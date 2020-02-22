@@ -303,6 +303,8 @@ GameObject:
   - component: {fileID: 577284749}
   - component: {fileID: 577284748}
   - component: {fileID: 577284752}
+  - component: {fileID: 577284753}
+  - component: {fileID: 577284754}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -325,16 +327,16 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5, y: 0.5}
+    oldSize: {x: 0.16, y: 0.16}
     newSize: {x: 5, y: 0.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5, y: 0.5}
+  m_Size: {x: 0.135, y: 0.135}
   m_EdgeRadius: 0
 --- !u!50 &577284749
 Rigidbody2D:
@@ -396,7 +398,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e90c9583032cb784f90b1e5bfb0eff29, type: 3}
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -416,7 +418,7 @@ Transform:
   m_GameObject: {fileID: 577284747}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -2.52, z: 0}
-  m_LocalScale: {x: 0.275, y: 1, z: 1}
+  m_LocalScale: {x: 10.007476, y: 10.007476, z: 10.007476}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -435,7 +437,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   speed: 10
-  wallJumpLerp: 1
+  wallJumpLerp: 10
+--- !u!114 &577284753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577284747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de3a49cd8be8c864589eaeba9f6e7b43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  fallMultiplier: 3
+  lowJumpMultiplier: 15
+  jumpForce: 15
+--- !u!114 &577284754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577284747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32521aa53ebaf94448b8a71a6ea29ee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  onGround: 0
+  onWall: 0
+  onRightWall: 0
+  onLeftWall: 0
+  wallSide: 0
+  collisionRadius: 0.25
+  bottomOffset: {x: 0, y: -0.66}
+  rightOffset: {x: 0.66, y: 0}
+  leftOffset: {x: -0.66, y: 0}
 --- !u!1001 &1180822697
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -593,6 +635,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: floor (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7262105581187656605, guid: 88ef2085c7f191548b925548e7733fa3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88ef2085c7f191548b925548e7733fa3, type: 3}
 --- !u!4 &1220598481 stripped
@@ -678,6 +725,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: floor (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7262105581187656605, guid: 88ef2085c7f191548b925548e7733fa3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88ef2085c7f191548b925548e7733fa3, type: 3}
 --- !u!4 &1391189535 stripped
@@ -729,7 +781,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1595987527}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: floors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -831,6 +883,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: floor (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7262105581187656605, guid: 88ef2085c7f191548b925548e7733fa3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88ef2085c7f191548b925548e7733fa3, type: 3}
 --- !u!4 &1813358133 stripped
@@ -926,6 +983,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1401702883}
     m_Modifications:
+    - target: {fileID: 2634431011129662421, guid: 9b8271382e5759d438fe042ebe80f32b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3812475861633787880, guid: 9b8271382e5759d438fe042ebe80f32b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1065,6 +1127,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7262105581187656605, guid: 88ef2085c7f191548b925548e7733fa3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88ef2085c7f191548b925548e7733fa3, type: 3}
