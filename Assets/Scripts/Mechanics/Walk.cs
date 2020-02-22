@@ -32,6 +32,6 @@ public class Walk : MonoBehaviour
     {
         //rb.velocity = Vector2.Lerp(rb.velocity, (new Vector2(dir.x * speed, rb.velocity.y)), wallJumpLerp * Time.deltaTime);
 
-        rb.velocity = Vector2.Lerp(rb.velocity, (new Vector2(dir.x * speed, rb.velocity.y)), wallJumpLerp * Time.deltaTime);
+        rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
     }
 }
