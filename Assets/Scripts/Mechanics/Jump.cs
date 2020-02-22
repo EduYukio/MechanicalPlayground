@@ -5,21 +5,20 @@ using UnityEngine;
 public class Jump : MonoBehaviour
 {
     public Rigidbody2D rb;
-    private CollisionChecker coll;
-    public float fallMultiplier = 2.5f;
-    public float lowJumpMultiplier = 2f;
+    public CollisionChecker coll;
+    public float fallMultiplier = 3f;
+    public float lowJumpMultiplier = 15f;
+    public float jumpForce = 15f;
 
-    public float jumpForce = 50;
 
-    // Start is called before the first frame update
+    public static bool isJumping = false;
+
     void Start()
     {
         coll = GetComponent<CollisionChecker>();
         rb = GetComponent<Rigidbody2D>();
     }
 
-
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown("Jump"))
@@ -29,15 +28,19 @@ public class Jump : MonoBehaviour
                 JumpAction(Vector2.up, false);
             }
         }
+        else if(coll.onGround){
+            isJumping = false;
+        }
 
         SmoothJump();
         rb.gravityScale = 3;
     }
 
-    private void JumpAction(Vector2 dir, bool wall)
+    public void JumpAction(Vector2 dir, bool wall)
     {
         //rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.velocity = dir * jumpForce;
+        isJumping = true;
     }
 
     private void SmoothJump()
