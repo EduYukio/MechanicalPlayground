@@ -5,7 +5,7 @@ using UnityEngine;
 public class Jump : MonoBehaviour
 {
     public Rigidbody2D rb;
-    //private Collision coll;
+    private CollisionChecker coll;
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
 
@@ -14,6 +14,7 @@ public class Jump : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        coll = GetComponent<CollisionChecker>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -23,7 +24,10 @@ public class Jump : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump"))
         {
-            JumpAction(Vector2.up, false);
+            if (coll.onGround)
+            {
+                JumpAction(Vector2.up, false);
+            }
         }
 
         SmoothJump();
