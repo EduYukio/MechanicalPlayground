@@ -9,17 +9,27 @@ public class Jump : MonoBehaviour {
     public float lowJumpMultiplier = 15f;
     public float jumpForce = 15f;
 
+    public int jumpQuantity;
+
     void Start() {
         coll = GetComponent<CollisionChecker>();
         rb = GetComponent<Rigidbody2D>();
+        jumpQuantity = 0;
     }
 
     void Update() {
-        if (Input.GetButtonDown("Jump")) {
-            if (coll.onGround) {
-                JumpAction(Vector2.up, false);
-            }
+        if (coll.onGround) {
+            jumpQuantity = 0;
         }
+
+        if (Input.GetButtonDown("Jump") && jumpQuantity == 0) {
+            JumpAction(Vector2.up, false);
+        }
+
+        if (Input.GetButtonUp("Jump")) {
+            jumpQuantity++;
+        }
+
         SmoothJump();
         rb.gravityScale = 3;
     }
@@ -37,5 +47,4 @@ public class Jump : MonoBehaviour {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
     }
-
 }

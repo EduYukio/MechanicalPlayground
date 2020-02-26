@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoubleJump : Jump {
-    private bool hasDoubleJumped = false;
+public class DoubleJump : MonoBehaviour {
+    public Jump jp;
+
+    void Start() {
+        jp = GetComponent<Jump>();
+    }
 
     void Update() {
-        if (coll.onGround) {
-            hasDoubleJumped = false;
-        }
-        else {
-            if (Input.GetButtonDown("Jump") && !hasDoubleJumped) {
-                JumpAction(Vector2.up, false);
-                hasDoubleJumped = true;
-            }
+        if (Input.GetButtonDown("Jump") && jp.jumpQuantity == 1) {
+            jp.JumpAction(Vector2.up, false);
         }
     }
 }
