@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollisionChecker : MonoBehaviour
-{
-
+public class CollisionChecker : MonoBehaviour {
     [Header("Layers")]
     public LayerMask groundLayer;
 
@@ -24,8 +22,7 @@ public class CollisionChecker : MonoBehaviour
     public Vector2 bottomOffset, rightOffset, leftOffset;
     private Color debugCollisionColor = Color.red;
 
-    void Update()
-    {
+    void Update() {
         onGround = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, collisionRadius, groundLayer);
         onWall = Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, collisionRadius, groundLayer)
             || Physics2D.OverlapCircle((Vector2)transform.position + leftOffset, collisionRadius, groundLayer);
@@ -36,8 +33,7 @@ public class CollisionChecker : MonoBehaviour
         wallSide = onRightWall ? -1 : 1;
     }
 
-    void OnDrawGizmos()
-    {
+    void OnDrawGizmos() {
         Gizmos.color = Color.red;
 
         var positions = new Vector2[] { bottomOffset, rightOffset, leftOffset };
