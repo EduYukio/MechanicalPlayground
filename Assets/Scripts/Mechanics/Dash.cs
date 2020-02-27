@@ -8,6 +8,7 @@ public class Dash : MonoBehaviour {
 
     public float dashSpeed = 20;
     public bool isDashing = false;
+    public bool hasDashed = false;
 
     void Start() {
         coll = GetComponent<CollisionChecker>();
@@ -18,7 +19,11 @@ public class Dash : MonoBehaviour {
         float xRaw = Input.GetAxisRaw("Horizontal");
         float yRaw = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetButtonDown("Fire2") && !isDashing) {
+        if (coll.onGround) {
+            hasDashed = false;
+        }
+
+        if (Input.GetButtonDown("Fire2") && !hasDashed) {
             if (xRaw != 0 || yRaw != 0) {
                 DashAction(xRaw, yRaw);
             }
@@ -26,6 +31,8 @@ public class Dash : MonoBehaviour {
     }
 
     private void DashAction(float x, float y) {
+        hasDashed = true;
+
         rb.velocity = Vector2.zero;
         Vector2 dir = new Vector2(x, y);
 
@@ -37,13 +44,13 @@ public class Dash : MonoBehaviour {
         rb.gravityScale = 0;
         GetComponent<SmoothFall>().enabled = false;
         GetComponent<Walk>().enabled = false;
-        isDashing = true;
+        //isDashing = true;
 
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(.1f);
 
         rb.gravityScale = 3;
         GetComponent<SmoothFall>().enabled = true;
         GetComponent<Walk>().enabled = true;
-        isDashing = false;
+        //isDashing = false;
     }
 }

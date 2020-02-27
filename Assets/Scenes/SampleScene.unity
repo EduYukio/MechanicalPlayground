@@ -628,6 +628,7 @@ MonoBehaviour:
   coll: {fileID: 0}
   dashSpeed: 20
   isDashing: 0
+  hasDashed: 0
 --- !u!1001 &632414477
 PrefabInstance:
   m_ObjectHideFlags: 0
