@@ -5,7 +5,9 @@ using UnityEngine;
 public class Player : MonoBehaviour {
     public GameObject menu;
 
-    void Start() {
+    void Awake() {
+        menu = GameObject.Find("MechanicsMenu");
+        menu.SetActive(false);
     }
 
     void Update() {

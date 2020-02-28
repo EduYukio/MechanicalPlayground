@@ -5,6 +5,7 @@ using UnityEngine;
 public class Dash : MonoBehaviour {
     public Rigidbody2D rb;
     public CollisionChecker coll;
+    public SmoothFall sf;
 
     public float dashSpeed = 20;
     public bool isDashing = false;
@@ -13,6 +14,7 @@ public class Dash : MonoBehaviour {
     void Start() {
         coll = GetComponent<CollisionChecker>();
         rb = GetComponent<Rigidbody2D>();
+        sf = GetComponent<SmoothFall>();
     }
 
     void Update() {
@@ -21,6 +23,7 @@ public class Dash : MonoBehaviour {
 
         if (coll.onGround) {
             hasDashed = false;
+            //sf.enabled = true;
         }
 
         if (Input.GetButtonDown("Fire2") && !hasDashed) {
@@ -42,14 +45,14 @@ public class Dash : MonoBehaviour {
 
     IEnumerator DashWait() {
         rb.gravityScale = 0;
-        GetComponent<SmoothFall>().enabled = false;
+        sf.enabled = false;
         GetComponent<Walk>().enabled = false;
         //isDashing = true;
 
         yield return new WaitForSeconds(.1f);
 
         rb.gravityScale = 3;
-        GetComponent<SmoothFall>().enabled = true;
+        sf.enabled = true;
         GetComponent<Walk>().enabled = true;
         //isDashing = false;
     }

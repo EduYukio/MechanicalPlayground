@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class OkButton : MonoBehaviour {
     public Slots slots;
-    public GameObject player;
+    public GameObject playerObj;
+    public GameObject playerPrefab;
     public GameObject menu;
 
     void Start() {
         slots = FindObjectOfType<Slots>();
-        player = GameObject.Find("Player");
+        playerObj = GameObject.Find("Player");
         menu = GameObject.Find("MechanicsMenu");
     }
 
@@ -18,10 +19,18 @@ public class OkButton : MonoBehaviour {
             return;
         }
 
+        Destroy(playerObj);
+        playerObj = Instantiate(playerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+
         foreach (string mechanic in slots.mechanics) {
             System.Type mType = System.Type.GetType(mechanic);
-            player.AddComponent(mType);
+            playerObj.AddComponent(mType);
         }
+
+        menu.SetActive(true);
+
+        Player playerScript = playerObj.GetComponent<Player>();
+        playerScript.menu = GameObject.Find("MechanicsMenu");
 
         menu.SetActive(false);
         Time.timeScale = 1;
