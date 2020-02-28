@@ -10,7 +10,7 @@ public class DoubleJump : MonoBehaviour {
     }
 
     void Update() {
-        if (Input.GetButtonDown("Jump") && jp.jumpQuantity == 1) {
+        if (Input.GetButtonDown("Jump") && jp != null && jp.jumpQuantity == 1) {
             jp.JumpAction(Vector2.up, false);
         }
     }
