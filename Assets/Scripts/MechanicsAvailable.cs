@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class MechanicsAvailable : MonoBehaviour {
     public Slots slots;
@@ -10,8 +11,9 @@ public class MechanicsAvailable : MonoBehaviour {
         slots = FindObjectOfType<Slots>();
     }
 
-    public void Select() {
-        string mechanicName = EventSystem.current.currentSelectedGameObject.name;
+    public void Select(Button btn) {
+        //string mechanicName = EventSystem.current.currentSelectedGameObject.name;
+        string mechanicName = btn.name;
         slots.AddMechanic(mechanicName);
     }
 }
