@@ -5,14 +5,16 @@ using UnityEngine;
 public class OkButton : MonoBehaviour {
     public Slots slots;
     public GameObject player;
+    public GameObject menu;
 
     void Start() {
         slots = FindObjectOfType<Slots>();
         player = GameObject.Find("Player");
+        menu = GameObject.Find("MechanicsMenu");
     }
 
     public void OkAction() {
-        if (slots.mechanics.Length < 3) {
+        if (slots.lastIndexAvailable < 3) {
             return;
         }
 
@@ -21,6 +23,6 @@ public class OkButton : MonoBehaviour {
             player.AddComponent(mType);
         }
 
-        //disable menu
+        menu.SetActive(false);
     }
 }

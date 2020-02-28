@@ -17,4 +17,13 @@ public class Slots : MonoBehaviour {
         mechanics[lastIndexAvailable] = name;
         lastIndexAvailable++;
     }
+
+    public void ClearMechanics(string name) {
+        for (int i = 0; i < lastIndexAvailable; i++) {
+            slotTexts[i].text = "";
+            mechanics[i] = "";
+        }
+
+        lastIndexAvailable = 0;
+    }
 }
