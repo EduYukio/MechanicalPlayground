@@ -24,5 +24,6 @@ public class OkButton : MonoBehaviour {
         }
 
         menu.SetActive(false);
+        Time.timeScale = 1;
     }
 }
