@@ -2714,7 +2714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slots: {fileID: 107331190}
-  player: {fileID: 0}
+  playerObj: {fileID: 0}
   playerPrefab: {fileID: 1479429603357970299, guid: ecf97d36b29964e489bc6aee1a4d5bcc,
     type: 3}
   menu: {fileID: 0}
@@ -3492,6 +3492,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479429604103183759, guid: ecf97d36b29964e489bc6aee1a4d5bcc,
+        type: 3}
+      propertyPath: orthographic size
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecf97d36b29964e489bc6aee1a4d5bcc, type: 3}
