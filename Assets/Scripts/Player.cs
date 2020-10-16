@@ -7,6 +7,7 @@ public class Player : MonoBehaviour {
     public float jumpForce = 5f;
     public bool isGrounded = false;
     public bool disableControls = false;
+    public bool canDoubleJump = true;
 
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public float xInput;
@@ -17,6 +18,10 @@ public class Player : MonoBehaviour {
 
     void Update() {
         if (disableControls) return;
+
+        if (isGrounded) {
+            canDoubleJump = true;
+        }
 
         xInput = Input.GetAxisRaw("Horizontal");
         ProcessJumpAction();
@@ -59,10 +64,10 @@ public class Player : MonoBehaviour {
             if (isGrounded) {
                 Jump();
             }
-            // else if (gotDoubleJumpItem && canDoubleJump) {
-            //     Jump();
-            //     canDoubleJump = false;
-            // }
+            else if (canDoubleJump) {
+                Jump();
+                canDoubleJump = false;
+            }
         }
     }
 
