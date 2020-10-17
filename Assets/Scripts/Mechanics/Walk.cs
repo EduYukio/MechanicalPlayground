@@ -5,6 +5,8 @@ using UnityEngine;
 public class Walk : MonoBehaviour {
     private Player player;
     public float moveSpeed = 5f;
+    public SpriteRenderer spriteRenderer;
+    public Dash dashScript;
 
     [HideInInspector] public float xInput;
     [HideInInspector] public Rigidbody2D rb;
@@ -12,6 +14,8 @@ public class Walk : MonoBehaviour {
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         player = FindObjectOfType<Player>();
+        spriteRenderer = player.GetComponent<SpriteRenderer>();
+        dashScript = FindObjectOfType<Dash>();
     }
 
     void Update() {
@@ -25,9 +29,9 @@ public class Walk : MonoBehaviour {
     }
 
     void ProcessWalkAction() {
-        // if (!isDashing) {
-        WalkAction(xInput);
-        // }
+        if (dashScript && !dashScript.isDashing) {
+            WalkAction(xInput);
+        }
     }
 
     void WalkAction(float xInput) {
@@ -38,15 +42,16 @@ public class Walk : MonoBehaviour {
         else if (xInput < 0) {
             direction = -1;
         }
+
         rb.velocity = new Vector2(direction * moveSpeed, rb.velocity.y);
 
-        // if (xInput < 0) {
-        //     lastDirection = -1;
-        //     spriteRenderer.flipX = true;
-        // }
-        // else if (xInput > 0) {
-        //     lastDirection = 1;
-        //     spriteRenderer.flipX = false;
-        // }
+        if (xInput < 0) {
+            player.lastDirection = -1;
+            player.spriteRenderer.flipX = true;
+        }
+        else if (xInput > 0) {
+            player.lastDirection = 1;
+            player.spriteRenderer.flipX = false;
+        }
     }
 }
