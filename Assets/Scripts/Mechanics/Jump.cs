@@ -7,12 +7,13 @@ public class Jump : MonoBehaviour {
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
     private Player player;
-
+    public Animator animator;
     [HideInInspector] public Rigidbody2D rb;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         player = FindObjectOfType<Player>();
+        animator = GetComponent<Animator>();
     }
 
     void Update() {
@@ -20,7 +21,7 @@ public class Jump : MonoBehaviour {
     }
 
     void ProcessJumpRequest() {
-        BetterJumping();
+        BetterFalling();
 
         if (Input.GetButtonDown("Jump")) {
             if (player.isGrounded) {
@@ -30,15 +31,20 @@ public class Jump : MonoBehaviour {
     }
 
     void JumpAction() {
+        animator.SetTrigger("Jump");
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
 
-    void BetterJumping() {
+    void BetterFalling() {
+        animator.SetBool("isFalling", true);
         if (rb.velocity.y < 0) {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
         else if (rb.velocity.y > 0 && !Input.GetButton("Jump")) {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+        }
+        else {
+            animator.SetBool("isFalling", false);
         }
     }
 }

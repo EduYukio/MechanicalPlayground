@@ -6,6 +6,7 @@ public class Walk : MonoBehaviour {
     private Player player;
     public float moveSpeed = 5f;
     public SpriteRenderer spriteRenderer;
+    public Animator animator;
     public Dash dashScript;
 
     [HideInInspector] public float xInput;
@@ -14,7 +15,8 @@ public class Walk : MonoBehaviour {
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         player = FindObjectOfType<Player>();
-        spriteRenderer = player.GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         dashScript = FindObjectOfType<Dash>();
     }
 
@@ -45,6 +47,7 @@ public class Walk : MonoBehaviour {
 
         rb.velocity = new Vector2(direction * moveSpeed, rb.velocity.y);
 
+        animator.SetBool("isWalking", true);
         if (xInput < 0) {
             player.lastDirection = -1;
             player.spriteRenderer.flipX = true;
@@ -52,6 +55,9 @@ public class Walk : MonoBehaviour {
         else if (xInput > 0) {
             player.lastDirection = 1;
             player.spriteRenderer.flipX = false;
+        }
+        else {
+            animator.SetBool("isWalking", false);
         }
     }
 }
