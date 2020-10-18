@@ -36,7 +36,15 @@ public class Dash : MonoBehaviour {
     }
 
     void ProcessDashRequest() {
-        if (Input.GetButtonDown("Dash") && canDash && !isDashing && dashCooldownTime <= 0) {
+        bool dashInput = false;
+        if (Input.GetAxisRaw("Dash") > 0 || Input.GetButtonDown("Dash")) {
+            dashInput = true;
+        }
+        else {
+            dashInput = false;
+        }
+
+        if (dashInput && canDash && !isDashing && dashCooldownTime <= 0) {
             isDashing = true;
         }
     }
