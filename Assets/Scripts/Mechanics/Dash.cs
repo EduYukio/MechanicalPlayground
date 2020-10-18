@@ -13,9 +13,9 @@ public class Dash : MonoBehaviour {
 
     public bool canDash = true;
     public bool isDashing = false;
-    private Player player;
 
     [HideInInspector] public Rigidbody2D rb;
+    private Player player;
 
     void Start() {
         player = FindObjectOfType<Player>();
@@ -32,7 +32,7 @@ public class Dash : MonoBehaviour {
 
         ProcessDashCooldown();
         ProcessDashRequest();
-        ProcessDashAction();
+        DashAction();
     }
 
     void ProcessDashRequest() {
@@ -41,7 +41,7 @@ public class Dash : MonoBehaviour {
         }
     }
 
-    void ProcessDashAction() {
+    void DashAction() {
         if (isDashing) {
             if (dashTime > 0) {
                 dashTime -= Time.deltaTime;
