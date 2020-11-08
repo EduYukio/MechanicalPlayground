@@ -26,7 +26,7 @@ public class Dash : MonoBehaviour {
     }
 
     void Update() {
-        if (player.isGrounded) {
+        if (player.isGrounded || player.isWallSliding) {
             canDash = true;
         }
 

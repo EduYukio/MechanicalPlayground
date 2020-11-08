@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WallSlide : MonoBehaviour {
-    bool isWallSliding = false;
     public float wallSlidingSpeed;
-    Player player;
     private Rigidbody2D rb;
+    Player player;
 
     void Start() {
         player = GameObject.Find("Player").GetComponent<Player>();
@@ -21,17 +20,17 @@ public class WallSlide : MonoBehaviour {
     void checkIfWallSliding() {
         float xInput = Input.GetAxisRaw("Horizontal");
         if (player.isTouchingWall && !player.isGrounded && xInput != 0) {
-            isWallSliding = true;
+            player.isWallSliding = true;
         }
         else {
-            isWallSliding = false;
+            player.isWallSliding = false;
         }
     }
 
     void WallSlideAction() {
-        if (isWallSliding) {
+        if (player.isWallSliding) {
             float yVelocity = Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue);
-            rb.velocity = new Vector3(rb.velocity.x, yVelocity);
+            rb.velocity = new Vector2(rb.velocity.x, yVelocity);
         }
     }
 }

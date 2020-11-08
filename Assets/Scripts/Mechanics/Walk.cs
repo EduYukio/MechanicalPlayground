@@ -31,7 +31,7 @@ public class Walk : MonoBehaviour {
     }
 
     void ProcessWalkAction() {
-        if (dashScript && !dashScript.isDashing) {
+        if (dashScript && !dashScript.isDashing && !player.isWallJumping) {
             WalkAction(xInput);
         }
     }

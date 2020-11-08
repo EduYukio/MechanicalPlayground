@@ -5,10 +5,9 @@ using UnityEngine;
 public class DoubleJump : MonoBehaviour {
     public float jumpForce = 12f;
     public bool canDoubleJump = true;
-    public Animator animator;
-
+    private Animator animator;
     private Player player;
-    [HideInInspector] public Rigidbody2D rb;
+    private Rigidbody2D rb;
 
     void Start() {
         player = FindObjectOfType<Player>();
@@ -17,12 +16,12 @@ public class DoubleJump : MonoBehaviour {
     }
 
     void Update() {
-        if (player.isGrounded) {
+        if (player.isGrounded || player.isWallSliding) {
             canDoubleJump = true;
         }
 
         if (Input.GetButtonDown("Jump")) {
-            if (!player.isGrounded && canDoubleJump) {
+            if (!player.isGrounded && canDoubleJump && !player.isWallSliding) {
                 DoubleJumpAction();
                 canDoubleJump = false;
             }
