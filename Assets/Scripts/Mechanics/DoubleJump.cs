@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class DoubleJump : MonoBehaviour {
     public float jumpForce = 12f;
-    public bool canDoubleJump = true;
     private Animator animator;
     private Player player;
     private Rigidbody2D rb;
+    private bool alreadyDoubleJumped = false;
 
     void Start() {
         player = FindObjectOfType<Player>();
@@ -16,20 +16,32 @@ public class DoubleJump : MonoBehaviour {
     }
 
     void Update() {
-        if (player.isGrounded || player.isWallSliding) {
-            canDoubleJump = true;
-        }
+        CheckIfCanDoubleJump();
+        ProcessDoubleJumpRequest();
+    }
+
+    void ProcessDoubleJumpRequest() {
+        if (!player.nextJumpIsDouble) return;
+        if (alreadyDoubleJumped) return;
 
         if (Input.GetButtonDown("Jump")) {
-            if (!player.isGrounded && canDoubleJump && !player.isWallSliding) {
-                DoubleJumpAction();
-                canDoubleJump = false;
-            }
+            DoubleJumpAction();
         }
     }
 
     void DoubleJumpAction() {
+        alreadyDoubleJumped = true;
         animator.SetTrigger("DoubleJump");
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+    }
+
+    void CheckIfCanDoubleJump() {
+        if (player.isGrounded || player.isWallSliding) {
+            player.nextJumpIsDouble = false;
+            alreadyDoubleJumped = false;
+        }
+        else if (Input.GetButtonUp("Jump") && !alreadyDoubleJumped) {
+            player.nextJumpIsDouble = true;
+        }
     }
 }

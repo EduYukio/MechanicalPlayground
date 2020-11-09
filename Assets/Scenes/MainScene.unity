@@ -312,7 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b5ee73aac4a48d4292f7783470dd917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallMultiplier: 3.5
+  fallMultiplier: 3
   lowJumpMultiplier: 5
 --- !u!1 &778239671
 GameObject:
@@ -2386,6 +2386,10 @@ PrefabInstance:
     - target: {fileID: 599111676644466035, guid: d97e726468d0ca84c9cdaaf6576e3cc9, type: 3}
       propertyPath: startBunnyHopTime
       value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 599111676644466035, guid: d97e726468d0ca84c9cdaaf6576e3cc9, type: 3}
+      propertyPath: startCoyoteTime
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d97e726468d0ca84c9cdaaf6576e3cc9, type: 3}
