@@ -10,6 +10,7 @@ public class Player : MonoBehaviour {
     public bool isWallSliding = false;
     public bool isWallJumping = false;
     public bool isDashing = false;
+    public bool isGluedOnTheWall = false;
     public bool nextJumpIsDouble = false;
     public bool activateSlowMotion = false;
     [HideInInspector] public bool disableControls = false;

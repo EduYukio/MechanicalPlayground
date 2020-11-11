@@ -26,15 +26,16 @@ public class Walk : MonoBehaviour {
     // }
 
     void ProcessWalkRequest() {
+        float xInput = Input.GetAxisRaw("Horizontal");
+        int direction = CalculateDirection(xInput);
+        SetWalkAnimation(direction);
+
         if (player.disableControls) return;
         if (player.isDashing) return;
         if (player.isWallJumping) return;
-
-        float xInput = Input.GetAxisRaw("Horizontal");
-        int direction = CalculateDirection(xInput);
+        if (player.isGluedOnTheWall) return;
 
         WalkAction(direction);
-        SetWalkAnimation(direction);
     }
 
     void WalkAction(float direction) {

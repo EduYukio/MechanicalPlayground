@@ -7,6 +7,8 @@ public class WallSlide : MonoBehaviour {
     private Rigidbody2D rb;
     private Player player;
     private Animator animator;
+    [SerializeField] private float stickyTime = 0;
+    [SerializeField] private float startStickyTime = 0.1f;
 
     void Start() {
         player = FindObjectOfType<Player>();
@@ -15,22 +17,29 @@ public class WallSlide : MonoBehaviour {
     }
 
     void Update() {
-        CheckWallSliding();
+        float xInput = Input.GetAxisRaw("Horizontal");
+        CheckWallSliding(xInput);
+        CheckStickyness();
 
         if (player.isWallSliding) {
             WallSlideAction();
+            WallStickyness(xInput);
         }
     }
 
-    void CheckWallSliding() {
+    void CheckWallSliding(float xInput) {
+        if (player.isWallSliding) {
+            FixPlayerSpriteWhenSliding();
+        }
         if (!player.isTouchingWall || player.isGrounded) {
             player.isWallSliding = false;
+            stickyTime = startStickyTime;
             animator.SetBool("isWallSliding", false);
+            // FixPlayerSpriteWhenSliding();
             return;
         }
 
-        FixPlayerSpriteWhenSliding();
-        float xInput = Input.GetAxisRaw("Horizontal");
+        // FixPlayerSpriteWhenSliding();
         if (player.isTouchingLeftWall && xInput < 0) {
             // facing left wall
             player.isWallSliding = true;
@@ -54,6 +63,37 @@ public class WallSlide : MonoBehaviour {
         }
         else if (player.isTouchingRightWall) {
             player.lastDirection = 1;
+        }
+    }
+
+    void WallStickyness(float xInput) {
+        if (IsSlidingWithoutMoveInput(xInput)) {
+            stickyTime = startStickyTime;
+            return;
+        }
+
+        if (stickyTime >= 0) stickyTime -= Time.deltaTime;
+    }
+
+    bool IsSlidingWithoutMoveInput(float xInput) {
+        if (xInput == 0) return true;
+        if (xInput < 0 && player.isTouchingLeftWall) return true;
+        if (xInput > 0 && player.isTouchingRightWall) return true;
+
+        return false;
+    }
+
+    void CheckStickyness() {
+        if (!player.isWallSliding) {
+            player.isGluedOnTheWall = false;
+            return;
+        }
+
+        if (stickyTime > 0) {
+            player.isGluedOnTheWall = true;
+        }
+        else {
+            player.isGluedOnTheWall = false;
         }
     }
 }

@@ -9,6 +9,7 @@ public class WallJump : MonoBehaviour {
     private Rigidbody2D rb;
     private Player player;
     private Animator animator;
+    int jumpDirection = 0;
 
     void Start() {
         player = FindObjectOfType<Player>();
@@ -18,6 +19,10 @@ public class WallJump : MonoBehaviour {
 
     void Update() {
         ProcessWallJumpRequest();
+
+        if (player.isWallSliding) {
+            CheckWallJumpDirection();
+        }
 
         if (player.isWallJumping) {
             WallJumpAction();
@@ -34,12 +39,20 @@ public class WallJump : MonoBehaviour {
     }
 
     void WallJumpAction() {
-        float xInput = Input.GetAxisRaw("Horizontal");
+        rb.velocity = new Vector2(xWallForce * jumpDirection, yWallForce);
         animator.SetTrigger("Jump");
-        rb.velocity = new Vector2(xWallForce * -xInput, yWallForce);
     }
 
     void SetWallJumpingToFalse() {
         player.isWallJumping = false;
+    }
+
+    void CheckWallJumpDirection() {
+        if (player.isTouchingLeftWall) {
+            jumpDirection = 1;
+        }
+        else {
+            jumpDirection = -1;
+        }
     }
 }
