@@ -32,7 +32,6 @@ public class Walk : MonoBehaviour {
 
         float xInput = Input.GetAxisRaw("Horizontal");
         int direction = CalculateDirection(xInput);
-        HandleDirectionChange(direction);
 
         WalkAction(direction);
         SetWalkAnimation(direction);
@@ -57,22 +56,8 @@ public class Walk : MonoBehaviour {
             animator.SetBool("isWalking", false);
         }
         else {
+            player.lastDirection = direction;
             animator.SetBool("isWalking", true);
-        }
-    }
-
-    void HandleDirectionChange(int direction) {
-        if (direction == 0) {
-            animator.SetBool("isWalking", false);
-            return;
-        }
-
-        player.lastDirection = direction;
-        if (direction == 1) {
-            spriteRenderer.flipX = false;
-        }
-        else {
-            spriteRenderer.flipX = true;
         }
     }
 }
