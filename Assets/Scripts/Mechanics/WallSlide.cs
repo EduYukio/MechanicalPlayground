@@ -5,25 +5,29 @@ using UnityEngine;
 public class WallSlide : MonoBehaviour {
     public float wallSlidingSpeed;
     private Rigidbody2D rb;
-    Player player;
+    private Player player;
+    private Animator animator;
 
     void Start() {
-        player = GameObject.Find("Player").GetComponent<Player>();
+        player = FindObjectOfType<Player>();
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     void Update() {
-        checkIfWallSliding();
+        CheckWallSliding();
         WallSlideAction();
     }
 
-    void checkIfWallSliding() {
+    void CheckWallSliding() {
         float xInput = Input.GetAxisRaw("Horizontal");
         if (player.isTouchingWall && !player.isGrounded && xInput != 0) {
             player.isWallSliding = true;
+            animator.SetBool("isWallSliding", true);
         }
         else {
             player.isWallSliding = false;
+            animator.SetBool("isWallSliding", false);
         }
     }
 

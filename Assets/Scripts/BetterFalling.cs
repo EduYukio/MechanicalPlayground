@@ -8,7 +8,7 @@ public class BetterFalling : MonoBehaviour {
 
     private Rigidbody2D rb;
     private Animator animator;
-    Player player;
+    private Player player;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -17,12 +17,15 @@ public class BetterFalling : MonoBehaviour {
     }
 
     void Update() {
-        if (!player.isWallSliding) {
-            BetterFallingAction();
-        }
+        BetterFallingAction();
     }
 
     void BetterFallingAction() {
+        if (player.isWallSliding) {
+            animator.SetBool("isFalling", false);
+            return;
+        }
+
         animator.SetBool("isFalling", true);
         if (rb.velocity.y < 0) {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;

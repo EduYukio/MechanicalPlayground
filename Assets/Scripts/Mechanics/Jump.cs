@@ -25,6 +25,7 @@ public class Jump : MonoBehaviour {
     }
 
     void ProcessJumpRequest() {
+        if (player.disableControls) return;
         if (bunnyHopTime <= 0) return;
         if (coyoteTime <= 0) return;
         if (player.isWallSliding) return;

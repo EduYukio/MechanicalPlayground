@@ -23,6 +23,7 @@ public class DoubleJump : MonoBehaviour {
     void ProcessDoubleJumpRequest() {
         if (!player.nextJumpIsDouble) return;
         if (alreadyDoubleJumped) return;
+        if (player.isWallSliding) return;
 
         if (Input.GetButtonDown("Jump")) {
             DoubleJumpAction();
@@ -36,8 +37,12 @@ public class DoubleJump : MonoBehaviour {
     }
 
     void CheckIfCanDoubleJump() {
-        if (player.isGrounded || player.isWallSliding) {
+        if (player.isGrounded) {
             player.nextJumpIsDouble = false;
+            alreadyDoubleJumped = false;
+        }
+        else if (player.isWallSliding) {
+            player.nextJumpIsDouble = true;
             alreadyDoubleJumped = false;
         }
         else if (Input.GetButtonUp("Jump") && !alreadyDoubleJumped) {

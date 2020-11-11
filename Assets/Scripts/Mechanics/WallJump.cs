@@ -7,20 +7,27 @@ public class WallJump : MonoBehaviour {
     public float yWallForce;
     public float wallJumpTime;
     private Rigidbody2D rb;
-    Player player;
+    private Player player;
+    private Animator animator;
 
     void Start() {
         player = FindObjectOfType<Player>();
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     void Update() {
         ProcessWallJumpRequest();
-        WallJumpAction();
+
+        if (player.isWallJumping) {
+            WallJumpAction();
+        }
     }
 
     void ProcessWallJumpRequest() {
-        if (Input.GetButtonDown("Jump") && player.isWallSliding) {
+        if (!player.isWallSliding) return;
+
+        if (Input.GetButtonDown("Jump")) {
             player.isWallJumping = true;
             Invoke(nameof(SetWallJumpingToFalse), wallJumpTime);
         }
@@ -28,9 +35,8 @@ public class WallJump : MonoBehaviour {
 
     void WallJumpAction() {
         float xInput = Input.GetAxisRaw("Horizontal");
-        if (player.isWallJumping) {
-            rb.velocity = new Vector2(xWallForce * -xInput, yWallForce);
-        }
+        animator.SetTrigger("Jump");
+        rb.velocity = new Vector2(xWallForce * -xInput, yWallForce);
     }
 
     void SetWallJumpingToFalse() {
