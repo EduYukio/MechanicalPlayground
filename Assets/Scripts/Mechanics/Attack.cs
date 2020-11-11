@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Attack : MonoBehaviour {
-    private Player player;
     public Animator animator;
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
     public float attackDamage = 10f;
     public float attackRate = 2f;
-    float nextAttackTime = 0f;
     public GameObject slashEffect;
+
+    private float nextAttackTime = 0f;
+    private Player player;
+    private SpriteRenderer playerSprite;
 
     void Start() {
         player = FindObjectOfType<Player>();
+        playerSprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         attackPoint = GameObject.FindWithTag("AttackPoint").GetComponent<Transform>();
     }
@@ -36,7 +39,7 @@ public class Attack : MonoBehaviour {
         Vector3 attackPosition = playerPos + new Vector3(xOffset, attackPoint.localPosition.y, 0);
 
         slashEffect.transform.position = attackPosition;
-        slashEffect.GetComponent<SpriteRenderer>().flipX = player.spriteRenderer.flipX;
+        slashEffect.GetComponent<SpriteRenderer>().flipX = playerSprite.flipX;
         return attackPosition;
     }
 

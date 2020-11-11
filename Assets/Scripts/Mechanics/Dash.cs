@@ -12,7 +12,6 @@ public class Dash : MonoBehaviour {
     [HideInInspector] public float dashCooldownTime;
 
     public bool canDash = true;
-    public bool isDashing = false;
 
     [HideInInspector] public Rigidbody2D rb;
     private Player player;
@@ -44,13 +43,13 @@ public class Dash : MonoBehaviour {
             dashInput = false;
         }
 
-        if (dashInput && canDash && !isDashing && dashCooldownTime <= 0) {
-            isDashing = true;
+        if (dashInput && canDash && !player.isDashing && dashCooldownTime <= 0) {
+            player.isDashing = true;
         }
     }
 
     void DashAction() {
-        if (isDashing) {
+        if (player.isDashing) {
             if (dashTime > 0) {
                 dashTime -= Time.deltaTime;
                 rb.velocity = new Vector2(player.lastDirection * dashSpeed, 0f);
@@ -69,7 +68,7 @@ public class Dash : MonoBehaviour {
 
     public void StopDashing() {
         rb.velocity = Vector2.zero;
-        isDashing = false;
+        player.isDashing = false;
         canDash = false;
         dashCooldownTime = startDashCooldownTime;
         dashTime = startDashTime;
