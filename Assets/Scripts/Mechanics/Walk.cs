@@ -3,61 +3,76 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Walk : MonoBehaviour {
-    private Player player;
     public float moveSpeed = 5f;
     public SpriteRenderer spriteRenderer;
     public Animator animator;
-    public Dash dashScript;
 
-    [HideInInspector] public float xInput;
-    [HideInInspector] public Rigidbody2D rb;
+    private Player player;
+    private Rigidbody2D rb;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         player = FindObjectOfType<Player>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        dashScript = FindObjectOfType<Dash>();
     }
 
     void Update() {
-        xInput = Input.GetAxisRaw("Horizontal");
+        ProcessWalkRequest();
     }
 
-    private void FixedUpdate() {
+    // *Checar depois se devo utilizar fixed update ou colocar time.deltaTime*
+    // private void FixedUpdate() {
+    // }
+
+    void ProcessWalkRequest() {
         if (player.disableControls) return;
+        if (player.isDashing) return;
+        if (player.isWallJumping) return;
 
-        ProcessWalkAction();
+        float xInput = Input.GetAxisRaw("Horizontal");
+        int direction = CalculateDirection(xInput);
+        HandleDirectionChange(direction);
+
+        WalkAction(direction);
+        SetWalkAnimation(direction);
     }
 
-    void ProcessWalkAction() {
-        if (dashScript && !dashScript.isDashing && !player.isWallJumping) {
-            WalkAction(xInput);
-        }
+    void WalkAction(float direction) {
+        rb.velocity = new Vector2(direction * moveSpeed, rb.velocity.y);
     }
 
-    void WalkAction(float xInput) {
-        int direction = 0;
+    int CalculateDirection(float xInput) {
         if (xInput > 0) {
-            direction = 1;
+            return 1;
         }
         else if (xInput < 0) {
-            direction = -1;
+            return -1;
         }
+        else return 0;
+    }
 
-        rb.velocity = new Vector2(direction * moveSpeed, rb.velocity.y);
-
-        animator.SetBool("isWalking", true);
-        if (xInput < 0) {
-            player.lastDirection = -1;
-            player.spriteRenderer.flipX = true;
-        }
-        else if (xInput > 0) {
-            player.lastDirection = 1;
-            player.spriteRenderer.flipX = false;
+    void SetWalkAnimation(int direction) {
+        if (direction == 0 || player.isWallSliding) {
+            animator.SetBool("isWalking", false);
         }
         else {
+            animator.SetBool("isWalking", true);
+        }
+    }
+
+    void HandleDirectionChange(int direction) {
+        if (direction == 0) {
             animator.SetBool("isWalking", false);
+            return;
+        }
+
+        player.lastDirection = direction;
+        if (direction == 1) {
+            spriteRenderer.flipX = false;
+        }
+        else {
+            spriteRenderer.flipX = true;
         }
     }
 }
