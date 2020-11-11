@@ -55,9 +55,10 @@ public class Walk : MonoBehaviour {
         if (direction == 0 || player.isWallSliding) {
             animator.SetBool("isWalking", false);
         }
-        else {
+        else if (!player.isTouchingWall) {
             player.lastDirection = direction;
             animator.SetBool("isWalking", true);
         }
     }
+}
 }

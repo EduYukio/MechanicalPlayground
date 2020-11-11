@@ -1,10 +1,12 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
     public bool isGrounded = false;
     public bool isTouchingWall = false;
+    public bool isTouchingRightWall;
+    public bool isTouchingLeftWall;
     public bool isWallSliding = false;
     public bool isWallJumping = false;
     public bool isDashing = false;
