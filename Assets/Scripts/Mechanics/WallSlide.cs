@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WallSlide : MonoBehaviour {
     public float wallSlidingSpeed;
+
     private Rigidbody2D rb;
     private Player player;
     private Animator animator;
@@ -18,35 +19,25 @@ public class WallSlide : MonoBehaviour {
 
     void Update() {
         float xInput = Input.GetAxisRaw("Horizontal");
-        CheckWallSliding(xInput);
+        ProcessWallSlidingCheck(xInput);
         CheckStickyness();
 
         if (player.isWallSliding) {
             WallSlideAction();
-            WallStickyness(xInput);
+            ProcessStickyTime(xInput);
+            FixPlayerSpriteDirection();
         }
     }
 
-    void CheckWallSliding(float xInput) {
-        if (player.isWallSliding) {
-            FixPlayerSpriteWhenSliding();
-        }
+    void ProcessWallSlidingCheck(float xInput) {
         if (!player.isTouchingWall || player.isGrounded) {
             player.isWallSliding = false;
             stickyTime = startStickyTime;
             animator.SetBool("isWallSliding", false);
-            // FixPlayerSpriteWhenSliding();
             return;
         }
 
-        // FixPlayerSpriteWhenSliding();
-        if (player.isTouchingLeftWall && xInput < 0) {
-            // facing left wall
-            player.isWallSliding = true;
-            animator.SetBool("isWallSliding", true);
-        }
-        else if (player.isTouchingRightWall && xInput > 0) {
-            // facing right wall
+        if (IsPressingAgainstTheWall(xInput)) {
             player.isWallSliding = true;
             animator.SetBool("isWallSliding", true);
         }
@@ -57,7 +48,7 @@ public class WallSlide : MonoBehaviour {
         rb.velocity = new Vector2(rb.velocity.x, yVelocity);
     }
 
-    void FixPlayerSpriteWhenSliding() {
+    void FixPlayerSpriteDirection() {
         if (player.isTouchingLeftWall) {
             player.lastDirection = -1;
         }
@@ -66,7 +57,7 @@ public class WallSlide : MonoBehaviour {
         }
     }
 
-    void WallStickyness(float xInput) {
+    void ProcessStickyTime(float xInput) {
         if (IsSlidingWithoutMoveInput(xInput)) {
             stickyTime = startStickyTime;
             return;
@@ -79,6 +70,13 @@ public class WallSlide : MonoBehaviour {
         if (xInput == 0) return true;
         if (xInput < 0 && player.isTouchingLeftWall) return true;
         if (xInput > 0 && player.isTouchingRightWall) return true;
+
+        return false;
+    }
+
+    bool IsPressingAgainstTheWall(float xInput) {
+        if (player.isTouchingLeftWall && xInput < 0) return true;
+        if (player.isTouchingRightWall && xInput > 0) return true;
 
         return false;
     }

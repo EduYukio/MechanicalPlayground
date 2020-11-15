@@ -33,7 +33,10 @@ public class Dash : MonoBehaviour {
         ProcessDashCooldown();
         ProcessDashRequest();
         DecideDirection();
-        DashAction();
+
+        if (player.isDashing) {
+            DashAction();
+        }
     }
 
     void ProcessDashRequest() {
@@ -48,8 +51,6 @@ public class Dash : MonoBehaviour {
     }
 
     void DashAction() {
-        if (!player.isDashing) return;
-
         if (dashTime > 0) {
             dashTime -= Time.deltaTime;
             rb.velocity = new Vector2(dashDirection * dashSpeed, 0f);
