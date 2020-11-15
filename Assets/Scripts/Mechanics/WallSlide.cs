@@ -19,28 +19,35 @@ public class WallSlide : MonoBehaviour {
 
     void Update() {
         float xInput = Input.GetAxisRaw("Horizontal");
-        ProcessWallSlidingCheck(xInput);
-        CheckStickyness();
+        if (CanWallSlide()) {
+            WallSlidingCheck(xInput);
+        }
+
+        StickynessCheck();
 
         if (player.isWallSliding) {
             WallSlideAction();
             ProcessStickyTime(xInput);
-            FixPlayerSpriteDirection();
         }
     }
 
-    void ProcessWallSlidingCheck(float xInput) {
+    void WallSlidingCheck(float xInput) {
+        if (IsPressingAgainstTheWall(xInput)) {
+            player.isWallSliding = true;
+            animator.SetBool("isWallSliding", true);
+            InvertPlayerDirection();
+        }
+    }
+
+    bool CanWallSlide() {
         if (!player.isTouchingWall || player.isGrounded) {
             player.isWallSliding = false;
             stickyTime = startStickyTime;
             animator.SetBool("isWallSliding", false);
-            return;
+            return false;
         }
 
-        if (IsPressingAgainstTheWall(xInput)) {
-            player.isWallSliding = true;
-            animator.SetBool("isWallSliding", true);
-        }
+        return true;
     }
 
     void WallSlideAction() {
@@ -48,12 +55,12 @@ public class WallSlide : MonoBehaviour {
         rb.velocity = new Vector2(rb.velocity.x, yVelocity);
     }
 
-    void FixPlayerSpriteDirection() {
+    void InvertPlayerDirection() {
         if (player.isTouchingLeftWall) {
-            player.lastDirection = -1;
+            player.lastDirection = 1;
         }
         else if (player.isTouchingRightWall) {
-            player.lastDirection = 1;
+            player.lastDirection = -1;
         }
     }
 
@@ -81,7 +88,7 @@ public class WallSlide : MonoBehaviour {
         return false;
     }
 
-    void CheckStickyness() {
+    void StickynessCheck() {
         if (!player.isWallSliding) {
             player.isGluedOnTheWall = false;
             return;

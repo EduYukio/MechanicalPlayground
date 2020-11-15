@@ -32,7 +32,7 @@ public class Dash : MonoBehaviour {
 
         ProcessDashCooldown();
         ProcessDashRequest();
-        DecideDirection();
+        SetDashDirection();
 
         if (player.isDashing) {
             DashAction();
@@ -74,14 +74,9 @@ public class Dash : MonoBehaviour {
         dashTime = startDashTime;
     }
 
-    void DecideDirection() {
+    void SetDashDirection() {
         if (player.isDashing) return;
 
-        if (player.isWallSliding) {
-            dashDirection = -player.lastDirection;
-        }
-        else {
-            dashDirection = player.lastDirection;
-        }
+        dashDirection = player.lastDirection;
     }
 }
