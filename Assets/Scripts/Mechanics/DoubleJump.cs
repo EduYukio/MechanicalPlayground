@@ -45,6 +45,9 @@ public class DoubleJump : MonoBehaviour {
             player.nextJumpIsDouble = true;
             alreadyDoubleJumped = false;
         }
+        else if (rb.velocity.y < 0 && !alreadyDoubleJumped) {
+            player.nextJumpIsDouble = true;
+        }
         else if (Input.GetButtonUp("Jump") && !alreadyDoubleJumped) {
             player.nextJumpIsDouble = true;
         }
