@@ -13,8 +13,9 @@ public class Dash : MonoBehaviour {
 
     public bool canDash = true;
 
-    [HideInInspector] public Rigidbody2D rb;
+    private Rigidbody2D rb;
     private Player player;
+    private int dashDirection;
 
     void Start() {
         player = FindObjectOfType<Player>();
@@ -31,32 +32,30 @@ public class Dash : MonoBehaviour {
 
         ProcessDashCooldown();
         ProcessDashRequest();
+        DecideDirection();
         DashAction();
     }
 
     void ProcessDashRequest() {
-        bool dashInput = false;
-        if (Input.GetAxisRaw("Dash") > 0 || Input.GetButtonDown("Dash")) {
-            dashInput = true;
-        }
-        else {
-            dashInput = false;
-        }
+        if (!canDash) return;
+        if (player.isDashing) return;
+        if (dashCooldownTime > 0) return;
 
-        if (dashInput && canDash && !player.isDashing && dashCooldownTime <= 0) {
+        // GamePad || Keyboard
+        if (Input.GetAxisRaw("Dash") > 0 || Input.GetButtonDown("Dash")) {
             player.isDashing = true;
         }
     }
 
     void DashAction() {
-        if (player.isDashing) {
-            if (dashTime > 0) {
-                dashTime -= Time.deltaTime;
-                rb.velocity = new Vector2(player.lastDirection * dashSpeed, 0f);
-            }
-            else {
-                StopDashing();
-            }
+        if (!player.isDashing) return;
+
+        if (dashTime > 0) {
+            dashTime -= Time.deltaTime;
+            rb.velocity = new Vector2(dashDirection * dashSpeed, 0f);
+        }
+        else {
+            StopDashing();
         }
     }
 
@@ -72,5 +71,16 @@ public class Dash : MonoBehaviour {
         canDash = false;
         dashCooldownTime = startDashCooldownTime;
         dashTime = startDashTime;
+    }
+
+    void DecideDirection() {
+        if (player.isDashing) return;
+
+        if (player.isWallSliding) {
+            dashDirection = -player.lastDirection;
+        }
+        else {
+            dashDirection = player.lastDirection;
+        }
     }
 }
