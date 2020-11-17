@@ -5,9 +5,9 @@ using UnityEngine;
 public class Jump : MonoBehaviour {
     public float jumpForce = 12f;
     [SerializeField] private float bunnyHopTime = 0;
-    [SerializeField] private float startBunnyHopTime = 0.2f;
+    [SerializeField] private float startBunnyHopTime = 0.15f;
     [SerializeField] private float coyoteTime = 0;
-    [SerializeField] private float startCoyoteTime = 0.05f;
+    [SerializeField] private float startCoyoteTime = 0.1f;
     private Player player;
     private Animator animator;
     private Rigidbody2D rb;

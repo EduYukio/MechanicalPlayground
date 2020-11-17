@@ -5,10 +5,10 @@ using UnityEngine;
 public class Attack : MonoBehaviour {
     public Animator animator;
     public Transform attackPoint;
-    public float attackRange = 0.5f;
+    public float attackRange = 0.41f;
     public LayerMask enemyLayers;
     public float attackDamage = 10f;
-    public float attackRate = 2f;
+    public float attackRate = 3f;
     public GameObject slashEffect;
 
     private float nextAttackTime = 0f;

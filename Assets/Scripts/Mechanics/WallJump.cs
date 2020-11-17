@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WallJump : MonoBehaviour {
-    public float xWallForce;
-    public float yWallForce;
-    public float wallJumpTime;
+    public float xWallForce = 20f;
+    public float yWallForce = 12f;
+    public float wallJumpTime = 0.075f;
     private Rigidbody2D rb;
     private Player player;
     private Animator animator;

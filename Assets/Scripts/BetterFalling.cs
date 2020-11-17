@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BetterFalling : MonoBehaviour {
-    public float fallMultiplier = 3.5f;
-    public float lowJumpMultiplier = 15f;
+    public float fallMultiplier = 3f;
+    public float lowJumpMultiplier = 5f;
 
     private Rigidbody2D rb;
     private Animator animator;

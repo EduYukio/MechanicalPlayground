@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Dash : MonoBehaviour {
-    public float dashSpeed = 30;
+    public float dashSpeed = 23;
 
-    public float startDashTime = 0.2f;
+    public float startDashTime = 0.175f;
     [HideInInspector] public float dashTime;
 
-    public float startDashCooldownTime = 0.5f;
+    public float startDashCooldownTime = 0.2f;
     [HideInInspector] public float dashCooldownTime;
 
     public bool canDash = true;

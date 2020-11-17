@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WallSlide : MonoBehaviour {
-    public float wallSlidingSpeed;
+    public float wallSlidingSpeed = 1.5f;
 
     private Rigidbody2D rb;
     private Player player;

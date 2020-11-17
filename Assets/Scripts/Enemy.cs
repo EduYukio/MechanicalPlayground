@@ -6,16 +6,12 @@ public class Enemy : MonoBehaviour {
     public float maxHealth = 25f;
     public Animator animator;
     [HideInInspector] public Rigidbody2D rb;
-    float currentHealth;
+    public float currentHealth;
 
     void Start() {
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-    }
-
-    void Update() {
-
     }
 
     public void TakeDamage(float damage) {
@@ -25,7 +21,6 @@ public class Enemy : MonoBehaviour {
         if (currentHealth <= 0) {
             Die();
         }
-
     }
 
     void Die() {
