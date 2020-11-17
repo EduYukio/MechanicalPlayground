@@ -1,0 +1,143 @@
+using System.Collections;
+using System.Collections.Generic;
+using NUnit.Framework;
+using UnityEngine;
+using UnityEditor;
+using UnityEngine.TestTools;
+using WindowsInput;
+using UnityEngine.SceneManagement;
+
+namespace Tests {
+    public class DoubleJumpTest {
+        bool sceneLoaded;
+
+        public void LoadTestScene() {
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.LoadScene("TestScene", LoadSceneMode.Single);
+        }
+
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+            sceneLoaded = true;
+        }
+
+        [UnityTest]
+        public IEnumerator player_can_double_jump_off_the_ground() {
+            // ~~~~~~~~~~
+            // Load
+            LoadTestScene();
+            yield return new WaitWhile(() => sceneLoaded == false);
+            // ~~~~~~~~~~
+
+            // Prepare
+            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerEmpty.prefab");
+            GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 0, 0), Quaternion.identity);
+
+            player.AddComponent<Jump>();
+            player.AddComponent<DoubleJump>();
+
+            yield return new WaitForSeconds(1f);
+
+            // Act
+            var groundY = player.transform.position.y;
+
+            Assert.IsTrue(player.GetComponent<Player>().isGrounded);
+
+            InputSimulator IS = new InputSimulator();
+            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
+
+            yield return new WaitForSeconds(0.2f);
+
+            IS.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.UP);
+            yield return new WaitForSeconds(0.05f);
+            var airY = player.transform.position.y;
+
+            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
+
+            yield return new WaitForSeconds(0.2f);
+
+            var finalY = player.transform.position.y;
+
+            // Assert
+            Assert.IsFalse(player.GetComponent<Player>().isGrounded);
+            Assert.IsTrue(airY > groundY);
+            Assert.IsTrue(finalY > airY);
+            Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.y > 0);
+        }
+
+        [UnityTest]
+        public IEnumerator player_can_double_jump_while_falling() {
+            // ~~~~~~~~~~
+            // Load
+            LoadTestScene();
+            yield return new WaitWhile(() => sceneLoaded == false);
+            // ~~~~~~~~~~
+
+            // Prepare
+            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerEmpty.prefab");
+            GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 20, 0), Quaternion.identity);
+
+            player.AddComponent<Jump>();
+            player.AddComponent<DoubleJump>();
+
+            yield return new WaitForSeconds(0.5f);
+
+            // Act
+            Assert.IsFalse(player.GetComponent<Player>().isGrounded);
+            Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.y < 0);
+
+            var initialY = player.transform.position.y;
+            InputSimulator IS = new InputSimulator();
+            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
+
+            yield return new WaitForSeconds(0.2f);
+
+            var finalY = player.transform.position.y;
+            Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.y > 0);
+            Assert.IsTrue(finalY > initialY);
+        }
+
+        [UnityTest]
+        public IEnumerator player_can_not_double_jump_twice() {
+            // ~~~~~~~~~~
+            // Load
+            LoadTestScene();
+            yield return new WaitWhile(() => sceneLoaded == false);
+            // ~~~~~~~~~~
+
+            // Prepare
+            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerEmpty.prefab");
+            GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 20, 0), Quaternion.identity);
+
+            player.AddComponent<Jump>();
+            player.AddComponent<DoubleJump>();
+
+            yield return new WaitForSeconds(0.5f);
+
+            // Act
+            Assert.IsFalse(player.GetComponent<Player>().isGrounded);
+            Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.y < 0);
+
+            var initialY = player.transform.position.y;
+            InputSimulator IS = new InputSimulator();
+            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
+
+            yield return new WaitForSeconds(0.2f);
+
+            var doubleJumpY = player.transform.position.y;
+            Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.y > 0);
+            Assert.IsTrue(doubleJumpY > initialY);
+
+            IS.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.UP);
+            yield return new WaitForSeconds(0.3f);
+
+            Assert.IsFalse(player.GetComponent<Player>().isGrounded);
+            Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.y < 0);
+
+            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
+            yield return new WaitForSeconds(0.2f);
+            var finalY = player.transform.position.y;
+            Assert.IsFalse(player.GetComponent<Rigidbody2D>().velocity.y > 0);
+            Assert.IsFalse(finalY > doubleJumpY);
+        }
+    }
+}
