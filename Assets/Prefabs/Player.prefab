@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &335020663
 Transform:
   m_ObjectHideFlags: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e50ff0b34e7c4ac48b233ee957c12059, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -194,9 +194,10 @@ GameObject:
   - component: {fileID: 599111676149499729}
   - component: {fileID: 599111676149499728}
   - component: {fileID: 599111676149499731}
-  - component: {fileID: 599111676149499694}
   - component: {fileID: 599111676149499730}
   - component: {fileID: 599111676644466032}
+  - component: {fileID: 599111676149499694}
+  - component: {fileID: 760206079}
   - component: {fileID: 599111676644466034}
   - component: {fileID: 599111676644466035}
   - component: {fileID: 599111676644465997}
@@ -204,7 +205,6 @@ GameObject:
   - component: {fileID: 2023178428}
   - component: {fileID: 760206077}
   - component: {fileID: 760206066}
-  - component: {fileID: 760206079}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -303,30 +303,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &599111676149499694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 599111676149499733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4746cbf167ece684abd4dec3eb99721a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGrounded: 0
-  isTouchingWall: 0
-  isTouchingRightWall: 0
-  isTouchingLeftWall: 0
-  isWallSliding: 0
-  isWallJumping: 0
-  isDashing: 0
-  isGluedOnTheWall: 0
-  nextJumpIsDouble: 0
-  activateSlowMotion: 0
-  disableControls: 0
-  lastDirection: 1
 --- !u!68 &599111676149499730
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -371,6 +347,44 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &599111676149499694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599111676149499733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4746cbf167ece684abd4dec3eb99721a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGrounded: 0
+  isTouchingWall: 0
+  isTouchingRightWall: 0
+  isTouchingLeftWall: 0
+  isWallSliding: 0
+  isWallJumping: 0
+  isDashing: 0
+  isGluedOnTheWall: 0
+  nextJumpIsDouble: 0
+  activateSlowMotion: 0
+  disableControls: 0
+  lastDirection: 1
+--- !u!114 &760206079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599111676149499733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b5ee73aac4a48d4292f7783470dd917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallMultiplier: 3
+  lowJumpMultiplier: 5
 --- !u!114 &599111676644466034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,7 +448,6 @@ MonoBehaviour:
   startDashCooldownTime: 0.2
   dashCooldownTime: 0
   canDash: 1
-  rb: {fileID: 0}
 --- !u!114 &2023178428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,7 +483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallSlidingSpeed: 1.5
   stickyTime: 0
-  startStickyTime: 2
+  startStickyTime: 0.1
 --- !u!114 &760206066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,23 +496,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db8714844c1d330488fa38f1f9df196d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xWallForce: 15
+  xWallForce: 20
   yWallForce: 12
-  wallJumpTime: 0.1
---- !u!114 &760206079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 599111676149499733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b5ee73aac4a48d4292f7783470dd917, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fallMultiplier: 3
-  lowJumpMultiplier: 5
+  wallJumpTime: 0.075
 --- !u!1 &599111676791261535
 GameObject:
   m_ObjectHideFlags: 0
