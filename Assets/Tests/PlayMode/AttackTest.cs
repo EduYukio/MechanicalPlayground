@@ -35,7 +35,6 @@ namespace Tests {
             Attack attackScript = player.AddComponent<Attack>();
             attackScript.attackPoint = GameObject.Find("AttackPoint").transform;
             attackScript.slashEffect = GameObject.Find("Circular");
-            // attackScript.enemyLayers += LayerMask.NameToLayer("Enemies");
             attackScript.enemyLayers = LayerMask.GetMask("Enemies");
 
 
@@ -47,7 +46,6 @@ namespace Tests {
             Enemy enemyScript = enemy.GetComponent<Enemy>();
             // Act
             Assert.IsTrue(enemyScript.currentHealth == enemyScript.maxHealth);
-            // Assert.IsFalse(GameObject.Find("Circular").activeSelf);
 
             InputSimulator IS = new InputSimulator();
             IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.VK_X);

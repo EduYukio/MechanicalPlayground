@@ -44,7 +44,7 @@
 //             yield return new WaitForSeconds(1f);
 
 //             // Assert
-//             Assert.IsTrue(player.transform.position.x > initialX);
+//             Assert.IsTrue(player.transform.position.x > 0);
 //         }
 //     }
 // }
