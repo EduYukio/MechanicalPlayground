@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WallChecker : MonoBehaviour {
-    private Player player;
+    private PlayerFSM player;
     private Collider2D selfCollider;
 
     private void Start() {
-        player = FindObjectOfType<Player>();
+        player = FindObjectOfType<PlayerFSM>();
         selfCollider = GetComponent<Collider2D>();
     }
 

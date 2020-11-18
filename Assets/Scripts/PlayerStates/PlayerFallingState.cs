@@ -11,6 +11,9 @@ public class PlayerFallingState : PlayerBaseState {
     public override void Update(PlayerFSM player) {
         BetterFalling(player);
 
+        float xInput = Input.GetAxisRaw("Horizontal");
+        AirMovement(xInput, player);
+
         if (player.isGrounded) {
             player.TransitionToState(player.GroundedState);
         }
@@ -26,5 +29,19 @@ public class PlayerFallingState : PlayerBaseState {
         else if (playerReleasedJumpButton) {
             player.rb.velocity += Vector2.up * Physics2D.gravity.y * (player.config.lowJumpMultiplier - 1) * Time.deltaTime;
         }
+    }
+
+    void AirMovement(float xInput, PlayerFSM player) {
+        int direction = 0;
+        if (xInput > 0) {
+            direction = 1;
+            player.lastDirection = direction;
+        }
+        else if (xInput < 0) {
+            direction = -1;
+            player.lastDirection = direction;
+        }
+
+        player.rb.velocity = new Vector2(direction * player.config.moveSpeed, player.rb.velocity.y);
     }
 }

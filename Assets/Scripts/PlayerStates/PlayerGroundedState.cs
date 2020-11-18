@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerGroundedState : PlayerBaseState {
     public override void EnterState(PlayerFSM player) {
+        player.rb.velocity = Vector2.zero;
         player.animator.Play("PlayerIdle");
     }
 
@@ -12,6 +13,11 @@ public class PlayerGroundedState : PlayerBaseState {
 
         if (Input.GetButtonDown("Jump")) {
             player.TransitionToState(player.JumpingState);
+        }
+
+        float xInput = Input.GetAxisRaw("Horizontal");
+        if (xInput != 0) {
+            player.TransitionToState(player.WalkingState);
         }
     }
 }
