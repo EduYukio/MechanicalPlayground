@@ -1,19 +1,19 @@
 using UnityEngine;
 
-public class PlayerJumpingState : PlayerBaseState {
+public class PlayerDoubleJumpingState : PlayerBaseState {
     private bool playerIsFalling = false;
     private bool playerReleasedJumpButton = false;
 
     public override void EnterState(PlayerFSM player) {
-        player.animator.Play("PlayerJump");
-        player.rb.velocity = new Vector2(player.rb.velocity.x, player.config.jumpForce);
+        player.animator.Play("PlayerDoubleJump");
+        player.canDoubleJump = false;
+        player.rb.velocity = new Vector2(player.rb.velocity.x, player.config.doubleJumpForce);
     }
 
     public override void Update(PlayerFSM player) {
         ProcessMovementInput(player);
 
         CheckTransitionToFalling(player);
-        CheckTransitionToDoubleJump(player);
     }
 
     void CheckTransitionToFalling(PlayerFSM player) {
@@ -22,12 +22,6 @@ public class PlayerJumpingState : PlayerBaseState {
 
         if (playerIsFalling || playerReleasedJumpButton) {
             player.TransitionToState(player.FallingState);
-        }
-    }
-
-    void CheckTransitionToDoubleJump(PlayerFSM player) {
-        if (player.canDoubleJump && Input.GetButtonDown("Jump")) {
-            player.TransitionToState(player.DoubleJumpingState);
         }
     }
 }

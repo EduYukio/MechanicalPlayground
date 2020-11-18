@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerFallingState : PlayerBaseState {
@@ -5,17 +6,27 @@ public class PlayerFallingState : PlayerBaseState {
     private bool playerReleasedJumpButton = false;
 
     public override void EnterState(PlayerFSM player) {
-        player.animator.Play("PlayerFall");
+        if (!AnimatorIsPlaying("PlayerDoubleJump", player)) {
+            player.animator.Play("PlayerFall");
+        }
     }
 
     public override void Update(PlayerFSM player) {
         BetterFalling(player);
+        ProcessMovementInput(player);
 
-        float xInput = Input.GetAxisRaw("Horizontal");
-        AirMovement(xInput, player);
+        CheckTransitionToGrounded(player);
+        CheckTransitionToDoubleJump(player);
+    }
 
+    void CheckTransitionToGrounded(PlayerFSM player) {
         if (player.isGrounded) {
             player.TransitionToState(player.GroundedState);
+        }
+    }
+    void CheckTransitionToDoubleJump(PlayerFSM player) {
+        if (player.canDoubleJump && Input.GetButtonDown("Jump")) {
+            player.TransitionToState(player.DoubleJumpingState);
         }
     }
 
@@ -31,17 +42,7 @@ public class PlayerFallingState : PlayerBaseState {
         }
     }
 
-    void AirMovement(float xInput, PlayerFSM player) {
-        int direction = 0;
-        if (xInput > 0) {
-            direction = 1;
-            player.lastDirection = direction;
-        }
-        else if (xInput < 0) {
-            direction = -1;
-            player.lastDirection = direction;
-        }
-
-        player.rb.velocity = new Vector2(direction * player.config.moveSpeed, player.rb.velocity.y);
+    bool AnimatorIsPlaying(string stateName, PlayerFSM player) {
+        return player.animator.GetCurrentAnimatorStateInfo(0).IsName(stateName);
     }
 }

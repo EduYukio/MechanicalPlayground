@@ -13,6 +13,7 @@ public class PlayerFSM : MonoBehaviour {
     public readonly PlayerJumpingState JumpingState = new PlayerJumpingState();
     public readonly PlayerFallingState FallingState = new PlayerFallingState();
     public readonly PlayerWalkingState WalkingState = new PlayerWalkingState();
+    public readonly PlayerDoubleJumpingState DoubleJumpingState = new PlayerDoubleJumpingState();
 
     public PlayerConfig config;
     public Rigidbody2D rb;
@@ -23,6 +24,7 @@ public class PlayerFSM : MonoBehaviour {
     public bool isTouchingWall;
     public bool isTouchingRightWall;
     public bool isTouchingLeftWall;
+    public bool canDoubleJump;
     public int lastDirection = 1;
 
     private void Start() {
