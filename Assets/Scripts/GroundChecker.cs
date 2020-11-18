@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundChecker : MonoBehaviour {
-    private Player playerScript;
+    private PlayerFSM player;
 
     private void Start() {
-        playerScript = FindObjectOfType<Player>();
+        player = FindObjectOfType<PlayerFSM>();
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Ground")) {
-            playerScript.isGrounded = true;
+            player.isGrounded = true;
         }
     }
     private void OnTriggerExit2D(Collider2D other) {
         if (other.CompareTag("Ground")) {
-            playerScript.isGrounded = false;
+            player.isGrounded = false;
         }
     }
 }

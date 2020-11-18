@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class WallSlide : MonoBehaviour {
     public float wallSlidingSpeed = 1.5f;
+    [SerializeField] private float stickyTime = 0;
+    [SerializeField] private float startStickyTime = 0.1f;
 
     private Rigidbody2D rb;
     private Player player;
     private Animator animator;
-    [SerializeField] private float stickyTime = 0;
-    [SerializeField] private float startStickyTime = 0.1f;
 
     void Start() {
         player = FindObjectOfType<Player>();

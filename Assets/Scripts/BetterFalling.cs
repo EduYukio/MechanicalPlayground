@@ -6,14 +6,14 @@ public class BetterFalling : MonoBehaviour {
     public float fallMultiplier = 3f;
     public float lowJumpMultiplier = 5f;
 
-    private Rigidbody2D rb;
-    private Animator animator;
-    private Player player;
+    // private Rigidbody2D rb;
+    // private Animator animator;
+    private PlayerFSM player;
 
     void Start() {
-        rb = GetComponent<Rigidbody2D>();
-        player = FindObjectOfType<Player>();
-        animator = GetComponent<Animator>();
+        // rb = GetComponent<Rigidbody2D>();
+        player = FindObjectOfType<PlayerFSM>();
+        // animator = GetComponent<Animator>();
     }
 
     void Update() {
@@ -21,20 +21,20 @@ public class BetterFalling : MonoBehaviour {
     }
 
     void BetterFallingAction() {
-        if (player.isWallSliding) {
-            animator.SetBool("isFalling", false);
-            return;
-        }
+        // if (player.isWallSliding) {
+        // animator.SetBool("isFalling", false);
+        // return;
+        // }
 
-        animator.SetBool("isFalling", true);
-        if (rb.velocity.y < 0) {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        // animator.SetBool("isFalling", true);
+        if (player.rb.velocity.y < 0) {
+            player.rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
-        else if (rb.velocity.y > 0 && !Input.GetButton("Jump")) {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+        else if (player.rb.velocity.y > 0 && !Input.GetButton("Jump")) {
+            player.rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
-        else {
-            animator.SetBool("isFalling", false);
-        }
+        // else {
+        // animator.SetBool("isFalling", false);
+        // }
     }
 }
