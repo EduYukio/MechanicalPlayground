@@ -29,7 +29,7 @@ namespace Tests {
             // ~~~~~~~~~~
 
             // Prepare
-            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerEmpty.prefab");
+            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerFSM.prefab");
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(-15, 0, 0), Quaternion.identity);
 
             player.AddComponent<WallSlide>();
@@ -65,7 +65,7 @@ namespace Tests {
             // ~~~~~~~~~~
 
             // Prepare
-            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerEmpty.prefab");
+            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerFSM.prefab");
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(-15, 0, 0), Quaternion.identity);
 
             player.AddComponent<Walk>();

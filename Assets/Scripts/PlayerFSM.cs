@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerFSM : MonoBehaviour {
-    private PlayerBaseState currentState;
+    [HideInInspector] public PlayerBaseState currentState;
 
     public readonly PlayerGroundedState GroundedState = new PlayerGroundedState();
     public readonly PlayerJumpingState JumpingState = new PlayerJumpingState();

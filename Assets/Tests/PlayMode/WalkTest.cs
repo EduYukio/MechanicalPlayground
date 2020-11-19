@@ -29,12 +29,14 @@ namespace Tests {
             // ~~~~~~~~~~
 
             // Prepare
-            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerEmpty.prefab");
+            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerFSM.prefab");
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 0, 0), Quaternion.identity);
 
-            player.AddComponent<Walk>();
+            PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.mechanics.ResetMechanics();
+            playerScript.mechanics.walk = true;
 
-            yield return null;
+            yield return new WaitForSeconds(0.3f);
 
             // Act
             var initialX = player.transform.position.x;
@@ -57,12 +59,14 @@ namespace Tests {
             // ~~~~~~~~~~
 
             // Prepare
-            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerEmpty.prefab");
+            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerFSM.prefab");
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 0, 0), Quaternion.identity);
 
-            player.AddComponent<Walk>();
+            PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.mechanics.ResetMechanics();
+            playerScript.mechanics.walk = true;
 
-            yield return null;
+            yield return new WaitForSeconds(0.3f);
 
             // Act
             var initialX = player.transform.position.x;

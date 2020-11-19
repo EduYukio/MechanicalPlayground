@@ -5,8 +5,6 @@ using UnityEngine;
 
 [CreateAssetMenu()]
 public class Mechanics : ScriptableObject {
-    private List<bool> mechanicsList;
-
     [Header("Mechanics enabled")]
     public bool walk = false;
     public bool jump = false;
@@ -17,22 +15,32 @@ public class Mechanics : ScriptableObject {
     public bool wallJump = false;
     public bool blink = false;
 
-    private void Awake() {
-        mechanicsList = new List<bool>();
-        mechanicsList.Add(walk);
-        mechanicsList.Add(jump);
-        mechanicsList.Add(doubleJump);
-        mechanicsList.Add(dash);
-        mechanicsList.Add(attack);
-        mechanicsList.Add(wallSlide);
-        mechanicsList.Add(wallJump);
-        mechanicsList.Add(blink);
-    }
+    // public bool[] GetMechanics() {
+    //     return new bool[] {
+    //         walk,
+    //         jump,
+    //         attack,
+    //         doubleJump,
+    //         dash,
+    //         wallSlide,
+    //         wallJump,
+    //         blink,
+    //     };
+    // }
 
     public void ResetMechanics() {
-        for (int i = 0; i < mechanicsList.Count; i++) {
-            mechanicsList[i] = false;
-        }
+        walk = false;
+        jump = false;
+        attack = false;
+        doubleJump = false;
+        dash = false;
+        wallSlide = false;
+        wallJump = false;
+        blink = false;
+        // bool[] mechanicsArray = GetMechanics();
+        // for (int i = 0; i < mechanicsArray.Length; i++) {
+        //     mechanicsArray[i] = false;
+        // }
     }
 
     public void EnableBasicMechanics() {

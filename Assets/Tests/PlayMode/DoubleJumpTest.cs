@@ -29,18 +29,20 @@ namespace Tests {
             // ~~~~~~~~~~
 
             // Prepare
-            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerEmpty.prefab");
+            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerFSM.prefab");
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 0, 0), Quaternion.identity);
 
-            player.AddComponent<Jump>();
-            player.AddComponent<DoubleJump>();
+            PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.mechanics.ResetMechanics();
+            playerScript.mechanics.jump = true;
+            playerScript.mechanics.doubleJump = true;
 
             yield return new WaitForSeconds(1f);
 
             // Act
             var groundY = player.transform.position.y;
 
-            Assert.IsTrue(player.GetComponent<Player>().isGrounded);
+            Assert.IsTrue(playerScript.isGrounded);
 
             InputSimulator IS = new InputSimulator();
             IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
@@ -58,7 +60,7 @@ namespace Tests {
             var finalY = player.transform.position.y;
 
             // Assert
-            Assert.IsFalse(player.GetComponent<Player>().isGrounded);
+            Assert.IsFalse(playerScript.isGrounded);
             Assert.IsTrue(airY > groundY);
             Assert.IsTrue(finalY > airY);
             Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.y > 0);
@@ -73,16 +75,18 @@ namespace Tests {
             // ~~~~~~~~~~
 
             // Prepare
-            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerEmpty.prefab");
+            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerFSM.prefab");
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 20, 0), Quaternion.identity);
 
-            player.AddComponent<Jump>();
-            player.AddComponent<DoubleJump>();
+            PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.mechanics.ResetMechanics();
+            playerScript.mechanics.jump = true;
+            playerScript.mechanics.doubleJump = true;
 
             yield return new WaitForSeconds(0.5f);
 
             // Act
-            Assert.IsFalse(player.GetComponent<Player>().isGrounded);
+            Assert.IsFalse(playerScript.isGrounded);
             Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.y < 0);
 
             var initialY = player.transform.position.y;
@@ -105,16 +109,18 @@ namespace Tests {
             // ~~~~~~~~~~
 
             // Prepare
-            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerEmpty.prefab");
+            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerFSM.prefab");
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 20, 0), Quaternion.identity);
 
-            player.AddComponent<Jump>();
-            player.AddComponent<DoubleJump>();
+            PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.mechanics.ResetMechanics();
+            playerScript.mechanics.jump = true;
+            playerScript.mechanics.doubleJump = true;
 
             yield return new WaitForSeconds(0.5f);
 
             // Act
-            Assert.IsFalse(player.GetComponent<Player>().isGrounded);
+            Assert.IsFalse(playerScript.isGrounded);
             Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.y < 0);
 
             var initialY = player.transform.position.y;
@@ -130,7 +136,7 @@ namespace Tests {
             IS.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.UP);
             yield return new WaitForSeconds(0.3f);
 
-            Assert.IsFalse(player.GetComponent<Player>().isGrounded);
+            Assert.IsFalse(playerScript.isGrounded);
             Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.y < 0);
 
             IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);

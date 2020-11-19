@@ -29,17 +29,19 @@ namespace Tests {
             // ~~~~~~~~~~
 
             // Prepare
-            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerEmpty.prefab");
+            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerFSM.prefab");
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 0, 0), Quaternion.identity);
 
-            player.AddComponent<Jump>();
+            PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.mechanics.ResetMechanics();
+            playerScript.mechanics.jump = true;
 
             yield return new WaitForSeconds(1f);
 
             // Act
             var initialY = player.transform.position.y;
 
-            Assert.IsTrue(player.GetComponent<Player>().isGrounded);
+            Assert.IsTrue(playerScript.isGrounded);
 
             InputSimulator IS = new InputSimulator();
             IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
@@ -60,12 +62,14 @@ namespace Tests {
             // ~~~~~~~~~~
 
             // Prepare
-            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerEmpty.prefab");
-            GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 20, 0), Quaternion.identity);
+            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerFSM.prefab");
+            GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 50, 0), Quaternion.identity);
 
-            player.AddComponent<Jump>();
+            PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.mechanics.ResetMechanics();
+            playerScript.mechanics.jump = true;
 
-            yield return null;
+            yield return new WaitForSeconds(0.3f);
 
             // Act
             var initialY = player.transform.position.y;
@@ -76,7 +80,7 @@ namespace Tests {
             yield return new WaitForSeconds(0.15f);
 
             // Assert
-            Assert.IsFalse(player.GetComponent<Player>().isGrounded);
+            Assert.IsFalse(playerScript.isGrounded);
             Assert.IsFalse(player.transform.position.y > initialY);
             Assert.IsFalse(player.GetComponent<Rigidbody2D>().velocity.y > 0);
         }
@@ -90,17 +94,19 @@ namespace Tests {
             // ~~~~~~~~~~
 
             // Prepare
-            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerEmpty.prefab");
+            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerFSM.prefab");
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 0, 0), Quaternion.identity);
 
-            player.AddComponent<Jump>();
+            PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.mechanics.ResetMechanics();
+            playerScript.mechanics.jump = true;
 
             yield return new WaitForSeconds(1f);
 
             // Act
             var initialY = player.transform.position.y;
 
-            Assert.IsTrue(player.GetComponent<Player>().isGrounded);
+            Assert.IsTrue(playerScript.isGrounded);
 
             InputSimulator IS = new InputSimulator();
             IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
@@ -116,7 +122,7 @@ namespace Tests {
 
             yield return new WaitForSeconds(0.1f);
 
-            Assert.IsFalse(player.GetComponent<Player>().isGrounded);
+            Assert.IsFalse(playerScript.isGrounded);
             Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.y < 0);
 
             IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
