@@ -1,28 +1,20 @@
 using UnityEngine;
 
 public class PlayerDoubleJumpingState : PlayerBaseState {
-    private bool playerIsFalling = false;
-    private bool playerReleasedJumpButton = false;
-
     public override void EnterState(PlayerFSM player) {
         player.animator.Play("PlayerDoubleJump");
-        player.canDoubleJump = false;
-        player.rb.velocity = new Vector2(player.rb.velocity.x, player.config.doubleJumpForce);
+        DoubleJumpAction(player);
     }
 
     public override void Update(PlayerFSM player) {
-        ProcessMovementInput(player);
+        base.ProcessMovementInput(player);
 
-        CheckTransitionToFalling(player);
-        CheckTransitionToDashing(player);
+        base.CheckTransitionToFalling(player);
+        base.CheckTransitionToDashing(player);
     }
 
-    void CheckTransitionToFalling(PlayerFSM player) {
-        playerIsFalling = player.rb.velocity.y < 0;
-        playerReleasedJumpButton = player.rb.velocity.y > 0 && !Input.GetButton("Jump");
-
-        if (playerIsFalling || playerReleasedJumpButton) {
-            player.TransitionToState(player.FallingState);
-        }
+    void DoubleJumpAction(PlayerFSM player) {
+        player.rb.velocity = new Vector2(player.rb.velocity.x, player.config.doubleJumpForce);
+        player.canDoubleJump = false;
     }
 }

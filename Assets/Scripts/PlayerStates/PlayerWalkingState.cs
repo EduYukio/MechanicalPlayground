@@ -6,29 +6,17 @@ public class PlayerWalkingState : PlayerBaseState {
     }
 
     public override void Update(PlayerFSM player) {
-        ProcessMovementInput(player);
+        base.ProcessMovementInput(player);
 
-        CheckTransitionToFalling(player);
-        CheckTransitionToJumping(player);
         CheckTransitionToGrounded(player);
-        CheckTransitionToDashing(player);
+        base.CheckTransitionToFalling(player);
+        base.CheckTransitionToJumping(player);
+        base.CheckTransitionToDashing(player);
     }
 
-    void CheckTransitionToFalling(PlayerFSM player) {
-        if (!player.isGrounded) {
-            player.TransitionToState(player.FallingState);
-        }
-    }
+    public override void CheckTransitionToGrounded(PlayerFSM player) {
+        if (!player.isGrounded) return;
 
-    void CheckTransitionToJumping(PlayerFSM player) {
-        if (!player.mechanics.jump) return;
-
-        if (Input.GetButtonDown("Jump")) {
-            player.TransitionToState(player.JumpingState);
-        }
-    }
-
-    void CheckTransitionToGrounded(PlayerFSM player) {
         float xInput = Input.GetAxisRaw("Horizontal");
         if (xInput == 0) {
             player.TransitionToState(player.GroundedState);

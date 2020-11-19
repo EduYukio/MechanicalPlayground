@@ -2,9 +2,6 @@ using System.Collections;
 using UnityEngine;
 
 public class PlayerFallingState : PlayerBaseState {
-    private bool playerIsFalling = false;
-    private bool playerReleasedJumpButton = false;
-
     public override void EnterState(PlayerFSM player) {
         if (!AnimatorIsPlaying("PlayerDoubleJump", player)) {
             player.animator.Play("PlayerFall");
@@ -13,36 +10,21 @@ public class PlayerFallingState : PlayerBaseState {
 
     public override void Update(PlayerFSM player) {
         BetterFalling(player);
-        ProcessMovementInput(player);
+        base.ProcessMovementInput(player);
 
-        CheckTransitionToGrounded(player);
-        CheckTransitionToDoubleJump(player);
-        CheckTransitionToDashing(player);
-    }
-
-    void CheckTransitionToGrounded(PlayerFSM player) {
-        if (player.isGrounded) {
-            player.TransitionToState(player.GroundedState);
-        }
-    }
-
-    void CheckTransitionToDoubleJump(PlayerFSM player) {
-        if (!player.mechanics.doubleJump) return;
-        if (!player.canDoubleJump) return;
-
-        if (Input.GetButtonDown("Jump")) {
-            player.TransitionToState(player.DoubleJumpingState);
-        }
+        base.CheckTransitionToGrounded(player);
+        base.CheckTransitionToDoubleJump(player);
+        base.CheckTransitionToDashing(player);
     }
 
     void BetterFalling(PlayerFSM player) {
-        playerIsFalling = player.rb.velocity.y < 0;
-        playerReleasedJumpButton = player.rb.velocity.y > 0 && !Input.GetButton("Jump");
+        bool playerIsFalling = player.rb.velocity.y < 0;
+        bool playerStoppedJumping = player.rb.velocity.y > 0 && !Input.GetButton("Jump");
 
         if (playerIsFalling) {
             player.rb.velocity += Vector2.up * Physics2D.gravity.y * (player.config.fallMultiplier - 1) * Time.deltaTime;
         }
-        else if (playerReleasedJumpButton) {
+        else if (playerStoppedJumping) {
             player.rb.velocity += Vector2.up * Physics2D.gravity.y * (player.config.lowJumpMultiplier - 1) * Time.deltaTime;
         }
     }

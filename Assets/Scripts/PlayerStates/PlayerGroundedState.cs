@@ -3,38 +3,19 @@ using UnityEngine;
 public class PlayerGroundedState : PlayerBaseState {
     public override void EnterState(PlayerFSM player) {
         player.animator.Play("PlayerIdle");
-        player.canDoubleJump = true;
-        player.canDash = true;
-        player.rb.velocity = Vector2.zero;
+        GroundedAction(player);
     }
 
     public override void Update(PlayerFSM player) {
-        CheckTransitionToFalling(player);
-        CheckTransitionToJumping(player);
-        CheckTransitionToWalking(player);
-        CheckTransitionToDashing(player);
+        base.CheckTransitionToFalling(player);
+        base.CheckTransitionToJumping(player);
+        base.CheckTransitionToWalking(player);
+        base.CheckTransitionToDashing(player);
     }
 
-    void CheckTransitionToFalling(PlayerFSM player) {
-        if (!player.isGrounded) {
-            player.TransitionToState(player.FallingState);
-        }
-    }
-
-    void CheckTransitionToJumping(PlayerFSM player) {
-        if (!player.mechanics.jump) return;
-
-        if (Input.GetButtonDown("Jump")) {
-            player.TransitionToState(player.JumpingState);
-        }
-    }
-
-    void CheckTransitionToWalking(PlayerFSM player) {
-        if (!player.mechanics.walk) return;
-
-        float xInput = Input.GetAxisRaw("Horizontal");
-        if (xInput != 0) {
-            player.TransitionToState(player.WalkingState);
-        }
+    void GroundedAction(PlayerFSM player) {
+        player.rb.velocity = Vector2.zero;
+        player.canDoubleJump = true;
+        player.canDash = true;
     }
 }

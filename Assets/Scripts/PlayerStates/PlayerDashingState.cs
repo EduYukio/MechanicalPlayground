@@ -17,19 +17,13 @@ public class PlayerDashingState : PlayerBaseState {
         }
 
         StopDashing(player);
-        CheckTransitionToGrounded(player);
         CheckTransitionToFalling(player);
+        base.CheckTransitionToGrounded(player);
     }
 
-    void CheckTransitionToFalling(PlayerFSM player) {
+    public override void CheckTransitionToFalling(PlayerFSM player) {
         if (!player.isGrounded) {
             player.TransitionToState(player.FallingState);
-        }
-    }
-
-    void CheckTransitionToGrounded(PlayerFSM player) {
-        if (player.isGrounded) {
-            player.TransitionToState(player.GroundedState);
         }
     }
 
@@ -41,7 +35,7 @@ public class PlayerDashingState : PlayerBaseState {
         dashTimer -= Time.deltaTime;
     }
 
-    public void StopDashing(PlayerFSM player) {
+    void StopDashing(PlayerFSM player) {
         player.rb.velocity = Vector2.zero;
         player.canDash = false;
         player.dashCooldownTimer = player.config.startDashCooldownTime;
