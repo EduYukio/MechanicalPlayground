@@ -20,6 +20,8 @@ public class PlayerWalkingState : PlayerBaseState {
     }
 
     void CheckTransitionToJumping(PlayerFSM player) {
+        if (!player.mechanics.jump) return;
+
         if (Input.GetButtonDown("Jump")) {
             player.TransitionToState(player.JumpingState);
         }

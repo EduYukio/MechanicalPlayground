@@ -5,9 +5,9 @@ using UnityEngine;
 public class PlayerFSM : MonoBehaviour {
     private PlayerBaseState currentState;
 
-    //DEBUGGGG
+    //DEBUG
     public string debugState;
-    //DEBUGGGG
+    //DEBUG
 
     public readonly PlayerGroundedState GroundedState = new PlayerGroundedState();
     public readonly PlayerJumpingState JumpingState = new PlayerJumpingState();
@@ -16,6 +16,7 @@ public class PlayerFSM : MonoBehaviour {
     public readonly PlayerDoubleJumpingState DoubleJumpingState = new PlayerDoubleJumpingState();
 
     public PlayerConfig config;
+    public Mechanics mechanics;
     public Rigidbody2D rb;
     public Animator animator;
     public SpriteRenderer spriteRenderer;
@@ -44,9 +45,9 @@ public class PlayerFSM : MonoBehaviour {
         currentState = state;
         currentState.EnterState(this);
 
-        //DEBUGG
+        //DEBUG
         debugState = currentState.GetType().Name;
-        //DEBUGG
+        //DEBUG
     }
 
     private void UpdateFacingSprite() {

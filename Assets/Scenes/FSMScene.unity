@@ -3581,9 +3581,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugState: 
   config: {fileID: 11400000, guid: 99225b8b90d80ac4886b876914cadcf2, type: 2}
+  mechanics: {fileID: 11400000, guid: daa8efa45546dec43a6bb1e2bd1561e0, type: 2}
   rb: {fileID: 0}
   animator: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   isGrounded: 0
+  isTouchingWall: 0
+  isTouchingRightWall: 0
+  isTouchingLeftWall: 0
+  canDoubleJump: 0
+  lastDirection: 1
 --- !u!50 &6669329812736070628
 Rigidbody2D:
   serializedVersion: 4

@@ -20,12 +20,16 @@ public class PlayerGroundedState : PlayerBaseState {
     }
 
     void CheckTransitionToJumping(PlayerFSM player) {
+        if (!player.mechanics.jump) return;
+
         if (Input.GetButtonDown("Jump")) {
             player.TransitionToState(player.JumpingState);
         }
     }
 
     void CheckTransitionToWalking(PlayerFSM player) {
+        if (!player.mechanics.walk) return;
+
         float xInput = Input.GetAxisRaw("Horizontal");
         if (xInput != 0) {
             player.TransitionToState(player.WalkingState);

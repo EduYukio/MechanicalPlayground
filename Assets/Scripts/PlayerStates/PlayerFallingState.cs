@@ -25,7 +25,10 @@ public class PlayerFallingState : PlayerBaseState {
         }
     }
     void CheckTransitionToDoubleJump(PlayerFSM player) {
-        if (player.canDoubleJump && Input.GetButtonDown("Jump")) {
+        if(!player.mechanics.doubleJump) return;
+        if(!player.canDoubleJump) return;
+        
+        if (Input.GetButtonDown("Jump")) {
             player.TransitionToState(player.DoubleJumpingState);
         }
     }
