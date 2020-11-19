@@ -5,15 +5,12 @@ using UnityEngine;
 public class PlayerFSM : MonoBehaviour {
     private PlayerBaseState currentState;
 
-    //DEBUG
-    public string debugState;
-    //DEBUG
-
     public readonly PlayerGroundedState GroundedState = new PlayerGroundedState();
     public readonly PlayerJumpingState JumpingState = new PlayerJumpingState();
     public readonly PlayerFallingState FallingState = new PlayerFallingState();
     public readonly PlayerWalkingState WalkingState = new PlayerWalkingState();
     public readonly PlayerDoubleJumpingState DoubleJumpingState = new PlayerDoubleJumpingState();
+    public readonly PlayerDashingState DashingState = new PlayerDashingState();
 
     public PlayerConfig config;
     public Mechanics mechanics;
@@ -25,8 +22,15 @@ public class PlayerFSM : MonoBehaviour {
     public bool isTouchingWall;
     public bool isTouchingRightWall;
     public bool isTouchingLeftWall;
+
     public bool canDoubleJump;
+    public bool canDash;
+    public float dashCooldownTimer;
     public int lastDirection = 1;
+
+    //DEBUG
+    public string debugState;
+    //DEBUG
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -36,6 +40,8 @@ public class PlayerFSM : MonoBehaviour {
     }
 
     private void Update() {
+        ProcessDashCooldown();
+
         currentState.Update(this);
 
         UpdateFacingSprite();
@@ -56,6 +62,12 @@ public class PlayerFSM : MonoBehaviour {
         }
         else if (lastDirection == -1) {
             spriteRenderer.flipX = true;
+        }
+    }
+
+    void ProcessDashCooldown() {
+        if (dashCooldownTimer > 0) {
+            dashCooldownTimer -= Time.deltaTime;
         }
     }
 }

@@ -25,9 +25,7 @@ public class PlayerConfig : ScriptableObject {
     [Header("Dash")]
     public float dashSpeed = 23;
     public float startDashTime = 0.175f;
-    public float dashTime;
     public float startDashCooldownTime = 0.2f;
-    public float dashCooldownTime;
 
     [Header("WallSlide")]
     public float wallSlidingSpeed = 1.5f;

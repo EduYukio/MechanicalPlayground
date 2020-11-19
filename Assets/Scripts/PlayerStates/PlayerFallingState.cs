@@ -17,6 +17,7 @@ public class PlayerFallingState : PlayerBaseState {
 
         CheckTransitionToGrounded(player);
         CheckTransitionToDoubleJump(player);
+        CheckTransitionToDashing(player);
     }
 
     void CheckTransitionToGrounded(PlayerFSM player) {
@@ -24,10 +25,11 @@ public class PlayerFallingState : PlayerBaseState {
             player.TransitionToState(player.GroundedState);
         }
     }
+
     void CheckTransitionToDoubleJump(PlayerFSM player) {
-        if(!player.mechanics.doubleJump) return;
-        if(!player.canDoubleJump) return;
-        
+        if (!player.mechanics.doubleJump) return;
+        if (!player.canDoubleJump) return;
+
         if (Input.GetButtonDown("Jump")) {
             player.TransitionToState(player.DoubleJumpingState);
         }

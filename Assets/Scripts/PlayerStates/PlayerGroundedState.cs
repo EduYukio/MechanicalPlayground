@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class PlayerGroundedState : PlayerBaseState {
     public override void EnterState(PlayerFSM player) {
-        player.canDoubleJump = true;
-        player.rb.velocity = Vector2.zero;
         player.animator.Play("PlayerIdle");
+        player.canDoubleJump = true;
+        player.canDash = true;
+        player.rb.velocity = Vector2.zero;
     }
 
     public override void Update(PlayerFSM player) {
         CheckTransitionToFalling(player);
         CheckTransitionToJumping(player);
         CheckTransitionToWalking(player);
+        CheckTransitionToDashing(player);
     }
 
     void CheckTransitionToFalling(PlayerFSM player) {

@@ -14,6 +14,7 @@ public class PlayerDoubleJumpingState : PlayerBaseState {
         ProcessMovementInput(player);
 
         CheckTransitionToFalling(player);
+        CheckTransitionToDashing(player);
     }
 
     void CheckTransitionToFalling(PlayerFSM player) {

@@ -11,6 +11,7 @@ public class PlayerWalkingState : PlayerBaseState {
         CheckTransitionToFalling(player);
         CheckTransitionToJumping(player);
         CheckTransitionToGrounded(player);
+        CheckTransitionToDashing(player);
     }
 
     void CheckTransitionToFalling(PlayerFSM player) {

@@ -23,9 +23,7 @@ MonoBehaviour:
   doubleJumpForce: 12
   dashSpeed: 23
   startDashTime: 0.175
-  dashTime: 0
-  startDashCooldownTime: 0.2
-  dashCooldownTime: 0
+  startDashCooldownTime: 0.35
   wallSlidingSpeed: 1.5
   stickyTime: 0
   startStickyTime: 0.1

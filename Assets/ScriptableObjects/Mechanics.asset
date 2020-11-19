@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6dd464ccda50b34aa5e8c36e63fb11e, type: 3}
   m_Name: Mechanics
   m_EditorClassIdentifier: 
-  walk: 0
-  jump: 0
-  doubleJump: 0
-  dash: 0
+  walk: 1
+  jump: 1
   attack: 0
+  doubleJump: 1
+  dash: 1
   wallSlide: 0
   wallJump: 0
   blink: 0

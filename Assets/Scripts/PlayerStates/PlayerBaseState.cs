@@ -19,4 +19,15 @@ public abstract class PlayerBaseState {
 
         player.rb.velocity = new Vector2(direction * player.config.moveSpeed, player.rb.velocity.y);
     }
+
+    public void CheckTransitionToDashing(PlayerFSM player) {
+        if (!player.mechanics.dash) return;
+        if (!player.canDash) return;
+        if (player.dashCooldownTimer > 0) return;
+
+        // GamePad || Keyboard
+        if (Input.GetAxisRaw("Dash") > 0 || Input.GetButtonDown("Dash")) {
+            player.TransitionToState(player.DashingState);
+        }
+    }
 }
