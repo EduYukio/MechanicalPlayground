@@ -15,6 +15,7 @@ public class PlayerWallJumpingState : PlayerBaseState {
     }
 
     public override void Update(PlayerFSM player) {
+        base.CheckTransitionToDashing(player);
         // Obligatory x movement
         if (xVelocityTimer > 0) {
             xVelocityTimer -= Time.deltaTime;
