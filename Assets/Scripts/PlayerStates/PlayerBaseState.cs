@@ -94,4 +94,13 @@ public abstract class PlayerBaseState {
             player.TransitionToState(player.WallJumpingState);
         }
     }
+
+    public void SetPlayerSpriteOppositeOfWall(PlayerFSM player) {
+        if (player.isTouchingLeftWall) {
+            player.lastDirection = 1;
+        }
+        else if (player.isTouchingRightWall) {
+            player.lastDirection = -1;
+        }
+    }
 }

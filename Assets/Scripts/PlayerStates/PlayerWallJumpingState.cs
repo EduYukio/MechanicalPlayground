@@ -1,7 +1,6 @@
 using UnityEngine;
 
 public class PlayerWallJumpingState : PlayerBaseState {
-    private int jumpDirection = 0;
     private float xVelocityTimer = 10f;
 
     public override void EnterState(PlayerFSM player) {
@@ -9,7 +8,7 @@ public class PlayerWallJumpingState : PlayerBaseState {
         player.canDoubleJump = true;
         player.canDash = true;
         xVelocityTimer = player.config.startWallJumpTime;
-        CheckWallJumpDirection(player);
+        base.SetPlayerSpriteOppositeOfWall(player);
         ApplyXVelocity(player);
         JumpAction(player);
     }
@@ -43,16 +42,7 @@ public class PlayerWallJumpingState : PlayerBaseState {
     }
 
     void ApplyXVelocity(PlayerFSM player) {
-        player.rb.velocity = new Vector2(player.config.moveSpeed * jumpDirection, player.rb.velocity.y);
-    }
-
-    void CheckWallJumpDirection(PlayerFSM player) {
-        if (player.isTouchingLeftWall) {
-            jumpDirection = 1;
-        }
-        else {
-            jumpDirection = -1;
-        }
+        player.rb.velocity = new Vector2(player.config.moveSpeed * player.lastDirection, player.rb.velocity.y);
     }
 
     void JumpAction(PlayerFSM player) {

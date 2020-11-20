@@ -8,7 +8,7 @@ public class PlayerWallSlidingState : PlayerBaseState {
         player.canDoubleJump = true;
         player.canDash = true;
         stickyTimer = player.config.startStickyTime;
-        InvertPlayerDirection(player);
+        base.SetPlayerSpriteOppositeOfWall(player);
     }
 
     public override void Update(PlayerFSM player) {
@@ -36,15 +36,6 @@ public class PlayerWallSlidingState : PlayerBaseState {
     void WallSlideAction(PlayerFSM player) {
         float yVelocity = Mathf.Clamp(player.rb.velocity.y, -player.config.wallSlidingSpeed, float.MaxValue);
         player.rb.velocity = new Vector2(player.rb.velocity.x, yVelocity);
-    }
-
-    void InvertPlayerDirection(PlayerFSM player) {
-        if (player.isTouchingLeftWall) {
-            player.lastDirection = 1;
-        }
-        else if (player.isTouchingRightWall) {
-            player.lastDirection = -1;
-        }
     }
 
     void ProcessStickyTimer(PlayerFSM player) {
