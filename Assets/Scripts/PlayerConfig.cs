@@ -29,7 +29,6 @@ public class PlayerConfig : ScriptableObject {
 
     [Header("WallSlide")]
     public float wallSlidingSpeed = 1.5f;
-    public float stickyTime = 0;
     public float startStickyTime = 0.1f;
 
     [Header("WallJump")]

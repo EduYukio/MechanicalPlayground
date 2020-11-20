@@ -39,7 +39,7 @@ public abstract class PlayerBaseState {
     public virtual void CheckTransitionToFalling(PlayerFSM player) {
         if (player.isGrounded) return;
 
-        bool playerIsFalling = player.rb.velocity.y < 0;
+        bool playerIsFalling = player.rb.velocity.y <= 0;
         bool playerStoppedJumping = player.rb.velocity.y > 0 && !Input.GetButton("Jump");
 
         if (playerIsFalling || playerStoppedJumping) {
@@ -70,6 +70,18 @@ public abstract class PlayerBaseState {
         float xInput = Input.GetAxisRaw("Horizontal");
         if (xInput != 0) {
             player.TransitionToState(player.WalkingState);
+        }
+    }
+
+    public virtual void CheckTransitionToWallSliding(PlayerFSM player) {
+        if (!player.mechanics.wallSlide) return;
+
+        float xInput = Input.GetAxisRaw("Horizontal");
+        bool pressingAgainstLeftWall = player.isTouchingLeftWall && xInput < 0;
+        bool pressingAgainstRightWall = player.isTouchingRightWall && xInput > 0;
+
+        if (pressingAgainstLeftWall || pressingAgainstRightWall) {
+            player.TransitionToState(player.WallSlidingState);
         }
     }
 }

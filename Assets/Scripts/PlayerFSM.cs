@@ -11,6 +11,7 @@ public class PlayerFSM : MonoBehaviour {
     public readonly PlayerWalkingState WalkingState = new PlayerWalkingState();
     public readonly PlayerDoubleJumpingState DoubleJumpingState = new PlayerDoubleJumpingState();
     public readonly PlayerDashingState DashingState = new PlayerDashingState();
+    public readonly PlayerWallSlidingState WallSlidingState = new PlayerWallSlidingState();
 
     public PlayerConfig config;
     public Mechanics mechanics;

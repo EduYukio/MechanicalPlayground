@@ -17,18 +17,9 @@ public class PlayerDashingState : PlayerBaseState {
         }
 
         StopDashing(player);
-        CheckTransitionToFalling(player);
+        base.CheckTransitionToFalling(player);
         base.CheckTransitionToGrounded(player);
     }
-
-    public override void CheckTransitionToFalling(PlayerFSM player) {
-        if (!player.isGrounded) {
-            player.TransitionToState(player.FallingState);
-        }
-    }
-
-    // void CheckTransitionToWallSliding(PlayerFSM player) {
-    // }
 
     void DashAction(PlayerFSM player) {
         player.rb.velocity = new Vector2(dashDirection * player.config.dashSpeed, 0f);

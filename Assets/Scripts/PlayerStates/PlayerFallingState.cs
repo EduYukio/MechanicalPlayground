@@ -15,6 +15,7 @@ public class PlayerFallingState : PlayerBaseState {
         base.CheckTransitionToGrounded(player);
         base.CheckTransitionToDoubleJump(player);
         base.CheckTransitionToDashing(player);
+        base.CheckTransitionToWallSliding(player);
     }
 
     void BetterFalling(PlayerFSM player) {
