@@ -13,6 +13,7 @@ public class PlayerWallSlidingState : PlayerBaseState {
 
     public override void Update(PlayerFSM player) {
         base.CheckTransitionToGrounded(player);
+        base.CheckTransitionToWallJumping(player);
 
         if (stickyTimer > 0) {
             WallSlideAction(player);

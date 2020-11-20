@@ -50,6 +50,7 @@ public abstract class PlayerBaseState {
     public virtual void CheckTransitionToDoubleJump(PlayerFSM player) {
         if (!player.mechanics.doubleJump) return;
         if (!player.canDoubleJump) return;
+        if (player.isTouchingWall) return;
 
         if (Input.GetButtonDown("Jump")) {
             player.TransitionToState(player.DoubleJumpingState);
@@ -82,6 +83,15 @@ public abstract class PlayerBaseState {
 
         if (pressingAgainstLeftWall || pressingAgainstRightWall) {
             player.TransitionToState(player.WallSlidingState);
+        }
+    }
+
+    public virtual void CheckTransitionToWallJumping(PlayerFSM player) {
+        if (!player.mechanics.wallJump) return;
+        if (!player.isTouchingWall) return;
+
+        if (Input.GetButtonDown("Jump")) {
+            player.TransitionToState(player.WallJumpingState);
         }
     }
 }

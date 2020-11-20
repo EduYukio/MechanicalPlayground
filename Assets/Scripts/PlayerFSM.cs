@@ -12,6 +12,7 @@ public class PlayerFSM : MonoBehaviour {
     public readonly PlayerDoubleJumpingState DoubleJumpingState = new PlayerDoubleJumpingState();
     public readonly PlayerDashingState DashingState = new PlayerDashingState();
     public readonly PlayerWallSlidingState WallSlidingState = new PlayerWallSlidingState();
+    public readonly PlayerWallJumpingState WallJumpingState = new PlayerWallJumpingState();
 
     public PlayerConfig config;
     public Mechanics mechanics;
@@ -31,6 +32,8 @@ public class PlayerFSM : MonoBehaviour {
 
     //DEBUG
     public string debugState;
+    public bool activateSlowMotion = false;
+    public bool printDebugStates = false;
     //DEBUG
 
     private void Start() {
@@ -46,6 +49,10 @@ public class PlayerFSM : MonoBehaviour {
         currentState.Update(this);
 
         UpdateFacingSprite();
+
+        //DEBUG
+        DebugSlowMotion();
+        //DEBUG
     }
 
     public void TransitionToState(PlayerBaseState state) {
@@ -54,6 +61,7 @@ public class PlayerFSM : MonoBehaviour {
 
         //DEBUG
         debugState = currentState.GetType().Name;
+        if (printDebugStates) Debug.Log(debugState);
         //DEBUG
     }
 
@@ -71,4 +79,15 @@ public class PlayerFSM : MonoBehaviour {
             dashCooldownTimer -= Time.deltaTime;
         }
     }
+
+    //DEBUG
+    void DebugSlowMotion() {
+        if (activateSlowMotion) {
+            Time.timeScale = 0.2f;
+        }
+        else {
+            Time.timeScale = 1f;
+        }
+    }
+    //DEBUG
 }

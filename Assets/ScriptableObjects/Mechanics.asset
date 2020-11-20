@@ -17,6 +17,6 @@ MonoBehaviour:
   attack: 0
   doubleJump: 1
   dash: 1
-  wallSlide: 0
-  wallJump: 0
+  wallSlide: 1
+  wallJump: 1
   blink: 0

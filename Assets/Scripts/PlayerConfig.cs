@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu()]
 public class PlayerConfig : ScriptableObject {
     [Header("Walk")]
-    public float moveSpeed = 5f;
+    public float moveSpeed = 6f;
 
     [Header("BetterFalling")]
     public float fallMultiplier = 3f;
@@ -32,8 +32,6 @@ public class PlayerConfig : ScriptableObject {
     public float startStickyTime = 0.1f;
 
     [Header("WallJump")]
-    public float xWallForce = 20f;
-    public float yWallForce = 12f;
-    public float wallJumpTime = 0.075f;
+    public float startWallJumpTime = 0.1f;
 }
 
