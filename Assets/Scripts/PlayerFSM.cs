@@ -31,6 +31,7 @@ public class PlayerFSM : MonoBehaviour {
     public float dashCooldownTimer;
     public float attackCooldownTimer;
     public float coyoteTimer;
+    public float bunnyHopTimer;
     public int lastDirection = 1;
 
     //DEBUG
@@ -82,6 +83,7 @@ public class PlayerFSM : MonoBehaviour {
         if (dashCooldownTimer >= 0) dashCooldownTimer -= step;
         if (attackCooldownTimer >= 0) attackCooldownTimer -= step;
         if (coyoteTimer >= 0) coyoteTimer -= step;
+        if (bunnyHopTimer >= 0) bunnyHopTimer -= step;
     }
 
     //DEBUG

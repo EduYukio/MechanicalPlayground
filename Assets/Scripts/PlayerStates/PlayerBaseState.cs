@@ -35,22 +35,31 @@ public abstract class PlayerBaseState {
         }
     }
 
-    public virtual void CheckTransitionToDoubleJumping(PlayerFSM player) {
-        if (!player.mechanics.doubleJump) return;
-        if (!player.canDoubleJump) return;
-        if (player.isTouchingWall) return;
+    public virtual bool CheckTransitionToJumping(PlayerFSM player) {
+        if (!player.mechanics.jump) return false;
+
+        if (Input.GetButtonDown("Jump") || player.bunnyHopTimer > 0) {
+            if (player.bunnyHopTimer > 0 && !Input.GetButtonDown("Jump")) {
+                Debug.Log("bunny hopped");
+            }
+            player.TransitionToState(player.JumpingState);
+            return true;
+        }
+
+        return false;
+    }
+
+    public virtual bool CheckTransitionToDoubleJumping(PlayerFSM player) {
+        if (!player.mechanics.doubleJump) return false;
+        if (!player.canDoubleJump) return false;
+        if (player.isTouchingWall) return false;
 
         if (Input.GetButtonDown("Jump")) {
             player.TransitionToState(player.DoubleJumpingState);
+            return true;
         }
-    }
 
-    public virtual void CheckTransitionToJumping(PlayerFSM player) {
-        if (!player.mechanics.jump) return;
-
-        if (Input.GetButtonDown("Jump")) {
-            player.TransitionToState(player.JumpingState);
-        }
+        return false;
     }
 
     public virtual void CheckTransitionToWalking(PlayerFSM player) {

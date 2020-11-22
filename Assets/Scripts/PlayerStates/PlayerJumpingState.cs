@@ -17,6 +17,7 @@ public class PlayerJumpingState : PlayerBaseState {
 
     void JumpAction(PlayerFSM player) {
         player.coyoteTimer = 0;
+        player.bunnyHopTimer = 0;
         player.rb.velocity = new Vector2(player.rb.velocity.x, player.config.jumpForce);
     }
 }

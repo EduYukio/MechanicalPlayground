@@ -8,14 +8,11 @@ public class PlayerFallingState : PlayerBaseState {
 
     public override void Update(PlayerFSM player) {
         BetterFalling(player);
+        CheckForBunnyHop(player);
         base.ProcessMovementInput(player);
 
-        if (player.coyoteTimer > 0) {
-            base.CheckTransitionToJumping(player);
-        }
-        else if (player.coyoteTimer <= 0) {
-            base.CheckTransitionToDoubleJumping(player);
-        }
+        if (CheckTransitionToJumping(player)) return;
+        if (base.CheckTransitionToDoubleJumping(player)) return;
         base.CheckTransitionToGrounded(player);
         base.CheckTransitionToDashing(player);
         base.CheckTransitionToWallSliding(player);
@@ -40,5 +37,22 @@ public class PlayerFallingState : PlayerBaseState {
         if (IsPlayingAnimation("PlayerAttack", player)) return;
 
         player.animator.Play("PlayerFall");
+    }
+
+    void CheckForBunnyHop(PlayerFSM player) {
+        if (player.coyoteTimer > 0) return;
+        // if (player.canDoubleJump) return;
+
+        if (Input.GetButtonDown("Jump")) {
+            player.bunnyHopTimer = player.config.startBunnyHopDurationTime;
+        }
+    }
+
+    public override bool CheckTransitionToJumping(PlayerFSM player) {
+        if (player.coyoteTimer > 0) {
+            return base.CheckTransitionToJumping(player);
+        }
+
+        return false;
     }
 }
