@@ -516,8 +516,13 @@ MonoBehaviour:
   canDoubleJump: 0
   canDash: 0
   dashCooldownTimer: 0
+  attackCooldownTimer: 0
+  coyoteTimer: 0
+  bunnyHopTimer: 0
   lastDirection: 1
   debugState: 
+  activateSlowMotion: 0
+  printDebugStates: 0
 --- !u!1 &8580986532070741945
 GameObject:
   m_ObjectHideFlags: 0
