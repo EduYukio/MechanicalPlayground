@@ -4,20 +4,8 @@ public abstract class PlayerBaseState {
     public abstract void EnterState(PlayerFSM player);
     public abstract void Update(PlayerFSM player);
 
-    public void ProcessMovementInput(PlayerFSM player) {
-        float xInput = Input.GetAxisRaw("Horizontal");
-        int direction = 0;
-        if (xInput > 0) {
-            direction = 1;
-            player.lastDirection = direction;
-        }
-        else if (xInput < 0) {
-            direction = -1;
-            player.lastDirection = direction;
-        }
 
-        player.rb.velocity = new Vector2(direction * player.config.moveSpeed, player.rb.velocity.y);
-    }
+    #region CheckTransitionFunctions
 
     public virtual void CheckTransitionToDashing(PlayerFSM player) {
         if (!player.mechanics.dash) return;
@@ -47,7 +35,7 @@ public abstract class PlayerBaseState {
         }
     }
 
-    public virtual void CheckTransitionToDoubleJump(PlayerFSM player) {
+    public virtual void CheckTransitionToDoubleJumping(PlayerFSM player) {
         if (!player.mechanics.doubleJump) return;
         if (!player.canDoubleJump) return;
         if (player.isTouchingWall) return;
@@ -95,15 +83,6 @@ public abstract class PlayerBaseState {
         }
     }
 
-    public void SetPlayerSpriteOppositeOfWall(PlayerFSM player) {
-        if (player.isTouchingLeftWall) {
-            player.lastDirection = 1;
-        }
-        else if (player.isTouchingRightWall) {
-            player.lastDirection = -1;
-        }
-    }
-
     public virtual void CheckTransitionToAttacking(PlayerFSM player) {
         if (!player.mechanics.attack) return;
         if (player.attackCooldownTimer > 0) return;
@@ -113,7 +92,37 @@ public abstract class PlayerBaseState {
         }
     }
 
+    #endregion
+
+
+    #region HelperFunctions
+    public void ProcessMovementInput(PlayerFSM player) {
+        float xInput = Input.GetAxisRaw("Horizontal");
+        int direction = 0;
+        if (xInput > 0) {
+            direction = 1;
+            player.lastDirection = direction;
+        }
+        else if (xInput < 0) {
+            direction = -1;
+            player.lastDirection = direction;
+        }
+
+        player.rb.velocity = new Vector2(direction * player.config.moveSpeed, player.rb.velocity.y);
+    }
+
+    public void SetPlayerSpriteOppositeOfWall(PlayerFSM player) {
+        if (player.isTouchingLeftWall) {
+            player.lastDirection = 1;
+        }
+        else if (player.isTouchingRightWall) {
+            player.lastDirection = -1;
+        }
+    }
+
     public bool IsPlayingAnimation(string stateName, PlayerFSM player) {
         return player.animator.GetCurrentAnimatorStateInfo(0).IsName(stateName);
     }
+
+    #endregion
 }

@@ -6,6 +6,7 @@ public class PlayerWalkingState : PlayerBaseState {
     }
 
     public override void Update(PlayerFSM player) {
+        player.coyoteTimer = player.config.startCoyoteDurationTime;
         base.ProcessMovementInput(player);
 
         CheckTransitionToGrounded(player);

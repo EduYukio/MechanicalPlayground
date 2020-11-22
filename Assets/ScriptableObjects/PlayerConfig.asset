@@ -16,16 +16,15 @@ MonoBehaviour:
   fallMultiplier: 3
   lowJumpMultiplier: 6
   jumpForce: 12
-  bunnyHopTime: 0
-  startBunnyHopTime: 0.15
-  coyoteTime: 0
-  startCoyoteTime: 0.1
+  startBunnyHopDurationTime: 0.15
+  startCoyoteDurationTime: 0.1
   doubleJumpForce: 12
   dashSpeed: 23
-  startDashTime: 0.175
+  startDashDurationTime: 0.175
   startDashCooldownTime: 0.35
   wallSlidingSpeed: 1.5
   startStickyTime: 0.15
-  xWallForce: 6
-  yWallForce: 12
-  startWallJumpTime: 0.15
+  startWallJumpDurationTime: 0.1
+  attackRange: 0.41
+  attackDamage: 10
+  startAttackCooldownTime: 0.33

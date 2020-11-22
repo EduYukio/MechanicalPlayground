@@ -11,11 +11,12 @@ public class PlayerJumpingState : PlayerBaseState {
 
         base.CheckTransitionToFalling(player);
         base.CheckTransitionToDashing(player);
-        base.CheckTransitionToDoubleJump(player);
+        base.CheckTransitionToDoubleJumping(player);
         base.CheckTransitionToAttacking(player);
     }
 
     void JumpAction(PlayerFSM player) {
+        player.coyoteTimer = 0;
         player.rb.velocity = new Vector2(player.rb.velocity.x, player.config.jumpForce);
     }
 }

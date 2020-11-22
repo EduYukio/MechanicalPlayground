@@ -10,8 +10,13 @@ public class PlayerFallingState : PlayerBaseState {
         BetterFalling(player);
         base.ProcessMovementInput(player);
 
+        if (player.coyoteTimer > 0) {
+            base.CheckTransitionToJumping(player);
+        }
+        else if (player.coyoteTimer <= 0) {
+            base.CheckTransitionToDoubleJumping(player);
+        }
         base.CheckTransitionToGrounded(player);
-        base.CheckTransitionToDoubleJump(player);
         base.CheckTransitionToDashing(player);
         base.CheckTransitionToWallSliding(player);
         base.CheckTransitionToWallJumping(player);

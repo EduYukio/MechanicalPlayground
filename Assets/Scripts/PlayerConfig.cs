@@ -14,10 +14,8 @@ public class PlayerConfig : ScriptableObject {
 
     [Header("Jump")]
     public float jumpForce = 12f;
-    public float bunnyHopTime = 0;
-    public float startBunnyHopTime = 0.15f;
-    public float coyoteTime = 0;
-    public float startCoyoteTime = 0.1f;
+    public float startBunnyHopDurationTime = 0.15f;
+    public float startCoyoteDurationTime = 0.1f;
 
     [Header("Double Jump")]
     public float doubleJumpForce = 12f;

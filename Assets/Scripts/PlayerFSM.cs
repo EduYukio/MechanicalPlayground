@@ -30,6 +30,7 @@ public class PlayerFSM : MonoBehaviour {
     public bool canDash;
     public float dashCooldownTimer;
     public float attackCooldownTimer;
+    public float coyoteTimer;
     public int lastDirection = 1;
 
     //DEBUG
@@ -46,8 +47,7 @@ public class PlayerFSM : MonoBehaviour {
     }
 
     private void Update() {
-        ProcessDashCooldown();
-        ProcessAttackCooldown();
+        ProcessTimers();
 
         currentState.Update(this);
 
@@ -77,16 +77,11 @@ public class PlayerFSM : MonoBehaviour {
         }
     }
 
-    void ProcessDashCooldown() {
-        if (dashCooldownTimer > 0) {
-            dashCooldownTimer -= Time.deltaTime;
-        }
-    }
-
-    void ProcessAttackCooldown() {
-        if (attackCooldownTimer > 0) {
-            attackCooldownTimer -= Time.deltaTime;
-        }
+    void ProcessTimers() {
+        float step = Time.deltaTime;
+        if (dashCooldownTimer >= 0) dashCooldownTimer -= step;
+        if (attackCooldownTimer >= 0) attackCooldownTimer -= step;
+        if (coyoteTimer >= 0) coyoteTimer -= step;
     }
 
     //DEBUG
