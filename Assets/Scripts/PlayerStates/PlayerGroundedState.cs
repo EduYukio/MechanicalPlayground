@@ -7,11 +7,11 @@ public class PlayerGroundedState : PlayerBaseState {
     }
 
     public override void Update(PlayerFSM player) {
-        base.CheckTransitionToFalling(player);
-        base.CheckTransitionToJumping(player);
-        base.CheckTransitionToWalking(player);
-        base.CheckTransitionToDashing(player);
-        base.CheckTransitionToAttacking(player);
+        if (base.CheckTransitionToFalling(player)) return;
+        if (base.CheckTransitionToJumping(player)) return;
+        if (base.CheckTransitionToWalking(player)) return;
+        if (base.CheckTransitionToDashing(player)) return;
+        if (base.CheckTransitionToAttacking(player)) return;
     }
 
     void GroundedAction(PlayerFSM player) {

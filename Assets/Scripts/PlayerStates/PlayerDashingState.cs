@@ -17,21 +17,25 @@ public class PlayerDashingState : PlayerBaseState {
         }
 
         StopDashing(player);
-        base.CheckTransitionToGrounded(player);
-        CheckTransitionToWallSliding(player);
-        CheckTransitionToFalling(player);
+        if (base.CheckTransitionToGrounded(player)) return;
+        if (CheckTransitionToWallSliding(player)) return;
+        if (CheckTransitionToFalling(player)) return;
     }
 
-    public override void CheckTransitionToWallSliding(PlayerFSM player) {
+    public override bool CheckTransitionToWallSliding(PlayerFSM player) {
         if (player.isTouchingWall) {
             player.TransitionToState(player.WallSlidingState);
+            return true;
         }
+        return false;
     }
 
-    public override void CheckTransitionToFalling(PlayerFSM player) {
+    public override bool CheckTransitionToFalling(PlayerFSM player) {
         if (!player.isTouchingWall && !player.isGrounded) {
             player.TransitionToState(player.FallingState);
+            return true;
         }
+        return false;
     }
 
     void DashAction(PlayerFSM player) {

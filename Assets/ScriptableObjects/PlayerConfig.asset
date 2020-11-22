@@ -16,7 +16,7 @@ MonoBehaviour:
   fallMultiplier: 3
   lowJumpMultiplier: 6
   jumpForce: 12
-  startBunnyHopDurationTime: 0.15
+  startBunnyHopDurationTime: 0.2
   startCoyoteDurationTime: 0.1
   doubleJumpForce: 12
   dashSpeed: 23

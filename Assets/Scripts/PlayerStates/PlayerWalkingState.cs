@@ -9,20 +9,22 @@ public class PlayerWalkingState : PlayerBaseState {
         player.coyoteTimer = player.config.startCoyoteDurationTime;
         base.ProcessMovementInput(player);
 
-        CheckTransitionToGrounded(player);
-        base.CheckTransitionToFalling(player);
-        base.CheckTransitionToJumping(player);
-        base.CheckTransitionToDashing(player);
-        base.CheckTransitionToAttacking(player);
+        if (CheckTransitionToGrounded(player)) return;
+        if (base.CheckTransitionToFalling(player)) return;
+        if (base.CheckTransitionToJumping(player)) return;
+        if (base.CheckTransitionToDashing(player)) return;
+        if (base.CheckTransitionToAttacking(player)) return;
     }
 
-    public override void CheckTransitionToGrounded(PlayerFSM player) {
-        if (!player.isGrounded) return;
+    public override bool CheckTransitionToGrounded(PlayerFSM player) {
+        if (!player.isGrounded) return false;
 
         float xInput = Input.GetAxisRaw("Horizontal");
         if (xInput == 0) {
             player.TransitionToState(player.GroundedState);
+            return true;
         }
+        return false;
     }
 
     private void PlayAnimationIfCan(PlayerFSM player) {

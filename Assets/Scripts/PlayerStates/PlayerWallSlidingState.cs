@@ -12,25 +12,24 @@ public class PlayerWallSlidingState : PlayerBaseState {
     }
 
     public override void Update(PlayerFSM player) {
-        base.CheckTransitionToGrounded(player);
-        base.CheckTransitionToWallJumping(player);
-        base.CheckTransitionToDashing(player);
+        if (base.CheckTransitionToGrounded(player)) return;
+        if (base.CheckTransitionToWallJumping(player)) return;
+        if (base.CheckTransitionToDashing(player)) return;
 
         if (stickyTimer > 0) {
             WallSlideAction(player);
             ProcessStickyTimer(player);
         }
-        else {
-            player.TransitionToState(player.FallingState);
-        }
 
-        CheckTransitionToFalling(player);
+        if (CheckTransitionToFalling(player)) return;
     }
 
-    public override void CheckTransitionToFalling(PlayerFSM player) {
-        if (!player.isTouchingWall) {
+    public override bool CheckTransitionToFalling(PlayerFSM player) {
+        if (stickyTimer <= 0 || !player.isTouchingWall) {
             player.TransitionToState(player.FallingState);
+            return true;
         }
+        return false;
     }
 
     void WallSlideAction(PlayerFSM player) {

@@ -7,32 +7,41 @@ public abstract class PlayerBaseState {
 
     #region CheckTransitionFunctions
 
-    public virtual void CheckTransitionToDashing(PlayerFSM player) {
-        if (!player.mechanics.dash) return;
-        if (!player.canDash) return;
-        if (player.dashCooldownTimer > 0) return;
+    public virtual bool CheckTransitionToDashing(PlayerFSM player) {
+        if (!player.mechanics.dash) return false;
+        if (!player.canDash) return false;
+        if (player.dashCooldownTimer > 0) return false;
 
         // GamePad || Keyboard
         if (Input.GetAxisRaw("Dash") > 0 || Input.GetButtonDown("Dash")) {
             player.TransitionToState(player.DashingState);
+            return true;
         }
+
+        return false;
     }
 
-    public virtual void CheckTransitionToGrounded(PlayerFSM player) {
+    public virtual bool CheckTransitionToGrounded(PlayerFSM player) {
         if (player.isGrounded) {
             player.TransitionToState(player.GroundedState);
+            return true;
         }
+
+        return false;
     }
 
-    public virtual void CheckTransitionToFalling(PlayerFSM player) {
-        if (player.isGrounded) return;
+    public virtual bool CheckTransitionToFalling(PlayerFSM player) {
+        if (player.isGrounded) return false;
 
         bool playerIsFalling = player.rb.velocity.y <= 0;
         bool playerStoppedJumping = player.rb.velocity.y > 0 && !Input.GetButton("Jump");
 
         if (playerIsFalling || playerStoppedJumping) {
             player.TransitionToState(player.FallingState);
+            return true;
         }
+
+        return false;
     }
 
     public virtual bool CheckTransitionToJumping(PlayerFSM player) {
@@ -62,17 +71,20 @@ public abstract class PlayerBaseState {
         return false;
     }
 
-    public virtual void CheckTransitionToWalking(PlayerFSM player) {
-        if (!player.mechanics.walk) return;
+    public virtual bool CheckTransitionToWalking(PlayerFSM player) {
+        if (!player.mechanics.walk) return false;
 
         float xInput = Input.GetAxisRaw("Horizontal");
         if (xInput != 0) {
             player.TransitionToState(player.WalkingState);
+            return true;
         }
+
+        return false;
     }
 
-    public virtual void CheckTransitionToWallSliding(PlayerFSM player) {
-        if (!player.mechanics.wallSlide) return;
+    public virtual bool CheckTransitionToWallSliding(PlayerFSM player) {
+        if (!player.mechanics.wallSlide) return false;
 
         float xInput = Input.GetAxisRaw("Horizontal");
         bool pressingAgainstLeftWall = player.isTouchingLeftWall && xInput < 0;
@@ -80,25 +92,34 @@ public abstract class PlayerBaseState {
 
         if (pressingAgainstLeftWall || pressingAgainstRightWall) {
             player.TransitionToState(player.WallSlidingState);
+            return true;
         }
+
+        return false;
     }
 
-    public virtual void CheckTransitionToWallJumping(PlayerFSM player) {
-        if (!player.mechanics.wallJump) return;
-        if (!player.isTouchingWall) return;
+    public virtual bool CheckTransitionToWallJumping(PlayerFSM player) {
+        if (!player.mechanics.wallJump) return false;
+        if (!player.isTouchingWall) return false;
 
         if (Input.GetButtonDown("Jump")) {
             player.TransitionToState(player.WallJumpingState);
+            return true;
         }
+
+        return false;
     }
 
-    public virtual void CheckTransitionToAttacking(PlayerFSM player) {
-        if (!player.mechanics.attack) return;
-        if (player.attackCooldownTimer > 0) return;
+    public virtual bool CheckTransitionToAttacking(PlayerFSM player) {
+        if (!player.mechanics.attack) return false;
+        if (player.attackCooldownTimer > 0) return false;
 
         if (Input.GetButtonDown("Attack")) {
             player.TransitionToState(player.AttackingState);
+            return true;
         }
+
+        return false;
     }
 
     #endregion

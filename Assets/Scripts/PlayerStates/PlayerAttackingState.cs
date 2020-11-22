@@ -22,10 +22,9 @@ public class PlayerAttackingState : PlayerBaseState {
         //     return;
         // }
 
-        base.CheckTransitionToWalking(player);
-        base.CheckTransitionToGrounded(player);
-        base.CheckTransitionToFalling(player);
-        //TO DO: PENSAR NO WALL SLIDE
+        if (base.CheckTransitionToWalking(player)) return;
+        if (base.CheckTransitionToGrounded(player)) return;
+        if (base.CheckTransitionToFalling(player)) return;
     }
 
     void AttackAction(PlayerFSM player) {

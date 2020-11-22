@@ -21,25 +21,30 @@ public class PlayerWallJumpingState : PlayerBaseState {
             return;
         }
 
-        CheckTransitionToWallSliding(player);
-        CheckTransitionToFalling(player);
-        base.CheckTransitionToGrounded(player);
-        base.CheckTransitionToAttacking(player);
+        if (CheckTransitionToWallSliding(player)) return;
+        if (CheckTransitionToFalling(player)) return;
+        if (base.CheckTransitionToGrounded(player)) return;
+        if (base.CheckTransitionToAttacking(player)) return;
     }
 
-    public override void CheckTransitionToFalling(PlayerFSM player) {
+    public override bool CheckTransitionToFalling(PlayerFSM player) {
         float xInput = Input.GetAxisRaw("Horizontal");
         if (!Input.GetButton("Jump") || xInput != 0) {
             player.TransitionToState(player.FallingState);
+            return true;
         }
+        return false;
     }
 
-    public override void CheckTransitionToWallSliding(PlayerFSM player) {
-        base.CheckTransitionToWallSliding(player);
+    public override bool CheckTransitionToWallSliding(PlayerFSM player) {
+        if (base.CheckTransitionToWallSliding(player)) return true;
 
         if (player.isTouchingWall) {
             player.TransitionToState(player.WallSlidingState);
+            return true;
         }
+
+        return false;
     }
 
     void ApplyXVelocity(PlayerFSM player) {

@@ -13,11 +13,11 @@ public class PlayerFallingState : PlayerBaseState {
 
         if (CheckTransitionToJumping(player)) return;
         if (base.CheckTransitionToDoubleJumping(player)) return;
-        base.CheckTransitionToGrounded(player);
-        base.CheckTransitionToDashing(player);
-        base.CheckTransitionToWallSliding(player);
-        base.CheckTransitionToWallJumping(player);
-        base.CheckTransitionToAttacking(player);
+        if (base.CheckTransitionToGrounded(player)) return;
+        if (base.CheckTransitionToDashing(player)) return;
+        if (base.CheckTransitionToWallSliding(player)) return;
+        if (base.CheckTransitionToWallJumping(player)) return;
+        if (base.CheckTransitionToAttacking(player)) return;
     }
 
     void BetterFalling(PlayerFSM player) {
@@ -41,7 +41,6 @@ public class PlayerFallingState : PlayerBaseState {
 
     void CheckForBunnyHop(PlayerFSM player) {
         if (player.coyoteTimer > 0) return;
-        // if (player.canDoubleJump) return;
 
         if (Input.GetButtonDown("Jump")) {
             player.bunnyHopTimer = player.config.startBunnyHopDurationTime;
