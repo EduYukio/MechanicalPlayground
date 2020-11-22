@@ -33,9 +33,10 @@ namespace Tests {
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 0, 0), Quaternion.identity);
 
             PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
-            playerScript.mechanics.jump = true;
-            playerScript.mechanics.doubleJump = true;
+            playerScript.mechanics.Activate("Jump");
+            playerScript.mechanics.Activate("DoubleJump");
 
             yield return new WaitForSeconds(1f);
 
@@ -64,6 +65,7 @@ namespace Tests {
             Assert.IsTrue(airY > groundY);
             Assert.IsTrue(finalY > airY);
             Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.y > 0);
+            playerScript.mechanics.RestoreState();
         }
 
         [UnityTest]
@@ -79,9 +81,10 @@ namespace Tests {
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 20, 0), Quaternion.identity);
 
             PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
-            playerScript.mechanics.jump = true;
-            playerScript.mechanics.doubleJump = true;
+            playerScript.mechanics.Activate("Jump");
+            playerScript.mechanics.Activate("DoubleJump");
 
             yield return new WaitForSeconds(0.5f);
 
@@ -98,6 +101,7 @@ namespace Tests {
             var finalY = player.transform.position.y;
             Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.y > 0);
             Assert.IsTrue(finalY > initialY);
+            playerScript.mechanics.RestoreState();
         }
 
         [UnityTest]
@@ -113,9 +117,10 @@ namespace Tests {
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 20, 0), Quaternion.identity);
 
             PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
-            playerScript.mechanics.jump = true;
-            playerScript.mechanics.doubleJump = true;
+            playerScript.mechanics.Activate("Jump");
+            playerScript.mechanics.Activate("DoubleJump");
 
             yield return new WaitForSeconds(0.5f);
 
@@ -144,6 +149,7 @@ namespace Tests {
             var finalY = player.transform.position.y;
             Assert.IsFalse(player.GetComponent<Rigidbody2D>().velocity.y > 0);
             Assert.IsFalse(finalY > doubleJumpY);
+            playerScript.mechanics.RestoreState();
         }
     }
 }

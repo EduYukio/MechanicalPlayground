@@ -32,16 +32,17 @@ namespace Tests {
             var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerFSM.prefab");
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(-15, 0, 0), Quaternion.identity);
 
-            player.AddComponent<WallSlide>();
-            player.AddComponent<Walk>();
-            player.AddComponent<Jump>();
+            PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.mechanics.SaveState();
+            playerScript.mechanics.ResetMechanics();
+            playerScript.mechanics.Activate("Walk");
+            playerScript.mechanics.Activate("Jump");
+            playerScript.mechanics.Activate("WallSlide");
 
             yield return new WaitForSeconds(0.5f);
 
             // Act
-            Player playerScript = player.GetComponent<Player>();
             Assert.IsFalse(playerScript.isTouchingWall);
-            Assert.IsFalse(playerScript.isWallSliding);
 
             InputSimulator IS = new InputSimulator();
             IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.LEFT);
@@ -50,10 +51,9 @@ namespace Tests {
             yield return new WaitForSeconds(1f);
 
             // Assert
-            Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.y ==
-                -playerScript.GetComponent<WallSlide>().wallSlidingSpeed);
+            Assert.IsTrue(playerScript.rb.velocity.y == -playerScript.config.wallSlidingSpeed);
             Assert.IsTrue(playerScript.isTouchingWall);
-            Assert.IsTrue(playerScript.isWallSliding);
+            playerScript.mechanics.RestoreState();
         }
 
         [UnityTest]
@@ -68,16 +68,17 @@ namespace Tests {
             var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerFSM.prefab");
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(-15, 0, 0), Quaternion.identity);
 
-            player.AddComponent<Walk>();
-            player.AddComponent<Jump>();
-            player.AddComponent<WallSlide>();
-            player.AddComponent<WallJump>();
+            PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.mechanics.SaveState();
+            playerScript.mechanics.ResetMechanics();
+            playerScript.mechanics.Activate("Walk");
+            playerScript.mechanics.Activate("Jump");
+            playerScript.mechanics.Activate("WallSlide");
+            playerScript.mechanics.Activate("WallJump");
 
             yield return new WaitForSeconds(0.5f);
 
             // Act
-            Player playerScript = player.GetComponent<Player>();
-
             InputSimulator IS = new InputSimulator();
             IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.LEFT);
             IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
@@ -85,26 +86,25 @@ namespace Tests {
             yield return new WaitForSeconds(1f);
 
             // Assert
-            Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.y ==
-                -playerScript.GetComponent<WallSlide>().wallSlidingSpeed);
+            Assert.IsTrue(playerScript.rb.velocity.y == -playerScript.config.wallSlidingSpeed);
             Assert.IsTrue(playerScript.isTouchingWall);
-            Assert.IsTrue(playerScript.isWallSliding);
 
             IS.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.LEFT);
             IS.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.UP);
 
             yield return new WaitForSeconds(0.2f);
 
-            Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.y < 0);
-            Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.x <= 0);
+            Assert.IsTrue(playerScript.rb.velocity.y < 0);
+            Assert.IsTrue(playerScript.rb.velocity.x <= 0);
 
             IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
 
-            float wallJumpDuration = player.GetComponent<WallJump>().wallJumpTime;
+            float wallJumpDuration = playerScript.config.startWallJumpDurationTime;
             yield return new WaitForSeconds(wallJumpDuration * 0.7f);
 
-            Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.y > 0);
-            Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.x > 0);
+            Assert.IsTrue(playerScript.rb.velocity.y > 0);
+            Assert.IsTrue(playerScript.rb.velocity.x > 0);
+            playerScript.mechanics.RestoreState();
         }
     }
 }

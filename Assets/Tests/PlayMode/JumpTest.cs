@@ -33,8 +33,9 @@ namespace Tests {
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 0, 0), Quaternion.identity);
 
             PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
-            playerScript.mechanics.jump = true;
+            playerScript.mechanics.Activate("Jump");
 
             yield return new WaitForSeconds(1f);
 
@@ -51,6 +52,7 @@ namespace Tests {
             // Assert
             Assert.IsTrue(player.transform.position.y > initialY);
             Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.y > 0);
+            playerScript.mechanics.RestoreState();
         }
 
         [UnityTest]
@@ -66,8 +68,9 @@ namespace Tests {
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 50, 0), Quaternion.identity);
 
             PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
-            playerScript.mechanics.jump = true;
+            playerScript.mechanics.Activate("Jump");
 
             yield return new WaitForSeconds(0.3f);
 
@@ -83,6 +86,7 @@ namespace Tests {
             Assert.IsFalse(playerScript.isGrounded);
             Assert.IsFalse(player.transform.position.y > initialY);
             Assert.IsFalse(player.GetComponent<Rigidbody2D>().velocity.y > 0);
+            playerScript.mechanics.RestoreState();
         }
 
         [UnityTest]
@@ -98,8 +102,9 @@ namespace Tests {
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 0, 0), Quaternion.identity);
 
             PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
-            playerScript.mechanics.jump = true;
+            playerScript.mechanics.Activate("Jump");
 
             yield return new WaitForSeconds(1f);
 
@@ -128,7 +133,7 @@ namespace Tests {
             IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
             yield return new WaitForSeconds(0.1f);
             Assert.IsFalse(player.GetComponent<Rigidbody2D>().velocity.y > 0);
-
+            playerScript.mechanics.RestoreState();
         }
     }
 }

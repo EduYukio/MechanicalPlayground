@@ -32,11 +32,10 @@ namespace Tests {
             var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerFSM.prefab");
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 0, 0), Quaternion.identity);
 
-            Attack attackScript = player.AddComponent<Attack>();
-            attackScript.attackPoint = GameObject.Find("AttackPoint").transform;
-            attackScript.slashEffect = GameObject.Find("Circular");
-            attackScript.enemyLayers = LayerMask.GetMask("Enemies");
-
+            PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.mechanics.SaveState();
+            playerScript.mechanics.ResetMechanics();
+            playerScript.mechanics.Activate("Attack");
 
             var enemyAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Slime.prefab");
             GameObject enemy = GameObject.Instantiate(enemyAsset, new Vector3(1f, 0, 0), Quaternion.identity);
@@ -56,6 +55,7 @@ namespace Tests {
             yield return new WaitForSeconds(0.2f);
 
             Assert.IsTrue(enemyScript.currentHealth < enemyScript.maxHealth);
+            playerScript.mechanics.RestoreState();
         }
     }
 }

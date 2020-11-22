@@ -33,8 +33,9 @@ namespace Tests {
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 0, 0), Quaternion.identity);
 
             PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
-            playerScript.mechanics.dash = true;
+            playerScript.mechanics.Activate("Dash");
 
             yield return new WaitForSeconds(1f);
 
@@ -53,6 +54,7 @@ namespace Tests {
             yield return new WaitForSeconds(dashDuration);
 
             Assert.IsFalse(player.GetComponent<Rigidbody2D>().velocity.x > 0);
+            playerScript.mechanics.RestoreState();
         }
 
         [UnityTest]
@@ -68,9 +70,10 @@ namespace Tests {
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 0, 0), Quaternion.identity);
 
             PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
-            playerScript.mechanics.dash = true;
-            playerScript.mechanics.walk = true;
+            playerScript.mechanics.Activate("Dash");
+            playerScript.mechanics.Activate("Walk");
 
             yield return new WaitForSeconds(1f);
 
@@ -109,6 +112,7 @@ namespace Tests {
             yield return new WaitForSeconds(dashDuration);
 
             Assert.IsFalse(player.GetComponent<Rigidbody2D>().velocity.x < 0);
+            playerScript.mechanics.RestoreState();
         }
 
         [UnityTest]
@@ -124,8 +128,9 @@ namespace Tests {
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 0, 0), Quaternion.identity);
 
             PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
-            playerScript.mechanics.dash = true;
+            playerScript.mechanics.Activate("Dash");
 
             yield return new WaitForSeconds(1f);
 
@@ -146,6 +151,7 @@ namespace Tests {
             yield return new WaitForSeconds(dashDuration * 0.6f);
 
             Assert.IsFalse(player.GetComponent<Rigidbody2D>().velocity.x > 0);
+            playerScript.mechanics.RestoreState();
         }
 
         [UnityTest]
@@ -161,8 +167,9 @@ namespace Tests {
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 0, 0), Quaternion.identity);
 
             PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
-            playerScript.mechanics.dash = true;
+            playerScript.mechanics.Activate("Dash");
 
             yield return new WaitForSeconds(1f);
 
@@ -186,6 +193,7 @@ namespace Tests {
 
             Assert.IsTrue(playerScript.dashCooldownTimer > 0);
             Assert.IsFalse(player.GetComponent<Rigidbody2D>().velocity.x > 0);
+            playerScript.mechanics.RestoreState();
         }
 
         [UnityTest]
@@ -201,8 +209,9 @@ namespace Tests {
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 0, 0), Quaternion.identity);
 
             PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
-            playerScript.mechanics.dash = true;
+            playerScript.mechanics.Activate("Dash");
 
             yield return new WaitForSeconds(1f);
 
@@ -230,6 +239,7 @@ namespace Tests {
             yield return new WaitForSeconds(dashDuration * 0.5f);
 
             Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.x > 0);
+            playerScript.mechanics.RestoreState();
         }
     }
 }

@@ -33,8 +33,9 @@ namespace Tests {
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 0, 0), Quaternion.identity);
 
             PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
-            playerScript.mechanics.walk = true;
+            playerScript.mechanics.Activate("Walk");
 
             yield return new WaitForSeconds(0.3f);
 
@@ -48,6 +49,7 @@ namespace Tests {
 
             // Assert
             Assert.IsTrue(player.transform.position.x > initialX);
+            playerScript.mechanics.RestoreState();
         }
 
         [UnityTest]
@@ -63,8 +65,9 @@ namespace Tests {
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 0, 0), Quaternion.identity);
 
             PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
-            playerScript.mechanics.walk = true;
+            playerScript.mechanics.Activate("Walk");
 
             yield return new WaitForSeconds(0.3f);
 
@@ -78,6 +81,7 @@ namespace Tests {
 
             // Assert
             Assert.IsTrue(player.transform.position.x < initialX);
+            playerScript.mechanics.RestoreState();
         }
     }
 }
