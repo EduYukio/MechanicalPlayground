@@ -1,52 +1,65 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu()]
 public class Mechanics : ScriptableObject {
-    [Header("Mechanics enabled")]
-    public bool walk = false;
-    public bool jump = false;
-    public bool attack = false;
-    public bool doubleJump = false;
-    public bool dash = false;
-    public bool wallSlide = false;
-    public bool wallJump = false;
-    public bool blink = false;
-
-    // public bool[] GetMechanics() {
-    //     return new bool[] {
-    //         walk,
-    //         jump,
-    //         attack,
-    //         doubleJump,
-    //         dash,
-    //         wallSlide,
-    //         wallJump,
-    //         blink,
-    //     };
-    // }
+    public List<Mechanic> mechanicList = new List<Mechanic>();
+    private List<Mechanic> savedState = new List<Mechanic>();
 
     public void ResetMechanics() {
-        walk = false;
-        jump = false;
-        attack = false;
-        doubleJump = false;
-        dash = false;
-        wallSlide = false;
-        wallJump = false;
-        blink = false;
-        // bool[] mechanicsArray = GetMechanics();
-        // for (int i = 0; i < mechanicsArray.Length; i++) {
-        //     mechanicsArray[i] = false;
-        // }
+        foreach (var mechanic in mechanicList) {
+            mechanic.Enabled = false;
+        }
     }
 
     public void EnableBasicMechanics() {
-        walk = true;
-        jump = true;
-        attack = true;
+        ResetMechanics();
+        Activate("Walk");
+        Activate("Jump");
+        Activate("Attack");
+    }
+
+    public void SaveState() {
+        savedState = mechanicList.ConvertAll(mechanic => new Mechanic(mechanic.Name, mechanic.Enabled));
+    }
+
+    public void RestoreState() {
+        if (savedState == null) return;
+
+        foreach (var mechanic in mechanicList) {
+            Mechanic savedMechanic = GetMechanic(mechanic.Name, savedState);
+            mechanic.Enabled = savedMechanic.Enabled;
+        }
+    }
+
+    public Mechanic GetMechanic(string name, List<Mechanic> list) {
+        var mechanic = list.Find(x => x.Name == name);
+        return mechanic;
+    }
+
+    public void Activate(string name) {
+        GetMechanic(name, mechanicList).Enabled = true;
+    }
+
+    public void Deactivate(string name) {
+        GetMechanic(name, mechanicList).Enabled = false;
+    }
+
+    public bool IsEnabled(string name) {
+        return GetMechanic(name, mechanicList).Enabled;
     }
 }
 
+[System.Serializable]
+public class Mechanic {
+    public string Name;
+    public bool Enabled;
+
+    public Mechanic(string name, bool enabled) {
+        this.Name = name;
+        this.Enabled = enabled;
+    }
+}

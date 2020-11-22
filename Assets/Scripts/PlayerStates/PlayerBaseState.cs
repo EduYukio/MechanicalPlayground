@@ -8,7 +8,7 @@ public abstract class PlayerBaseState {
     #region CheckTransitionFunctions
 
     public virtual bool CheckTransitionToDashing(PlayerFSM player) {
-        if (!player.mechanics.dash) return false;
+        if (!player.mechanics.IsEnabled("Dash")) return false;
         if (!player.canDash) return false;
         if (player.dashCooldownTimer > 0) return false;
 
@@ -45,7 +45,7 @@ public abstract class PlayerBaseState {
     }
 
     public virtual bool CheckTransitionToJumping(PlayerFSM player) {
-        if (!player.mechanics.jump) return false;
+        if (!player.mechanics.IsEnabled("Jump")) return false;
 
         if (Input.GetButtonDown("Jump") || player.bunnyHopTimer > 0) {
             player.TransitionToState(player.JumpingState);
@@ -56,7 +56,7 @@ public abstract class PlayerBaseState {
     }
 
     public virtual bool CheckTransitionToDoubleJumping(PlayerFSM player) {
-        if (!player.mechanics.doubleJump) return false;
+        if (!player.mechanics.IsEnabled("DoubleJump")) return false;
         if (!player.canDoubleJump) return false;
         if (player.isTouchingWall) return false;
 
@@ -69,7 +69,7 @@ public abstract class PlayerBaseState {
     }
 
     public virtual bool CheckTransitionToWalking(PlayerFSM player) {
-        if (!player.mechanics.walk) return false;
+        if (!player.mechanics.IsEnabled("Walk")) return false;
 
         float xInput = Input.GetAxisRaw("Horizontal");
         if (xInput != 0) {
@@ -81,7 +81,7 @@ public abstract class PlayerBaseState {
     }
 
     public virtual bool CheckTransitionToWallSliding(PlayerFSM player) {
-        if (!player.mechanics.wallSlide) return false;
+        if (!player.mechanics.IsEnabled("WallSlide")) return false;
 
         float xInput = Input.GetAxisRaw("Horizontal");
         bool pressingAgainstLeftWall = player.isTouchingLeftWall && xInput < 0;
@@ -96,7 +96,7 @@ public abstract class PlayerBaseState {
     }
 
     public virtual bool CheckTransitionToWallJumping(PlayerFSM player) {
-        if (!player.mechanics.wallJump) return false;
+        if (!player.mechanics.IsEnabled("WallJump")) return false;
         if (!player.isTouchingWall) return false;
 
         if (Input.GetButtonDown("Jump")) {
@@ -108,7 +108,7 @@ public abstract class PlayerBaseState {
     }
 
     public virtual bool CheckTransitionToAttacking(PlayerFSM player) {
-        if (!player.mechanics.attack) return false;
+        if (!player.mechanics.IsEnabled("Attack")) return false;
         if (player.attackCooldownTimer > 0) return false;
 
         if (Input.GetButtonDown("Attack")) {

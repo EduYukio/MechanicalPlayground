@@ -12,11 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6dd464ccda50b34aa5e8c36e63fb11e, type: 3}
   m_Name: Mechanics
   m_EditorClassIdentifier: 
-  walk: 1
-  jump: 1
-  attack: 1
-  doubleJump: 1
-  dash: 1
-  wallSlide: 1
-  wallJump: 1
-  blink: 0
+  mechanicList:
+  - Name: Walk
+    Enabled: 1
+  - Name: Jump
+    Enabled: 1
+  - Name: DoubleJump
+    Enabled: 1
+  - Name: Dash
+    Enabled: 1
+  - Name: Attack
+    Enabled: 1
+  - Name: WallSlide
+    Enabled: 1
+  - Name: WallJump
+    Enabled: 1
+  - Name: Blink
+    Enabled: 0
