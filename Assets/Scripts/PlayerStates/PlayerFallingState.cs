@@ -3,9 +3,7 @@ using UnityEngine;
 
 public class PlayerFallingState : PlayerBaseState {
     public override void EnterState(PlayerFSM player) {
-        if (!AnimatorIsPlaying("PlayerDoubleJump", player)) {
-            player.animator.Play("PlayerFall");
-        }
+        PlayAnimationIfCan(player);
     }
 
     public override void Update(PlayerFSM player) {
@@ -17,6 +15,7 @@ public class PlayerFallingState : PlayerBaseState {
         base.CheckTransitionToDashing(player);
         base.CheckTransitionToWallSliding(player);
         base.CheckTransitionToWallJumping(player);
+        base.CheckTransitionToAttacking(player);
     }
 
     void BetterFalling(PlayerFSM player) {
@@ -31,7 +30,10 @@ public class PlayerFallingState : PlayerBaseState {
         }
     }
 
-    bool AnimatorIsPlaying(string stateName, PlayerFSM player) {
-        return player.animator.GetCurrentAnimatorStateInfo(0).IsName(stateName);
+    void PlayAnimationIfCan(PlayerFSM player) {
+        if (IsPlayingAnimation("PlayerDoubleJump", player)) return;
+        if (IsPlayingAnimation("PlayerAttack", player)) return;
+
+        player.animator.Play("PlayerFall");
     }
 }

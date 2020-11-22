@@ -13,6 +13,7 @@ public class PlayerFSM : MonoBehaviour {
     public readonly PlayerDashingState DashingState = new PlayerDashingState();
     public readonly PlayerWallSlidingState WallSlidingState = new PlayerWallSlidingState();
     public readonly PlayerWallJumpingState WallJumpingState = new PlayerWallJumpingState();
+    public readonly PlayerAttackingState AttackingState = new PlayerAttackingState();
 
     public PlayerConfig config;
     public Mechanics mechanics;
@@ -28,6 +29,7 @@ public class PlayerFSM : MonoBehaviour {
     public bool canDoubleJump;
     public bool canDash;
     public float dashCooldownTimer;
+    public float attackCooldownTimer;
     public int lastDirection = 1;
 
     //DEBUG
@@ -45,6 +47,7 @@ public class PlayerFSM : MonoBehaviour {
 
     private void Update() {
         ProcessDashCooldown();
+        ProcessAttackCooldown();
 
         currentState.Update(this);
 
@@ -77,6 +80,12 @@ public class PlayerFSM : MonoBehaviour {
     void ProcessDashCooldown() {
         if (dashCooldownTimer > 0) {
             dashCooldownTimer -= Time.deltaTime;
+        }
+    }
+
+    void ProcessAttackCooldown() {
+        if (attackCooldownTimer > 0) {
+            attackCooldownTimer -= Time.deltaTime;
         }
     }
 

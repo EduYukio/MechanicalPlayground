@@ -11,6 +11,7 @@ public class PlayerDoubleJumpingState : PlayerBaseState {
 
         base.CheckTransitionToFalling(player);
         base.CheckTransitionToDashing(player);
+        base.CheckTransitionToAttacking(player);
     }
 
     void DoubleJumpAction(PlayerFSM player) {

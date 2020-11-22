@@ -6,7 +6,7 @@ public class PlayerDashingState : PlayerBaseState {
 
     public override void EnterState(PlayerFSM player) {
         player.animator.Play("PlayerDash");
-        dashTimer = player.config.startDashTime;
+        dashTimer = player.config.startDashDurationTime;
         dashDirection = player.lastDirection;
     }
 

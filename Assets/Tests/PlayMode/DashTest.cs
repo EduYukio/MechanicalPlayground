@@ -44,7 +44,7 @@ namespace Tests {
             InputSimulator IS = new InputSimulator();
             IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_C);
 
-            float dashDuration = playerScript.config.startDashTime;
+            float dashDuration = playerScript.config.startDashDurationTime;
 
             yield return new WaitForSeconds(dashDuration / 2);
 
@@ -80,7 +80,7 @@ namespace Tests {
             InputSimulator IS = new InputSimulator();
             IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_C);
 
-            float dashDuration = playerScript.config.startDashTime;
+            float dashDuration = playerScript.config.startDashDurationTime;
 
             yield return new WaitForSeconds(dashDuration / 2);
 
@@ -135,7 +135,7 @@ namespace Tests {
             InputSimulator IS = new InputSimulator();
             IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_C);
 
-            float dashDuration = playerScript.config.startDashTime;
+            float dashDuration = playerScript.config.startDashDurationTime;
 
             yield return new WaitForSeconds(dashDuration * 0.5f);
 
@@ -172,7 +172,7 @@ namespace Tests {
             InputSimulator IS = new InputSimulator();
             IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_C);
 
-            float dashDuration = playerScript.config.startDashTime;
+            float dashDuration = playerScript.config.startDashDurationTime;
 
             yield return new WaitForSeconds(dashDuration * 0.5f);
 
@@ -212,7 +212,7 @@ namespace Tests {
             InputSimulator IS = new InputSimulator();
             IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_C);
 
-            float dashDuration = playerScript.config.startDashTime;
+            float dashDuration = playerScript.config.startDashDurationTime;
 
             yield return new WaitForSeconds(dashDuration * 1.2f);
             yield return null;

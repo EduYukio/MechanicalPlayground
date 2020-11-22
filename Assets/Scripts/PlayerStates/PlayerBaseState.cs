@@ -103,4 +103,17 @@ public abstract class PlayerBaseState {
             player.lastDirection = -1;
         }
     }
+
+    public virtual void CheckTransitionToAttacking(PlayerFSM player) {
+        if (!player.mechanics.attack) return;
+        if (player.attackCooldownTimer > 0) return;
+
+        if (Input.GetButtonDown("Attack")) {
+            player.TransitionToState(player.AttackingState);
+        }
+    }
+
+    public bool IsPlayingAnimation(string stateName, PlayerFSM player) {
+        return player.animator.GetCurrentAnimatorStateInfo(0).IsName(stateName);
+    }
 }

@@ -7,7 +7,7 @@ public class PlayerWallJumpingState : PlayerBaseState {
         player.animator.Play("PlayerJump");
         player.canDoubleJump = true;
         player.canDash = true;
-        xVelocityTimer = player.config.startWallJumpTime;
+        xVelocityTimer = player.config.startWallJumpDurationTime;
         base.SetPlayerSpriteOppositeOfWall(player);
         ApplyXVelocity(player);
         JumpAction(player);
@@ -24,6 +24,7 @@ public class PlayerWallJumpingState : PlayerBaseState {
         CheckTransitionToWallSliding(player);
         CheckTransitionToFalling(player);
         base.CheckTransitionToGrounded(player);
+        base.CheckTransitionToAttacking(player);
     }
 
     public override void CheckTransitionToFalling(PlayerFSM player) {

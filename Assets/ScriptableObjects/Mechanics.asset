@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walk: 1
   jump: 1
-  attack: 0
+  attack: 1
   doubleJump: 1
   dash: 1
   wallSlide: 1
