@@ -48,9 +48,6 @@ public abstract class PlayerBaseState {
         if (!player.mechanics.jump) return false;
 
         if (Input.GetButtonDown("Jump") || player.bunnyHopTimer > 0) {
-            if (player.bunnyHopTimer > 0 && !Input.GetButtonDown("Jump")) {
-                Debug.Log("bunny hopped");
-            }
             player.TransitionToState(player.JumpingState);
             return true;
         }

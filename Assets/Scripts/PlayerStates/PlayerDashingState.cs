@@ -3,16 +3,15 @@ using UnityEngine;
 public class PlayerDashingState : PlayerBaseState {
     public float dashTimer;
     private int dashDirection;
-
+    private float originalGravity;
     public override void EnterState(PlayerFSM player) {
         player.animator.Play("PlayerDash");
-        dashTimer = player.config.startDashDurationTime;
-        dashDirection = player.lastDirection;
+        DashAction(player);
     }
 
     public override void Update(PlayerFSM player) {
         if (dashTimer > 0) {
-            DashAction(player);
+            dashTimer -= Time.deltaTime;
             return;
         }
 
@@ -39,11 +38,15 @@ public class PlayerDashingState : PlayerBaseState {
     }
 
     void DashAction(PlayerFSM player) {
+        dashTimer = player.config.startDashDurationTime;
+        dashDirection = player.lastDirection;
+        originalGravity = player.rb.gravityScale;
+        player.rb.gravityScale = 0f;
         player.rb.velocity = new Vector2(dashDirection * player.config.dashSpeed, 0f);
-        dashTimer -= Time.deltaTime;
     }
 
     void StopDashing(PlayerFSM player) {
+        player.rb.gravityScale = originalGravity;
         player.rb.velocity = Vector2.zero;
         player.canDash = false;
         player.dashCooldownTimer = player.config.startDashCooldownTime;
