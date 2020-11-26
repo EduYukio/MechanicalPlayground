@@ -23,8 +23,25 @@ public class PlayerBlinkingState : PlayerBaseState {
             blinkDirection = new Vector3(xInput, yInput, 0f);
         }
 
-        Vector3 newPos = player.config.blinkDistance * blinkDirection;
+        Vector3 newPos = ValidDestinationPosition(player, blinkDirection);
         player.transform.Translate(newPos);
         player.blinkCooldownTimer = player.config.startBlinkCooldownTime;
+    }
+
+    Vector3 ValidDestinationPosition(PlayerFSM player, Vector3 blinkDirection) {
+        float distance = player.config.blinkDistance;
+        Vector3 finalPosition = blinkDirection * distance;
+        LayerMask groundLayer = LayerMask.GetMask("Ground");
+        float radius = 0.3f;
+        float step = 0.1f;
+
+        Collider2D[] destinationColliders = Physics2D.OverlapCircleAll(player.transform.localPosition + finalPosition, radius, groundLayer);
+        while (destinationColliders.Length > 0) {
+            distance = distance - step;
+            finalPosition = blinkDirection * distance;
+            destinationColliders = Physics2D.OverlapCircleAll(player.transform.localPosition + finalPosition, radius, groundLayer);
+        }
+
+        return finalPosition;
     }
 }
