@@ -1,14 +1,46 @@
 using UnityEngine;
 
 public class PlayerBlinkingState : PlayerBaseState {
+    float beginBlinkTimer;
+    float endBlinkTimer;
+    float originalGravity;
+    bool alreadyBlinked;
+
     public override void EnterState(PlayerFSM player) {
-        // player.animator.Play("PlayerBlink");
-        BlinkAction(player);
+        player.animator.Play("PlayerDisappear");
+        Setup(player);
     }
 
     public override void Update(PlayerFSM player) {
+        if (beginBlinkTimer > 0) {
+            beginBlinkTimer -= Time.deltaTime;
+            return;
+        }
+
+        if (!alreadyBlinked) {
+            player.animator.Play("PlayerAppear");
+            BlinkAction(player);
+            alreadyBlinked = true;
+        }
+
+        if (endBlinkTimer > 0) {
+            endBlinkTimer -= Time.deltaTime;
+            return;
+        }
+
+        StopBlinking(player);
+
         if (base.CheckTransitionToGrounded(player)) return;
         if (base.CheckTransitionToFalling(player)) return;
+    }
+
+    void Setup(PlayerFSM player) {
+        alreadyBlinked = false;
+        beginBlinkTimer = player.config.startPreBlinkTime;
+        endBlinkTimer = player.config.startPostBlinkTime;
+        player.rb.velocity = Vector2.zero;
+        originalGravity = player.rb.gravityScale;
+        player.rb.gravityScale = 0f;
     }
 
     void BlinkAction(PlayerFSM player) {
@@ -25,7 +57,6 @@ public class PlayerBlinkingState : PlayerBaseState {
 
         Vector3 newPos = ValidDestinationPosition(player, blinkDirection);
         player.transform.Translate(newPos);
-        player.blinkCooldownTimer = player.config.startBlinkCooldownTime;
     }
 
     Vector3 ValidDestinationPosition(PlayerFSM player, Vector3 blinkDirection) {
@@ -43,5 +74,11 @@ public class PlayerBlinkingState : PlayerBaseState {
         }
 
         return finalPosition;
+    }
+
+    void StopBlinking(PlayerFSM player) {
+        player.rb.gravityScale = originalGravity;
+        player.rb.velocity = Vector2.zero;
+        player.blinkCooldownTimer = player.config.startBlinkCooldownTime;
     }
 }

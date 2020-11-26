@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class PlayerFallingState : PlayerBaseState {
     public override void EnterState(PlayerFSM player) {
-        PlayAnimationIfCan(player);
     }
 
     public override void Update(PlayerFSM player) {
+        PlayAnimationIfCan(player);
         BetterFalling(player);
         CheckForBunnyHop(player);
         base.ProcessMovementInput(player);
@@ -34,8 +34,10 @@ public class PlayerFallingState : PlayerBaseState {
     }
 
     void PlayAnimationIfCan(PlayerFSM player) {
+        if (IsPlayingAnimation("PlayerFall", player)) return;
         if (IsPlayingAnimation("PlayerDoubleJump", player)) return;
         if (IsPlayingAnimation("PlayerAttack", player)) return;
+        if (IsPlayingAnimation("PlayerAppear", player)) return;
 
         player.animator.Play("PlayerFall");
     }

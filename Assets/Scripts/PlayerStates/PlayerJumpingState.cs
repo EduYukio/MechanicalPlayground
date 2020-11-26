@@ -25,5 +25,4 @@ public class PlayerJumpingState : PlayerBaseState {
     void JumpAction(PlayerFSM player) {
         player.rb.velocity = new Vector2(player.rb.velocity.x, player.config.jumpForce);
     }
-
 }

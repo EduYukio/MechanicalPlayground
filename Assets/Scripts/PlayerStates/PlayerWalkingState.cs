@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class PlayerWalkingState : PlayerBaseState {
     public override void EnterState(PlayerFSM player) {
-        PlayAnimationIfCan(player);
     }
 
     public override void Update(PlayerFSM player) {
+        PlayAnimationIfCan(player);
         ResetCoyoteTimer(player);
         base.ProcessMovementInput(player);
 
@@ -33,6 +33,7 @@ public class PlayerWalkingState : PlayerBaseState {
     }
 
     private void PlayAnimationIfCan(PlayerFSM player) {
+        if (IsPlayingAnimation("PlayerWalk", player)) return;
         if (IsPlayingAnimation("PlayerAttack", player)) return;
 
         player.animator.Play("PlayerWalk");
