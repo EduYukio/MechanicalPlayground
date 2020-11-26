@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class PlayerDashingState : PlayerBaseState {
     public float dashTimer;
-    private int dashDirection;
     private float originalGravity;
 
     public override void EnterState(PlayerFSM player) {
         player.animator.Play("PlayerDash");
+        Setup(player);
         DashAction(player);
     }
 
@@ -20,6 +20,23 @@ public class PlayerDashingState : PlayerBaseState {
         if (base.CheckTransitionToGrounded(player)) return;
         if (CheckTransitionToWallSliding(player)) return;
         if (CheckTransitionToFalling(player)) return;
+    }
+
+    void Setup(PlayerFSM player) {
+        dashTimer = player.config.startDashDurationTime;
+    }
+
+    void DashAction(PlayerFSM player) {
+        originalGravity = player.rb.gravityScale;
+        player.rb.gravityScale = 0f;
+        player.rb.velocity = new Vector2(player.lastDirection * player.config.dashSpeed, 0f);
+    }
+
+    void StopDashing(PlayerFSM player) {
+        player.rb.gravityScale = originalGravity;
+        player.rb.velocity = Vector2.zero;
+        player.canDash = false;
+        player.dashCooldownTimer = player.config.startDashCooldownTime;
     }
 
     public override bool CheckTransitionToWallSliding(PlayerFSM player) {
@@ -36,20 +53,5 @@ public class PlayerDashingState : PlayerBaseState {
             return true;
         }
         return false;
-    }
-
-    void DashAction(PlayerFSM player) {
-        dashTimer = player.config.startDashDurationTime;
-        dashDirection = player.lastDirection;
-        originalGravity = player.rb.gravityScale;
-        player.rb.gravityScale = 0f;
-        player.rb.velocity = new Vector2(dashDirection * player.config.dashSpeed, 0f);
-    }
-
-    void StopDashing(PlayerFSM player) {
-        player.rb.gravityScale = originalGravity;
-        player.rb.velocity = Vector2.zero;
-        player.canDash = false;
-        player.dashCooldownTimer = player.config.startDashCooldownTime;
     }
 }

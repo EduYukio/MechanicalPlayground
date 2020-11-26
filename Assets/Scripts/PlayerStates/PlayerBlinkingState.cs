@@ -12,10 +12,10 @@ public class PlayerBlinkingState : PlayerBaseState {
     }
 
     void BlinkAction(PlayerFSM player) {
-        Vector3 blinkDirection;
         float xInput = Input.GetAxisRaw("Horizontal");
         float yInput = Input.GetAxisRaw("Vertical");
 
+        Vector3 blinkDirection;
         if (xInput == 0 && yInput == 0) {
             blinkDirection = new Vector3(player.lastDirection, 0f, 0f);
         }

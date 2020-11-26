@@ -345,11 +345,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6671967020987745500}
+  - component: {fileID: 6671967020987745497}
   - component: {fileID: 6671967020987745501}
   - component: {fileID: 6671967020987745502}
   - component: {fileID: 6671967020987745503}
   - component: {fileID: 6671967019284831997}
-  - component: {fileID: 6671967020987745497}
   m_Layer: 0
   m_Name: PlayerFSM
   m_TagString: Player
@@ -376,6 +376,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6671967020987745497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6671967020987745496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dba6cf3b9f2cf4142a4493531802ac32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  config: {fileID: 11400000, guid: 99225b8b90d80ac4886b876914cadcf2, type: 2}
+  mechanics: {fileID: 11400000, guid: daa8efa45546dec43a6bb1e2bd1561e0, type: 2}
+  rb: {fileID: 0}
+  animator: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  isGrounded: 0
+  isTouchingWall: 0
+  isTouchingRightWall: 0
+  isTouchingLeftWall: 0
+  canDoubleJump: 0
+  canDash: 0
+  dashCooldownTimer: 0
+  attackCooldownTimer: 0
+  blinkCooldownTimer: 0
+  coyoteTimer: 0
+  bunnyHopTimer: 0
+  lastDirection: 1
+  debugState: 
+  activateSlowMotion: 0
+  printDebugStates: 0
 --- !u!212 &6671967020987745501
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -492,37 +524,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6671967020987745497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6671967020987745496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dba6cf3b9f2cf4142a4493531802ac32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: 99225b8b90d80ac4886b876914cadcf2, type: 2}
-  mechanics: {fileID: 11400000, guid: daa8efa45546dec43a6bb1e2bd1561e0, type: 2}
-  rb: {fileID: 0}
-  animator: {fileID: 0}
-  spriteRenderer: {fileID: 0}
-  isGrounded: 0
-  isTouchingWall: 0
-  isTouchingRightWall: 0
-  isTouchingLeftWall: 0
-  canDoubleJump: 0
-  canDash: 0
-  dashCooldownTimer: 0
-  attackCooldownTimer: 0
-  coyoteTimer: 0
-  bunnyHopTimer: 0
-  lastDirection: 1
-  debugState: 
-  activateSlowMotion: 0
-  printDebugStates: 0
 --- !u!1 &8580986532070741945
 GameObject:
   m_ObjectHideFlags: 0

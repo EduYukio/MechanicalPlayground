@@ -6,7 +6,7 @@ public class PlayerWalkingState : PlayerBaseState {
     }
 
     public override void Update(PlayerFSM player) {
-        player.coyoteTimer = player.config.startCoyoteDurationTime;
+        ResetCoyoteTimer(player);
         base.ProcessMovementInput(player);
 
         if (CheckTransitionToGrounded(player)) return;
@@ -15,6 +15,10 @@ public class PlayerWalkingState : PlayerBaseState {
         if (base.CheckTransitionToDashing(player)) return;
         if (base.CheckTransitionToAttacking(player)) return;
         if (base.CheckTransitionToBlinking(player)) return;
+    }
+
+    void ResetCoyoteTimer(PlayerFSM player) {
+        player.coyoteTimer = player.config.startCoyoteDurationTime;
     }
 
     public override bool CheckTransitionToGrounded(PlayerFSM player) {

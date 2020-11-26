@@ -5,10 +5,7 @@ public class PlayerWallSlidingState : PlayerBaseState {
 
     public override void EnterState(PlayerFSM player) {
         player.animator.Play("PlayerWallSlide");
-        player.canDoubleJump = true;
-        player.canDash = true;
-        stickyTimer = player.config.startStickyTime;
-        base.SetPlayerSpriteOppositeOfWall(player);
+        Setup(player);
     }
 
     public override void Update(PlayerFSM player) {
@@ -25,12 +22,11 @@ public class PlayerWallSlidingState : PlayerBaseState {
         if (CheckTransitionToFalling(player)) return;
     }
 
-    public override bool CheckTransitionToFalling(PlayerFSM player) {
-        if (stickyTimer <= 0 || !player.isTouchingWall) {
-            player.TransitionToState(player.FallingState);
-            return true;
-        }
-        return false;
+    void Setup(PlayerFSM player) {
+        player.canDoubleJump = true;
+        player.canDash = true;
+        stickyTimer = player.config.startStickyTime;
+        base.SetPlayerSpriteOppositeOfWall(player);
     }
 
     void WallSlideAction(PlayerFSM player) {
@@ -54,5 +50,13 @@ public class PlayerWallSlidingState : PlayerBaseState {
         if (xInput > 0 && player.isTouchingRightWall) return false;
 
         return true;
+    }
+
+    public override bool CheckTransitionToFalling(PlayerFSM player) {
+        if (stickyTimer <= 0 || !player.isTouchingWall) {
+            player.TransitionToState(player.FallingState);
+            return true;
+        }
+        return false;
     }
 }

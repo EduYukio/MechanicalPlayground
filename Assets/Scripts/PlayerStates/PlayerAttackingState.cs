@@ -8,11 +8,8 @@ public class PlayerAttackingState : PlayerBaseState {
 
     public override void EnterState(PlayerFSM player) {
         player.animator.Play("PlayerAttack");
-        attackPoint = GameObject.FindWithTag("AttackPoint").GetComponent<Transform>();
-        slashEffect = GameObject.Find("Circular");
-        enemyLayers = LayerMask.GetMask("Enemies");
+        Setup(player);
         AttackAction(player);
-        player.attackCooldownTimer = player.config.startAttackCooldownTime;
     }
 
     public override void Update(PlayerFSM player) {
@@ -25,6 +22,13 @@ public class PlayerAttackingState : PlayerBaseState {
         if (base.CheckTransitionToWalking(player)) return;
         if (base.CheckTransitionToGrounded(player)) return;
         if (base.CheckTransitionToFalling(player)) return;
+    }
+
+    void Setup(PlayerFSM player) {
+        attackPoint = GameObject.FindWithTag("AttackPoint").GetComponent<Transform>();
+        slashEffect = GameObject.Find("Circular");
+        enemyLayers = LayerMask.GetMask("Enemies");
+        player.attackCooldownTimer = player.config.startAttackCooldownTime;
     }
 
     void AttackAction(PlayerFSM player) {

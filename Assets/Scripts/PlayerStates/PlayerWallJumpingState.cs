@@ -5,10 +5,7 @@ public class PlayerWallJumpingState : PlayerBaseState {
 
     public override void EnterState(PlayerFSM player) {
         player.animator.Play("PlayerJump");
-        player.canDoubleJump = true;
-        player.canDash = true;
-        xVelocityTimer = player.config.startWallJumpDurationTime;
-        base.SetPlayerSpriteOppositeOfWall(player);
+        Setup(player);
         ApplyXVelocity(player);
         JumpAction(player);
     }
@@ -29,6 +26,21 @@ public class PlayerWallJumpingState : PlayerBaseState {
         if (base.CheckTransitionToAttacking(player)) return;
     }
 
+    void Setup(PlayerFSM player) {
+        player.canDoubleJump = true;
+        player.canDash = true;
+        xVelocityTimer = player.config.startWallJumpDurationTime;
+        base.SetPlayerSpriteOppositeOfWall(player);
+    }
+
+    void JumpAction(PlayerFSM player) {
+        player.rb.velocity = new Vector2(player.rb.velocity.x, player.config.jumpForce);
+    }
+
+    void ApplyXVelocity(PlayerFSM player) {
+        player.rb.velocity = new Vector2(player.config.moveSpeed * player.lastDirection, player.rb.velocity.y);
+    }
+
     public override bool CheckTransitionToFalling(PlayerFSM player) {
         float xInput = Input.GetAxisRaw("Horizontal");
         if (!Input.GetButton("Jump") || xInput != 0) {
@@ -47,13 +59,5 @@ public class PlayerWallJumpingState : PlayerBaseState {
         }
 
         return false;
-    }
-
-    void ApplyXVelocity(PlayerFSM player) {
-        player.rb.velocity = new Vector2(player.config.moveSpeed * player.lastDirection, player.rb.velocity.y);
-    }
-
-    void JumpAction(PlayerFSM player) {
-        player.rb.velocity = new Vector2(player.rb.velocity.x, player.config.jumpForce);
     }
 }
