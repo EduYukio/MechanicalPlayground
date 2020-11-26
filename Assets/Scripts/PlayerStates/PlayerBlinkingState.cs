@@ -12,8 +12,18 @@ public class PlayerBlinkingState : PlayerBaseState {
     }
 
     void BlinkAction(PlayerFSM player) {
-        float newX = player.lastDirection * player.config.blinkDistance;
-        Vector3 newPos = new Vector3(newX, 0f, 0f);
+        Vector3 blinkDirection;
+        float xInput = Input.GetAxisRaw("Horizontal");
+        float yInput = Input.GetAxisRaw("Vertical");
+
+        if (xInput == 0 && yInput == 0) {
+            blinkDirection = new Vector3(player.lastDirection, 0f, 0f);
+        }
+        else {
+            blinkDirection = new Vector3(xInput, yInput, 0f);
+        }
+
+        Vector3 newPos = player.config.blinkDistance * blinkDirection;
         player.transform.Translate(newPos);
         player.blinkCooldownTimer = player.config.startBlinkCooldownTime;
     }

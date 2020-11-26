@@ -28,4 +28,4 @@ MonoBehaviour:
   - Name: WallJump
     Enabled: 1
   - Name: Blink
-    Enabled: 0
+    Enabled: 1

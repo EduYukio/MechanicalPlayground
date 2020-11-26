@@ -28,3 +28,5 @@ MonoBehaviour:
   attackRange: 0.41
   attackDamage: 10
   startAttackCooldownTime: 0.33
+  blinkDistance: 3
+  startBlinkCooldownTime: 0.3
