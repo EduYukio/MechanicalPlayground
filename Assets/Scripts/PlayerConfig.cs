@@ -36,5 +36,9 @@ public class PlayerConfig : ScriptableObject {
     public float attackRange = 0.41f;
     public float attackDamage = 10f;
     public float startAttackCooldownTime = 0.33f;
+
+    [Header("Blink")]
+    public float blinkDistance = 5f;
+    public float startBlinkCooldownTime = 0.2f;
 }
 

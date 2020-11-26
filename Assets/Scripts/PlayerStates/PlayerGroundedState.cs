@@ -12,6 +12,7 @@ public class PlayerGroundedState : PlayerBaseState {
         if (base.CheckTransitionToWalking(player)) return;
         if (base.CheckTransitionToDashing(player)) return;
         if (base.CheckTransitionToAttacking(player)) return;
+        if (base.CheckTransitionToBlinking(player)) return;
     }
 
     void GroundedAction(PlayerFSM player) {

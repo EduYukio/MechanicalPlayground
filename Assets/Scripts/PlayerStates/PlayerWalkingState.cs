@@ -14,6 +14,7 @@ public class PlayerWalkingState : PlayerBaseState {
         if (base.CheckTransitionToJumping(player)) return;
         if (base.CheckTransitionToDashing(player)) return;
         if (base.CheckTransitionToAttacking(player)) return;
+        if (base.CheckTransitionToBlinking(player)) return;
     }
 
     public override bool CheckTransitionToGrounded(PlayerFSM player) {

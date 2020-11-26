@@ -15,6 +15,7 @@ public class PlayerWallSlidingState : PlayerBaseState {
         if (base.CheckTransitionToGrounded(player)) return;
         if (base.CheckTransitionToWallJumping(player)) return;
         if (base.CheckTransitionToDashing(player)) return;
+        if (base.CheckTransitionToBlinking(player)) return;
 
         if (stickyTimer > 0) {
             WallSlideAction(player);

@@ -14,7 +14,9 @@ public class PlayerWallJumpingState : PlayerBaseState {
     }
 
     public override void Update(PlayerFSM player) {
-        base.CheckTransitionToDashing(player);
+        if (base.CheckTransitionToDashing(player)) return;
+        if (base.CheckTransitionToBlinking(player)) return;
+
         // Obligatory x movement
         if (xVelocityTimer > 0) {
             xVelocityTimer -= Time.deltaTime;

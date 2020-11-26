@@ -4,6 +4,7 @@ public class PlayerDashingState : PlayerBaseState {
     public float dashTimer;
     private int dashDirection;
     private float originalGravity;
+
     public override void EnterState(PlayerFSM player) {
         player.animator.Play("PlayerDash");
         DashAction(player);

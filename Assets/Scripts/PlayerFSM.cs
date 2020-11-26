@@ -14,6 +14,7 @@ public class PlayerFSM : MonoBehaviour {
     public readonly PlayerWallSlidingState WallSlidingState = new PlayerWallSlidingState();
     public readonly PlayerWallJumpingState WallJumpingState = new PlayerWallJumpingState();
     public readonly PlayerAttackingState AttackingState = new PlayerAttackingState();
+    public readonly PlayerBlinkingState BlinkingState = new PlayerBlinkingState();
 
     public PlayerConfig config;
     public Mechanics mechanics;
@@ -30,6 +31,7 @@ public class PlayerFSM : MonoBehaviour {
     public bool canDash;
     public float dashCooldownTimer;
     public float attackCooldownTimer;
+    public float blinkCooldownTimer;
     public float coyoteTimer;
     public float bunnyHopTimer;
     public int lastDirection = 1;
@@ -82,6 +84,7 @@ public class PlayerFSM : MonoBehaviour {
         float step = Time.deltaTime;
         if (dashCooldownTimer >= 0) dashCooldownTimer -= step;
         if (attackCooldownTimer >= 0) attackCooldownTimer -= step;
+        if (blinkCooldownTimer >= 0) blinkCooldownTimer -= step;
         if (coyoteTimer >= 0) coyoteTimer -= step;
         if (bunnyHopTimer >= 0) bunnyHopTimer -= step;
     }

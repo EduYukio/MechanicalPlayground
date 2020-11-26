@@ -18,6 +18,7 @@ public class PlayerFallingState : PlayerBaseState {
         if (base.CheckTransitionToWallSliding(player)) return;
         if (base.CheckTransitionToWallJumping(player)) return;
         if (base.CheckTransitionToAttacking(player)) return;
+        if (base.CheckTransitionToBlinking(player)) return;
     }
 
     void BetterFalling(PlayerFSM player) {

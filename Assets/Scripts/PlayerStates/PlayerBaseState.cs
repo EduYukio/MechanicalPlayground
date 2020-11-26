@@ -119,10 +119,24 @@ public abstract class PlayerBaseState {
         return false;
     }
 
+    public virtual bool CheckTransitionToBlinking(PlayerFSM player) {
+        if (!player.mechanics.IsEnabled("Blink")) return false;
+        if (player.blinkCooldownTimer > 0) return false;
+
+        if (Input.GetButtonDown("Blink")) {
+            player.TransitionToState(player.BlinkingState);
+            return true;
+        }
+
+        return false;
+    }
+
     #endregion
 
 
+
     #region HelperFunctions
+
     public void ProcessMovementInput(PlayerFSM player) {
         float xInput = Input.GetAxisRaw("Horizontal");
         int direction = 0;
