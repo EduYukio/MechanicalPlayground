@@ -16,7 +16,7 @@ public class Item : MonoBehaviour {
             //play collect animation
             PlayerFSM player = other.gameObject.GetComponent<PlayerFSM>();
             player.items++;
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerFSM : MonoBehaviour {
     [HideInInspector] public PlayerBaseState currentState;
@@ -18,9 +19,9 @@ public class PlayerFSM : MonoBehaviour {
 
     public PlayerConfig config;
     public Mechanics mechanics;
-    public Rigidbody2D rb;
-    public Animator animator;
-    public SpriteRenderer spriteRenderer;
+    [HideInInspector] public Rigidbody2D rb;
+    [HideInInspector] public Animator animator;
+    [HideInInspector] public SpriteRenderer spriteRenderer;
 
     public bool isGrounded;
     public bool isTouchingWall;
@@ -37,6 +38,7 @@ public class PlayerFSM : MonoBehaviour {
 
     public int lastDirection = 1;
     public float moveSpeed;
+    public int items;
 
     //DEBUG
     public string debugState;
@@ -53,6 +55,8 @@ public class PlayerFSM : MonoBehaviour {
         if (mechanics.IsEnabled("MoveSpeedBoost")) {
             moveSpeed = config.moveSpeedBoosted;
         }
+
+        items = 0;
 
         TransitionToState(GroundedState);
     }
@@ -79,6 +83,16 @@ public class PlayerFSM : MonoBehaviour {
         //DEBUG
     }
 
+    public void Die() {
+        //play die animation
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+
+
+
+    // Helper functions
+
     private void UpdateFacingSprite() {
         if (lastDirection == 1) {
             spriteRenderer.flipX = false;
@@ -88,7 +102,7 @@ public class PlayerFSM : MonoBehaviour {
         }
     }
 
-    void ProcessTimers() {
+    private void ProcessTimers() {
         float step = Time.deltaTime;
         if (dashCooldownTimer >= 0) dashCooldownTimer -= step;
         if (attackCooldownTimer >= 0) attackCooldownTimer -= step;
@@ -98,7 +112,7 @@ public class PlayerFSM : MonoBehaviour {
     }
 
     //DEBUG
-    void DebugSlowMotion() {
+    private void DebugSlowMotion() {
         if (activateSlowMotion) {
             Time.timeScale = 0.2f;
         }
