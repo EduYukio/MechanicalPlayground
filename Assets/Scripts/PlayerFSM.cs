@@ -34,7 +34,9 @@ public class PlayerFSM : MonoBehaviour {
     public float blinkCooldownTimer;
     public float coyoteTimer;
     public float bunnyHopTimer;
+
     public int lastDirection = 1;
+    public float moveSpeed;
 
     //DEBUG
     public string debugState;
@@ -46,6 +48,12 @@ public class PlayerFSM : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        moveSpeed = config.moveSpeed;
+        if (mechanics.IsEnabled("MoveSpeedBoost")) {
+            moveSpeed = config.moveSpeedBoosted;
+        }
+
         TransitionToState(GroundedState);
     }
 

@@ -43,5 +43,8 @@ public class PlayerConfig : ScriptableObject {
     public float startPreBlinkTime = 0.2f;
     public float startPostBlinkTime = 0.2f;
     public float startBlinkCooldownTime = 0.2f;
+
+    [Header("Move Speed Boost")]
+    public float moveSpeedBoosted = 9f;
 }
 

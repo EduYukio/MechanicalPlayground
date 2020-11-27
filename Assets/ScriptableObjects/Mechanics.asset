@@ -31,3 +31,5 @@ MonoBehaviour:
     Enabled: 1
   - Name: EtherealDash
     Enabled: 1
+  - Name: MoveSpeedBoost
+    Enabled: 0

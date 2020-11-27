@@ -38,7 +38,7 @@ public class PlayerWallJumpingState : PlayerBaseState {
     }
 
     void ApplyXVelocity(PlayerFSM player) {
-        player.rb.velocity = new Vector2(player.config.moveSpeed * player.lastDirection, player.rb.velocity.y);
+        player.rb.velocity = new Vector2(player.lastDirection * player.moveSpeed, player.rb.velocity.y);
     }
 
     public override bool CheckTransitionToFalling(PlayerFSM player) {
