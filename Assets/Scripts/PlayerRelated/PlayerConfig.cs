@@ -11,6 +11,7 @@ public class PlayerConfig : ScriptableObject {
     [Header("Better Falling")]
     public float fallMultiplier = 3f;
     public float lowJumpMultiplier = 5f;
+    public float maxFallSpeed = -15f;
 
     [Header("Jump")]
     public float jumpForce = 12f;

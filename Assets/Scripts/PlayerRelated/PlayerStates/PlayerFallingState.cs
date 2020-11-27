@@ -22,6 +22,11 @@ public class PlayerFallingState : PlayerBaseState {
     }
 
     void BetterFalling(PlayerFSM player) {
+        if (player.rb.velocity.y < player.config.maxFallSpeed) {
+            player.rb.velocity = new Vector2(player.rb.velocity.x, player.config.maxFallSpeed);
+            return;
+        }
+
         bool playerIsFalling = player.rb.velocity.y < 0;
         bool playerStoppedJumping = player.rb.velocity.y > 0 && !Input.GetButton("Jump");
 
