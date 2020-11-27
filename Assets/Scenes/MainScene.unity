@@ -4206,9 +4206,33 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3629794706979796304, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109113389555052394, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109113390298202619, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109113391053206136, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671967019414850258, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6671967020987745496, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
       propertyPath: m_Name
       value: PlayerFSM
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671967020987745496, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6671967020987745500, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4253,6 +4277,10 @@ PrefabInstance:
     - target: {fileID: 6671967020987745500, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8580986532070741945, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}

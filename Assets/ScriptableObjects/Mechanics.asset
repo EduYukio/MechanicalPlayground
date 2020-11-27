@@ -29,3 +29,5 @@ MonoBehaviour:
     Enabled: 1
   - Name: Blink
     Enabled: 1
+  - Name: EtherealDash
+    Enabled: 1
