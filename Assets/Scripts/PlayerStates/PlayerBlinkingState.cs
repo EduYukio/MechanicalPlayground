@@ -63,7 +63,7 @@ public class PlayerBlinkingState : PlayerBaseState {
         float distance = player.config.blinkDistance;
         Vector3 finalPosition = blinkDirection * distance;
         LayerMask groundLayer = LayerMask.GetMask("Ground");
-        float radius = 0.3f;
+        float radius = 0.2f;
         float step = 0.1f;
 
         Collider2D[] destinationColliders = Physics2D.OverlapCircleAll(player.transform.localPosition + finalPosition, radius, groundLayer);
