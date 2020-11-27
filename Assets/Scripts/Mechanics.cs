@@ -41,15 +41,26 @@ public class Mechanics : ScriptableObject {
     }
 
     public void Activate(string name) {
-        GetMechanic(name, mechanicList).Enabled = true;
+        Mechanic mechanic = GetMechanic(name, mechanicList);
+        if (mechanic != null) {
+            mechanic.Enabled = true;
+        }
     }
 
     public void Deactivate(string name) {
-        GetMechanic(name, mechanicList).Enabled = false;
+        Mechanic mechanic = GetMechanic(name, mechanicList);
+        if (mechanic != null) {
+            mechanic.Enabled = false;
+        }
     }
 
     public bool IsEnabled(string name) {
-        return GetMechanic(name, mechanicList).Enabled;
+        Mechanic mechanic = GetMechanic(name, mechanicList);
+        if (mechanic != null) {
+            return mechanic.Enabled;
+        }
+
+        return false;
     }
 }
 
