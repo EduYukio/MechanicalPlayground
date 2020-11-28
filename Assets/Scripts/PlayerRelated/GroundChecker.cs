@@ -14,9 +14,16 @@ public class GroundChecker : MonoBehaviour {
             player.isGrounded = true;
         }
     }
+
     private void OnTriggerExit2D(Collider2D other) {
         if (other.CompareTag("Ground")) {
             player.isGrounded = false;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other) {
+        if (other.CompareTag("Ground")) {
+            player.isGrounded = true;
         }
     }
 }

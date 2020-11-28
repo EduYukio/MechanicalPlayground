@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Spike : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D other) {
-        // check if player has protection
         if (other.gameObject.CompareTag("Player")) {
             PlayerFSM player = other.gameObject.GetComponent<PlayerFSM>();
+            if (player.mechanics.IsEnabled("SpikeInvulnerability")) return;
+
             player.Die();
         }
     }
