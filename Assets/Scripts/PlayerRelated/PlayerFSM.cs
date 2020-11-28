@@ -16,6 +16,7 @@ public class PlayerFSM : MonoBehaviour {
     public readonly PlayerWallJumpingState WallJumpingState = new PlayerWallJumpingState();
     public readonly PlayerAttackingState AttackingState = new PlayerAttackingState();
     public readonly PlayerBlinkingState BlinkingState = new PlayerBlinkingState();
+    public readonly PlayerDyingState DyingState = new PlayerDyingState();
 
     public PlayerConfig config;
     public Mechanics mechanics;
@@ -81,11 +82,6 @@ public class PlayerFSM : MonoBehaviour {
         debugState = currentState.GetType().Name;
         if (printDebugStates) Debug.Log(debugState);
         //DEBUG
-    }
-
-    public void Die() {
-        //play die animation
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 

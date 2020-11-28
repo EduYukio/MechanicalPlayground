@@ -9,6 +9,7 @@ public class PlayerBlinkingState : PlayerBaseState {
     float yInput;
 
     public override void EnterState(PlayerFSM player) {
+        player.animator.SetFloat("disappearSpeedMultiplier", 2.2f);
         player.animator.Play("PlayerDisappear");
         Setup(player);
     }

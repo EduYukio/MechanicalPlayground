@@ -30,6 +30,7 @@ public class PlayerGroundedState : PlayerBaseState {
         if (IsPlayingAnimation("PlayerIdle", player)) return;
         if (IsPlayingAnimation("PlayerAttack", player)) return;
         if (IsPlayingAnimation("PlayerAppear", player)) return;
+        if (IsPlayingAnimation("PlayerDisappear", player)) return;
 
         player.animator.Play("PlayerIdle");
     }

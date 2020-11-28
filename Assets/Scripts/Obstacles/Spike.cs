@@ -8,7 +8,7 @@ public class Spike : MonoBehaviour {
             PlayerFSM player = other.gameObject.GetComponent<PlayerFSM>();
             if (player.mechanics.IsEnabled("SpikeInvulnerability")) return;
 
-            player.Die();
+            player.TransitionToState(player.DyingState);
         }
     }
 }
