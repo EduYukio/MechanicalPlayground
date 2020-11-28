@@ -138,7 +138,8 @@ public abstract class PlayerBaseState {
     #region HelperFunctions
 
     public void ProcessMovementInput(PlayerFSM player) {
-        int direction = GetRawDirection();
+        float xInput = Input.GetAxisRaw("Horizontal");
+        int direction = GetRawDirection(xInput);
         if (direction != 0) {
             player.lastDirection = direction;
         }
@@ -146,13 +147,12 @@ public abstract class PlayerBaseState {
         player.rb.velocity = new Vector2(direction * player.moveSpeed, player.rb.velocity.y);
     }
 
-    private int GetRawDirection() {
-        float xInput = Input.GetAxisRaw("Horizontal");
+    public int GetRawDirection(float input) {
         int direction = 0;
-        if (xInput > 0) {
+        if (input > 0) {
             direction = 1;
         }
-        else if (xInput < 0) {
+        else if (input < 0) {
             direction = -1;
         }
 

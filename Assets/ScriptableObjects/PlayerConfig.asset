@@ -15,6 +15,7 @@ MonoBehaviour:
   moveSpeed: 6
   fallMultiplier: 3
   lowJumpMultiplier: 6
+  maxFallSpeed: -15
   jumpForce: 12
   startBunnyHopDurationTime: 0.2
   startCoyoteDurationTime: 0.1
@@ -30,6 +31,8 @@ MonoBehaviour:
   attackDamage: 10
   startAttackCooldownTime: 0.33
   blinkDistance: 3
+  blinkGroundCheckRadius: 0.25
   startPreBlinkTime: 0.15
   startPostBlinkTime: 0.1
   startBlinkCooldownTime: 0.3
+  moveSpeedBoosted: 9

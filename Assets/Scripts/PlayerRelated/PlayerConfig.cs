@@ -41,6 +41,7 @@ public class PlayerConfig : ScriptableObject {
 
     [Header("Blink")]
     public float blinkDistance = 5f;
+    public float blinkGroundCheckRadius = 0.2f;
     public float startPreBlinkTime = 0.2f;
     public float startPostBlinkTime = 0.2f;
     public float startBlinkCooldownTime = 0.2f;

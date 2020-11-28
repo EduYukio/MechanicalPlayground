@@ -5,6 +5,8 @@ public class PlayerBlinkingState : PlayerBaseState {
     float endBlinkTimer;
     float originalGravity;
     bool alreadyBlinked;
+    float xInput;
+    float yInput;
 
     public override void EnterState(PlayerFSM player) {
         player.animator.Play("PlayerDisappear");
@@ -41,20 +43,19 @@ public class PlayerBlinkingState : PlayerBaseState {
         player.rb.velocity = Vector2.zero;
         originalGravity = player.rb.gravityScale;
         player.rb.gravityScale = 0f;
+        InputBuffer();
     }
 
     void BlinkAction(PlayerFSM player) {
-        float xInput = Input.GetAxisRaw("Horizontal");
-        float yInput = Input.GetAxisRaw("Vertical");
-
         Vector3 blinkDirection;
         if (xInput == 0 && yInput == 0) {
             blinkDirection = new Vector3(player.lastDirection, 0f, 0f);
         }
         else {
-            blinkDirection = new Vector3(xInput, yInput, 0f);
+            int xDirection = base.GetRawDirection(xInput);
+            int yDirection = base.GetRawDirection(yInput);
+            blinkDirection = new Vector3(xDirection, yDirection, 0f);
         }
-
         Vector3 newPos = ValidDestinationPosition(player, blinkDirection);
         player.transform.Translate(newPos);
     }
@@ -63,7 +64,7 @@ public class PlayerBlinkingState : PlayerBaseState {
         float distance = player.config.blinkDistance;
         Vector3 finalPosition = blinkDirection * distance;
         LayerMask groundLayer = LayerMask.GetMask("Ground");
-        float radius = 0.2f;
+        float radius = player.config.blinkGroundCheckRadius;
         float step = 0.1f;
 
         Collider2D[] destinationColliders = Physics2D.OverlapCircleAll(player.transform.localPosition + finalPosition, radius, groundLayer);
@@ -80,5 +81,10 @@ public class PlayerBlinkingState : PlayerBaseState {
         player.rb.gravityScale = originalGravity;
         player.rb.velocity = Vector2.zero;
         player.blinkCooldownTimer = player.config.startBlinkCooldownTime;
+    }
+
+    void InputBuffer() {
+        xInput = Input.GetAxisRaw("Horizontal");
+        yInput = Input.GetAxisRaw("Vertical");
     }
 }
