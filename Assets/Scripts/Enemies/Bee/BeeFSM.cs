@@ -11,13 +11,17 @@ public class BeeFSM : Enemy {
     public readonly BeeBeingHitState BeingHitState = new BeeBeingHitState();
     public readonly BeeDyingState DyingState = new BeeDyingState();
 
-    [HideInInspector] public SpriteRenderer spriteRenderer;
-
+    public GameObject beeBullet;
+    public Transform bulletSpawnPosition;
+    public float bulletSpeed = 2f;
     public float moveSpeed = 3f;
     public float distanceToMove = 3f;
-    public float initialY;
-    public Vector2 targetPosition;
-    public bool isBeingHit = false;
+    public float startAttackCooldownTimer = 1.5f;
+    public float attackCooldownTimer = 0;
+    [HideInInspector] public float initialY;
+    [HideInInspector] public Vector2 targetPosition;
+    [HideInInspector] public bool isBeingHit = false;
+    [HideInInspector] public SpriteRenderer spriteRenderer;
 
     private void Start() {
         currentHealth = maxHealth;
@@ -26,10 +30,13 @@ public class BeeFSM : Enemy {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         MoveSetup();
+        attackCooldownTimer = startAttackCooldownTimer;
         TransitionToState(MovingState);
     }
 
     private void Update() {
+        ProcessTimers();
+
         currentState.Update(this);
     }
 
@@ -57,5 +64,10 @@ public class BeeFSM : Enemy {
     void MoveSetup() {
         initialY = transform.position.y;
         targetPosition = new Vector2(transform.position.x, initialY + distanceToMove);
+    }
+
+    private void ProcessTimers() {
+        float step = Time.deltaTime;
+        if (attackCooldownTimer >= 0) attackCooldownTimer -= step;
     }
 }

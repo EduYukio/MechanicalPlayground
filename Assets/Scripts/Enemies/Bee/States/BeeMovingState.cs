@@ -9,5 +9,6 @@ public class BeeMovingState : BeeBaseState {
         base.MoveAction(bee);
 
         if (base.CheckTransitionToBeingHit(bee)) return;
+        if (base.CheckTransitionToAttacking(bee)) return;
     }
 }

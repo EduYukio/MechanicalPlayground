@@ -19,6 +19,10 @@ public abstract class BeeBaseState {
         return false;
     }
     public virtual bool CheckTransitionToAttacking(BeeFSM bee) {
+        if (bee.attackCooldownTimer <= 0) {
+            bee.TransitionToState(bee.AttackingState);
+            return true;
+        }
         return false;
     }
 
