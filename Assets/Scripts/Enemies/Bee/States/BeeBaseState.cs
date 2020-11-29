@@ -6,7 +6,7 @@ public abstract class BeeBaseState {
 
     #region Check Methods
 
-    public virtual bool CheckTransitionToIdle(BeeFSM bee) {
+    public virtual bool CheckTransitionToMoving(BeeFSM bee) {
         return false;
     }
 

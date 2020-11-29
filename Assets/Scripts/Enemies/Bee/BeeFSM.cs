@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class BeeFSM : MonoBehaviour {
     private BeeBaseState currentState;
 
-    public readonly BeeIdleState IdleState = new BeeIdleState();
+    public readonly BeeMovingState MovingState = new BeeMovingState();
     public readonly BeeAttackingState AttackingState = new BeeAttackingState();
     public readonly BeeBeingHitState HitState = new BeeBeingHitState();
 
@@ -14,12 +14,15 @@ public class BeeFSM : MonoBehaviour {
     [HideInInspector] public Animator animator;
     [HideInInspector] public SpriteRenderer spriteRenderer;
 
+    public float moveSpeed = 3f;
+    public float distanceToMove = 3f;
+
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        TransitionToState(IdleState);
+        TransitionToState(MovingState);
     }
 
     private void Update() {
