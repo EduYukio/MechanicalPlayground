@@ -8,7 +8,7 @@ public class BeeFSM : MonoBehaviour {
 
     public readonly BeeIdleState IdleState = new BeeIdleState();
     public readonly BeeAttackingState AttackingState = new BeeAttackingState();
-    public readonly BeeHitState HitState = new BeeHitState();
+    public readonly BeeBeingHitState HitState = new BeeBeingHitState();
 
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Animator animator;

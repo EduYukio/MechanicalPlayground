@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class BeeHitState : BeeBaseState {
+public class BeeBeingHitState : BeeBaseState {
     public override void EnterState(BeeFSM bee) {
-        bee.animator.Play("BeeHit");
+        bee.animator.Play("BeeBeingHit");
     }
 
     public override void Update(BeeFSM bee) {
