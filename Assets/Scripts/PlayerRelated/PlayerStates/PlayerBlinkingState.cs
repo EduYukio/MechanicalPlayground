@@ -52,10 +52,13 @@ public class PlayerBlinkingState : PlayerBaseState {
         if (xInput == 0 && yInput == 0) {
             blinkDirection = new Vector3(player.lastDirection, 0f, 0f);
         }
-        else {
+        else if (Mathf.Abs(xInput) > Mathf.Abs(yInput)) {
             int xDirection = base.GetRawDirection(xInput);
+            blinkDirection = new Vector3(xDirection, 0f, 0f);
+        }
+        else {
             int yDirection = base.GetRawDirection(yInput);
-            blinkDirection = new Vector3(xDirection, yDirection, 0f);
+            blinkDirection = new Vector3(0f, yDirection, 0f);
         }
         Vector3 newPos = ValidDestinationPosition(player, blinkDirection);
         player.transform.Translate(newPos);
