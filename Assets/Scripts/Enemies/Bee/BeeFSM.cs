@@ -33,4 +33,15 @@ public class BeeFSM : MonoBehaviour {
         currentState = state;
         currentState.EnterState(this);
     }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        KillPlayer(other);
+    }
+
+    void KillPlayer(Collision2D other) {
+        if (other.gameObject.CompareTag("Player")) {
+            PlayerFSM player = other.gameObject.GetComponent<PlayerFSM>();
+            player.TransitionToState(player.DyingState);
+        }
+    }
 }

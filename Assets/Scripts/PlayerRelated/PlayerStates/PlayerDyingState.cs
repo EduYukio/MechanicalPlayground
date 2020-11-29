@@ -18,7 +18,7 @@ public class PlayerDyingState : PlayerBaseState {
     }
 
     void Setup(PlayerFSM player) {
-        player.rb.velocity = Vector3.zero;
+        player.rb.simulated = false;
         player.spriteRenderer.color = Color.white;
 
         dyingTimer = base.GetAnimationDuration("PlayerDisappear", player);
