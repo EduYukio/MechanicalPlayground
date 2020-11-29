@@ -7,18 +7,53 @@ public abstract class BeeBaseState {
     #region Check Methods
 
     public virtual bool CheckTransitionToMoving(BeeFSM bee) {
-        return false;
+        bee.TransitionToState(bee.MovingState);
+        return true;
     }
 
     public virtual bool CheckTransitionToBeingHit(BeeFSM bee) {
+        if (bee.isBeingHit) {
+            bee.TransitionToState(bee.BeingHitState);
+            return true;
+        }
         return false;
     }
     public virtual bool CheckTransitionToAttacking(BeeFSM bee) {
         return false;
     }
 
+    public virtual bool CheckTransitionToDying(BeeFSM bee) {
+        if (bee.currentHealth <= 0) {
+            bee.TransitionToState(bee.DyingState);
+            return true;
+        }
+
+        return false;
+    }
+
     #endregion
 
     #region Helper Functions
+    public void MoveAction(BeeFSM bee) {
+        float step = bee.moveSpeed * Time.deltaTime;
+        bee.transform.position = Vector2.MoveTowards(bee.transform.position, bee.targetPosition, step);
+
+        if (Vector2.Distance(bee.transform.position, bee.targetPosition) < 0.01f) {
+            bee.distanceToMove *= -1f;
+            bee.targetPosition = new Vector2(bee.transform.position.x, bee.initialY + bee.distanceToMove);
+        }
+    }
+
+    public float GetAnimationDuration(string clipName, BeeFSM bee) {
+        AnimationClip[] clips = bee.animator.runtimeAnimatorController.animationClips;
+        foreach (AnimationClip clip in clips) {
+            if (clip.name == clipName) {
+                return clip.length;
+            }
+        }
+
+        Debug.Log("ERROR! No clip with this name was found: " + clipName);
+        return 0;
+    }
     #endregion
 }
