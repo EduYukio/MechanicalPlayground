@@ -5,7 +5,10 @@ public class BeeBullet : MonoBehaviour {
         if (other.gameObject.CompareTag("Player")) {
             PlayerFSM player = other.gameObject.GetComponent<PlayerFSM>();
             player.TransitionToState(player.DyingState);
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        if (other.gameObject.CompareTag("Ground")) {
+            Destroy(gameObject);
+        }
     }
 }
