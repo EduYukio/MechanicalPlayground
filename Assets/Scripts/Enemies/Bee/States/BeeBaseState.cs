@@ -48,16 +48,5 @@ public abstract class BeeBaseState {
         }
     }
 
-    public float GetAnimationDuration(string clipName, BeeFSM bee) {
-        AnimationClip[] clips = bee.animator.runtimeAnimatorController.animationClips;
-        foreach (AnimationClip clip in clips) {
-            if (clip.name == clipName) {
-                return clip.length;
-            }
-        }
-
-        Debug.Log("ERROR! No clip with this name was found: " + clipName);
-        return 0;
-    }
     #endregion
 }

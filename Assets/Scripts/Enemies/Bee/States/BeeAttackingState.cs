@@ -24,7 +24,7 @@ public class BeeAttackingState : BeeBaseState {
     }
 
     void Setup(BeeFSM bee) {
-        attackingTimer = base.GetAnimationDuration("BeeAttack", bee) * 0.8f;
+        attackingTimer = Helper.GetAnimationDuration("BeeAttack", bee.animator) * 0.8f;
     }
 
     void AttackAction(BeeFSM bee) {

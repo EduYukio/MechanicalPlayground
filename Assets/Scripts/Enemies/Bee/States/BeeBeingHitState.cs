@@ -21,7 +21,7 @@ public class BeeBeingHitState : BeeBaseState {
     }
 
     void Setup(BeeFSM bee) {
-        hitTimer = base.GetAnimationDuration("BeeBeingHit", bee);
+        hitTimer = Helper.GetAnimationDuration("BeeBeingHit", bee.animator);
         bee.isBeingHit = false;
     }
 

@@ -172,17 +172,5 @@ public abstract class PlayerBaseState {
         return player.animator.GetCurrentAnimatorStateInfo(0).IsName(stateName);
     }
 
-    public float GetAnimationDuration(string clipName, PlayerFSM player) {
-        AnimationClip[] clips = player.animator.runtimeAnimatorController.animationClips;
-        foreach (AnimationClip clip in clips) {
-            if (clip.name == clipName) {
-                return clip.length;
-            }
-        }
-
-        Debug.Log("ERROR! No clip with this name was found: " + clipName);
-        return 0;
-    }
-
     #endregion
 }

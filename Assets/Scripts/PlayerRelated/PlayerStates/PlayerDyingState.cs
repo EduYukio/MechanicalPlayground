@@ -21,7 +21,7 @@ public class PlayerDyingState : PlayerBaseState {
         player.rb.simulated = false;
         player.spriteRenderer.color = Color.white;
 
-        dyingTimer = base.GetAnimationDuration("PlayerDisappear", player);
+        dyingTimer = Helper.GetAnimationDuration("PlayerDisappear", player.animator);
         player.animator.SetFloat("disappearSpeedMultiplier", 1f);
         player.animator.Play("PlayerDisappear");
     }

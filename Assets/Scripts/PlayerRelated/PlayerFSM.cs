@@ -37,20 +37,23 @@ public class PlayerFSM : MonoBehaviour {
     public float coyoteTimer;
     public float bunnyHopTimer;
 
+    public bool freezePlayerState = false;
     public int lastDirection = 1;
     public float moveSpeed;
     public int items;
 
     //DEBUG
-    public string debugState;
+    public bool debugMode = false;
     public bool activateSlowMotion = false;
     public bool printDebugStates = false;
+    public string debugState;
     //DEBUG
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        freezePlayerState = false;
 
         moveSpeed = config.moveSpeed;
         if (mechanics.IsEnabled("MoveSpeedBoost")) {
@@ -63,6 +66,8 @@ public class PlayerFSM : MonoBehaviour {
     }
 
     private void Update() {
+        if (freezePlayerState) return;
+
         ProcessTimers();
 
         currentState.Update(this);
@@ -70,11 +75,16 @@ public class PlayerFSM : MonoBehaviour {
         UpdateFacingSprite();
 
         //DEBUG
-        DebugSlowMotion();
+        if (debugMode) {
+            if (activateSlowMotion) Time.timeScale = 0.2f;
+            else Time.timeScale = 1f;
+        }
         //DEBUG
     }
 
     public void TransitionToState(PlayerBaseState state) {
+        if (freezePlayerState) return;
+
         currentState = state;
         currentState.EnterState(this);
 
@@ -106,15 +116,4 @@ public class PlayerFSM : MonoBehaviour {
         if (coyoteTimer >= 0) coyoteTimer -= step;
         if (bunnyHopTimer >= 0) bunnyHopTimer -= step;
     }
-
-    //DEBUG
-    private void DebugSlowMotion() {
-        if (activateSlowMotion) {
-            Time.timeScale = 0.2f;
-        }
-        else {
-            Time.timeScale = 1f;
-        }
-    }
-    //DEBUG
 }
