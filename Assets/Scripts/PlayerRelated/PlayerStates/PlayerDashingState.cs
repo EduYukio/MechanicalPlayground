@@ -34,7 +34,7 @@ public class PlayerDashingState : PlayerBaseState {
         player.rb.velocity = new Vector2(player.lastDirection * player.config.dashSpeed, 0f);
         if (isEthereal) {
             player.spriteRenderer.color = new Color(1, 1, 1, player.config.etherealTransparency);
-            player.gameObject.layer = LayerMask.NameToLayer("PlayerEthereal"); ;
+            player.gameObject.layer = LayerMask.NameToLayer("PlayerEthereal");
         }
     }
 

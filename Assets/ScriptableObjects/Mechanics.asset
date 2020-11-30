@@ -34,4 +34,4 @@ MonoBehaviour:
   - Name: MoveSpeedBoost
     Enabled: 0
   - Name: SpikeInvulnerability
-    Enabled: 0
+    Enabled: 1

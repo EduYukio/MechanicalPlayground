@@ -45,16 +45,16 @@ public class BeeFSM : Enemy {
         currentState.EnterState(this);
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
-        KillPlayer(other);
-    }
+    // private void OnCollisionEnter2D(Collision2D other) {
+    //     KillPlayer(other);
+    // }
 
-    void KillPlayer(Collision2D other) {
-        if (other.gameObject.CompareTag("Player")) {
-            PlayerFSM player = other.gameObject.GetComponent<PlayerFSM>();
-            player.TransitionToState(player.DyingState);
-        }
-    }
+    // void KillPlayer(Collision2D other) {
+    //     if (other.gameObject.CompareTag("Player")) {
+    //         PlayerFSM player = other.gameObject.GetComponent<PlayerFSM>();
+    //         player.TransitionToState(player.DyingState);
+    //     }
+    // }
 
     public override void TakeDamage(float damage) {
         isBeingHit = true;

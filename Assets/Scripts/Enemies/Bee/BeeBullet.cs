@@ -7,6 +7,7 @@ public class BeeBullet : MonoBehaviour {
             player.TransitionToState(player.DyingState);
             Destroy(gameObject);
         }
+
         if (other.gameObject.CompareTag("Ground")) {
             Destroy(gameObject);
         }
