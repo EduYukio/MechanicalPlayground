@@ -15,7 +15,7 @@ MonoBehaviour:
   moveSpeed: 6
   fallMultiplier: 3
   lowJumpMultiplier: 6
-  maxFallSpeed: -15
+  maxFallSpeed: -10
   jumpForce: 12
   startBunnyHopDurationTime: 0.2
   startCoyoteDurationTime: 0.1
