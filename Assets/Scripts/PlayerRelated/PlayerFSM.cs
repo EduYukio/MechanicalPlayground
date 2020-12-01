@@ -37,6 +37,8 @@ public class PlayerFSM : MonoBehaviour {
     public float coyoteTimer;
     public float bunnyHopTimer;
 
+    public static Vector3 respawnPosition;
+    public Vector3 originalPosition = new Vector3(0, 0, 0);
     public bool freezePlayerState = false;
     public int lastDirection = 1;
     public float moveSpeed;
@@ -59,6 +61,11 @@ public class PlayerFSM : MonoBehaviour {
         if (mechanics.IsEnabled("MoveSpeedBoost")) {
             moveSpeed = config.moveSpeedBoosted;
         }
+
+        if (respawnPosition == Vector3.zero) {
+            respawnPosition = originalPosition;
+        }
+        transform.position = respawnPosition;
 
         items = 0;
 
