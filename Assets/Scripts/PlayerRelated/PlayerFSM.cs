@@ -31,6 +31,7 @@ public class PlayerFSM : MonoBehaviour {
 
     public bool canDoubleJump;
     public bool canDash;
+    public bool hasResetDashTrigger;
     public float dashCooldownTimer;
     public float attackCooldownTimer;
     public float blinkCooldownTimer;
@@ -58,6 +59,7 @@ public class PlayerFSM : MonoBehaviour {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         freezePlayerState = false;
+        hasResetDashTrigger = true;
 
         moveSpeed = config.moveSpeed;
         if (mechanics.IsEnabled("MoveSpeedBoost")) {
@@ -78,6 +80,7 @@ public class PlayerFSM : MonoBehaviour {
         if (freezePlayerState) return;
 
         ProcessTimers();
+        CheckIfHasResetDashTrigger();
 
         currentState.Update(this);
 
@@ -125,5 +128,11 @@ public class PlayerFSM : MonoBehaviour {
         if (coyoteTimer >= 0) coyoteTimer -= step;
         if (bunnyHopTimer >= 0) bunnyHopTimer -= step;
         if (airJumpInputBuffer >= 0) airJumpInputBuffer -= step;
+    }
+
+    void CheckIfHasResetDashTrigger() {
+        if (Input.GetAxisRaw("Dash") == 0f) {
+            hasResetDashTrigger = true;
+        }
     }
 }

@@ -29,6 +29,7 @@ public class PlayerDashingState : PlayerBaseState {
     void Setup(PlayerFSM player) {
         dashTimer = player.config.startDashDurationTime;
         isEthereal = player.mechanics.IsEnabled("EtherealDash");
+        player.hasResetDashTrigger = false;
     }
 
     void DashAction(PlayerFSM player) {

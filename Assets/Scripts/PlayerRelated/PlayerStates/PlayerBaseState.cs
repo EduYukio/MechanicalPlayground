@@ -10,6 +10,7 @@ public abstract class PlayerBaseState {
     public virtual bool CheckTransitionToDashing(PlayerFSM player) {
         if (!player.mechanics.IsEnabled("Dash")) return false;
         if (!player.canDash) return false;
+        if (!player.hasResetDashTrigger) return false;
         if (player.dashCooldownTimer > 0) return false;
 
         // GamePad || Keyboard
