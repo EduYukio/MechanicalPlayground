@@ -12,6 +12,8 @@ public class PlayerDashingState : PlayerBaseState {
     }
 
     public override void Update(PlayerFSM player) {
+        CheckForAirJumpInputBuffer(player);
+
         if (dashTimer > 0) {
             dashTimer -= Time.deltaTime;
             return;
@@ -19,6 +21,7 @@ public class PlayerDashingState : PlayerBaseState {
 
         StopDashing(player);
         if (base.CheckTransitionToGrounded(player)) return;
+        if (base.CheckTransitionToDoubleJumping(player)) return;
         if (CheckTransitionToWallSliding(player)) return;
         if (CheckTransitionToFalling(player)) return;
     }
@@ -46,6 +49,12 @@ public class PlayerDashingState : PlayerBaseState {
         if (isEthereal) {
             player.spriteRenderer.color = new Color(1, 1, 1, 1);
             player.gameObject.layer = LayerMask.NameToLayer("Player"); ;
+        }
+    }
+
+    void CheckForAirJumpInputBuffer(PlayerFSM player) {
+        if (Input.GetButtonDown("Jump")) {
+            player.airJumpInputBuffer = player.config.startAirJumpInputBuffer;
         }
     }
 

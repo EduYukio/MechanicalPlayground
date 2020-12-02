@@ -20,6 +20,7 @@ MonoBehaviour:
   startBunnyHopDurationTime: 0.2
   startCoyoteDurationTime: 0.1
   doubleJumpForce: 12
+  startAirJumpInputBuffer: 0.2
   dashSpeed: 23
   startDashDurationTime: 0.12
   startDashCooldownTime: 0.35

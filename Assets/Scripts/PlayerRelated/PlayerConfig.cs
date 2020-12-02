@@ -20,6 +20,7 @@ public class PlayerConfig : ScriptableObject {
 
     [Header("Double Jump")]
     public float doubleJumpForce = 12f;
+    public float startAirJumpInputBuffer = 0.2f;
 
     [Header("Dash")]
     public float dashSpeed = 23;

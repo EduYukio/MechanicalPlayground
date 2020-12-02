@@ -60,7 +60,7 @@ public abstract class PlayerBaseState {
         if (!player.canDoubleJump) return false;
         if (player.isTouchingWall) return false;
 
-        if (Input.GetButtonDown("Jump")) {
+        if (Input.GetButtonDown("Jump") || player.airJumpInputBuffer > 0) {
             player.TransitionToState(player.DoubleJumpingState);
             return true;
         }

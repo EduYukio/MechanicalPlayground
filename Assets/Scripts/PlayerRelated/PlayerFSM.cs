@@ -36,6 +36,8 @@ public class PlayerFSM : MonoBehaviour {
     public float blinkCooldownTimer;
     public float coyoteTimer;
     public float bunnyHopTimer;
+    public float airJumpInputBuffer;
+
 
     public static Vector3 respawnPosition;
     public Vector3 originalPosition = new Vector3(0, 0, 0);
@@ -122,5 +124,6 @@ public class PlayerFSM : MonoBehaviour {
         if (blinkCooldownTimer >= 0) blinkCooldownTimer -= step;
         if (coyoteTimer >= 0) coyoteTimer -= step;
         if (bunnyHopTimer >= 0) bunnyHopTimer -= step;
+        if (airJumpInputBuffer >= 0) airJumpInputBuffer -= step;
     }
 }
