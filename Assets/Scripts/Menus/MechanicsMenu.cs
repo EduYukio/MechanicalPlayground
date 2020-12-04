@@ -15,17 +15,17 @@ public class MechanicsMenu : MonoBehaviour {
     public VideoPlayer videoPlayer;
     public RawImage rawImage;
     public GameObject buttonObjects;
-    public GameObject pauseMenu;
-    public GameObject firstSelectedButton;
 
 
     private MechanicButton[] buttons;
     private PlayerFSM player;
+    private Menu menu;
 
     private void Awake() {
         CleanInfo();
         buttons = buttonObjects.GetComponentsInChildren<MechanicButton>();
         player = GameObject.FindObjectOfType<PlayerFSM>();
+        menu = GameObject.FindObjectOfType<Menu>();
     }
 
     private void Update() {
@@ -34,13 +34,6 @@ public class MechanicsMenu : MonoBehaviour {
 
     private void OnEnable() {
         mechanics.SaveState();
-        Time.timeScale = 0f;
-        player.freezePlayerState = true;
-    }
-
-    private void OnDisable() {
-        Time.timeScale = 1f;
-        player.freezePlayerState = false;
     }
 
     void CleanInfo() {
@@ -60,9 +53,9 @@ public class MechanicsMenu : MonoBehaviour {
     public void ConfirmMechanics() {
         // check if all skill points were spent
         gameObject.SetActive(false);
-        pauseMenu.SetActive(true);
+        menu.pauseMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(pauseMenu.GetComponent<PauseMenu>().mechanicsButton);
+        EventSystem.current.SetSelectedGameObject(menu.mechanicsButton);
         if (!debugMode) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }

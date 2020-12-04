@@ -76,7 +76,6 @@ public class PlayerFSM : MonoBehaviour {
     private void Update() {
         if (freezePlayerState) return;
 
-        CheckMenuInput();
         UpdateMoveSpeed();
         ProcessTimers();
         CheckIfHasResetDashTrigger();
@@ -134,15 +133,6 @@ public class PlayerFSM : MonoBehaviour {
             hasResetDashTrigger = true;
         }
     }
-
-    void CheckMenuInput() {
-        if (Input.GetButtonDown("Esc")) {
-            pauseMenu.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(pauseMenu.GetComponent<PauseMenu>().continueButton);
-        }
-    }
-
 
     // quando for lançar, cachear a movespeed do player ao inves de dar update todo frame
     void UpdateMoveSpeed() {
