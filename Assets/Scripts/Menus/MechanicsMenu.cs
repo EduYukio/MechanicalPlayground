@@ -81,7 +81,7 @@ public class MechanicsMenu : MonoBehaviour {
     }
 
     void CheckMenuInput() {
-        if (Input.GetButtonDown("Esc")) {
+        if (Input.GetButtonDown("Esc") || Input.GetButtonDown("Circle")) {
             RevertMechanics();
             ConfirmMechanics();
         }

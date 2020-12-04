@@ -53,6 +53,9 @@ public class Menu : MonoBehaviour {
                 OpenPauseMenu();
             }
         }
+        else if (Input.GetButtonDown("Circle") && pauseMenu.activeSelf) {
+            ClosePauseMenu();
+        }
     }
 
     void ClosePauseMenu() {
