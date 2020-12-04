@@ -39,7 +39,9 @@ public class Menu : MonoBehaviour {
     }
 
     public void QuitToMenuButton() {
-        ClosePauseMenu();
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1f;
+        player.freezePlayerState = false;
         PlayerFSM.respawnPosition = Vector2.zero;
         SceneManager.LoadScene("MainMenu");
     }
