@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class PlayerFSM : MonoBehaviour {
@@ -137,6 +138,8 @@ public class PlayerFSM : MonoBehaviour {
     void CheckMenuInput() {
         if (Input.GetButtonDown("Esc")) {
             pauseMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(pauseMenu.GetComponent<PauseMenu>().continueButton);
         }
     }
 

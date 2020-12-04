@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
+using UnityEngine.EventSystems;
 
 public class MechanicsMenu : MonoBehaviour {
     public bool debugMode = false;
@@ -14,13 +15,17 @@ public class MechanicsMenu : MonoBehaviour {
     public VideoPlayer videoPlayer;
     public RawImage rawImage;
     public GameObject buttonObjects;
-    private MechanicButton[] buttons;
     public GameObject pauseMenu;
+    public GameObject firstSelectedButton;
 
+
+    private MechanicButton[] buttons;
+    private PlayerFSM player;
 
     private void Awake() {
         CleanInfo();
         buttons = buttonObjects.GetComponentsInChildren<MechanicButton>();
+        player = GameObject.FindObjectOfType<PlayerFSM>();
     }
 
     private void Update() {
@@ -30,12 +35,12 @@ public class MechanicsMenu : MonoBehaviour {
     private void OnEnable() {
         mechanics.SaveState();
         Time.timeScale = 0f;
-        GameObject.FindObjectOfType<PlayerFSM>().freezePlayerState = true;
+        player.freezePlayerState = true;
     }
 
     private void OnDisable() {
         Time.timeScale = 1f;
-        GameObject.FindObjectOfType<PlayerFSM>().freezePlayerState = false;
+        player.freezePlayerState = false;
     }
 
     void CleanInfo() {
@@ -56,6 +61,8 @@ public class MechanicsMenu : MonoBehaviour {
         // check if all skill points were spent
         gameObject.SetActive(false);
         pauseMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(pauseMenu.GetComponent<PauseMenu>().mechanicsButton);
         if (!debugMode) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }

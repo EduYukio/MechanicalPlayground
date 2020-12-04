@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class PauseMenu : MonoBehaviour {
     public GameObject mechanicsMenu;
     private PlayerFSM player;
+
+    public GameObject continueButton;
+    public GameObject mechanicsButton;
+    public GameObject optionsButton;
 
     private void Awake() {
         player = GameObject.FindObjectOfType<PlayerFSM>();
@@ -34,6 +39,8 @@ public class PauseMenu : MonoBehaviour {
     public void MechanicsButton() {
         gameObject.SetActive(false);
         mechanicsMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(mechanicsMenu.GetComponent<MechanicsMenu>().firstSelectedButton);
     }
 
     public void OptionsButton() {
