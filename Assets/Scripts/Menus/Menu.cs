@@ -58,8 +58,7 @@ public class Menu : MonoBehaviour {
     void ClosePauseMenu() {
         pauseMenu.SetActive(false);
 
-        Time.timeScale = 1f;
-        player.freezePlayerState = false;
+        StartCoroutine(WaitToClosePauseMenu());
     }
 
     void OpenPauseMenu() {
@@ -71,4 +70,11 @@ public class Menu : MonoBehaviour {
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(continueButton);
     }
+
+    IEnumerator WaitToClosePauseMenu() {
+        yield return new WaitForSecondsRealtime(0.05f);
+        Time.timeScale = 1f;
+        player.freezePlayerState = false;
+    }
+
 }
