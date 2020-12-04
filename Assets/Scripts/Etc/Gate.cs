@@ -9,7 +9,7 @@ public class Gate : MonoBehaviour {
             if (player.items > 0) {
                 // animação, som do portão sumindo
                 player.items--;
-                Destroy(gameObject);
+                Destroy(gameObject, 0.1f);
             }
         }
     }
