@@ -11,13 +11,14 @@ public class MechanicButton : MonoBehaviour {
     public string description;
     public static MechanicsMenu mechMenu;
 
-    public bool isUnavailable = false;
+    public bool isBlocked = false;
     public bool isActive = false;
 
     private Image buttonImage;
     private Color activeColor = new Color(100 / 255f, 122 / 255f, 224 / 255f, 1f);
-    private Color inactiveColor = Color.gray;
-    private Color unavailableColor = new Color(0.1f, 0.1f, 0.1f, 1f);
+    private Color inactiveColor = new Color(160 / 255f, 160 / 255f, 160 / 255f, 1f);
+    private Color blockedColor = new Color(160 / 255f, 160 / 255f, 160 / 255f, 0.5f);
+    private Color blockedTextColor = new Color(1, 1, 1, 0.5f);
 
     private void Awake() {
         if (mechMenu == null) mechMenu = GameObject.FindObjectOfType<MechanicsMenu>();
@@ -26,8 +27,9 @@ public class MechanicButton : MonoBehaviour {
     }
 
     private void OnEnable() {
-        if (isUnavailable) {
-            buttonImage.color = unavailableColor;
+        if (isBlocked) {
+            buttonImage.color = blockedColor;
+            GetComponentInChildren<TextMeshProUGUI>().color = blockedTextColor;
         }
         else if (mechMenu.mechanics.IsEnabled(mechanicName)) {
             isActive = true;
@@ -40,7 +42,7 @@ public class MechanicButton : MonoBehaviour {
     }
 
     public void ClickedOnMechanic() {
-        if (isUnavailable) return;
+        if (isBlocked) return;
 
         if (isActive) {
             // desativa
@@ -74,13 +76,13 @@ public class MechanicButton : MonoBehaviour {
     }
 
     public void ActivateButtonImage() {
-        if (isUnavailable) return;
+        if (isBlocked) return;
         isActive = true;
         buttonImage.color = activeColor;
     }
 
     public void DeactivateButtonImage() {
-        if (isUnavailable) return;
+        if (isBlocked) return;
         isActive = false;
         buttonImage.color = inactiveColor;
     }
