@@ -57,7 +57,7 @@ public abstract class PlayerBaseState {
     }
 
     public virtual bool CheckTransitionToDoubleJumping(PlayerFSM player) {
-        if (!player.mechanics.IsEnabled("DoubleJump")) return false;
+        if (!player.mechanics.IsEnabled("Double Jump")) return false;
         if (!player.canDoubleJump) return false;
         if (player.isTouchingWall) return false;
 
@@ -82,7 +82,7 @@ public abstract class PlayerBaseState {
     }
 
     public virtual bool CheckTransitionToWallSliding(PlayerFSM player) {
-        if (!player.mechanics.IsEnabled("WallSlide")) return false;
+        if (!player.mechanics.IsEnabled("Wall Slide")) return false;
 
         float xInput = Input.GetAxisRaw("Horizontal");
         bool pressingAgainstLeftWall = player.isTouchingLeftWall && xInput < 0;
@@ -97,7 +97,7 @@ public abstract class PlayerBaseState {
     }
 
     public virtual bool CheckTransitionToWallJumping(PlayerFSM player) {
-        if (!player.mechanics.IsEnabled("WallJump")) return false;
+        if (!player.mechanics.IsEnabled("Wall Jump")) return false;
         if (!player.isTouchingWall) return false;
 
         if (Input.GetButtonDown("Jump")) {

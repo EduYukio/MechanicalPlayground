@@ -1273,7 +1273,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184952, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184952, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1333,7 +1333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184956, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: mechanicName
-      value: EtherealDash
+      value: Ethereal Dash
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184956, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: description
@@ -2916,7 +2916,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184952, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184952, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2976,7 +2976,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184956, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: mechanicName
-      value: WallJump
+      value: Wall Jump
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184956, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: description
@@ -24050,7 +24050,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184956, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: mechanicName
-      value: SpikeInvulnerability
+      value: Spike Invulnerability
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184956, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: description
@@ -24234,7 +24234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184952, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184952, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -24294,7 +24294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184956, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: mechanicName
-      value: MoveSpeedBoost
+      value: Move Speed Boost
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184956, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: description
@@ -25193,7 +25193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184952, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184952, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -25253,7 +25253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184956, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: mechanicName
-      value: CreatePlatform
+      value: Create Platform
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184956, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: description
@@ -26243,7 +26243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184956, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: mechanicName
-      value: WallSlide
+      value: Wall Slide
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184956, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: description
@@ -26668,7 +26668,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184952, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184952, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -29738,7 +29738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184956, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: mechanicName
-      value: DoubleJump
+      value: Double Jump
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}

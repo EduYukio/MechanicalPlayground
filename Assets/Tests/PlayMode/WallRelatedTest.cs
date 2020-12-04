@@ -37,7 +37,7 @@ namespace Tests {
             playerScript.mechanics.ResetMechanics();
             playerScript.mechanics.Activate("Walk");
             playerScript.mechanics.Activate("Jump");
-            playerScript.mechanics.Activate("WallSlide");
+            playerScript.mechanics.Activate("Wall Slide");
 
             yield return new WaitForSeconds(0.5f);
 
@@ -73,8 +73,8 @@ namespace Tests {
             playerScript.mechanics.ResetMechanics();
             playerScript.mechanics.Activate("Walk");
             playerScript.mechanics.Activate("Jump");
-            playerScript.mechanics.Activate("WallSlide");
-            playerScript.mechanics.Activate("WallJump");
+            playerScript.mechanics.Activate("Wall Slide");
+            playerScript.mechanics.Activate("Wall Jump");
 
             yield return new WaitForSeconds(0.5f);
 

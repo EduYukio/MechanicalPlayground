@@ -17,21 +17,21 @@ MonoBehaviour:
     Enabled: 1
   - Name: Jump
     Enabled: 1
-  - Name: DoubleJump
+  - Name: Double Jump
     Enabled: 1
   - Name: Dash
     Enabled: 1
   - Name: Attack
+    Enabled: 0
+  - Name: Wall Slide
     Enabled: 1
-  - Name: WallSlide
-    Enabled: 1
-  - Name: WallJump
+  - Name: Wall Jump
     Enabled: 1
   - Name: Blink
     Enabled: 1
-  - Name: EtherealDash
+  - Name: Ethereal Dash
     Enabled: 1
-  - Name: MoveSpeedBoost
-    Enabled: 0
-  - Name: SpikeInvulnerability
+  - Name: Move Speed Boost
+    Enabled: 1
+  - Name: Spike Invulnerability
     Enabled: 0

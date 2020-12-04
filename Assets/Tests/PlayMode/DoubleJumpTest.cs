@@ -36,7 +36,7 @@ namespace Tests {
             playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
             playerScript.mechanics.Activate("Jump");
-            playerScript.mechanics.Activate("DoubleJump");
+            playerScript.mechanics.Activate("Double Jump");
 
             yield return new WaitForSeconds(1f);
 
@@ -84,7 +84,7 @@ namespace Tests {
             playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
             playerScript.mechanics.Activate("Jump");
-            playerScript.mechanics.Activate("DoubleJump");
+            playerScript.mechanics.Activate("Double Jump");
 
             yield return new WaitForSeconds(0.5f);
 
@@ -120,7 +120,7 @@ namespace Tests {
             playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
             playerScript.mechanics.Activate("Jump");
-            playerScript.mechanics.Activate("DoubleJump");
+            playerScript.mechanics.Activate("Double Jump");
 
             yield return new WaitForSeconds(0.5f);
 

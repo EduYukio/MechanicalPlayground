@@ -29,7 +29,7 @@ public class KillPlayerOnTouch : MonoBehaviour {
 
     bool PlayerInvulnerableToSpike(GameObject otherObject) {
         PlayerFSM player = otherObject.GetComponent<PlayerFSM>();
-        if (player.mechanics.IsEnabled("SpikeInvulnerability")) return true;
+        if (player.mechanics.IsEnabled("Spike Invulnerability")) return true;
         return false;
     }
 }
