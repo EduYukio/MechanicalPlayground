@@ -9,7 +9,7 @@ public class MechanicButton : MonoBehaviour {
     public VideoClip mechanicClip;
     public string mechanicName;
     public string description;
-    public static MechanicsMenu menu;
+    public static MechanicsMenu mechMenu;
 
     public bool isUnavailable = false;
     public bool isActive = false;
@@ -20,7 +20,7 @@ public class MechanicButton : MonoBehaviour {
     private Color unavailableColor = new Color(0.1f, 0.1f, 0.1f, 1f);
 
     private void Awake() {
-        if (menu == null) menu = GameObject.FindObjectOfType<MechanicsMenu>();
+        if (mechMenu == null) mechMenu = GameObject.FindObjectOfType<MechanicsMenu>();
         buttonImage = GetComponent<Image>();
         GetComponent<Button>().onClick.AddListener(ClickedOnMechanic);
     }
@@ -29,7 +29,7 @@ public class MechanicButton : MonoBehaviour {
         if (isUnavailable) {
             buttonImage.color = unavailableColor;
         }
-        else if (menu.mechanics.IsEnabled(mechanicName)) {
+        else if (mechMenu.mechanics.IsEnabled(mechanicName)) {
             isActive = true;
             buttonImage.color = activeColor;
         }
@@ -45,30 +45,32 @@ public class MechanicButton : MonoBehaviour {
         if (isActive) {
             // desativa
             DeactivateButtonImage();
-            menu.mechanics.Deactivate(mechanicName);
+            mechMenu.mechanics.Deactivate(mechanicName);
+            mechMenu.changedMechanics = true;
         }
         else {
             // ativa
             ActivateButtonImage();
-            menu.mechanics.Activate(mechanicName);
+            mechMenu.mechanics.Activate(mechanicName);
+            mechMenu.changedMechanics = true;
         }
     }
 
     public void UpdateTutorialInfo() {
         if (mechanicClip != null) {
-            menu.videoPlayer.clip = mechanicClip;
-            menu.videoPlayer.Play();
-            menu.rawImage.enabled = true;
+            mechMenu.videoPlayer.clip = mechanicClip;
+            mechMenu.videoPlayer.Play();
+            mechMenu.rawImage.enabled = true;
         }
-        menu.title.text = mechanicName;
-        menu.description.text = description;
+        mechMenu.title.text = mechanicName;
+        mechMenu.description.text = description;
     }
 
     public void ClearTutorialInfo() {
-        menu.videoPlayer.Stop();
-        menu.rawImage.enabled = false;
-        menu.title.text = "";
-        menu.description.text = "";
+        mechMenu.videoPlayer.Stop();
+        mechMenu.rawImage.enabled = false;
+        mechMenu.title.text = "";
+        mechMenu.description.text = "";
     }
 
     public void ActivateButtonImage() {

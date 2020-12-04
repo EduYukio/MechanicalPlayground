@@ -15,7 +15,7 @@ public class MechanicsMenu : MonoBehaviour {
     public VideoPlayer videoPlayer;
     public RawImage rawImage;
     public GameObject buttonObjects;
-
+    [HideInInspector] public bool changedMechanics = false;
 
     private MechanicButton[] buttons;
     private PlayerFSM player;
@@ -34,6 +34,7 @@ public class MechanicsMenu : MonoBehaviour {
 
     private void OnEnable() {
         mechanics.SaveState();
+        changedMechanics = false;
     }
 
     void CleanInfo() {
@@ -48,20 +49,26 @@ public class MechanicsMenu : MonoBehaviour {
         foreach (var button in buttons) {
             button.DeactivateButtonImage();
         }
+        changedMechanics = true;
     }
 
     public void ConfirmMechanics() {
         // check if all skill points were spent
-        gameObject.SetActive(false);
-        menu.pauseMenu.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(menu.mechanicsButton);
-        if (!debugMode) {
+        if (!debugMode && changedMechanics) {
+            Time.timeScale = 1f;
+            player.freezePlayerState = false;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        else {
+            gameObject.SetActive(false);
+            menu.pauseMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(menu.mechanicsButton);
         }
     }
 
     public void RevertMechanics() {
+        changedMechanics = false;
         mechanics.RestoreState();
         foreach (var button in buttons) {
             if (mechanics.IsEnabled(button.mechanicName)) {
