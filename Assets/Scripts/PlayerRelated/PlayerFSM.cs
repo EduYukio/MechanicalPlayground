@@ -20,7 +20,7 @@ public class PlayerFSM : MonoBehaviour {
 
     public PlayerConfig config;
     public Mechanics mechanics;
-    public GameObject mechanicsMenu;
+    public GameObject pauseMenu;
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Animator animator;
     [HideInInspector] public SpriteRenderer spriteRenderer;
@@ -135,8 +135,8 @@ public class PlayerFSM : MonoBehaviour {
     }
 
     void CheckMenuInput() {
-        if (Input.GetButtonDown("MechanicsMenu")) {
-            mechanicsMenu.SetActive(true);
+        if (Input.GetButtonDown("Esc")) {
+            pauseMenu.SetActive(true);
         }
     }
 

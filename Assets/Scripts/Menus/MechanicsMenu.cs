@@ -15,6 +15,7 @@ public class MechanicsMenu : MonoBehaviour {
     public RawImage rawImage;
     public GameObject buttonObjects;
     private MechanicButton[] buttons;
+    public GameObject pauseMenu;
 
 
     private void Awake() {
@@ -54,6 +55,7 @@ public class MechanicsMenu : MonoBehaviour {
     public void ConfirmMechanics() {
         // check if all skill points were spent
         gameObject.SetActive(false);
+        pauseMenu.SetActive(true);
         if (!debugMode) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
@@ -72,8 +74,9 @@ public class MechanicsMenu : MonoBehaviour {
     }
 
     void CheckMenuInput() {
-        if (Input.GetButtonDown("MechanicsMenu")) {
-            gameObject.SetActive(false);
+        if (Input.GetButtonDown("Esc")) {
+            RevertMechanics();
+            ConfirmMechanics();
         }
     }
 }
