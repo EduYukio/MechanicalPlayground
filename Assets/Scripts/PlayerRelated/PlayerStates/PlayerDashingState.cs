@@ -60,6 +60,8 @@ public class PlayerDashingState : PlayerBaseState {
     }
 
     public override bool CheckTransitionToWallSliding(PlayerFSM player) {
+        if (!player.mechanics.IsEnabled("Wall Slide")) return false;
+
         if (player.isTouchingWall) {
             player.TransitionToState(player.WallSlidingState);
             return true;

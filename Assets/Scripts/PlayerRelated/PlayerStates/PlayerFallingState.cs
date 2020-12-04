@@ -56,6 +56,8 @@ public class PlayerFallingState : PlayerBaseState {
     }
 
     public override bool CheckTransitionToJumping(PlayerFSM player) {
+        if (!player.mechanics.IsEnabled("Jump")) return false;
+
         if (player.coyoteTimer > 0) {
             return base.CheckTransitionToJumping(player);
         }

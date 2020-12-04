@@ -51,6 +51,8 @@ public class PlayerWallJumpingState : PlayerBaseState {
     }
 
     public override bool CheckTransitionToWallSliding(PlayerFSM player) {
+        if (!player.mechanics.IsEnabled("Wall Slide")) return false;
+
         if (base.CheckTransitionToWallSliding(player)) return true;
 
         if (player.isTouchingWall) {
