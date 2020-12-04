@@ -36,4 +36,4 @@ MonoBehaviour:
   startPreBlinkTime: 0.15
   startPostBlinkTime: 0.1
   startBlinkCooldownTime: 0.3
-  moveSpeedBoosted: 9
+  moveSpeedBoosted: 8

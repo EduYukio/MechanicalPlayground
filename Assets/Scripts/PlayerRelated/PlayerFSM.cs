@@ -20,6 +20,7 @@ public class PlayerFSM : MonoBehaviour {
 
     public PlayerConfig config;
     public Mechanics mechanics;
+    public GameObject mechanicsMenu;
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Animator animator;
     [HideInInspector] public SpriteRenderer spriteRenderer;
@@ -40,11 +41,11 @@ public class PlayerFSM : MonoBehaviour {
     public float airJumpInputBuffer;
 
 
+    public float moveSpeed;
     public static Vector3 respawnPosition;
     public Vector3 originalPosition = new Vector3(0, 0, 0);
     public bool freezePlayerState = false;
     public int lastDirection = 1;
-    public float moveSpeed;
     public int items;
 
     //DEBUG
@@ -61,11 +62,6 @@ public class PlayerFSM : MonoBehaviour {
         freezePlayerState = false;
         hasResetDashTrigger = true;
 
-        moveSpeed = config.moveSpeed;
-        if (mechanics.IsEnabled("MoveSpeedBoost")) {
-            moveSpeed = config.moveSpeedBoosted;
-        }
-
         if (respawnPosition == Vector3.zero) {
             respawnPosition = originalPosition;
         }
@@ -79,6 +75,8 @@ public class PlayerFSM : MonoBehaviour {
     private void Update() {
         if (freezePlayerState) return;
 
+        CheckMenuInput();
+        UpdateMoveSpeed();
         ProcessTimers();
         CheckIfHasResetDashTrigger();
 
@@ -133,6 +131,21 @@ public class PlayerFSM : MonoBehaviour {
     void CheckIfHasResetDashTrigger() {
         if (Input.GetAxisRaw("Dash") == 0f) {
             hasResetDashTrigger = true;
+        }
+    }
+
+    void CheckMenuInput() {
+        if (Input.GetButtonDown("MechanicsMenu")) {
+            mechanicsMenu.SetActive(true);
+        }
+    }
+
+
+    // quando for lançar, cachear a movespeed do player ao inves de dar update todo frame
+    void UpdateMoveSpeed() {
+        moveSpeed = config.moveSpeed;
+        if (mechanics.IsEnabled("MoveSpeedBoost")) {
+            moveSpeed = config.moveSpeedBoosted;
         }
     }
 }

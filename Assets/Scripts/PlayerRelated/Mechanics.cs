@@ -16,10 +16,8 @@ public class Mechanics : ScriptableObject {
     }
 
     public void EnableBasicMechanics() {
-        ResetMechanics();
         Activate("Walk");
         Activate("Jump");
-        Activate("Attack");
     }
 
     public void SaveState() {
