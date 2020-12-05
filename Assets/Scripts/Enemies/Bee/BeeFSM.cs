@@ -18,6 +18,7 @@ public class BeeFSM : Enemy {
     public float distanceToMove = 3f;
     public float startAttackCooldownTimer = 1.5f;
     public float attackCooldownTimer = 0;
+    public Vector2 bulletDirection = Vector2.down;
     [HideInInspector] public float initialY;
     [HideInInspector] public Vector2 targetPosition;
     [HideInInspector] public bool isBeingHit = false;
