@@ -29,8 +29,7 @@ public class Goal : MonoBehaviour {
         float duration = Helper.GetAnimationDuration("GoalReached", animator);
         yield return new WaitForSecondsRealtime(duration * 2.5f);
         Time.timeScale = 1;
-        PlayerFSM.respawnPosition = Vector3.zero;
-        Checkpoint.activated = false;
+        Checkpoint.ResetCheckPointState();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }

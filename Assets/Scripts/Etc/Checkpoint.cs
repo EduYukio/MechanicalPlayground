@@ -3,21 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Checkpoint : MonoBehaviour {
-    public static bool activated = false;
     private Animator animator;
+    public static Checkpoint currentCheckpoint = null;
 
-    private void Start() {
+    private void Awake() {
         animator = GetComponent<Animator>();
-        animator.SetBool("activated", activated);
+
+        if (Checkpoint.currentCheckpoint == this) {
+            Checkpoint.currentCheckpoint.GetComponent<Animator>().Play("FlagOn");
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (activated) return;
+        if (Checkpoint.currentCheckpoint == this) return;
 
         if (other.gameObject.CompareTag("Player")) {
+            DeactivateCurrentCheckpoint();
             PlayerFSM.respawnPosition = transform.position;
             animator.Play("FlagActivating");
-            activated = true;
+            Checkpoint.currentCheckpoint = this;
         }
+    }
+
+    public static void DeactivateCurrentCheckpoint() {
+        if (Checkpoint.currentCheckpoint != null) {
+            Checkpoint.currentCheckpoint.GetComponent<Animator>().Play("FlagOff");
+        }
+    }
+
+    public static void ResetCheckPointState() {
+        DeactivateCurrentCheckpoint();
+        Checkpoint.currentCheckpoint = null;
+        PlayerFSM.respawnPosition = Vector3.zero;
     }
 }

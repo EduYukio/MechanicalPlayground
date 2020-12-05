@@ -21,7 +21,6 @@ public class PlayerFSM : MonoBehaviour {
 
     public PlayerConfig config;
     public Mechanics mechanics;
-    public GameObject pauseMenu;
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Animator animator;
     [HideInInspector] public SpriteRenderer spriteRenderer;
