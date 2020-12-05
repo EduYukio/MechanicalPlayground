@@ -10,6 +10,7 @@ public class PlayerJumpingState : PlayerBaseState {
     public override void Update(PlayerFSM player) {
         base.ProcessMovementInput(player);
 
+        if (base.CheckTransitionToWallSliding(player)) return;
         if (base.CheckTransitionToFalling(player)) return;
         if (base.CheckTransitionToDashing(player)) return;
         if (base.CheckTransitionToDoubleJumping(player)) return;
