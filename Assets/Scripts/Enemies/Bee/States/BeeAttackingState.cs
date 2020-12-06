@@ -4,7 +4,7 @@ public class BeeAttackingState : BeeBaseState {
     float attackingTimer;
 
     public override void EnterState(BeeFSM bee) {
-        bee.animator.Play("BeeAttack");
+        bee.animator.Play("Attacking");
         Setup(bee);
     }
 
@@ -24,12 +24,12 @@ public class BeeAttackingState : BeeBaseState {
     }
 
     void Setup(BeeFSM bee) {
-        attackingTimer = Helper.GetAnimationDuration("BeeAttack", bee.animator) * 0.8f;
+        attackingTimer = Helper.GetAnimationDuration("Attacking", bee.animator) * 0.8f;
     }
 
     void AttackAction(BeeFSM bee) {
         Transform spawnTransform = bee.bulletSpawnPosition;
-        GameObject bullet = MonoBehaviour.Instantiate(bee.beeBullet, spawnTransform.position, bee.transform.rotation);
+        GameObject bullet = MonoBehaviour.Instantiate(bee.bullet, spawnTransform.position, bee.transform.rotation);
         bullet.GetComponent<Rigidbody2D>().velocity = bee.bulletDirection * bee.bulletSpeed;
 
         bee.attackCooldownTimer = bee.startAttackCooldownTimer;

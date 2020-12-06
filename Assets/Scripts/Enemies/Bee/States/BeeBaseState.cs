@@ -18,6 +18,7 @@ public abstract class BeeBaseState {
         }
         return false;
     }
+
     public virtual bool CheckTransitionToAttacking(BeeFSM bee) {
         if (bee.attackCooldownTimer <= 0) {
             bee.TransitionToState(bee.AttackingState);
@@ -37,7 +38,10 @@ public abstract class BeeBaseState {
 
     #endregion
 
+
+
     #region Helper Functions
+
     public void MoveAction(BeeFSM bee) {
         float step = bee.moveSpeed * Time.deltaTime;
         bee.transform.position = Vector2.MoveTowards(bee.transform.position, bee.targetPosition, step);

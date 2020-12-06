@@ -4,7 +4,7 @@ public class BeeBeingHitState : BeeBaseState {
     float hitTimer;
 
     public override void EnterState(BeeFSM bee) {
-        bee.animator.Play("BeeBeingHit");
+        bee.animator.Play("BeingHit");
         Setup(bee);
         BeingHitAction(bee);
     }
@@ -21,7 +21,7 @@ public class BeeBeingHitState : BeeBaseState {
     }
 
     void Setup(BeeFSM bee) {
-        hitTimer = Helper.GetAnimationDuration("BeeBeingHit", bee.animator);
+        hitTimer = Helper.GetAnimationDuration("BeingHit", bee.animator);
         bee.isBeingHit = false;
     }
 

@@ -11,7 +11,7 @@ public class BeeFSM : Enemy {
     public readonly BeeBeingHitState BeingHitState = new BeeBeingHitState();
     public readonly BeeDyingState DyingState = new BeeDyingState();
 
-    public GameObject beeBullet;
+    public GameObject bullet;
     public Transform bulletSpawnPosition;
     public float bulletSpeed = 2f;
     public float moveSpeed = 3f;
@@ -45,17 +45,6 @@ public class BeeFSM : Enemy {
         currentState = state;
         currentState.EnterState(this);
     }
-
-    // private void OnCollisionEnter2D(Collision2D other) {
-    //     KillPlayer(other);
-    // }
-
-    // void KillPlayer(Collision2D other) {
-    //     if (other.gameObject.CompareTag("Player")) {
-    //         PlayerFSM player = other.gameObject.GetComponent<PlayerFSM>();
-    //         player.TransitionToState(player.DyingState);
-    //     }
-    // }
 
     public override void TakeDamage(float damage) {
         isBeingHit = true;

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BeeMovingState : BeeBaseState {
     public override void EnterState(BeeFSM bee) {
-        bee.animator.Play("BeeMoving");
+        bee.animator.Play("Moving");
     }
 
     public override void Update(BeeFSM bee) {
