@@ -62,10 +62,12 @@ public class PlayerFSM : MonoBehaviour {
         freezePlayerState = false;
         hasResetDashTrigger = true;
 
-        if (respawnPosition == Vector3.zero) {
-            respawnPosition = originalPosition;
+        if (!debugMode) {
+            if (respawnPosition == Vector3.zero) {
+                respawnPosition = originalPosition;
+            }
+            transform.position = respawnPosition;
         }
-        transform.position = respawnPosition;
 
         items = 0;
 
