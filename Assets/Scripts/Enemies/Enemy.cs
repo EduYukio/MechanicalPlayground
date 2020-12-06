@@ -9,17 +9,12 @@ public class Enemy : MonoBehaviour {
     public float maxHealth = 25f;
     public float currentHealth;
 
-    private static PlayerFSM player;
-
-    private void Start() {
-        Enemy.player = GameObject.FindObjectOfType<PlayerFSM>();
-    }
-
     public virtual void TakeDamage(float damage) {
     }
 
     public static void DieAction(GameObject enemy) {
         int direction = 1;
+        PlayerFSM player = GameObject.FindObjectOfType<PlayerFSM>();
         if (player != null) direction = player.lastDirection;
 
         Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();

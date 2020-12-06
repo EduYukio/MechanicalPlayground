@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class SpikyFSM : Enemy {
     private SpikyBaseState currentState;
@@ -12,13 +13,11 @@ public class SpikyFSM : Enemy {
     public readonly SpikyDyingState DyingState = new SpikyDyingState();
 
     public GameObject bullet;
-    public Transform bulletSpawnPosition;
+    public Transform[] bulletStartTransforms;
+    public Transform[] bulletEndTransforms;
     public float bulletSpeed = 2f;
-    public float moveSpeed = 3f;
-    public float distanceToMove = 3f;
     public float startAttackCooldownTimer = 1.5f;
     public float attackCooldownTimer = 0;
-    public Vector2 bulletDirection = Vector2.down;
     [HideInInspector] public float initialY;
     [HideInInspector] public Vector2 targetPosition;
     [HideInInspector] public bool isBeingHit = false;
@@ -30,7 +29,6 @@ public class SpikyFSM : Enemy {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        MoveSetup();
         attackCooldownTimer = startAttackCooldownTimer;
         TransitionToState(IdleState);
     }
@@ -49,11 +47,6 @@ public class SpikyFSM : Enemy {
     public override void TakeDamage(float damage) {
         isBeingHit = true;
         currentHealth -= damage;
-    }
-
-    void MoveSetup() {
-        initialY = transform.position.y;
-        targetPosition = new Vector2(transform.position.x, initialY + distanceToMove);
     }
 
     private void ProcessTimers() {
