@@ -1,23 +1,27 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
-public class SpikyFSM : Enemy {
-    private SpikyBaseState currentState;
+public class TrunkFSM : Enemy {
+    private TrunkBaseState currentState;
 
-    public readonly SpikyIdleState IdleState = new SpikyIdleState();
-    public readonly SpikyAttackingState AttackingState = new SpikyAttackingState();
-    public readonly SpikyBeingHitState BeingHitState = new SpikyBeingHitState();
-    public readonly SpikyDyingState DyingState = new SpikyDyingState();
+    public readonly TrunkIdleState IdleState = new TrunkIdleState();
+    public readonly TrunkAttackingState AttackingState = new TrunkAttackingState();
+    public readonly TrunkBeingHitState BeingHitState = new TrunkBeingHitState();
+    public readonly TrunkDyingState DyingState = new TrunkDyingState();
+    public readonly TrunkMovingState MovingState = new TrunkMovingState();
 
+    public float moveSpeed = 3f;
     public GameObject bullet;
-    public Transform[] bulletStartTransforms;
-    public Transform[] bulletEndTransforms;
     public float bulletSpeed = 2f;
     public float startAttackCooldownTimer = 1.5f;
     public float attackCooldownTimer = 0;
+    // public int lastDirection = -1;
+    public Transform groundTransform;
+    public Transform frontTransform;
+    public bool needToTurn = false;
     [HideInInspector] public bool isBeingHit = false;
     [HideInInspector] public SpriteRenderer spriteRenderer;
 
@@ -37,7 +41,7 @@ public class SpikyFSM : Enemy {
         currentState.Update(this);
     }
 
-    public void TransitionToState(SpikyBaseState state) {
+    public void TransitionToState(TrunkBaseState state) {
         currentState = state;
         currentState.EnterState(this);
     }
