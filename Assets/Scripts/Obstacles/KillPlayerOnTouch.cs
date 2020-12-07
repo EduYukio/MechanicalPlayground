@@ -26,7 +26,7 @@ public class KillPlayerOnTouch : MonoBehaviour {
             if (CheckBulletHitGround(other.gameObject)) return;
         }
         else {
-            KillPlayer(other.gameObject);
+            if (CheckHitPlayer(other.gameObject)) return;
         }
     }
 
@@ -50,9 +50,18 @@ public class KillPlayerOnTouch : MonoBehaviour {
         }
         return false;
     }
+
     bool CheckBulletHitGround(GameObject otherObject) {
         if (otherObject.CompareTag("Ground")) {
             Destroy(gameObject);
+            return true;
+        }
+        return false;
+    }
+
+    bool CheckHitPlayer(GameObject otherObject) {
+        if (otherObject.CompareTag("Player")) {
+            KillPlayer(otherObject);
             return true;
         }
         return false;
