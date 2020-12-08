@@ -22,8 +22,9 @@ public class KillPlayerOnTouch : MonoBehaviour {
     // saw, bullets
     private void OnTriggerEnter2D(Collider2D other) {
         if (isBullet) {
-            if (CheckBulletHitPlayer(other.gameObject)) return;
+            if (CheckBulletHitObstacle(other.gameObject)) return;
             if (CheckBulletHitGround(other.gameObject)) return;
+            if (CheckBulletHitPlayer(other.gameObject)) return;
         }
         else {
             if (CheckHitPlayer(other.gameObject)) return;
@@ -53,6 +54,14 @@ public class KillPlayerOnTouch : MonoBehaviour {
 
     bool CheckBulletHitGround(GameObject otherObject) {
         if (otherObject.CompareTag("Ground")) {
+            Destroy(gameObject);
+            return true;
+        }
+        return false;
+    }
+
+    bool CheckBulletHitObstacle(GameObject otherObject) {
+        if (otherObject.CompareTag("Obstacle")) {
             Destroy(gameObject);
             return true;
         }
