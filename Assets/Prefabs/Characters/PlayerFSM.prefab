@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3629794706979796396}
   - component: {fileID: 3629794706979796307}
   - component: {fileID: 3629794706979796305}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6109113389555052389}
   - component: {fileID: 6109113389555052390}
   - component: {fileID: 6109113389555052388}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RightWalllChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6109113390298202618}
   - component: {fileID: 6109113390298202613}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Circular
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6109113391053206139}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AttackPoint
   m_TagString: AttackPoint
   m_Icon: {fileID: 0}
@@ -277,7 +277,7 @@ GameObject:
   - component: {fileID: 6671967019414850257}
   - component: {fileID: 6671967019414850256}
   - component: {fileID: 6671967019414850263}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GroundChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +350,7 @@ GameObject:
   - component: {fileID: 6671967020987745502}
   - component: {fileID: 6671967020987745503}
   - component: {fileID: 6671967019284831997}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PlayerFSM
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -399,15 +399,22 @@ MonoBehaviour:
   isTouchingLeftWall: 0
   canDoubleJump: 0
   canDash: 0
+  hasResetDashTrigger: 0
   dashCooldownTimer: 0
   attackCooldownTimer: 0
   blinkCooldownTimer: 0
   coyoteTimer: 0
   bunnyHopTimer: 0
+  airJumpInputBuffer: 0
+  moveSpeed: 0
+  originalPosition: {x: 14.5, y: 9.7, z: 0}
+  freezePlayerState: 0
   lastDirection: 1
-  debugState: 
+  items: 0
+  debugMode: 1
   activateSlowMotion: 0
   printDebugStates: 0
+  debugState: 
 --- !u!212 &6671967020987745501
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -498,8 +505,8 @@ EdgeCollider2D:
   m_Points:
   - {x: 0.3, y: -0.5}
   - {x: -0.3, y: -0.5}
-  - {x: -0.3, y: 0.25}
-  - {x: 0.3, y: 0.25}
+  - {x: -0.3, y: 0.27}
+  - {x: 0.3, y: 0.27}
   - {x: 0.3, y: -0.5}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
@@ -535,7 +542,7 @@ GameObject:
   - component: {fileID: 1014634805170659878}
   - component: {fileID: 2909223240617087423}
   - component: {fileID: 6109113390157367081}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LeftWallChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
