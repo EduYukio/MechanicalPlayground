@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 6536871124206469679}
   - component: {fileID: 6536871124206469672}
   - component: {fileID: 6536871124206469678}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Saw
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

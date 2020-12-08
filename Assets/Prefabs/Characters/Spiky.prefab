@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 843767207536941563}
   m_Layer: 8
   m_Name: Spiky
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -307,8 +307,6 @@ MonoBehaviour:
   bulletSpeed: 4
   startAttackCooldownTimer: 4
   attackCooldownTimer: 0
-  initialY: 0
-  targetPosition: {x: 0, y: 0}
   isBeingHit: 0
   spriteRenderer: {fileID: 0}
 --- !u!114 &843767207536941563
