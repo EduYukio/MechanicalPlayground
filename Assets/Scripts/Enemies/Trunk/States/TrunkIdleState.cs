@@ -12,7 +12,7 @@ public class TrunkIdleState : TrunkBaseState {
 
     public override void Update(TrunkFSM trunk) {
         if (base.CheckTransitionToBeingHit(trunk)) return;
-        // if (base.CheckTransitionToAttacking(trunk)) return;
+        if (base.CheckTransitionToAttacking(trunk)) return;
 
         if (idleTimer >= 0) {
             idleTimer -= Time.deltaTime;

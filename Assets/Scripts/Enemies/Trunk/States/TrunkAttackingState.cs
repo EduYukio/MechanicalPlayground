@@ -18,25 +18,20 @@ public class TrunkAttackingState : TrunkBaseState {
 
         AttackAction(trunk);
 
-        // if (base.CheckTransitionToIdle(trunk)) return;
+        if (base.CheckTransitionToIdle(trunk)) return;
     }
 
     void Setup(TrunkFSM trunk) {
-        attackingTimer = Helper.GetAnimationDuration("Attacking", trunk.animator);
-        // Transform[] end = trunk.bulletEndTransforms;
-        // Transform[] start = trunk.bulletStartTransforms;
-        // for (int i = 0; i < bulletDirections.Length; i++) {
-        //     bulletDirections[i] = (end[i].position - start[i].position).normalized;
-        // }
+        attackingTimer = Helper.GetAnimationDuration("Attacking", trunk.animator) * 0.7f;
+        trunk.rb.velocity = Vector2.zero;
     }
 
     void AttackAction(TrunkFSM trunk) {
-        // for (int i = 0; i < bulletDirections.Length; i++) {
-        //     Transform spawnTransform = trunk.bulletStartTransforms[i];
-        //     GameObject bullet = MonoBehaviour.Instantiate(trunk.bullet, spawnTransform.position, Quaternion.identity);
-        //     bullet.transform.eulerAngles = spawnTransform.eulerAngles;
-        //     bullet.GetComponent<Rigidbody2D>().velocity = bulletDirections[i] * trunk.bulletSpeed;
-        // }
+        Vector2 direction = CalculateDirection(trunk);
+
+        Transform spawnTransform = trunk.bulletSpawnPosition;
+        GameObject bullet = MonoBehaviour.Instantiate(trunk.bullet, spawnTransform.position, trunk.transform.rotation);
+        bullet.GetComponent<Rigidbody2D>().velocity = direction * trunk.bulletSpeed;
 
         trunk.attackCooldownTimer = trunk.startAttackCooldownTimer;
     }

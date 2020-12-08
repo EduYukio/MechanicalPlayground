@@ -27,7 +27,7 @@ public abstract class TrunkBaseState {
     }
 
     public virtual bool CheckTransitionToAttacking(TrunkFSM trunk) {
-        if (trunk.attackCooldownTimer <= 0) {
+        if (trunk.attackCooldownTimer <= 0 && PlayerIsOnSight(trunk)) {
             trunk.TransitionToState(trunk.AttackingState);
             return true;
         }
@@ -61,6 +61,32 @@ public abstract class TrunkBaseState {
             }
         }
         trunk.needToTurn = false;
+    }
+
+    public Vector2 CalculateDirection(TrunkFSM trunk) {
+        Vector2 direction;
+        if (trunk.transform.eulerAngles.y == 0) {
+            direction = Vector2.left;
+        }
+        else {
+            direction = Vector2.right;
+        }
+        return direction;
+    }
+
+    public bool PlayerIsOnSight(TrunkFSM trunk) {
+        Vector2 direction = CalculateDirection(trunk);
+        foreach (var frontTransform in trunk.frontTransforms) {
+            RaycastHit2D[] frontRay = Physics2D.RaycastAll(frontTransform.position, direction, trunk.playerRayDistance);
+
+            foreach (var obj in frontRay) {
+                if (obj.collider != null && obj.collider.CompareTag("Player")) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     #endregion

@@ -15,11 +15,13 @@ public class TrunkFSM : Enemy {
 
     public float moveSpeed = 3f;
     public GameObject bullet;
+    public Transform bulletSpawnPosition;
     public float bulletSpeed = 2f;
     public float startAttackCooldownTimer = 1.5f;
     public float attackCooldownTimer = 0;
+    public float playerRayDistance = 5f;
     public Transform groundTransform;
-    public Transform frontTransform;
+    public Transform[] frontTransforms;
     public bool needToTurn = false;
     [HideInInspector] public bool isBeingHit = false;
     [HideInInspector] public SpriteRenderer spriteRenderer;

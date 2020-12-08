@@ -10,47 +10,51 @@ public class TrunkMovingState : TrunkBaseState {
 
     public override void Update(TrunkFSM trunk) {
         if (base.CheckTransitionToBeingHit(trunk)) return;
-        // if (base.CheckTransitionToAttacking(trunk)) return;
+        if (base.CheckTransitionToAttacking(trunk)) return;
 
         base.MoveAction(trunk);
         if (CheckTransitionToIdle(trunk)) return;
     }
 
-    bool CheckIfReachedEndOfPlatform(TrunkFSM trunk) {
-        RaycastHit2D groundRay = Physics2D.Raycast(trunk.groundTransform.position, Vector2.down, distanceToCheckGround);
-        bool? isOnGround = groundRay.collider?.CompareTag("Ground");
-        if (isOnGround == false || isOnGround == null) return true;
-        else return false;
+    bool ThereIsGroundToWalk(TrunkFSM trunk) {
+        RaycastHit2D[] groundRay = Physics2D.RaycastAll(trunk.groundTransform.position, Vector2.down, distanceToCheckGround);
+
+        foreach (var obj in groundRay) {
+            if (obj.collider != null && obj.collider.CompareTag("Ground")) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    bool CheckIfReachedObstacle(TrunkFSM trunk) {
-        Vector2 direction;
-        if (trunk.transform.eulerAngles.y == 0) {
-            direction = Vector2.left;
-        }
-        else {
-            direction = Vector2.right;
-        }
-        RaycastHit2D frontRay = Physics2D.Raycast(trunk.frontTransform.position, direction, distanceToCheckObstacle);
-        if (frontRay.collider == null) {
-            return false;
-        }
-        else if (frontRay.collider.CompareTag("Player")) {
-            return false;
-        }
-        else if (frontRay.collider.CompareTag("Checker")) {
-            return false;
+    bool ReachedObstacle(TrunkFSM trunk) {
+        Vector2 direction = CalculateDirection(trunk);
+        foreach (var frontTransform in trunk.frontTransforms) {
+            RaycastHit2D[] frontRay = Physics2D.RaycastAll(frontTransform.position, direction, distanceToCheckObstacle);
+
+            foreach (var obj in frontRay) {
+                if (obj.collider != null) {
+                    bool isWall = obj.collider.CompareTag("Ground");
+                    bool isEnemy = obj.collider.CompareTag("Enemy");
+                    bool isObstacle = obj.collider.CompareTag("Obstacle");
+
+                    bool hasHitObstacle = isObstacle || isWall || isEnemy;
+                    if (hasHitObstacle) {
+                        return true;
+                    }
+                }
+            }
         }
 
-        return true;
+        return false;
     }
 
     public override bool CheckTransitionToIdle(TrunkFSM trunk) {
-        if (CheckIfReachedEndOfPlatform(trunk) || CheckIfReachedObstacle(trunk)) {
+        if (!ThereIsGroundToWalk(trunk) || ReachedObstacle(trunk)) {
             trunk.needToTurn = true;
             trunk.TransitionToState(trunk.IdleState);
             return true;
-        };
+        }
 
         return false;
     }

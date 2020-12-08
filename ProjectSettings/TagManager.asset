@@ -7,7 +7,8 @@ TagManager:
   - Ground
   - AttackPoint
   - Spike
-  - Checker
+  - Obstacle
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Ground
   - Player
   - PlayerEthereal
-  - 
+  - Obstacle
   - 
   - 
   - 
