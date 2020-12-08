@@ -12,6 +12,8 @@ public abstract class TrunkBaseState {
     }
 
     public virtual bool CheckTransitionToMoving(TrunkFSM trunk) {
+        InvertDirectionIfNeeded(trunk);
+
         trunk.TransitionToState(trunk.MovingState);
         return true;
     }
@@ -47,6 +49,18 @@ public abstract class TrunkBaseState {
 
     public void MoveAction(TrunkFSM trunk) {
         trunk.transform.Translate(Vector2.left * trunk.moveSpeed * Time.deltaTime);
+    }
+
+    public void InvertDirectionIfNeeded(TrunkFSM trunk) {
+        if (trunk.needToTurn) {
+            if (trunk.transform.eulerAngles.y == 0) {
+                trunk.transform.eulerAngles = new Vector3(0f, 180f, 0f);
+            }
+            else if (trunk.transform.eulerAngles.y == 180) {
+                trunk.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+            }
+        }
+        trunk.needToTurn = false;
     }
 
     #endregion

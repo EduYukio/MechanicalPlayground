@@ -18,7 +18,6 @@ public class TrunkFSM : Enemy {
     public float bulletSpeed = 2f;
     public float startAttackCooldownTimer = 1.5f;
     public float attackCooldownTimer = 0;
-    // public int lastDirection = -1;
     public Transform groundTransform;
     public Transform frontTransform;
     public bool needToTurn = false;

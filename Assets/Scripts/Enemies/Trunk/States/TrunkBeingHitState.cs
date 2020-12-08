@@ -17,7 +17,7 @@ public class TrunkBeingHitState : TrunkBaseState {
             return;
         }
 
-        // if (base.CheckTransitionToIdle(trunk)) return;
+        if (base.CheckTransitionToMoving(trunk)) return;
     }
 
     void Setup(TrunkFSM trunk) {
