@@ -80,9 +80,8 @@ public abstract class TrunkBaseState {
             RaycastHit2D[] frontRay = Physics2D.RaycastAll(frontTransform.position, direction, trunk.playerRayDistance);
 
             foreach (var obj in frontRay) {
-                if (obj.collider != null && obj.collider.CompareTag("Player")) {
-                    return true;
-                }
+                if (obj.collider != null && obj.collider.CompareTag("Ground")) return false;
+                if (obj.collider != null && obj.collider.CompareTag("Player")) return true;
             }
         }
 
