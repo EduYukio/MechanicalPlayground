@@ -13,12 +13,12 @@ public class BeeFSM : Enemy {
 
     public GameObject bullet;
     public Transform bulletSpawnPosition;
+    public Transform bulletDirection;
     public float bulletSpeed = 2f;
     public float moveSpeed = 3f;
     public float distanceToMove = 3f;
     public float startAttackCooldownTimer = 1.5f;
     public float attackCooldownTimer = 0;
-    public Vector2 bulletDirection = Vector2.down;
     [HideInInspector] public float initialY;
     [HideInInspector] public Vector2 targetPosition;
     [HideInInspector] public bool isBeingHit = false;

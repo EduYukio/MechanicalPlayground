@@ -30,7 +30,9 @@ public class BeeAttackingState : BeeBaseState {
     void AttackAction(BeeFSM bee) {
         Transform spawnTransform = bee.bulletSpawnPosition;
         GameObject bullet = MonoBehaviour.Instantiate(bee.bullet, spawnTransform.position, bee.transform.rotation);
-        bullet.GetComponent<Rigidbody2D>().velocity = bee.bulletDirection * bee.bulletSpeed;
+        Vector2 direction = (bee.bulletDirection.position - bee.bulletSpawnPosition.position).normalized;
+
+        bullet.GetComponent<Rigidbody2D>().velocity = direction * bee.bulletSpeed;
 
         bee.attackCooldownTimer = bee.startAttackCooldownTimer;
     }
