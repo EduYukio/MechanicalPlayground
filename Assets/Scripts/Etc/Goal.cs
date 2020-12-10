@@ -20,7 +20,7 @@ public class Goal : MonoBehaviour {
     }
 
     IEnumerator ChangeSceneAfterAnimation() {
-        player.animator.Play("PlayerJump");
+        player.animator.Play("PlayerIdle");
         player.freezePlayerState = true;
         player.spriteRenderer.color = Color.white;
         yield return null;
