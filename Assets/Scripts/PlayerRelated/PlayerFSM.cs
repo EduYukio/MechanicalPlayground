@@ -19,9 +19,18 @@ public class PlayerFSM : MonoBehaviour {
     public readonly PlayerBlinkingState BlinkingState = new PlayerBlinkingState();
     public readonly PlayerDyingState DyingState = new PlayerDyingState();
 
+    //DEBUG
+    public bool debugMode = false;
+    public bool activateSlowMotion = false;
+    public bool printDebugStates = false;
+    public string debugState;
+    //DEBUG
+
+
     public PlayerConfig config;
     public Mechanics mechanics;
     public GameObject platformPrefab;
+    [HideInInspector] public List<GameObject> platformsList = new List<GameObject>();
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Animator animator;
     [HideInInspector] public SpriteRenderer spriteRenderer;
@@ -49,12 +58,6 @@ public class PlayerFSM : MonoBehaviour {
     public int lastDirection = 1;
     public int items;
 
-    //DEBUG
-    public bool debugMode = false;
-    public bool activateSlowMotion = false;
-    public bool printDebugStates = false;
-    public string debugState;
-    //DEBUG
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -78,14 +81,7 @@ public class PlayerFSM : MonoBehaviour {
     private void Update() {
         if (freezePlayerState) return;
 
-        UpdateMoveSpeed();
-        ProcessTimers();
-        CheckIfHasResetDashTrigger();
-        CheckCreatePlatformInput();
-
         currentState.Update(this);
-
-        UpdateFacingSprite();
 
         //DEBUG
         if (debugMode) {
@@ -93,6 +89,13 @@ public class PlayerFSM : MonoBehaviour {
             else Time.timeScale = 1f;
         }
         //DEBUG
+
+        UpdateFacingSprite();
+        UpdateMoveSpeed();
+        ProcessTimers();
+        CheckIfHasResetDashTrigger();
+        CheckCreatePlatformInput();
+        CheckDeletePlatformsInput();
     }
 
     public void TransitionToState(PlayerBaseState state) {
@@ -150,7 +153,18 @@ public class PlayerFSM : MonoBehaviour {
 
         if (Input.GetButtonDown("CreatePlatform")) {
             Vector3 newPos = transform.position + new Vector3(0f, -0.7f, 0f);
-            Instantiate(platformPrefab, newPos, Quaternion.identity, gameObject.transform);
+            GameObject platformObject = Instantiate(platformPrefab, newPos, Quaternion.identity, gameObject.transform);
+            platformsList.Add(platformObject);
+        }
+    }
+
+    void CheckDeletePlatformsInput() {
+        if (!mechanics.IsEnabled("Create Platform")) return;
+
+        if (Input.GetButtonDown("DeletePlatforms")) {
+            foreach (var platform in platformsList) {
+                Destroy(platform);
+            }
         }
     }
 }
