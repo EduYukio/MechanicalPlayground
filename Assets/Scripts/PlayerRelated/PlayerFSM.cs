@@ -21,6 +21,7 @@ public class PlayerFSM : MonoBehaviour {
 
     public PlayerConfig config;
     public Mechanics mechanics;
+    public GameObject platformPrefab;
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Animator animator;
     [HideInInspector] public SpriteRenderer spriteRenderer;
@@ -80,6 +81,7 @@ public class PlayerFSM : MonoBehaviour {
         UpdateMoveSpeed();
         ProcessTimers();
         CheckIfHasResetDashTrigger();
+        CheckCreatePlatformInput();
 
         currentState.Update(this);
 
@@ -140,6 +142,15 @@ public class PlayerFSM : MonoBehaviour {
         moveSpeed = config.moveSpeed;
         if (mechanics.IsEnabled("Move Speed Boost")) {
             moveSpeed = config.moveSpeedBoosted;
+        }
+    }
+
+    void CheckCreatePlatformInput() {
+        if (!mechanics.IsEnabled("Create Platform")) return;
+
+        if (Input.GetButtonDown("CreatePlatform")) {
+            Vector3 newPos = transform.position + new Vector3(0f, -0.7f, 0f);
+            Instantiate(platformPrefab, newPos, Quaternion.identity, gameObject.transform);
         }
     }
 }

@@ -18,20 +18,24 @@ MonoBehaviour:
   - Name: Jump
     Enabled: 1
   - Name: Double Jump
-    Enabled: 1
-  - Name: Dash
-    Enabled: 1
-  - Name: Attack
     Enabled: 0
+  - Name: Dash
+    Enabled: 0
+  - Name: Attack
+    Enabled: 1
   - Name: Wall Slide
-    Enabled: 1
+    Enabled: 0
   - Name: Wall Jump
-    Enabled: 1
+    Enabled: 0
   - Name: Blink
-    Enabled: 1
+    Enabled: 0
   - Name: Ethereal Dash
-    Enabled: 1
+    Enabled: 0
   - Name: Move Speed Boost
-    Enabled: 1
+    Enabled: 0
   - Name: Spike Invulnerability
+    Enabled: 1
+  - Name: Saw Invulnerability
+    Enabled: 0
+  - Name: Create Platform
     Enabled: 0
