@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class KillPlayerOnTouch : MonoBehaviour {
     bool isSpike = false;
+    bool isSaw = false;
     bool isBullet = false;
 
     private void Start() {
         isSpike = gameObject.name.Contains("Spike");
+        isSaw = gameObject.name.Contains("Saw");
         isBullet = gameObject.name.Contains("Bullet");
     }
 
     // spikes, enemy body
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Player")) {
-            if (isSpike && PlayerInvulnerableToSpike(other.gameObject)) return;
+            if (isSpike && IsPlayerInvulnerableToSpike(other.gameObject)) return;
+            if (isSaw && IsPlayerInvulnerableToSaw(other.gameObject)) return;
             KillPlayer(other.gameObject);
         }
     }
@@ -36,9 +39,16 @@ public class KillPlayerOnTouch : MonoBehaviour {
         player.TransitionToState(player.DyingState);
     }
 
-    bool PlayerInvulnerableToSpike(GameObject otherObject) {
+    bool IsPlayerInvulnerableToSpike(GameObject otherObject) {
         PlayerFSM player = otherObject.GetComponent<PlayerFSM>();
         if (player.mechanics.IsEnabled("Spike Invulnerability")) return true;
+
+        return false;
+    }
+
+    bool IsPlayerInvulnerableToSaw(GameObject otherObject) {
+        PlayerFSM player = otherObject.GetComponent<PlayerFSM>();
+        if (player.mechanics.IsEnabled("Saw Invulnerability")) return true;
 
         return false;
     }

@@ -39918,7 +39918,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6671967020987745497, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
       propertyPath: debugMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6671967020987745497, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
       propertyPath: platformPrefab
@@ -39926,11 +39926,11 @@ PrefabInstance:
       objectReference: {fileID: 2555538721634559807, guid: 8460e2a49474a9d4b8ea8040d224a3b0, type: 3}
     - target: {fileID: 6671967020987745500, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 11.28
       objectReference: {fileID: 0}
     - target: {fileID: 6671967020987745500, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 47.31
       objectReference: {fileID: 0}
     - target: {fileID: 6671967020987745500, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
       propertyPath: m_LocalPosition.z
