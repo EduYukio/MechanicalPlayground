@@ -48,7 +48,16 @@ public abstract class BeeBaseState {
 
         if (Vector2.Distance(bee.transform.position, bee.targetPosition) < 0.01f) {
             bee.distanceToMove *= -1f;
-            bee.targetPosition = new Vector2(bee.transform.position.x, bee.initialY + bee.distanceToMove);
+            bee.targetPosition = NewTargetPosition(bee);
+        }
+    }
+
+    Vector2 NewTargetPosition(BeeFSM bee) {
+        if (bee.moveVertically) {
+            return new Vector2(bee.transform.position.x, bee.initialCoord + bee.distanceToMove);
+        }
+        else {
+            return new Vector2(bee.initialCoord + bee.distanceToMove, bee.transform.position.y);
         }
     }
 

@@ -17,9 +17,10 @@ public class BeeFSM : Enemy {
     public float bulletSpeed = 2f;
     public float moveSpeed = 3f;
     public float distanceToMove = 3f;
+    public bool moveVertically = true;
     public float startAttackCooldownTimer = 1.5f;
     public float attackCooldownTimer = 0;
-    [HideInInspector] public float initialY;
+    [HideInInspector] public float initialCoord;
     [HideInInspector] public Vector2 targetPosition;
     [HideInInspector] public bool isBeingHit = false;
     [HideInInspector] public SpriteRenderer spriteRenderer;
@@ -52,8 +53,14 @@ public class BeeFSM : Enemy {
     }
 
     void MoveSetup() {
-        initialY = transform.position.y;
-        targetPosition = new Vector2(transform.position.x, initialY + distanceToMove);
+        if (moveVertically) {
+            initialCoord = transform.position.y;
+            targetPosition = new Vector2(transform.position.x, initialCoord + distanceToMove);
+        }
+        else {
+            initialCoord = transform.position.x;
+            targetPosition = new Vector2(initialCoord + distanceToMove, transform.position.y);
+        }
     }
 
     private void ProcessTimers() {
