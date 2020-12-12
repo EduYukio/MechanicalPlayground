@@ -37,3 +37,5 @@ MonoBehaviour:
   startPostBlinkTime: 0.1
   startBlinkCooldownTime: 0.3
   moveSpeedBoosted: 8
+  startParryTime: 0.15
+  parryPauseDuration: 0.2

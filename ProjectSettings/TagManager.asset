@@ -9,6 +9,7 @@ TagManager:
   - Spike
   - Obstacle
   - Enemy
+  - Shield
   layers:
   - Default
   - TransparentFX

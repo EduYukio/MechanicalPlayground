@@ -39,6 +39,8 @@ public class PlayerFSM : MonoBehaviour {
     public bool isTouchingWall;
     public bool isTouchingRightWall;
     public bool isTouchingLeftWall;
+    public bool isDying = false;
+    public bool isParrying = false;
 
     public bool canDoubleJump;
     public bool canDash;
@@ -48,6 +50,7 @@ public class PlayerFSM : MonoBehaviour {
     public float blinkCooldownTimer;
     public float coyoteTimer;
     public float bunnyHopTimer;
+    public float parryTimer;
     public float airJumpInputBuffer;
 
 
@@ -58,6 +61,7 @@ public class PlayerFSM : MonoBehaviour {
     public Vector3 originalPosition = new Vector3(0, 0, 0);
     public bool freezePlayerState = false;
     public GameObject shield;
+    bool canDefend = true;
 
 
     private void Start() {
@@ -94,10 +98,12 @@ public class PlayerFSM : MonoBehaviour {
         UpdateFacingSprite();
         UpdateMoveSpeed();
         ProcessTimers();
-        CheckIfHasResetDashTrigger();
-        CheckShieldInput();
-        CheckCreatePlatformInput();
-        CheckDeletePlatformsInput();
+        if (!isDying) {
+            CheckIfHasResetDashTrigger();
+            CheckShieldInput();
+            CheckCreatePlatformInput();
+            CheckDeletePlatformsInput();
+        }
     }
 
     public void TransitionToState(PlayerBaseState state) {
@@ -128,12 +134,13 @@ public class PlayerFSM : MonoBehaviour {
 
     private void ProcessTimers() {
         float step = Time.deltaTime;
-        if (dashCooldownTimer >= 0) dashCooldownTimer -= step;
         if (attackCooldownTimer >= 0) attackCooldownTimer -= step;
         if (blinkCooldownTimer >= 0) blinkCooldownTimer -= step;
-        if (coyoteTimer >= 0) coyoteTimer -= step;
-        if (bunnyHopTimer >= 0) bunnyHopTimer -= step;
         if (airJumpInputBuffer >= 0) airJumpInputBuffer -= step;
+        if (dashCooldownTimer >= 0) dashCooldownTimer -= step;
+        if (bunnyHopTimer >= 0) bunnyHopTimer -= step;
+        if (coyoteTimer >= 0) coyoteTimer -= step;
+        if (parryTimer >= 0) parryTimer -= step;
     }
 
     void CheckIfHasResetDashTrigger() {
@@ -173,12 +180,44 @@ public class PlayerFSM : MonoBehaviour {
     void CheckShieldInput() {
         if (!mechanics.IsEnabled("Shield")) return;
 
-        if (Input.GetButton("Shield")) {
-            shield.transform.position = transform.position;
-            shield.SetActive(true);
+        if (Input.GetButtonDown("Shield")) {
+            parryTimer = config.startParryTime;
+        }
+
+        if (Input.GetButtonUp("Shield")) {
+            canDefend = true;
+        }
+
+        if (!isParrying) {
+            if (Input.GetButton("Shield") && canDefend) {
+                shield.transform.position = transform.position;
+                shield.SetActive(true);
+            }
+            else {
+                shield.SetActive(false);
+            }
+        }
+    }
+
+    public void Parry() {
+        StartCoroutine(nameof(ParryCoroutine));
+    }
+
+    IEnumerator ParryCoroutine() {
+        Time.timeScale = 0f;
+        isParrying = true;
+        shield.transform.position = transform.position;
+        yield return new WaitForSecondsRealtime(config.parryPauseDuration);
+        isParrying = false;
+        shield.SetActive(false);
+        canDefend = false;
+        Time.timeScale = 1f;
+
+        if (!Input.GetButton("Shield")) {
+            canDefend = true;
         }
         else {
-            shield.SetActive(false);
+            canDefend = false;
         }
     }
 }

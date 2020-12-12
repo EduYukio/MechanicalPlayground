@@ -21,8 +21,17 @@ public class KillPlayerOnTouch : MonoBehaviour {
         ProcessCollision(other.gameObject);
     }
 
+    private void OnTriggerStay2D(Collider2D other) {
+        ProcessCollision(other.gameObject);
+    }
+
+    private void OnCollisionStay2D(Collision2D other) {
+        ProcessCollision(other.gameObject);
+
+    }
+
     void ProcessCollision(GameObject collidedObj) {
-        if (HitPlayerWithShield(collidedObj)) {
+        if (HitPlayerWithShield(collidedObj) || HitShield(collidedObj)) {
             if (isBullet) Destroy(gameObject);
             return;
         }
@@ -32,11 +41,13 @@ public class KillPlayerOnTouch : MonoBehaviour {
             ProcessBulletHit(collidedObj);
         }
         else if (isSpike) {
+            if (!collidedObj.CompareTag("Player")) return;
             if (PlayerIsInvulnerableToSpike(collidedObj)) return;
 
             KillPlayer(collidedObj);
         }
         else if (isSaw) {
+            if (!collidedObj.CompareTag("Player")) return;
             if (PlayerIsInvulnerableToSaw(collidedObj)) return;
 
             KillPlayer(collidedObj);
@@ -83,11 +94,14 @@ public class KillPlayerOnTouch : MonoBehaviour {
         return false;
     }
 
-    bool CheckHitShield(GameObject collidedObj) {
-        if (collidedObj.CompareTag("Shield")) {
-            return true;
+    bool HitShield(GameObject collidedObj) {
+        if (!collidedObj.CompareTag("Shield")) return false;
+
+        PlayerFSM player = collidedObj.transform.parent.GetComponent<PlayerFSM>();
+        if (player.parryTimer > 0) {
+            player.Parry();
         }
-        return false;
+        return true;
     }
 
     bool HitPlayerWithShield(GameObject collidedObj) {
@@ -95,6 +109,9 @@ public class KillPlayerOnTouch : MonoBehaviour {
 
         PlayerFSM player = collidedObj.GetComponent<PlayerFSM>();
         if (player.shield.activeSelf) {
+            if (player.parryTimer > 0) {
+                player.Parry();
+            }
             return true;
         }
         return false;

@@ -93,16 +93,22 @@ GameObject:
   m_Component:
   - component: {fileID: 1556290654534589278}
   - component: {fileID: 4173771286152890247}
+  - component: {fileID: 2715606343044226073}
   - component: {fileID: 243584600897595186}
   - component: {fileID: 3162474462360214755}
-  - component: {fileID: 2715606343044226073}
+  - component: {fileID: 7642630381528490030}
+  - component: {fileID: 6966491532280683246}
+  - component: {fileID: 7739573615957154957}
+  - component: {fileID: 5890439517654776992}
+  - component: {fileID: 8461532640166574340}
+  - component: {fileID: 7485667415634353248}
   m_Layer: 10
   m_Name: Shield
-  m_TagString: Untagged
+  m_TagString: Shield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1556290654534589278
 Transform:
   m_ObjectHideFlags: 0
@@ -168,6 +174,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2715606343044226073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5000582239237971235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a26df1d0cd42cb742b0e761d4c7b8d58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &243584600897595186
 Rigidbody2D:
   serializedVersion: 4
@@ -204,19 +222,103 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.66
---- !u!114 &2715606343044226073
-MonoBehaviour:
+  m_Radius: 0.65
+--- !u!58 &7642630381528490030
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5000582239237971235}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a26df1d0cd42cb742b0e761d4c7b8d58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.625
+--- !u!58 &6966491532280683246
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5000582239237971235}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.6
+--- !u!58 &7739573615957154957
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5000582239237971235}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.575
+--- !u!58 &5890439517654776992
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5000582239237971235}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.55
+--- !u!58 &8461532640166574340
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5000582239237971235}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.525
+--- !u!58 &7485667415634353248
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5000582239237971235}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &6109113389555052394
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,6 +640,8 @@ MonoBehaviour:
   isTouchingWall: 0
   isTouchingRightWall: 0
   isTouchingLeftWall: 0
+  isDying: 0
+  isParrying: 0
   canDoubleJump: 0
   canDash: 0
   hasResetDashTrigger: 0
@@ -546,11 +650,12 @@ MonoBehaviour:
   blinkCooldownTimer: 0
   coyoteTimer: 0
   bunnyHopTimer: 0
+  parryTimer: 0
   airJumpInputBuffer: 0
   moveSpeed: 0
   lastDirection: 1
   items: 0
-  originalPosition: {x: 0, y: 0, z: 0}
+  originalPosition: {x: 31, y: 27.5, z: 0}
   freezePlayerState: 0
   shield: {fileID: 5000582239237971235}
 --- !u!212 &6671967020987745501

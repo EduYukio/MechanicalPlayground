@@ -18,6 +18,7 @@ public class PlayerDyingState : PlayerBaseState {
     }
 
     void Setup(PlayerFSM player) {
+        player.isDying = true;
         player.rb.simulated = false;
         player.spriteRenderer.color = Color.white;
 
