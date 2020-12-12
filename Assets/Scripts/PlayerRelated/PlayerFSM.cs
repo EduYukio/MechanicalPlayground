@@ -200,6 +200,8 @@ public class PlayerFSM : MonoBehaviour {
     }
 
     public void Parry() {
+        if (!mechanics.IsEnabled("Parry")) return;
+
         StartCoroutine(nameof(ParryCoroutine));
     }
 
