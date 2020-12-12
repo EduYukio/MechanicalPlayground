@@ -13,74 +13,82 @@ public class KillPlayerOnTouch : MonoBehaviour {
         isBullet = gameObject.name.Contains("Bullet");
     }
 
-    // spikes, enemy body
     private void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.CompareTag("Player")) {
-            if (isSpike && IsPlayerInvulnerableToSpike(other.gameObject)) return;
-            if (isSaw && IsPlayerInvulnerableToSaw(other.gameObject)) return;
-            KillPlayer(other.gameObject);
-        }
+        ProcessCollision(other.gameObject);
     }
 
-    // saw, bullets
     private void OnTriggerEnter2D(Collider2D other) {
+        ProcessCollision(other.gameObject);
+    }
+
+    void ProcessCollision(GameObject collidedObj) {
         if (isBullet) {
-            if (CheckBulletHitObstacle(other.gameObject)) return;
-            if (CheckBulletHitGround(other.gameObject)) return;
-            if (CheckBulletHitPlayer(other.gameObject)) return;
+            if (CheckBulletHitObstacle(collidedObj)) return;
+            if (CheckBulletHitGround(collidedObj)) return;
+            if (CheckBulletHitPlayer(collidedObj)) return;
+        }
+        else if (isSpike) {
+            if (PlayerIsInvulnerableToSpike(collidedObj)) return;
+
+            KillPlayer(collidedObj);
+        }
+        else if (isSaw) {
+            if (PlayerIsInvulnerableToSaw(collidedObj)) return;
+
+            KillPlayer(collidedObj);
         }
         else {
-            if (CheckHitPlayer(other.gameObject)) return;
+            if (CheckHitPlayer(collidedObj)) return;
         }
     }
 
-    void KillPlayer(GameObject otherObject) {
-        PlayerFSM player = otherObject.GetComponent<PlayerFSM>();
+    void KillPlayer(GameObject collidedObj) {
+        PlayerFSM player = collidedObj.GetComponent<PlayerFSM>();
         player.TransitionToState(player.DyingState);
     }
 
-    bool IsPlayerInvulnerableToSpike(GameObject otherObject) {
-        PlayerFSM player = otherObject.GetComponent<PlayerFSM>();
+    bool PlayerIsInvulnerableToSpike(GameObject collidedObj) {
+        PlayerFSM player = collidedObj.GetComponent<PlayerFSM>();
         if (player.mechanics.IsEnabled("Spike Invulnerability")) return true;
 
         return false;
     }
 
-    bool IsPlayerInvulnerableToSaw(GameObject otherObject) {
-        PlayerFSM player = otherObject.GetComponent<PlayerFSM>();
+    bool PlayerIsInvulnerableToSaw(GameObject collidedObj) {
+        PlayerFSM player = collidedObj.GetComponent<PlayerFSM>();
         if (player.mechanics.IsEnabled("Saw Invulnerability")) return true;
 
         return false;
     }
 
-    bool CheckBulletHitPlayer(GameObject otherObject) {
-        if (otherObject.CompareTag("Player")) {
-            KillPlayer(otherObject);
+    bool CheckBulletHitPlayer(GameObject collidedObj) {
+        if (collidedObj.CompareTag("Player")) {
+            KillPlayer(collidedObj);
             Destroy(gameObject);
             return true;
         }
         return false;
     }
 
-    bool CheckBulletHitGround(GameObject otherObject) {
-        if (otherObject.CompareTag("Ground")) {
+    bool CheckBulletHitGround(GameObject collidedObj) {
+        if (collidedObj.CompareTag("Ground")) {
             Destroy(gameObject);
             return true;
         }
         return false;
     }
 
-    bool CheckBulletHitObstacle(GameObject otherObject) {
-        if (otherObject.CompareTag("Obstacle")) {
+    bool CheckBulletHitObstacle(GameObject collidedObj) {
+        if (collidedObj.CompareTag("Obstacle")) {
             Destroy(gameObject);
             return true;
         }
         return false;
     }
 
-    bool CheckHitPlayer(GameObject otherObject) {
-        if (otherObject.CompareTag("Player")) {
-            KillPlayer(otherObject);
+    bool CheckHitPlayer(GameObject collidedObj) {
+        if (collidedObj.CompareTag("Player")) {
+            KillPlayer(collidedObj);
             return true;
         }
         return false;
