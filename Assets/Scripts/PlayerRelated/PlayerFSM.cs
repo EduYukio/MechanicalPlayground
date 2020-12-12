@@ -51,12 +51,13 @@ public class PlayerFSM : MonoBehaviour {
     public float airJumpInputBuffer;
 
 
-    public float moveSpeed;
+    [HideInInspector] public float moveSpeed;
+    [HideInInspector] public int lastDirection = 1;
+    [HideInInspector] public int items;
     public static Vector3 respawnPosition;
     public Vector3 originalPosition = new Vector3(0, 0, 0);
     public bool freezePlayerState = false;
-    public int lastDirection = 1;
-    public int items;
+    public GameObject shield;
 
 
     private void Start() {
@@ -94,6 +95,7 @@ public class PlayerFSM : MonoBehaviour {
         UpdateMoveSpeed();
         ProcessTimers();
         CheckIfHasResetDashTrigger();
+        CheckShieldInput();
         CheckCreatePlatformInput();
         CheckDeletePlatformsInput();
     }
@@ -165,6 +167,18 @@ public class PlayerFSM : MonoBehaviour {
             foreach (var platform in platformsList) {
                 Destroy(platform);
             }
+        }
+    }
+
+    void CheckShieldInput() {
+        if (!mechanics.IsEnabled("Shield")) return;
+
+        if (Input.GetButton("Shield")) {
+            shield.transform.position = transform.position;
+            shield.SetActive(true);
+        }
+        else {
+            shield.SetActive(false);
         }
     }
 }

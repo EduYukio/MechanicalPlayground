@@ -22,10 +22,14 @@ public class KillPlayerOnTouch : MonoBehaviour {
     }
 
     void ProcessCollision(GameObject collidedObj) {
+        if (HitPlayerWithShield(collidedObj)) {
+            if (isBullet) Destroy(gameObject);
+            return;
+        }
+
+
         if (isBullet) {
-            if (CheckBulletHitObstacle(collidedObj)) return;
-            if (CheckBulletHitGround(collidedObj)) return;
-            if (CheckBulletHitPlayer(collidedObj)) return;
+            ProcessBulletHit(collidedObj);
         }
         else if (isSpike) {
             if (PlayerIsInvulnerableToSpike(collidedObj)) return;
@@ -61,34 +65,36 @@ public class KillPlayerOnTouch : MonoBehaviour {
         return false;
     }
 
-    bool CheckBulletHitPlayer(GameObject collidedObj) {
-        if (collidedObj.CompareTag("Player")) {
-            KillPlayer(collidedObj);
-            Destroy(gameObject);
-            return true;
-        }
-        return false;
-    }
+    void ProcessBulletHit(GameObject collidedObj) {
+        bool hitPlayer = collidedObj.CompareTag("Player");
+        bool hitGround = collidedObj.CompareTag("Ground");
+        bool hitObstacle = collidedObj.CompareTag("Obstacle");
+        bool shouldAutoDestroy = hitPlayer || hitGround || hitObstacle;
 
-    bool CheckBulletHitGround(GameObject collidedObj) {
-        if (collidedObj.CompareTag("Ground")) {
-            Destroy(gameObject);
-            return true;
-        }
-        return false;
-    }
-
-    bool CheckBulletHitObstacle(GameObject collidedObj) {
-        if (collidedObj.CompareTag("Obstacle")) {
-            Destroy(gameObject);
-            return true;
-        }
-        return false;
+        if (shouldAutoDestroy) Destroy(gameObject);
+        if (hitPlayer) KillPlayer(collidedObj);
     }
 
     bool CheckHitPlayer(GameObject collidedObj) {
         if (collidedObj.CompareTag("Player")) {
             KillPlayer(collidedObj);
+            return true;
+        }
+        return false;
+    }
+
+    bool CheckHitShield(GameObject collidedObj) {
+        if (collidedObj.CompareTag("Shield")) {
+            return true;
+        }
+        return false;
+    }
+
+    bool HitPlayerWithShield(GameObject collidedObj) {
+        if (!collidedObj.CompareTag("Player")) return false;
+
+        PlayerFSM player = collidedObj.GetComponent<PlayerFSM>();
+        if (player.shield.activeSelf) {
             return true;
         }
         return false;
