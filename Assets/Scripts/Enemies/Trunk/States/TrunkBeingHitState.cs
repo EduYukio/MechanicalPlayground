@@ -17,6 +17,7 @@ public class TrunkBeingHitState : TrunkBaseState {
             return;
         }
 
+        if (base.CheckTransitionToAttacking(trunk)) return;
         if (base.CheckTransitionToMoving(trunk)) return;
     }
 
