@@ -9,6 +9,10 @@ public class Shield : MonoBehaviour {
         gameObject.transform.position = player.transform.position;
     }
 
+    private void OnEnable() {
+        gameObject.transform.position = player.transform.position;
+    }
+
     public void CheckShieldInput() {
         if (!player.mechanics.IsEnabled("Shield")) return;
 
@@ -19,7 +23,7 @@ public class Shield : MonoBehaviour {
         }
 
         if (!player.isParrying) {
-            if (Input.GetButton("Shield") && canDefend) {
+            if (Input.GetButton("Shield") && canDefend && player.shieldCooldownTimer <= 0) {
                 gameObject.SetActive(true);
             }
             else {
@@ -56,5 +60,11 @@ public class Shield : MonoBehaviour {
         else {
             canDefend = false;
         }
+    }
+
+    public void ConsumeShield() {
+        gameObject.SetActive(false);
+        canDefend = false;
+        player.shieldCooldownTimer = player.config.startShieldCooldownTime;
     }
 }

@@ -50,7 +50,8 @@ public class PlayerConfig : ScriptableObject {
     [Header("Move Speed Boost")]
     public float moveSpeedBoosted = 9f;
 
-    [Header("Parry")]
+    [Header("Shield")]
+    public float startShieldCooldownTime = 0.75f;
     public float startParryTime = 0.15f;
     public float parryPauseDuration = 0.25f;
 }

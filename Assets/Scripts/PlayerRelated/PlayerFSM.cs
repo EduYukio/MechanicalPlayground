@@ -48,6 +48,7 @@ public class PlayerFSM : MonoBehaviour {
     public float dashCooldownTimer;
     public float attackCooldownTimer;
     public float blinkCooldownTimer;
+    public float shieldCooldownTimer;
     public float coyoteTimer;
     public float bunnyHopTimer;
     public float parryTimer;
@@ -134,6 +135,7 @@ public class PlayerFSM : MonoBehaviour {
     private void ProcessTimers() {
         float step = Time.deltaTime;
         if (attackCooldownTimer >= 0) attackCooldownTimer -= step;
+        if (shieldCooldownTimer >= 0) shieldCooldownTimer -= step;
         if (blinkCooldownTimer >= 0) blinkCooldownTimer -= step;
         if (airJumpInputBuffer >= 0) airJumpInputBuffer -= step;
         if (dashCooldownTimer >= 0) dashCooldownTimer -= step;

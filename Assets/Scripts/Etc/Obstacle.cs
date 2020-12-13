@@ -103,13 +103,7 @@ public class Obstacle : MonoBehaviour {
         if (!collidedObj.CompareTag("Shield")) return false;
 
         PlayerFSM player = collidedObj.transform.parent.GetComponent<PlayerFSM>();
-        if (player.parryTimer > 0) {
-            player.shield.Parry();
-            if (isBullet) InvertDirection(gameObject);
-        }
-        else {
-            if (isBullet) Destroy(gameObject);
-        }
+        BulletHitShieldAction(player);
         return true;
     }
 
@@ -118,16 +112,21 @@ public class Obstacle : MonoBehaviour {
 
         PlayerFSM player = collidedObj.GetComponent<PlayerFSM>();
         if (player.shield.gameObject.activeSelf) {
-            if (player.parryTimer > 0) {
-                player.shield.Parry();
-                if (isBullet) InvertDirection(gameObject);
-            }
-            else {
-                if (isBullet) Destroy(gameObject);
-            }
+            BulletHitShieldAction(player);
             return true;
         }
         return false;
+    }
+
+    void BulletHitShieldAction(PlayerFSM player) {
+        if (player.parryTimer > 0) {
+            player.shield.Parry();
+            InvertDirection(gameObject);
+        }
+        else {
+            Destroy(gameObject);
+            player.shield.ConsumeShield();
+        }
     }
 
     private void InvertDirection(GameObject bullet) {
