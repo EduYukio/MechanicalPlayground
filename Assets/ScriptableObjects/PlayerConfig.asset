@@ -26,7 +26,7 @@ MonoBehaviour:
   startDashCooldownTime: 0.35
   etherealTransparency: 0.4
   wallSlidingSpeed: 1.5
-  startStickyTime: 0.15
+  startStickyTime: 0.1
   startWallJumpDurationTime: 0.1
   attackRange: 0.41
   attackDamage: 10
