@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TrunkMovingState : TrunkBaseState {
     float distanceToCheckGround = 0.2f;
-    float distanceToCheckObstacle = 0.2f;
+    float distanceToCheckObstacle = 0.1f;
 
     public override void EnterState(TrunkFSM trunk) {
         trunk.animator.Play("Moving");
