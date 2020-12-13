@@ -1,11 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KillPlayerOnTouch : MonoBehaviour {
+public class Obstacle : MonoBehaviour {
     bool isSpike = false;
     bool isSaw = false;
     bool isBullet = false;
+    bool alreadyInverted = false;
 
     private void Start() {
         isSpike = gameObject.name.Contains("Spike");
@@ -27,15 +29,17 @@ public class KillPlayerOnTouch : MonoBehaviour {
 
     private void OnCollisionStay2D(Collision2D other) {
         ProcessCollision(other.gameObject);
-
     }
 
     void ProcessCollision(GameObject collidedObj) {
         if (HitPlayerWithShield(collidedObj) || HitShield(collidedObj)) {
-            if (isBullet) Destroy(gameObject);
             return;
         }
 
+        if (HitEnemy(collidedObj)) {
+            DamageEnemy(collidedObj);
+            return;
+        }
 
         if (isBullet) {
             ProcessBulletHit(collidedObj);
@@ -100,6 +104,10 @@ public class KillPlayerOnTouch : MonoBehaviour {
         PlayerFSM player = collidedObj.transform.parent.GetComponent<PlayerFSM>();
         if (player.parryTimer > 0) {
             player.shield.Parry();
+            if (isBullet) InvertDirection(gameObject);
+        }
+        else {
+            if (isBullet) Destroy(gameObject);
         }
         return true;
     }
@@ -111,9 +119,38 @@ public class KillPlayerOnTouch : MonoBehaviour {
         if (player.shield.gameObject.activeSelf) {
             if (player.parryTimer > 0) {
                 player.shield.Parry();
+                if (isBullet) InvertDirection(gameObject);
+            }
+            else {
+                if (isBullet) Destroy(gameObject);
             }
             return true;
         }
         return false;
+    }
+
+    private void InvertDirection(GameObject bullet) {
+        if (alreadyInverted) return;
+
+        alreadyInverted = true;
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.velocity = -2 * rb.velocity;
+        Vector3 angle = bullet.transform.eulerAngles;
+        bullet.transform.eulerAngles = new Vector3(angle.x, angle.y, angle.z + 180);
+        bullet.layer = LayerMask.NameToLayer("ParriedBullet");
+    }
+
+    bool HitEnemy(GameObject collidedObj) {
+        if (collidedObj.CompareTag("Enemy")) {
+            return true;
+        }
+        return false;
+    }
+
+    void DamageEnemy(GameObject collidedObj) {
+        Enemy enemy = collidedObj.GetComponent<Enemy>();
+        float damage = 0.1f + enemy.maxHealth / 2;
+        enemy.TakeDamage(damage);
+        Destroy(gameObject);
     }
 }

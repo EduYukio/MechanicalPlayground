@@ -11,9 +11,7 @@ public class Shield : MonoBehaviour {
     public void CheckShieldInput() {
         if (!player.mechanics.IsEnabled("Shield")) return;
 
-        if (Input.GetButtonDown("Shield")) {
-            player.parryTimer = player.config.startParryTime;
-        }
+        CheckForParryInput();
 
         if (Input.GetButtonUp("Shield")) {
             canDefend = true;
@@ -27,6 +25,14 @@ public class Shield : MonoBehaviour {
             else {
                 gameObject.SetActive(false);
             }
+        }
+    }
+
+    public void CheckForParryInput() {
+        if (!player.mechanics.IsEnabled("Parry")) return;
+
+        if (Input.GetButtonDown("Shield")) {
+            player.parryTimer = player.config.startParryTime;
         }
     }
 

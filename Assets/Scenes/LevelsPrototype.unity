@@ -961,6 +961,10 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 8373479253327382331, guid: 2d9e0915fcc45194b8a10739162ae020, type: 3}
+      propertyPath: bulletSpeed
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d9e0915fcc45194b8a10739162ae020, type: 3}
 --- !u!4 &83876045 stripped
@@ -37289,6 +37293,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8373479253327382331, guid: 2d9e0915fcc45194b8a10739162ae020, type: 3}
       propertyPath: moveSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373479253327382331, guid: 2d9e0915fcc45194b8a10739162ae020, type: 3}
+      propertyPath: bulletSpeed
       value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
