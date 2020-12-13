@@ -40201,6 +40201,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gate
       objectReference: {fileID: 0}
+    - target: {fileID: 3241342182808679010, guid: a9fc167ea1bb6f24a8eca0a9d45f0993, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3241342182808679010, guid: a9fc167ea1bb6f24a8eca0a9d45f0993, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3241342182808679011, guid: a9fc167ea1bb6f24a8eca0a9d45f0993, type: 3}
       propertyPath: m_LocalPosition.x
       value: 23
