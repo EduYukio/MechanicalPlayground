@@ -99,7 +99,7 @@ public class KillPlayerOnTouch : MonoBehaviour {
 
         PlayerFSM player = collidedObj.transform.parent.GetComponent<PlayerFSM>();
         if (player.parryTimer > 0) {
-            player.Parry();
+            player.shield.Parry();
         }
         return true;
     }
@@ -108,9 +108,9 @@ public class KillPlayerOnTouch : MonoBehaviour {
         if (!collidedObj.CompareTag("Player")) return false;
 
         PlayerFSM player = collidedObj.GetComponent<PlayerFSM>();
-        if (player.shield.activeSelf) {
+        if (player.shield.gameObject.activeSelf) {
             if (player.parryTimer > 0) {
-                player.Parry();
+                player.shield.Parry();
             }
             return true;
         }

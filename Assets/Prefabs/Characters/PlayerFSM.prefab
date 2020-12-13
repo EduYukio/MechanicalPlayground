@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a26df1d0cd42cb742b0e761d4c7b8d58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 6671967020987745497}
 --- !u!50 &243584600897595186
 Rigidbody2D:
   serializedVersion: 4
@@ -657,7 +658,7 @@ MonoBehaviour:
   items: 0
   originalPosition: {x: 31, y: 27.5, z: 0}
   freezePlayerState: 0
-  shield: {fileID: 5000582239237971235}
+  shield: {fileID: 2715606343044226073}
 --- !u!212 &6671967020987745501
 SpriteRenderer:
   m_ObjectHideFlags: 0

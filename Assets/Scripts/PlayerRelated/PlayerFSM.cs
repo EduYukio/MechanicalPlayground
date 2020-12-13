@@ -60,8 +60,7 @@ public class PlayerFSM : MonoBehaviour {
     public static Vector3 respawnPosition;
     public Vector3 originalPosition = new Vector3(0, 0, 0);
     public bool freezePlayerState = false;
-    public GameObject shield;
-    bool canDefend = true;
+    public Shield shield;
 
 
     private void Start() {
@@ -100,7 +99,7 @@ public class PlayerFSM : MonoBehaviour {
         ProcessTimers();
         if (!isDying) {
             CheckIfHasResetDashTrigger();
-            CheckShieldInput();
+            shield.CheckShieldInput();
             CheckCreatePlatformInput();
             CheckDeletePlatformsInput();
         }
@@ -174,52 +173,6 @@ public class PlayerFSM : MonoBehaviour {
             foreach (var platform in platformsList) {
                 Destroy(platform);
             }
-        }
-    }
-
-    void CheckShieldInput() {
-        if (!mechanics.IsEnabled("Shield")) return;
-
-        if (Input.GetButtonDown("Shield")) {
-            parryTimer = config.startParryTime;
-        }
-
-        if (Input.GetButtonUp("Shield")) {
-            canDefend = true;
-        }
-
-        if (!isParrying) {
-            if (Input.GetButton("Shield") && canDefend) {
-                shield.transform.position = transform.position;
-                shield.SetActive(true);
-            }
-            else {
-                shield.SetActive(false);
-            }
-        }
-    }
-
-    public void Parry() {
-        if (!mechanics.IsEnabled("Parry")) return;
-
-        StartCoroutine(nameof(ParryCoroutine));
-    }
-
-    IEnumerator ParryCoroutine() {
-        Time.timeScale = 0f;
-        isParrying = true;
-        shield.transform.position = transform.position;
-        yield return new WaitForSecondsRealtime(config.parryPauseDuration);
-        isParrying = false;
-        shield.SetActive(false);
-        canDefend = false;
-        Time.timeScale = 1f;
-
-        if (!Input.GetButton("Shield")) {
-            canDefend = true;
-        }
-        else {
-            canDefend = false;
         }
     }
 }
