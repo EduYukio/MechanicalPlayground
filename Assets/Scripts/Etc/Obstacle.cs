@@ -32,15 +32,6 @@ public class Obstacle : MonoBehaviour {
     }
 
     void ProcessCollision(GameObject collidedObj) {
-        if (HitPlayerWithShield(collidedObj) || HitShield(collidedObj)) {
-            return;
-        }
-
-        if (HitEnemy(collidedObj)) {
-            DamageEnemy(collidedObj);
-            return;
-        }
-
         if (isBullet) {
             ProcessBulletHit(collidedObj);
         }
@@ -81,6 +72,16 @@ public class Obstacle : MonoBehaviour {
     }
 
     void ProcessBulletHit(GameObject collidedObj) {
+        if (HitPlayerWithShield(collidedObj) || HitShield(collidedObj)) {
+            return;
+        }
+
+        bool hitEnemy = collidedObj.CompareTag("Enemy");
+        if (hitEnemy) {
+            DamageEnemy(collidedObj);
+            return;
+        }
+
         bool hitPlayer = collidedObj.CompareTag("Player");
         bool hitGround = collidedObj.CompareTag("Ground");
         bool hitObstacle = collidedObj.CompareTag("Obstacle");
@@ -138,13 +139,6 @@ public class Obstacle : MonoBehaviour {
         Vector3 angle = bullet.transform.eulerAngles;
         bullet.transform.eulerAngles = new Vector3(angle.x, angle.y, angle.z + 180);
         bullet.layer = LayerMask.NameToLayer("ParriedBullet");
-    }
-
-    bool HitEnemy(GameObject collidedObj) {
-        if (collidedObj.CompareTag("Enemy")) {
-            return true;
-        }
-        return false;
     }
 
     void DamageEnemy(GameObject collidedObj) {

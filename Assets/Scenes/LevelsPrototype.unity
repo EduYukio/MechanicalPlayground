@@ -963,7 +963,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8373479253327382331, guid: 2d9e0915fcc45194b8a10739162ae020, type: 3}
       propertyPath: bulletSpeed
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d9e0915fcc45194b8a10739162ae020, type: 3}
@@ -37297,7 +37297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8373479253327382331, guid: 2d9e0915fcc45194b8a10739162ae020, type: 3}
       propertyPath: bulletSpeed
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d9e0915fcc45194b8a10739162ae020, type: 3}
@@ -39994,13 +39994,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerFSM
       objectReference: {fileID: 0}
+    - target: {fileID: 6671967020987745497, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
+      propertyPath: printDebugStates
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671967020987745497, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
+      propertyPath: activateSlowMotion
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671967020987745497, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
+      propertyPath: debugMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6671967020987745500, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30.997
+      value: 18.247
       objectReference: {fileID: 0}
     - target: {fileID: 6671967020987745500, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 27.658
+      value: 16.408
       objectReference: {fileID: 0}
     - target: {fileID: 6671967020987745500, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
       propertyPath: m_LocalPosition.z

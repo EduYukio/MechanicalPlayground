@@ -5,7 +5,8 @@ public class Shield : MonoBehaviour {
     public PlayerFSM player;
     bool canDefend = true;
 
-    private void Start() {
+    private void Update() {
+        gameObject.transform.position = player.transform.position;
     }
 
     public void CheckShieldInput() {
@@ -19,7 +20,6 @@ public class Shield : MonoBehaviour {
 
         if (!player.isParrying) {
             if (Input.GetButton("Shield") && canDefend) {
-                gameObject.transform.position = player.transform.position;
                 gameObject.SetActive(true);
             }
             else {
@@ -43,7 +43,6 @@ public class Shield : MonoBehaviour {
     }
 
     public IEnumerator ParryCoroutine() {
-        gameObject.transform.position = player.transform.position;
         player.isParrying = true;
         Time.timeScale = 0f;
         yield return new WaitForSecondsRealtime(player.config.parryPauseDuration);
