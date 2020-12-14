@@ -20,13 +20,16 @@ public class PlayerFSM : MonoBehaviour {
     public readonly PlayerDyingState DyingState = new PlayerDyingState();
 
     //DEBUG
-    public bool debugMode = false;
+    [Header("Debug")]
+    public bool ignoreConfirmationPopup = false;
+    public bool ignoreCheckpoints = false;
+    public bool canActivateSlowMotion = false;
     public bool activateSlowMotion = false;
     public bool printDebugStates = false;
     public string debugState;
     //DEBUG
 
-
+    [Header("Config")]
     public PlayerConfig config;
     public Mechanics mechanics;
     public GameObject platformPrefab;
@@ -34,6 +37,7 @@ public class PlayerFSM : MonoBehaviour {
     [HideInInspector] public Animator animator;
     [HideInInspector] public SpriteRenderer spriteRenderer;
 
+    [Header("Parameters")]
     public bool isGrounded;
     public bool isTouchingWall;
     public bool isTouchingRightWall;
@@ -69,15 +73,16 @@ public class PlayerFSM : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
         freezePlayerState = false;
         hasResetDashTrigger = true;
+        items = 0;
 
-        if (!debugMode) {
+        //DEBUG
+        if (!ignoreCheckpoints) {
             if (respawnPosition == Vector3.zero) {
                 respawnPosition = originalPosition;
             }
             transform.position = respawnPosition;
         }
-
-        items = 0;
+        //DEBUG
 
         TransitionToState(GroundedState);
     }
@@ -88,7 +93,7 @@ public class PlayerFSM : MonoBehaviour {
         currentState.Update(this);
 
         //DEBUG
-        if (debugMode) {
+        if (canActivateSlowMotion) {
             if (activateSlowMotion) Time.timeScale = 0.2f;
             else Time.timeScale = 1f;
         }
@@ -112,8 +117,10 @@ public class PlayerFSM : MonoBehaviour {
         currentState.EnterState(this);
 
         //DEBUG
-        debugState = currentState.GetType().Name;
-        if (printDebugStates) Debug.Log(debugState);
+        if (printDebugStates) {
+            debugState = currentState.GetType().Name;
+            Debug.Log(debugState);
+        }
         //DEBUG
     }
 
