@@ -13,6 +13,8 @@ public class WallChecker : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Ground")) {
+            if (other.name.Contains("Saw") || other.name.Contains("Spike")) return;
+
             player.isTouchingWall = true;
 
             if (selfCollider.offset.x < 0) {
