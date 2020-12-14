@@ -626,14 +626,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba6cf3b9f2cf4142a4493531802ac32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugMode: 0
+  ignoreConfirmationPopup: 0
+  ignoreCheckpoints: 0
+  canActivateSlowMotion: 0
   activateSlowMotion: 0
   printDebugStates: 0
   debugState: 
   config: {fileID: 11400000, guid: 99225b8b90d80ac4886b876914cadcf2, type: 2}
   mechanics: {fileID: 11400000, guid: daa8efa45546dec43a6bb1e2bd1561e0, type: 2}
   platformPrefab: {fileID: 2555538721634559807, guid: 8460e2a49474a9d4b8ea8040d224a3b0, type: 3}
-  platformsList: []
   rb: {fileID: 0}
   animator: {fileID: 0}
   spriteRenderer: {fileID: 0}
@@ -649,6 +650,7 @@ MonoBehaviour:
   dashCooldownTimer: 0
   attackCooldownTimer: 0
   blinkCooldownTimer: 0
+  shieldCooldownTimer: 0
   coyoteTimer: 0
   bunnyHopTimer: 0
   parryTimer: 0
@@ -656,7 +658,7 @@ MonoBehaviour:
   moveSpeed: 0
   lastDirection: 1
   items: 0
-  originalPosition: {x: 31, y: 27.5, z: 0}
+  originalPosition: {x: 0, y: 0, z: 0}
   freezePlayerState: 0
   shield: {fileID: 2715606343044226073}
 --- !u!212 &6671967020987745501

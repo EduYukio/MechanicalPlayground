@@ -8,14 +8,15 @@ using UnityEngine.Video;
 using UnityEngine.EventSystems;
 
 public class MechanicsMenu : MonoBehaviour {
-    public bool debugMode = false;
     public TMP_Text title;
     public TMP_Text description;
     public Mechanics mechanics;
     public VideoPlayer videoPlayer;
     public RawImage rawImage;
     public GameObject buttonObjects;
-    [HideInInspector] public bool changedMechanics = false;
+    public GameObject confirmationPopup;
+    public GameObject popupSaveButton;
+    public bool changedMechanics = false;
 
     private MechanicButton[] buttons;
     private PlayerFSM player;
@@ -29,7 +30,7 @@ public class MechanicsMenu : MonoBehaviour {
     }
 
     private void Update() {
-        CheckMenuInput();
+        CheckMenuExitInput();
     }
 
     private void OnEnable() {
@@ -54,17 +55,31 @@ public class MechanicsMenu : MonoBehaviour {
 
     public void ConfirmMechanics() {
         // check if all skill points were spent
-        if (!debugMode && changedMechanics) {
-            Time.timeScale = 1f;
-            player.freezePlayerState = false;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (changedMechanics && !player.ignoreConfirmationPopup) {
+            OpenConfirmationPopup();
         }
         else {
-            gameObject.SetActive(false);
-            menu.pauseMenu.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(menu.mechanicsButton);
+            BackToPauseMenu();
         }
+    }
+
+    public void ReloadLevel() {
+        Time.timeScale = 1f;
+        player.freezePlayerState = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void BackToPauseMenu() {
+        gameObject.SetActive(false);
+        menu.pauseMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(menu.mechanicsButton);
+    }
+
+    public void OpenConfirmationPopup() {
+        confirmationPopup.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(popupSaveButton);
     }
 
     public void RevertMechanics() {
@@ -80,9 +95,8 @@ public class MechanicsMenu : MonoBehaviour {
         }
     }
 
-    void CheckMenuInput() {
+    void CheckMenuExitInput() {
         if (Input.GetButtonDown("Esc") || Input.GetButtonDown("Circle")) {
-            RevertMechanics();
             ConfirmMechanics();
         }
     }
