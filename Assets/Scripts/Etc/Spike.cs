@@ -2,15 +2,15 @@ using System;
 using UnityEngine;
 
 public class Spike : MonoBehaviour {
-    private void OnCollisionEnter2D(Collision2D other) {
-        ProcessCollision(other.gameObject);
-    }
-
     private void Start() {
         GameObject playerObj = GameObject.Find("PlayerFSM");
         if (PlayerIsInvulnerableToSpike(playerObj)) {
             gameObject.tag = "Ground";
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        ProcessCollision(other.gameObject);
     }
 
     private void OnCollisionStay2D(Collision2D other) {

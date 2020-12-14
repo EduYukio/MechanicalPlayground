@@ -8,6 +8,7 @@ public class Saw : MonoBehaviour {
             gameObject.tag = "Ground";
         }
     }
+
     private void OnCollisionEnter2D(Collision2D other) {
         ProcessCollision(other.gameObject);
     }
