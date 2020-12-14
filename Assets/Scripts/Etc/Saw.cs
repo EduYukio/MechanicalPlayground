@@ -2,6 +2,12 @@ using System;
 using UnityEngine;
 
 public class Saw : MonoBehaviour {
+    private void Start() {
+        GameObject playerObj = GameObject.Find("PlayerFSM");
+        if (PlayerIsInvulnerableToSaw(playerObj)) {
+            gameObject.tag = "Ground";
+        }
+    }
     private void OnCollisionEnter2D(Collision2D other) {
         ProcessCollision(other.gameObject);
     }

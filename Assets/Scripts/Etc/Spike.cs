@@ -6,6 +6,13 @@ public class Spike : MonoBehaviour {
         ProcessCollision(other.gameObject);
     }
 
+    private void Start() {
+        GameObject playerObj = GameObject.Find("PlayerFSM");
+        if (PlayerIsInvulnerableToSpike(playerObj)) {
+            gameObject.tag = "Ground";
+        }
+    }
+
     private void OnCollisionStay2D(Collision2D other) {
         ProcessCollision(other.gameObject);
     }
