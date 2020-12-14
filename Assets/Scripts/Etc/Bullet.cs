@@ -1,17 +1,20 @@
 using UnityEngine;
 
 public class Bullet : MonoBehaviour {
-    bool alreadyInverted = false;
+    bool alreadyProcessedHit = false;
+    Rigidbody2D rb;
+
+    private void Start() {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     private void OnTriggerEnter2D(Collider2D other) {
         ProcessCollision(other.gameObject);
     }
 
-    private void OnTriggerStay2D(Collider2D other) {
-        ProcessCollision(other.gameObject);
-    }
-
     void ProcessCollision(GameObject collidedObj) {
+        if (alreadyProcessedHit) return;
+
         if (HitPlayerWithShield(collidedObj) || HitShield(collidedObj)) {
             return;
         }
@@ -52,6 +55,8 @@ public class Bullet : MonoBehaviour {
     }
 
     void BulletHitShieldAction(PlayerFSM player) {
+        alreadyProcessedHit = true;
+
         if (player.parryTimer > 0) {
             player.shield.Parry();
             InvertDirection(gameObject);
@@ -63,10 +68,7 @@ public class Bullet : MonoBehaviour {
     }
 
     private void InvertDirection(GameObject bullet) {
-        if (alreadyInverted) return;
-
-        alreadyInverted = true;
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb = bullet.GetComponent<Rigidbody2D>();
         rb.velocity = -2 * rb.velocity;
         Vector3 angle = bullet.transform.eulerAngles;
         bullet.transform.eulerAngles = new Vector3(angle.x, angle.y, angle.z + 180);
