@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 166212877342176895}
   - component: {fileID: 166212877342176882}
   - component: {fileID: 166212877342176881}
-  - component: {fileID: 8581352622049307721}
+  - component: {fileID: 8974346992847007333}
   m_Layer: 12
   m_Name: Spikes
   m_TagString: Ground
@@ -132,7 +132,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.185}
   m_EdgeRadius: 0
---- !u!114 &8581352622049307721
+--- !u!114 &8974346992847007333
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,6 +141,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 166212877342176894}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae1ff46ecb478064c90b96a59c3d0b72, type: 3}
+  m_Script: {fileID: 11500000, guid: 4abc2128cf74a534fa64a235137968ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

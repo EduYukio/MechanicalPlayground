@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6536871124206469675}
   - component: {fileID: 6536871124206469679}
   - component: {fileID: 6536871124206469672}
-  - component: {fileID: 6536871124206469678}
+  - component: {fileID: 4674461771572066211}
   m_Layer: 12
   m_Name: Saw
   m_TagString: Ground
@@ -142,7 +142,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &6536871124206469678
+--- !u!114 &4674461771572066211
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,6 +151,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6536871124206469652}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae1ff46ecb478064c90b96a59c3d0b72, type: 3}
+  m_Script: {fileID: 11500000, guid: 04bb4f337efcdea45bbfb048c3f709b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

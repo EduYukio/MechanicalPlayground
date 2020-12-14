@@ -27,4 +27,12 @@ public class Enemy : MonoBehaviour {
         enemy.GetComponent<Collider2D>().enabled = false;
         MonoBehaviour.Destroy(enemy, 0.75f);
     }
+
+    private void OnCollisionStay2D(Collision2D other) {
+        if (other.gameObject.CompareTag("Player")) {
+            PlayerFSM player = other.gameObject.GetComponent<PlayerFSM>();
+            player.TransitionToState(player.DyingState);
+        }
+    }
+
 }
