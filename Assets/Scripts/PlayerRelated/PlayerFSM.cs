@@ -30,7 +30,6 @@ public class PlayerFSM : MonoBehaviour {
     public PlayerConfig config;
     public Mechanics mechanics;
     public GameObject platformPrefab;
-    [HideInInspector] public List<GameObject> platformsList = new List<GameObject>();
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Animator animator;
     [HideInInspector] public SpriteRenderer spriteRenderer;
@@ -101,8 +100,8 @@ public class PlayerFSM : MonoBehaviour {
         if (!isDying) {
             CheckIfHasResetDashTrigger();
             shield.CheckShieldInput();
-            CheckCreatePlatformInput();
-            CheckDeletePlatformsInput();
+            CreatePlatform.CheckCreateInput(this);
+            CreatePlatform.CheckDeleteInput(this);
         }
     }
 
@@ -155,26 +154,6 @@ public class PlayerFSM : MonoBehaviour {
         moveSpeed = config.moveSpeed;
         if (mechanics.IsEnabled("Move Speed Boost")) {
             moveSpeed = config.moveSpeedBoosted;
-        }
-    }
-
-    void CheckCreatePlatformInput() {
-        if (!mechanics.IsEnabled("Create Platform")) return;
-
-        if (Input.GetButtonDown("CreatePlatform")) {
-            Vector3 newPos = transform.position + new Vector3(0f, -0.7f, 0f);
-            GameObject platformObject = Instantiate(platformPrefab, newPos, Quaternion.identity, gameObject.transform);
-            platformsList.Add(platformObject);
-        }
-    }
-
-    void CheckDeletePlatformsInput() {
-        if (!mechanics.IsEnabled("Create Platform")) return;
-
-        if (Input.GetButtonDown("DeletePlatforms")) {
-            foreach (var platform in platformsList) {
-                Destroy(platform);
-            }
         }
     }
 }
