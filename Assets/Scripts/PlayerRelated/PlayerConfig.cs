@@ -36,7 +36,8 @@ public class PlayerConfig : ScriptableObject {
     public float startWallJumpDurationTime = 0.1f;
 
     [Header("Attack")]
-    public float attackRange = 0.41f;
+    public float attackDistance = 1f;
+    public float attackRadius = 0.41f;
     public float attackDamage = 10f;
     public float startAttackCooldownTime = 0.33f;
 

@@ -28,7 +28,8 @@ MonoBehaviour:
   wallSlidingSpeed: 1.5
   startStickyTime: 0.1
   startWallJumpDurationTime: 0.1
-  attackRange: 0.41
+  attackDistance: 0.73
+  attackRadius: 0.47
   attackDamage: 10
   startAttackCooldownTime: 0.33
   blinkDistance: 2.8
@@ -37,5 +38,6 @@ MonoBehaviour:
   startPostBlinkTime: 0.1
   startBlinkCooldownTime: 0.3
   moveSpeedBoosted: 8
+  startShieldCooldownTime: 0.75
   startParryTime: 0.15
   parryPauseDuration: 0.2

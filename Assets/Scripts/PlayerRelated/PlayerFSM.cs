@@ -33,6 +33,7 @@ public class PlayerFSM : MonoBehaviour {
     public PlayerConfig config;
     public Mechanics mechanics;
     public GameObject platformPrefab;
+    public GameObject slashEffect;
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Animator animator;
     [HideInInspector] public SpriteRenderer spriteRenderer;
@@ -161,5 +162,9 @@ public class PlayerFSM : MonoBehaviour {
         if (mechanics.IsEnabled("Move Speed Boost")) {
             moveSpeed = config.moveSpeedBoosted;
         }
+    }
+
+    void OnDrawGizmos() {
+        Gizmos.DrawWireSphere(transform.position + new Vector3(config.attackDistance, -0.13f, 0f), config.attackRadius);
     }
 }

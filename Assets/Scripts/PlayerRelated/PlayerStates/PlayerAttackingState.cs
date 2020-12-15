@@ -1,10 +1,11 @@
 using UnityEngine;
 
 public class PlayerAttackingState : PlayerBaseState {
-    public Transform attackPoint;
     public LayerMask enemyLayers;
-    public GameObject slashEffect;
     public float attackTimer;
+    GameObject slashEffect;
+    float xInput;
+    float yInput;
 
     public override void EnterState(PlayerFSM player) {
         player.animator.Play("PlayerAttack");
@@ -25,32 +26,47 @@ public class PlayerAttackingState : PlayerBaseState {
     }
 
     void Setup(PlayerFSM player) {
-        attackPoint = GameObject.FindWithTag("AttackPoint").GetComponent<Transform>();
-        slashEffect = GameObject.Find("Circular");
+        slashEffect = player.slashEffect;
         enemyLayers = LayerMask.GetMask("Enemies");
         player.attackCooldownTimer = player.config.startAttackCooldownTime;
+        xInput = Input.GetAxisRaw("Horizontal");
+        yInput = Input.GetAxisRaw("Vertical");
     }
 
     void AttackAction(PlayerFSM player) {
-        Vector3 attackPosition = CalculateAttackPosition(player);
-        PositionSlashEffect(attackPosition, player);
+        Vector3 attackDirection = base.GetFourDirectionalInput(player, xInput, yInput);
+        Vector3 attackPosition = CalculateAttackPosition(player, attackDirection);
+        PositionSlashEffect(attackPosition, attackDirection);
 
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPosition, player.config.attackRange, enemyLayers);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPosition, player.config.attackRadius, enemyLayers);
         foreach (Collider2D enemy in hitEnemies) {
             enemy.GetComponent<Enemy>()?.TakeDamage(player.config.attackDamage);
         }
     }
 
-    Vector3 CalculateAttackPosition(PlayerFSM player) {
-        Vector3 playerPos = player.gameObject.transform.position;
-        float xOffset = player.lastDirection * attackPoint.localPosition.x;
-        Vector3 attackPosition = playerPos + new Vector3(xOffset, attackPoint.localPosition.y, 0);
+    Vector3 CalculateAttackPosition(PlayerFSM player, Vector3 direction) {
+        float distance = player.config.attackDistance;
+
+        Vector3 playerPos = player.transform.position;
+        Vector3 attackPosition = playerPos + (direction * distance);
 
         return attackPosition;
     }
 
-    void PositionSlashEffect(Vector3 attackPosition, PlayerFSM player) {
-        slashEffect.transform.position = attackPosition;
-        slashEffect.GetComponent<SpriteRenderer>().flipX = player.spriteRenderer.flipX;
+    void PositionSlashEffect(Vector3 attackPosition, Vector3 direction) {
+        slashEffect.transform.position = attackPosition + new Vector3(0f, -0.13f, 0f);
+
+        if (direction == Vector3.right) {
+            slashEffect.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+        }
+        else if (direction == Vector3.up) {
+            slashEffect.transform.eulerAngles = new Vector3(0f, 0f, 90f);
+        }
+        else if (direction == Vector3.left) {
+            slashEffect.transform.eulerAngles = new Vector3(0f, 0f, 180f);
+        }
+        else if (direction == Vector3.down) {
+            slashEffect.transform.eulerAngles = new Vector3(0f, 0f, -90f);
+        }
     }
 }

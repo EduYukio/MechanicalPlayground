@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &12191077
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5126,6 +5126,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341431015}
   m_CullTransparentMesh: 0
+--- !u!1 &341455446 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6109113390298202619, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
+  m_PrefabInstance: {fileID: 7228768810096442}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &348711734 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2331374248252561178, guid: 2d9e0915fcc45194b8a10739162ae020, type: 3}
@@ -40787,6 +40792,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6109113390298202613, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109113390298202618, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109113390298202618, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109113390298202618, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.13
+      objectReference: {fileID: 0}
     - target: {fileID: 6671967020987745496, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
       propertyPath: m_Name
       value: PlayerFSM
@@ -40799,13 +40820,17 @@ PrefabInstance:
       propertyPath: ignoreCheckpoints
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6671967020987745497, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
+      propertyPath: slashEffect
+      value: 
+      objectReference: {fileID: 341455446}
     - target: {fileID: 6671967020987745500, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 28.68
+      value: 29.774
       objectReference: {fileID: 0}
     - target: {fileID: 6671967020987745500, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 27.93
+      value: 27.506
       objectReference: {fileID: 0}
     - target: {fileID: 6671967020987745500, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
       propertyPath: m_LocalPosition.z
