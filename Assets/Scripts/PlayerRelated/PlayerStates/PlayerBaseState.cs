@@ -160,6 +160,22 @@ public abstract class PlayerBaseState {
         return direction;
     }
 
+    public Vector3 GetFourDirectionalInput(PlayerFSM player, float xInput, float yInput) {
+        Vector3 direction;
+        if (xInput == 0 && yInput == 0) {
+            direction = new Vector3(player.lastDirection, 0f, 0f);
+        }
+        else if (Mathf.Abs(xInput) > Mathf.Abs(yInput)) {
+            int xDirection = GetRawDirection(xInput);
+            direction = new Vector3(xDirection, 0f, 0f);
+        }
+        else {
+            int yDirection = GetRawDirection(yInput);
+            direction = new Vector3(0f, yDirection, 0f);
+        }
+        return direction;
+    }
+
     public void SetPlayerSpriteOppositeOfWall(PlayerFSM player) {
         if (player.isTouchingLeftWall) {
             player.lastDirection = 1;

@@ -48,18 +48,7 @@ public class PlayerBlinkingState : PlayerBaseState {
     }
 
     void BlinkAction(PlayerFSM player) {
-        Vector3 blinkDirection;
-        if (xInput == 0 && yInput == 0) {
-            blinkDirection = new Vector3(player.lastDirection, 0f, 0f);
-        }
-        else if (Mathf.Abs(xInput) > Mathf.Abs(yInput)) {
-            int xDirection = base.GetRawDirection(xInput);
-            blinkDirection = new Vector3(xDirection, 0f, 0f);
-        }
-        else {
-            int yDirection = base.GetRawDirection(yInput);
-            blinkDirection = new Vector3(0f, yDirection, 0f);
-        }
+        Vector3 blinkDirection = base.GetFourDirectionalInput(player, xInput, yInput);
         Vector3 newPos = ValidDestinationPosition(player, blinkDirection);
         player.transform.Translate(newPos);
     }
