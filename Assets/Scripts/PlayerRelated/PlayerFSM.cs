@@ -74,6 +74,7 @@ public class PlayerFSM : MonoBehaviour {
         freezePlayerState = false;
         hasResetDashTrigger = true;
         items = 0;
+        SetMoveSpeed();
 
         //DEBUG
         if (!ignoreCheckpoints) {
@@ -100,7 +101,6 @@ public class PlayerFSM : MonoBehaviour {
         //DEBUG
 
         UpdateFacingSprite();
-        UpdateMoveSpeed();
         ProcessTimers();
         if (!isDying) {
             CheckIfHasResetDashTrigger();
@@ -156,8 +156,7 @@ public class PlayerFSM : MonoBehaviour {
         }
     }
 
-    // quando for lançar, cachear a movespeed do player ao inves de dar update todo frame
-    void UpdateMoveSpeed() {
+    void SetMoveSpeed() {
         moveSpeed = config.moveSpeed;
         if (mechanics.IsEnabled("Move Speed Boost")) {
             moveSpeed = config.moveSpeedBoosted;

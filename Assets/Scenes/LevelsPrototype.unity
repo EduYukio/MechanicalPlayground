@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &12191077
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32042,7 +32042,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184953, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: m_Name
-      value: MechanicButton (11)
+      value: +MoveSpeed
+      objectReference: {fileID: 0}
+    - target: {fileID: 1887519762526184953, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184956, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: mechanicName
