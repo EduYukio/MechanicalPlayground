@@ -40,13 +40,13 @@ public class Shield : MonoBehaviour {
         }
     }
 
-    public void Parry() {
+    public void Parry(GameObject parriedObject) {
         if (!player.mechanics.IsEnabled("Parry")) return;
 
-        StartCoroutine(nameof(ParryCoroutine));
+        StartCoroutine(nameof(ParryCoroutine), parriedObject);
     }
 
-    public IEnumerator ParryCoroutine() {
+    public IEnumerator ParryCoroutine(GameObject parriedObject) {
         player.isParrying = true;
         Time.timeScale = 0f;
         yield return new WaitForSecondsRealtime(player.config.parryPauseDuration);
@@ -60,11 +60,29 @@ public class Shield : MonoBehaviour {
         else {
             canDefend = false;
         }
+
+        if (player.mechanics.IsEnabled("Reflect Projectile")) {
+            ReflectBullet(parriedObject);
+        }
+        else {
+            Destroy(parriedObject);
+        }
     }
 
     public void ConsumeShield() {
         gameObject.SetActive(false);
         canDefend = false;
         player.shieldCooldownTimer = player.config.startShieldCooldownTime;
+    }
+
+    public void ReflectBullet(GameObject parriedObject) {
+        Bullet bullet = parriedObject.GetComponent<Bullet>();
+        if (bullet == null) return;
+
+        bullet.alreadyProcessedHit = false;
+        bullet.rb.velocity = -2 * bullet.rb.velocity;
+        Vector3 angle = bullet.transform.eulerAngles;
+        bullet.transform.eulerAngles = new Vector3(angle.x, angle.y, angle.z + 180);
+        bullet.gameObject.layer = LayerMask.NameToLayer("ParriedBullet");
     }
 }

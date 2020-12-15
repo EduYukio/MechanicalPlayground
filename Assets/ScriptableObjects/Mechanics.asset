@@ -28,7 +28,7 @@ MonoBehaviour:
   - Name: Wall Jump
     Enabled: 1
   - Name: Blink
-    Enabled: 0
+    Enabled: 1
   - Name: Ethereal Dash
     Enabled: 1
   - Name: Move Speed Boost
@@ -38,8 +38,10 @@ MonoBehaviour:
   - Name: Saw Invulnerability
     Enabled: 0
   - Name: Create Platform
-    Enabled: 1
+    Enabled: 0
   - Name: Shield
-    Enabled: 1
+    Enabled: 0
   - Name: Parry
+    Enabled: 0
+  - Name: Reflect Projectile
     Enabled: 0

@@ -1,8 +1,8 @@
 using UnityEngine;
 
 public class Bullet : MonoBehaviour {
-    bool alreadyProcessedHit = false;
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
+    public bool alreadyProcessedHit = false;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -58,21 +58,12 @@ public class Bullet : MonoBehaviour {
         alreadyProcessedHit = true;
 
         if (player.parryTimer > 0) {
-            player.shield.Parry();
-            InvertDirection(gameObject);
+            player.shield.Parry(gameObject);
         }
         else {
             Destroy(gameObject);
             player.shield.ConsumeShield();
         }
-    }
-
-    private void InvertDirection(GameObject bullet) {
-        rb = bullet.GetComponent<Rigidbody2D>();
-        rb.velocity = -2 * rb.velocity;
-        Vector3 angle = bullet.transform.eulerAngles;
-        bullet.transform.eulerAngles = new Vector3(angle.x, angle.y, angle.z + 180);
-        bullet.layer = LayerMask.NameToLayer("ParriedBullet");
     }
 
     void DamageEnemy(GameObject collidedObj) {
