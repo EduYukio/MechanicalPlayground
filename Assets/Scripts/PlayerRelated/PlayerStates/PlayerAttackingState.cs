@@ -18,7 +18,6 @@ public class PlayerAttackingState : PlayerBaseState {
     }
 
     public override void Update(PlayerFSM player) {
-        PositionSlashEffect(player, isBoosted, attackDirection);
         if (base.CheckTransitionToWalking(player)) return;
         if (base.CheckTransitionToGrounded(player)) return;
         if (base.CheckTransitionToFalling(player)) return;
@@ -29,6 +28,7 @@ public class PlayerAttackingState : PlayerBaseState {
         player.attackCooldownTimer = player.config.startAttackCooldownTime;
         isBoosted = player.mechanics.IsEnabled("Range Boost");
         attackDirection = CalculateDirection(player);
+        PositionSlashEffect(player, isBoosted, attackDirection);
     }
 
     Vector3 CalculateDirection(PlayerFSM player) {
