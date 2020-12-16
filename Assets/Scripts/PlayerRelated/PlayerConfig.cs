@@ -38,6 +38,7 @@ public class PlayerConfig : ScriptableObject {
     [Header("Attack")]
     public float attackDamage = 10f;
     public float startAttackCooldownTime = 0.33f;
+    public float pogoForce = 6f;
 
     [Header("Blink")]
     public float blinkDistance = 5f;

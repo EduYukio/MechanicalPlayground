@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -18,6 +19,7 @@ public class PlayerFSM : MonoBehaviour {
     public readonly PlayerAttackingState AttackingState = new PlayerAttackingState();
     public readonly PlayerBlinkingState BlinkingState = new PlayerBlinkingState();
     public readonly PlayerDyingState DyingState = new PlayerDyingState();
+    public readonly PlayerPogoingState PogoingState = new PlayerPogoingState();
 
     //DEBUG
     [Header("Debug")]
@@ -50,6 +52,8 @@ public class PlayerFSM : MonoBehaviour {
     public bool canDoubleJump;
     public bool canDash;
     public bool hasResetDashTrigger;
+    public bool shouldPogo;
+
     public float dashCooldownTimer;
     public float attackCooldownTimer;
     public float blinkCooldownTimer;
@@ -59,7 +63,6 @@ public class PlayerFSM : MonoBehaviour {
     public float parryTimer;
     public float airJumpInputBuffer;
 
-
     [HideInInspector] public float moveSpeed;
     [HideInInspector] public int lastDirection = 1;
     [HideInInspector] public int items;
@@ -67,7 +70,6 @@ public class PlayerFSM : MonoBehaviour {
     public Vector3 originalPosition = new Vector3(0, 0, 0);
     public bool freezePlayerState = false;
     public Shield shield;
-
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -163,5 +165,18 @@ public class PlayerFSM : MonoBehaviour {
         if (mechanics.IsEnabled("Move Speed Boost")) {
             moveSpeed = config.moveSpeedBoosted;
         }
+    }
+
+    private void OnDrawGizmosSelected() {
+        Vector3 center = transform.position + new Vector3(1, -0.16f, 0f);
+        Vector3 left = center + new Vector3(-3.65f * 0.64f / 2, 0f, 0f);
+        Vector3 right = center + new Vector3(+3.65f * 0.64f / 2, 0f, 0f);
+
+        float radius = 3.65f * 0.5f / 2;
+
+        DebugExtension.DebugCapsule(left, right, Color.red, radius);
+
+        // Gizmos.DrawCube(transform.position + new Vector3(0, -1.23f, 0f), new Vector3(3.65f * 0.64f, 3.65f * 0.5f, 0f));
+        // Gizmos.DrawCube(transform.position + new Vector3(1, -0.16f, 0f), new Vector3(3.65f, 3.65f, 0f));
     }
 }

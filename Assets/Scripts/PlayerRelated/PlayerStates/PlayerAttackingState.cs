@@ -18,6 +18,7 @@ public class PlayerAttackingState : PlayerBaseState {
     }
 
     public override void Update(PlayerFSM player) {
+        // Debug.Log(player.shouldPogo);
         if (base.CheckTransitionToWalking(player)) return;
         if (base.CheckTransitionToGrounded(player)) return;
         if (base.CheckTransitionToFalling(player)) return;
@@ -50,40 +51,72 @@ public class PlayerAttackingState : PlayerBaseState {
     }
 
     void PositionSlashEffect(PlayerFSM player, bool isBoosted, Vector3 direction) {
+        Vector2 pos = new Vector2();
+        float angle = 0f;
         if (isBoosted) {
             if (direction == Vector3.right) {
                 player.boostedSlash.transform.eulerAngles = new Vector3(0, 0f, 0f);
                 player.boostedSlash.transform.localPosition = new Vector3(1, -0.16f, 0f);
+                pos = player.boostedSlash.transform.localPosition;
+                angle = player.boostedSlash.transform.eulerAngles.z;
             }
             else if (direction == Vector3.up) {
                 player.boostedSlash.transform.eulerAngles = new Vector3(0, 0f, 90f);
                 player.boostedSlash.transform.localPosition = new Vector3(0, 0.95f, 0f);
+                pos = player.boostedSlash.transform.localPosition;
+                angle = player.boostedSlash.transform.eulerAngles.z;
             }
             else if (direction == Vector3.left) {
                 player.boostedSlash.transform.eulerAngles = new Vector3(0, 0f, 180f);
                 player.boostedSlash.transform.localPosition = new Vector3(-1, -0.16f, 0f);
+                pos = player.boostedSlash.transform.localPosition;
+                angle = player.boostedSlash.transform.eulerAngles.z;
             }
             else if (direction == Vector3.down) {
                 player.boostedSlash.transform.eulerAngles = new Vector3(0, 0f, -90f);
                 player.boostedSlash.transform.localPosition = new Vector3(0, -1.23f, 0f);
+                pos = player.boostedSlash.transform.localPosition;
+                angle = player.boostedSlash.transform.eulerAngles.z;
             }
         }
         else {
             if (direction == Vector3.right) {
                 player.normalSlash.transform.eulerAngles = new Vector3(0, 0f, 0f);
                 player.normalSlash.transform.localPosition = new Vector3(0.7f, -0.15f, 0f);
+                pos = player.boostedSlash.transform.localPosition;
+                angle = player.boostedSlash.transform.eulerAngles.z;
             }
             else if (direction == Vector3.up) {
                 player.normalSlash.transform.eulerAngles = new Vector3(0, 0f, 90f);
                 player.normalSlash.transform.localPosition = new Vector3(0, 0.59f, 0);
+                pos = player.boostedSlash.transform.localPosition;
+                angle = player.boostedSlash.transform.eulerAngles.z;
             }
             else if (direction == Vector3.left) {
                 player.normalSlash.transform.eulerAngles = new Vector3(0, 0f, 180f);
                 player.normalSlash.transform.localPosition = new Vector3(-0.7f, -0.15f, 0f);
+                pos = player.boostedSlash.transform.localPosition;
+                angle = player.boostedSlash.transform.eulerAngles.z;
             }
             else if (direction == Vector3.down) {
                 player.normalSlash.transform.eulerAngles = new Vector3(0, 0f, -90f);
                 player.normalSlash.transform.localPosition = new Vector3(0, -0.86f, 0f);
+                pos = player.boostedSlash.transform.localPosition;
+                angle = player.boostedSlash.transform.eulerAngles.z;
+            }
+        }
+
+        // Vector2 size = new Vector2(3.65f, 3.65f);
+        Vector2 size = new Vector2(3.65f * 0.64f, 3.65f * 0.5f);
+        pos = pos + new Vector2(player.transform.position.x, player.transform.position.y);
+        Collider2D[] hitTargets = Physics2D.OverlapCapsuleAll(pos, size, CapsuleDirection2D.Horizontal, angle);
+        // if (hitTargets.Length > 0) {
+        //     Debug.Log("hitou");
+        // }
+        foreach (Collider2D coll in hitTargets) {
+            // Debug.Log(coll.tag + " " + coll.name);
+            if (coll.gameObject.CompareTag("Obstacle")) {
+                Debug.Log("hitou");
             }
         }
     }
