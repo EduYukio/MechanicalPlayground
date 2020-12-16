@@ -28,7 +28,8 @@ public class PlayerGroundedState : PlayerBaseState {
 
     private void PlayAnimationIfCan(PlayerFSM player) {
         if (IsPlayingAnimation("PlayerIdle", player)) return;
-        if (IsPlayingAnimation("PlayerAttack", player)) return;
+        if (IsPlayingAnimation("PlayerAttacking", player)) return;
+        if (IsPlayingAnimation("PlayerAttackingBoosted", player)) return;
         if (IsPlayingAnimation("PlayerAppear", player)) return;
         if (IsPlayingAnimation("PlayerDisappear", player)) return;
 

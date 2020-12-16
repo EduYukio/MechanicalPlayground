@@ -22,7 +22,7 @@ MonoBehaviour:
   - Name: Dash
     Enabled: 1
   - Name: Attack
-    Enabled: 0
+    Enabled: 1
   - Name: Wall Slide
     Enabled: 1
   - Name: Wall Jump
@@ -44,4 +44,6 @@ MonoBehaviour:
   - Name: Parry
     Enabled: 0
   - Name: Reflect Projectile
+    Enabled: 0
+  - Name: Range Boost
     Enabled: 0

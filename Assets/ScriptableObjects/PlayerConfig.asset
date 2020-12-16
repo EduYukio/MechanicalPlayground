@@ -29,9 +29,13 @@ MonoBehaviour:
   startStickyTime: 0.1
   startWallJumpDurationTime: 0.1
   attackDistance: 0.73
-  attackRadius: 0.47
+  attackAreaX: 1.05
+  attackAreaY: 0.93
   attackDamage: 10
   startAttackCooldownTime: 0.33
+  attackBoostedDistance: 1.1
+  attackBoostedAreaX: 2.22
+  attackBoostedAreaY: 1.87
   blinkDistance: 2.8
   blinkGroundCheckRadius: 0.25
   startPreBlinkTime: 0.15

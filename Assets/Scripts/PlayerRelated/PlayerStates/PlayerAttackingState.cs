@@ -3,70 +3,88 @@ using UnityEngine;
 public class PlayerAttackingState : PlayerBaseState {
     public LayerMask enemyLayers;
     public float attackTimer;
-    GameObject slashEffect;
-    float xInput;
-    float yInput;
+    Vector3 attackDirection;
+    bool isBoosted;
 
     public override void EnterState(PlayerFSM player) {
-        player.animator.Play("PlayerAttack");
         Setup(player);
         AttackAction(player);
+        if (isBoosted) {
+            player.animator.Play("PlayerAttackingBoosted");
+        }
+        else {
+            player.animator.Play("PlayerAttacking");
+        }
     }
 
     public override void Update(PlayerFSM player) {
-        // Pensar se vai ser instantâneo mesmo ou se vai durar um tempinho
-        // if (attackTimer > 0) {
-        //     attackTimer -= Time.deltaTime;
-        //     return;
-        // }
-
+        PositionSlashEffect(player, isBoosted, attackDirection);
         if (base.CheckTransitionToWalking(player)) return;
         if (base.CheckTransitionToGrounded(player)) return;
         if (base.CheckTransitionToFalling(player)) return;
     }
 
     void Setup(PlayerFSM player) {
-        slashEffect = player.slashEffect;
         enemyLayers = LayerMask.GetMask("Enemies");
         player.attackCooldownTimer = player.config.startAttackCooldownTime;
-        xInput = Input.GetAxisRaw("Horizontal");
-        yInput = Input.GetAxisRaw("Vertical");
+        isBoosted = player.mechanics.IsEnabled("Range Boost");
+        attackDirection = CalculateDirection(player);
     }
+
+    Vector3 CalculateDirection(PlayerFSM player) {
+        float xInput = Input.GetAxisRaw("Horizontal");
+        float yInput = Input.GetAxisRaw("Vertical");
+        return base.GetFourDirectionalInput(player, xInput, yInput);
+    }
+
 
     void AttackAction(PlayerFSM player) {
-        Vector3 attackDirection = base.GetFourDirectionalInput(player, xInput, yInput);
-        Vector3 attackPosition = CalculateAttackPosition(player, attackDirection);
-        PositionSlashEffect(attackPosition, attackDirection);
-
-        Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPosition, new Vector2(player.config.attackAreaX, player.config.attackAreaY), 0f);
-        foreach (Collider2D enemy in hitEnemies) {
-            enemy.GetComponent<Enemy>()?.TakeDamage(player.config.attackDamage);
+        if (isBoosted) {
+            player.boostedSlash.SetActive(true);
+            player.normalSlash.SetActive(false);
+        }
+        else {
+            player.normalSlash.SetActive(true);
+            player.boostedSlash.SetActive(false);
         }
     }
 
-    Vector3 CalculateAttackPosition(PlayerFSM player, Vector3 direction) {
-        float distance = player.config.attackDistance;
-
-        Vector3 playerPos = player.transform.position;
-        Vector3 attackPosition = playerPos + (direction * distance);
-
-        return attackPosition;
-    }
-
-    void PositionSlashEffect(Vector3 attackPosition, Vector3 direction) {
-        slashEffect.transform.position = attackPosition + new Vector3(0f, -0.13f, 0f);
-
-        if (direction == Vector3.right) {
-            slashEffect.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+    void PositionSlashEffect(PlayerFSM player, bool isBoosted, Vector3 direction) {
+        if (isBoosted) {
+            if (direction == Vector3.right) {
+                player.boostedSlash.transform.eulerAngles = new Vector3(0, 0f, 0f);
+                player.boostedSlash.transform.localPosition = new Vector3(1, -0.16f, 0f);
+            }
+            else if (direction == Vector3.up) {
+                player.boostedSlash.transform.eulerAngles = new Vector3(0, 0f, 90f);
+                player.boostedSlash.transform.localPosition = new Vector3(0, 0.95f, 0f);
+            }
+            else if (direction == Vector3.left) {
+                player.boostedSlash.transform.eulerAngles = new Vector3(0, 0f, 180f);
+                player.boostedSlash.transform.localPosition = new Vector3(-1, -0.16f, 0f);
+            }
+            else if (direction == Vector3.down) {
+                player.boostedSlash.transform.eulerAngles = new Vector3(0, 0f, -90f);
+                player.boostedSlash.transform.localPosition = new Vector3(0, -1.23f, 0f);
+            }
         }
-        else if (direction == Vector3.up) {
-            slashEffect.transform.eulerAngles = new Vector3(0f, 0f, 90f);
-        }
-        else if (direction == Vector3.left) {
-            slashEffect.transform.eulerAngles = new Vector3(0f, 0f, 180f);
-        }
-        else if (direction == Vector3.down) {
-            slashEffect.transform.eulerAngles = new Vector3(0f, 0f, -90f);
+        else {
+            if (direction == Vector3.right) {
+                player.normalSlash.transform.eulerAngles = new Vector3(0, 0f, 0f);
+                player.normalSlash.transform.localPosition = new Vector3(0.7f, -0.15f, 0f);
+            }
+            else if (direction == Vector3.up) {
+                player.normalSlash.transform.eulerAngles = new Vector3(0, 0f, 90f);
+                player.normalSlash.transform.localPosition = new Vector3(0, 0.59f, 0);
+            }
+            else if (direction == Vector3.left) {
+                player.normalSlash.transform.eulerAngles = new Vector3(0, 0f, 180f);
+                player.normalSlash.transform.localPosition = new Vector3(-0.7f, -0.15f, 0f);
+            }
+            else if (direction == Vector3.down) {
+                player.normalSlash.transform.eulerAngles = new Vector3(0, 0f, -90f);
+                player.normalSlash.transform.localPosition = new Vector3(0, -0.86f, 0f);
+            }
         }
     }
 }

@@ -34,7 +34,8 @@ public class PlayerWalkingState : PlayerBaseState {
 
     private void PlayAnimationIfCan(PlayerFSM player) {
         if (IsPlayingAnimation("PlayerWalk", player)) return;
-        if (IsPlayingAnimation("PlayerAttack", player)) return;
+        if (IsPlayingAnimation("PlayerAttacking", player)) return;
+        if (IsPlayingAnimation("PlayerAttackingBoosted", player)) return;
 
         player.animator.Play("PlayerWalk");
     }
