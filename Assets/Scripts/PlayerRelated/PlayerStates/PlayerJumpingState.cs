@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class PlayerJumpingState : PlayerBaseState {
     public override void EnterState(PlayerFSM player) {
-        player.animator.Play("PlayerJump");
         Setup(player);
         JumpAction(player);
     }
 
     public override void Update(PlayerFSM player) {
+        PlayAnimationIfCan(player);
         base.ProcessMovementInput(player);
 
         if (base.CheckTransitionToWallSliding(player)) return;
@@ -25,5 +25,13 @@ public class PlayerJumpingState : PlayerBaseState {
 
     void JumpAction(PlayerFSM player) {
         player.rb.velocity = new Vector2(player.rb.velocity.x, player.config.jumpForce);
+    }
+
+    private void PlayAnimationIfCan(PlayerFSM player) {
+        if (IsPlayingAnimation("PlayerJump", player)) return;
+        if (IsPlayingAnimation("PlayerAttacking", player)) return;
+        if (IsPlayingAnimation("PlayerAttackingBoosted", player)) return;
+
+        player.animator.Play("PlayerJump");
     }
 }

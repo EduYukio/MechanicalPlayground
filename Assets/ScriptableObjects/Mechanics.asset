@@ -46,4 +46,6 @@ MonoBehaviour:
   - Name: Reflect Projectile
     Enabled: 0
   - Name: Range Boost
-    Enabled: 0
+    Enabled: 1
+  - Name: Destroy Projectile
+    Enabled: 1
