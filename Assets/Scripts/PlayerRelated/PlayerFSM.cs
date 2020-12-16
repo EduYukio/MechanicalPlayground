@@ -165,6 +165,6 @@ public class PlayerFSM : MonoBehaviour {
     }
 
     void OnDrawGizmos() {
-        Gizmos.DrawWireSphere(transform.position + new Vector3(config.attackDistance, -0.13f, 0f), config.attackRadius);
+        Gizmos.DrawWireCube(transform.position + new Vector3(config.attackDistance, -0.13f, 0f), new Vector3(config.attackAreaX, config.attackAreaY, 0f));
     }
 }

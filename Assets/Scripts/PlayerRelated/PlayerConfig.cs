@@ -38,6 +38,8 @@ public class PlayerConfig : ScriptableObject {
     [Header("Attack")]
     public float attackDistance = 1f;
     public float attackRadius = 0.41f;
+    public float attackAreaX = 0.5f;
+    public float attackAreaY = 0.5f;
     public float attackDamage = 10f;
     public float startAttackCooldownTime = 0.33f;
 

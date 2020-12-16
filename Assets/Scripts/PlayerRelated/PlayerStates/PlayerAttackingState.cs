@@ -38,7 +38,7 @@ public class PlayerAttackingState : PlayerBaseState {
         Vector3 attackPosition = CalculateAttackPosition(player, attackDirection);
         PositionSlashEffect(attackPosition, attackDirection);
 
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPosition, player.config.attackRadius, enemyLayers);
+        Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPosition, new Vector2(player.config.attackAreaX, player.config.attackAreaY), 0f);
         foreach (Collider2D enemy in hitEnemies) {
             enemy.GetComponent<Enemy>()?.TakeDamage(player.config.attackDamage);
         }
