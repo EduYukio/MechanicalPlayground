@@ -70,7 +70,7 @@ public class PlayerDashingState : PlayerBaseState {
     }
 
     public override bool CheckTransitionToFalling(PlayerFSM player) {
-        if (!player.isTouchingWall && !player.isGrounded) {
+        if (!player.isGrounded) {
             player.TransitionToState(player.FallingState);
             return true;
         }
