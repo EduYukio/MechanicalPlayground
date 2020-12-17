@@ -59,7 +59,6 @@ public abstract class PlayerBaseState {
     public virtual bool CheckTransitionToDoubleJumping(PlayerFSM player) {
         if (!player.mechanics.IsEnabled("Double Jump")) return false;
         if (!player.canDoubleJump) return false;
-        if (player.isTouchingWall) return false;
 
         if (Input.GetButtonDown("Jump") || player.airJumpInputBuffer > 0) {
             player.TransitionToState(player.DoubleJumpingState);
