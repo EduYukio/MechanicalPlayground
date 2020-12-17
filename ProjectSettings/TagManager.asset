@@ -24,9 +24,9 @@ TagManager:
   - Ground
   - Player
   - PlayerEthereal
-  - Obstacle
+  - Obstacles
   - ParriedBullet
-  - 
+  - Projectiles
   - 
   - 
   - 

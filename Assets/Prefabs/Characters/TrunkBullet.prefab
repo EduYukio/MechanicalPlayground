@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 295229867403493633}
   - component: {fileID: 295229867403493632}
   - component: {fileID: 6215916780319239349}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: TrunkBullet
   m_TagString: Projectile
   m_Icon: {fileID: 0}
