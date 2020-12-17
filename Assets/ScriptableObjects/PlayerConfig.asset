@@ -30,7 +30,7 @@ MonoBehaviour:
   startWallJumpDurationTime: 0.1
   attackDamage: 10
   startAttackCooldownTime: 0.33
-  pogoForce: 12
+  pogoForce: 11
   blinkDistance: 2.8
   blinkGroundCheckRadius: 0.25
   startPreBlinkTime: 0.15

@@ -1,35 +1,38 @@
 using UnityEngine;
 
 public class PlayerAttackingState : PlayerBaseState {
-    public LayerMask enemyLayers;
+    public LayerMask hitLayers;
     public float attackTimer;
     Vector3 attackDirection;
     bool isBoosted;
+    GameObject slashEffect;
+    bool shouldPogo = false;
 
     public override void EnterState(PlayerFSM player) {
         Setup(player);
-        AttackAction(player);
         if (isBoosted) {
             player.animator.Play("PlayerAttackingBoosted");
         }
         else {
             player.animator.Play("PlayerAttacking");
         }
+        AttackAction(player);
     }
 
     public override void Update(PlayerFSM player) {
-        // Debug.Log(player.shouldPogo);
+        if (CheckTransitionToPogoing(player)) return;
         if (base.CheckTransitionToWalking(player)) return;
         if (base.CheckTransitionToGrounded(player)) return;
         if (base.CheckTransitionToFalling(player)) return;
     }
 
     void Setup(PlayerFSM player) {
-        enemyLayers = LayerMask.GetMask("Enemies");
+        hitLayers = LayerMask.GetMask("Enemies", "Obstacles", "Projectiles");
         player.attackCooldownTimer = player.config.startAttackCooldownTime;
         isBoosted = player.mechanics.IsEnabled("Range Boost");
         attackDirection = CalculateDirection(player);
-        PositionSlashEffect(player, isBoosted, attackDirection);
+        slashEffect = (isBoosted) ? player.boostedSlash : player.normalSlash;
+        PositionSlashEffect(player, isBoosted);
     }
 
     Vector3 CalculateDirection(PlayerFSM player) {
@@ -40,84 +43,107 @@ public class PlayerAttackingState : PlayerBaseState {
 
 
     void AttackAction(PlayerFSM player) {
+        Vector2 hitboxSize;
+        Vector2 attackPosition;
         if (isBoosted) {
-            player.boostedSlash.SetActive(true);
-            player.normalSlash.SetActive(false);
+            hitboxSize = new Vector2(3.65f, 3.65f) * GetBoostedSlashScale();
+            attackPosition = player.transform.position + GetBoostedSlashPosition();
         }
         else {
-            player.normalSlash.SetActive(true);
-            player.boostedSlash.SetActive(false);
+            hitboxSize = new Vector2(3.65f, 3.65f) * GetNormalSlashScale();
+            attackPosition = player.transform.position + GetNormalSlashPosition();
+        }
+
+        float attackRotationAngle = GetSlashAngleVector().z;
+        Collider2D[] hitTargets = Physics2D.OverlapCapsuleAll(attackPosition, hitboxSize, CapsuleDirection2D.Horizontal, attackRotationAngle, hitLayers);
+        foreach (Collider2D colliderHit in hitTargets) {
+            CheckDamageEnemy(player, colliderHit);
+            CheckPogo(player, colliderHit);
+            CheckDestroyProjectile(player, colliderHit);
         }
     }
 
-    void PositionSlashEffect(PlayerFSM player, bool isBoosted, Vector3 direction) {
-        Vector2 pos = new Vector2();
-        float angle = 0f;
+    void CheckDamageEnemy(PlayerFSM player, Collider2D colliderHit) {
+        bool hitEnemy = colliderHit.gameObject.CompareTag("Enemy");
+        if (hitEnemy) {
+            colliderHit.GetComponent<Enemy>()?.TakeDamage(player.config.attackDamage);
+        }
+    }
+
+    void CheckDestroyProjectile(PlayerFSM player, Collider2D colliderHit) {
+        if (!player.mechanics.IsEnabled("Destroy Projectile")) return;
+
+        bool hitProjectile = colliderHit.gameObject.CompareTag("Projectile");
+        if (hitProjectile) {
+            MonoBehaviour.Destroy(colliderHit.gameObject);
+        }
+    }
+
+    void CheckPogo(PlayerFSM player, Collider2D colliderHit) {
+        if (!player.mechanics.IsEnabled("Pogo")) return;
+
+        bool hitEnemy = colliderHit.gameObject.layer == LayerMask.NameToLayer("Enemies");
+        bool hitProjectile = colliderHit.gameObject.layer == LayerMask.NameToLayer("Projectiles");
+        bool hitObstacle = colliderHit.gameObject.layer == LayerMask.NameToLayer("Obstacles");
+
+        bool downwardSlash = GetSlashAngleVector().z == 270f;
+        shouldPogo = downwardSlash && !player.isGrounded && (hitEnemy || hitProjectile || hitObstacle);
+    }
+
+    Vector3 GetBoostedSlashPosition() {
+        if (attackDirection == Vector3.right) return new Vector3(1, -0.16f, 0f);
+        if (attackDirection == Vector3.up) return new Vector3(0, 0.95f, 0f);
+        if (attackDirection == Vector3.left) return new Vector3(-1, -0.16f, 0f);
+        if (attackDirection == Vector3.down) return new Vector3(0, -1.23f, 0f);
+
+        return Vector3.zero;
+    }
+
+    Vector3 GetNormalSlashPosition() {
+        if (attackDirection == Vector3.right) return new Vector3(0.7f, -0.15f, 0f);
+        if (attackDirection == Vector3.up) return new Vector3(0, 0.59f, 0);
+        if (attackDirection == Vector3.left) return new Vector3(-0.7f, -0.15f, 0f);
+        if (attackDirection == Vector3.down) return new Vector3(0, -0.86f, 0f);
+
+        return Vector3.zero;
+    }
+
+    Vector3 GetSlashAngleVector() {
+        if (attackDirection == Vector3.right) return new Vector3(0, 0f, 0f);
+        if (attackDirection == Vector3.up) return new Vector3(0, 0f, 90f);
+        if (attackDirection == Vector3.left) return new Vector3(0, 0f, 180f);
+        if (attackDirection == Vector3.down) return new Vector3(0, 0f, 270f);
+
+        return Vector3.zero;
+    }
+
+    Vector2 GetBoostedSlashScale() {
+        return new Vector2(0.64f, 0.5f);
+    }
+
+    Vector2 GetNormalSlashScale() {
+        return new Vector2(0.32f, 0.25f);
+    }
+
+    void PositionSlashEffect(PlayerFSM player, bool isBoosted) {
         if (isBoosted) {
-            if (direction == Vector3.right) {
-                player.boostedSlash.transform.eulerAngles = new Vector3(0, 0f, 0f);
-                player.boostedSlash.transform.localPosition = new Vector3(1, -0.16f, 0f);
-                pos = player.boostedSlash.transform.localPosition;
-                angle = player.boostedSlash.transform.eulerAngles.z;
-            }
-            else if (direction == Vector3.up) {
-                player.boostedSlash.transform.eulerAngles = new Vector3(0, 0f, 90f);
-                player.boostedSlash.transform.localPosition = new Vector3(0, 0.95f, 0f);
-                pos = player.boostedSlash.transform.localPosition;
-                angle = player.boostedSlash.transform.eulerAngles.z;
-            }
-            else if (direction == Vector3.left) {
-                player.boostedSlash.transform.eulerAngles = new Vector3(0, 0f, 180f);
-                player.boostedSlash.transform.localPosition = new Vector3(-1, -0.16f, 0f);
-                pos = player.boostedSlash.transform.localPosition;
-                angle = player.boostedSlash.transform.eulerAngles.z;
-            }
-            else if (direction == Vector3.down) {
-                player.boostedSlash.transform.eulerAngles = new Vector3(0, 0f, -90f);
-                player.boostedSlash.transform.localPosition = new Vector3(0, -1.23f, 0f);
-                pos = player.boostedSlash.transform.localPosition;
-                angle = player.boostedSlash.transform.eulerAngles.z;
-            }
+            slashEffect.transform.localPosition = GetBoostedSlashPosition();
         }
         else {
-            if (direction == Vector3.right) {
-                player.normalSlash.transform.eulerAngles = new Vector3(0, 0f, 0f);
-                player.normalSlash.transform.localPosition = new Vector3(0.7f, -0.15f, 0f);
-                pos = player.boostedSlash.transform.localPosition;
-                angle = player.boostedSlash.transform.eulerAngles.z;
-            }
-            else if (direction == Vector3.up) {
-                player.normalSlash.transform.eulerAngles = new Vector3(0, 0f, 90f);
-                player.normalSlash.transform.localPosition = new Vector3(0, 0.59f, 0);
-                pos = player.boostedSlash.transform.localPosition;
-                angle = player.boostedSlash.transform.eulerAngles.z;
-            }
-            else if (direction == Vector3.left) {
-                player.normalSlash.transform.eulerAngles = new Vector3(0, 0f, 180f);
-                player.normalSlash.transform.localPosition = new Vector3(-0.7f, -0.15f, 0f);
-                pos = player.boostedSlash.transform.localPosition;
-                angle = player.boostedSlash.transform.eulerAngles.z;
-            }
-            else if (direction == Vector3.down) {
-                player.normalSlash.transform.eulerAngles = new Vector3(0, 0f, -90f);
-                player.normalSlash.transform.localPosition = new Vector3(0, -0.86f, 0f);
-                pos = player.boostedSlash.transform.localPosition;
-                angle = player.boostedSlash.transform.eulerAngles.z;
-            }
+            slashEffect.transform.localPosition = GetNormalSlashPosition();
+        }
+        slashEffect.transform.eulerAngles = GetSlashAngleVector();
+    }
+
+    public bool CheckTransitionToPogoing(PlayerFSM player) {
+        if (!player.mechanics.IsEnabled("Pogo")) return false;
+
+        if (shouldPogo) {
+            shouldPogo = false;
+            player.TransitionToState(player.PogoingState);
+            return true;
         }
 
-        // Vector2 size = new Vector2(3.65f, 3.65f);
-        Vector2 size = new Vector2(3.65f * 0.64f, 3.65f * 0.5f);
-        pos = pos + new Vector2(player.transform.position.x, player.transform.position.y);
-        Collider2D[] hitTargets = Physics2D.OverlapCapsuleAll(pos, size, CapsuleDirection2D.Horizontal, angle);
-        // if (hitTargets.Length > 0) {
-        //     Debug.Log("hitou");
-        // }
-        foreach (Collider2D coll in hitTargets) {
-            // Debug.Log(coll.tag + " " + coll.name);
-            if (coll.gameObject.CompareTag("Obstacle")) {
-                Debug.Log("hitou");
-            }
-        }
+        return false;
     }
 }

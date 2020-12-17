@@ -52,7 +52,6 @@ public class PlayerFSM : MonoBehaviour {
     public bool canDoubleJump;
     public bool canDash;
     public bool hasResetDashTrigger;
-    public bool shouldPogo;
 
     public float dashCooldownTimer;
     public float attackCooldownTimer;
