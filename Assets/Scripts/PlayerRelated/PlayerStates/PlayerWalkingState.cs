@@ -15,6 +15,7 @@ public class PlayerWalkingState : PlayerBaseState {
         if (base.CheckTransitionToDashing(player)) return;
         if (base.CheckTransitionToAttacking(player)) return;
         if (base.CheckTransitionToBlinking(player)) return;
+        if (base.CheckTransitionToShotgunning(player)) return;
     }
 
     void ResetCoyoteTimer(PlayerFSM player) {
@@ -36,6 +37,7 @@ public class PlayerWalkingState : PlayerBaseState {
         if (IsPlayingAnimation("PlayerWalk", player)) return;
         if (IsPlayingAnimation("PlayerAttacking", player)) return;
         if (IsPlayingAnimation("PlayerAttackingBoosted", player)) return;
+        if (IsPlayingAnimation("PlayerShotgunning", player)) return;
 
         player.animator.Play("PlayerWalk");
     }

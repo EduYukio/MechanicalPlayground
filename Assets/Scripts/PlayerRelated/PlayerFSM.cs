@@ -20,6 +20,7 @@ public class PlayerFSM : MonoBehaviour {
     public readonly PlayerBlinkingState BlinkingState = new PlayerBlinkingState();
     public readonly PlayerDyingState DyingState = new PlayerDyingState();
     public readonly PlayerPogoingState PogoingState = new PlayerPogoingState();
+    public readonly PlayerShotgunningState ShotgunningState = new PlayerShotgunningState();
 
     //DEBUG
     [Header("Debug")]
@@ -37,6 +38,7 @@ public class PlayerFSM : MonoBehaviour {
     public GameObject platformPrefab;
     public GameObject normalSlash;
     public GameObject boostedSlash;
+    public GameObject explosionEffect;
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Animator animator;
     [HideInInspector] public SpriteRenderer spriteRenderer;
@@ -65,6 +67,8 @@ public class PlayerFSM : MonoBehaviour {
     [HideInInspector] public float moveSpeed;
     [HideInInspector] public int lastDirection = 1;
     [HideInInspector] public int items;
+    [HideInInspector] public Vector3 centerPosition;
+    public Transform centerTransform;
     public static Vector3 respawnPosition;
     public Vector3 originalPosition = new Vector3(0, 0, 0);
     public bool freezePlayerState = false;
@@ -74,6 +78,7 @@ public class PlayerFSM : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        centerPosition = centerTransform.position;
         freezePlayerState = false;
         hasResetDashTrigger = true;
         items = 0;
@@ -166,16 +171,14 @@ public class PlayerFSM : MonoBehaviour {
         }
     }
 
-    private void OnDrawGizmosSelected() {
-        Vector3 center = transform.position + new Vector3(1, -0.16f, 0f);
-        Vector3 left = center + new Vector3(-3.65f * 0.64f / 2, 0f, 0f);
-        Vector3 right = center + new Vector3(+3.65f * 0.64f / 2, 0f, 0f);
+    // private void OnDrawGizmosSelected() {
+    //     Vector3 center = transform.position + new Vector3(1, -0.16f, 0f);
+    //     Vector3 left = center + new Vector3(-3.65f * 0.64f / 2, 0f, 0f);
+    //     Vector3 right = center + new Vector3(+3.65f * 0.64f / 2, 0f, 0f);
+    //     float radius = 3.65f * 0.5f / 2;
+    //     DebugExtension.DebugCapsule(left, right, Color.red, radius);
 
-        float radius = 3.65f * 0.5f / 2;
-
-        DebugExtension.DebugCapsule(left, right, Color.red, radius);
-
-        // Gizmos.DrawCube(transform.position + new Vector3(0, -1.23f, 0f), new Vector3(3.65f * 0.64f, 3.65f * 0.5f, 0f));
-        // Gizmos.DrawCube(transform.position + new Vector3(1, -0.16f, 0f), new Vector3(3.65f, 3.65f, 0f));
-    }
+    //     Gizmos.DrawWireSphere(transform.position + new Vector3(1.5f, -0.12f, 0f), 0.4f);
+    //     Gizmos.DrawWireSphere(transform.position + new Vector3(0, -1.6f, 0f), 0.4f);
+    // }
 }

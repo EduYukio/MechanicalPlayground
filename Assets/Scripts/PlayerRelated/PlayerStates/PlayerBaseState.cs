@@ -131,6 +131,18 @@ public abstract class PlayerBaseState {
         return false;
     }
 
+    public virtual bool CheckTransitionToShotgunning(PlayerFSM player) {
+        if (!player.mechanics.IsEnabled("Shotgun")) return false;
+        // if (player.blinkCooldownTimer > 0) return false;
+
+        if (Input.GetButtonDown("Shotgun")) {
+            player.TransitionToState(player.ShotgunningState);
+            return true;
+        }
+
+        return false;
+    }
+
     #endregion
 
 

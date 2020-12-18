@@ -51,3 +51,5 @@ MonoBehaviour:
     Enabled: 1
   - Name: Pogo
     Enabled: 1
+  - Name: Shotgun
+    Enabled: 0

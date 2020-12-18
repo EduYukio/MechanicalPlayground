@@ -24,6 +24,7 @@ public class PlayerWallJumpingState : PlayerBaseState {
         if (CheckTransitionToFalling(player)) return;
         if (base.CheckTransitionToGrounded(player)) return;
         if (base.CheckTransitionToAttacking(player)) return;
+        if (base.CheckTransitionToShotgunning(player)) return;
     }
 
     void Setup(PlayerFSM player) {
