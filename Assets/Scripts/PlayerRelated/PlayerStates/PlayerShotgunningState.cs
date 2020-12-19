@@ -6,10 +6,11 @@ public class PlayerShotgunningState : PlayerBaseState {
     float yInput;
     float explosionRadius = 0.4f;
     float explosionDamageRate = 0.5f;
-    Vector3 rightDistance = new Vector3(1.5f, -0.12f, 0f);
-    Vector3 leftDistance = new Vector3(-1.5f, -0.12f, 0f);
-    Vector3 upDistance = new Vector3(0, 1.6f, 0f);
-    Vector3 downDistance = new Vector3(0, -1.6f, 0f);
+
+    Vector3 rightDistance = new Vector3(1.2f, -0.12f, 0f);
+    Vector3 leftDistance = new Vector3(-1.2f, -0.12f, 0f);
+    Vector3 upDistance = new Vector3(0, 1.3f, 0f);
+    Vector3 downDistance = new Vector3(0, -1.3f, 0f);
     Animator explosionAnimator;
 
     public override void EnterState(PlayerFSM player) {
