@@ -13,6 +13,7 @@ public class PlayerWallJumpingState : PlayerBaseState {
     public override void Update(PlayerFSM player) {
         if (base.CheckTransitionToDashing(player)) return;
         if (base.CheckTransitionToBlinking(player)) return;
+        if (base.CheckTransitionToShotgunning(player)) return;
 
         // Obligatory x movement
         if (xVelocityTimer > 0) {
@@ -24,7 +25,6 @@ public class PlayerWallJumpingState : PlayerBaseState {
         if (CheckTransitionToFalling(player)) return;
         if (base.CheckTransitionToGrounded(player)) return;
         if (base.CheckTransitionToAttacking(player)) return;
-        if (base.CheckTransitionToShotgunning(player)) return;
     }
 
     void Setup(PlayerFSM player) {
