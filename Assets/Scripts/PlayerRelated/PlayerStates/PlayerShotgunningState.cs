@@ -15,8 +15,6 @@ public class PlayerShotgunningState : PlayerBaseState {
     }
 
     public override void Update(PlayerFSM player) {
-        // base.ProcessMovementInput(player);
-
         if (CheckTransitionToWallSliding(player)) return;
         if (base.CheckTransitionToFalling(player)) return;
         if (base.CheckTransitionToGrounded(player)) return;
@@ -31,22 +29,15 @@ public class PlayerShotgunningState : PlayerBaseState {
     }
 
     void ShotgunAction(PlayerFSM player) {
-        Vector3 inputDirection = base.GetFourDirectionalInput(player, xInput, yInput);
-        Vector3 explosionDistance = new Vector3();
-        if (inputDirection == Vector3.right) explosionDistance = rightDistance;
-        else if (inputDirection == Vector3.left) explosionDistance = leftDistance;
-        else if (inputDirection == Vector3.up) explosionDistance = upDistance;
-        else if (inputDirection == Vector3.down) explosionDistance = downDistance;
-
+        Vector3 explosionDistance = CalculateExplosionDistance(player);
         Vector3 explosionPosition = player.transform.position + explosionDistance;
-        Collider2D[] hitTargets = Physics2D.OverlapCircleAll(explosionPosition, player.config.explosionRadius, hitLayers);
+        player.explosionEffect.transform.position = explosionPosition;
 
+        Collider2D[] hitTargets = Physics2D.OverlapCircleAll(explosionPosition, player.config.explosionRadius, hitLayers);
         foreach (Collider2D colliderHit in hitTargets) {
             CheckDamageEnemy(player, colliderHit);
             CheckDestroyObject(player, colliderHit);
         }
-
-        player.explosionEffect.transform.position = explosionPosition;
     }
 
     void CheckDamageEnemy(PlayerFSM player, Collider2D colliderHit) {
@@ -60,7 +51,6 @@ public class PlayerShotgunningState : PlayerBaseState {
 
     void CheckDestroyObject(PlayerFSM player, Collider2D colliderHit) {
         bool hitObstacle = colliderHit.gameObject.layer == LayerMask.NameToLayer("Obstacles");
-
         bool hitProjectile = colliderHit.gameObject.CompareTag("Projectile");
         if (hitObstacle || hitProjectile) {
             MonoBehaviour.Destroy(colliderHit.gameObject);
@@ -90,5 +80,16 @@ public class PlayerShotgunningState : PlayerBaseState {
         leftDistance = new Vector3(-xRange, -0.12f, 0f);
         upDistance = new Vector3(0, yRange, 0f);
         downDistance = new Vector3(0, -yRange, 0f);
+    }
+
+    Vector3 CalculateExplosionDistance(PlayerFSM player) {
+        Vector3 inputDirection = base.GetFourDirectionalInput(player, xInput, yInput);
+
+        if (inputDirection == Vector3.right) return rightDistance;
+        if (inputDirection == Vector3.left) return leftDistance;
+        if (inputDirection == Vector3.up) return upDistance;
+        if (inputDirection == Vector3.down) return downDistance;
+
+        return Vector3.zero;
     }
 }
