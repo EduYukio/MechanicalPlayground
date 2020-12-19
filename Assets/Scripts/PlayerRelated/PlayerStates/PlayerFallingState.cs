@@ -12,6 +12,7 @@ public class PlayerFallingState : PlayerBaseState {
         base.ProcessMovementInput(player);
 
         if (CheckTransitionToJumping(player)) return;
+        if (base.CheckTransitionToGunBoots(player)) return;
         if (base.CheckTransitionToWallJumping(player)) return;
         if (base.CheckTransitionToDoubleJumping(player)) return;
         if (base.CheckTransitionToGrounded(player)) return;

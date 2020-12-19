@@ -14,6 +14,7 @@ public class PlayerWallJumpingState : PlayerBaseState {
         if (base.CheckTransitionToDashing(player)) return;
         if (base.CheckTransitionToBlinking(player)) return;
         if (base.CheckTransitionToShotgunning(player)) return;
+        if (base.CheckTransitionToGunBoots(player)) return;
 
         // Obligatory x movement
         if (xVelocityTimer > 0) {

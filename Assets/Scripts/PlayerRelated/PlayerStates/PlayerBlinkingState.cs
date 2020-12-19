@@ -33,6 +33,7 @@ public class PlayerBlinkingState : PlayerBaseState {
 
         StopBlinking(player);
 
+        if (base.CheckTransitionToGunBoots(player)) return;
         if (base.CheckTransitionToGrounded(player)) return;
         if (base.CheckTransitionToFalling(player)) return;
     }

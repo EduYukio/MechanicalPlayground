@@ -9,6 +9,7 @@ public class PlayerWallSlidingState : PlayerBaseState {
     }
 
     public override void Update(PlayerFSM player) {
+        if (base.CheckTransitionToGunBoots(player)) return;
         if (base.CheckTransitionToGrounded(player)) return;
         if (base.CheckTransitionToWallJumping(player)) return;
         if (base.CheckTransitionToDashing(player)) return;

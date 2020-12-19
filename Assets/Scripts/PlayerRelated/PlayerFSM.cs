@@ -21,6 +21,7 @@ public class PlayerFSM : MonoBehaviour {
     public readonly PlayerDyingState DyingState = new PlayerDyingState();
     public readonly PlayerPogoingState PogoingState = new PlayerPogoingState();
     public readonly PlayerShotgunningState ShotgunningState = new PlayerShotgunningState();
+    public readonly PlayerGunBootsState GunBootsState = new PlayerGunBootsState();
 
     //DEBUG
     [Header("Debug")]
@@ -36,6 +37,7 @@ public class PlayerFSM : MonoBehaviour {
     public PlayerConfig config;
     public Mechanics mechanics;
     public GameObject platformPrefab;
+    public GameObject bootsBulletPrefab;
     public GameObject normalSlash;
     public GameObject boostedSlash;
     public GameObject explosionEffect;
@@ -60,6 +62,7 @@ public class PlayerFSM : MonoBehaviour {
     public float blinkCooldownTimer;
     public float shieldCooldownTimer;
     public float shotgunCooldownTimer;
+    public float gunBootsCooldownTimer;
 
     public float coyoteTimer;
     public float bunnyHopTimer;
@@ -150,6 +153,7 @@ public class PlayerFSM : MonoBehaviour {
 
     private void ProcessTimers() {
         float step = Time.deltaTime;
+        if (gunBootsCooldownTimer >= 0) gunBootsCooldownTimer -= step;
         if (shotgunCooldownTimer >= 0) shotgunCooldownTimer -= step;
         if (attackCooldownTimer >= 0) attackCooldownTimer -= step;
         if (shieldCooldownTimer >= 0) shieldCooldownTimer -= step;

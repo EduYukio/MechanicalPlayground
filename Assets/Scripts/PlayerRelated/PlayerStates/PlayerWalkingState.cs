@@ -9,6 +9,7 @@ public class PlayerWalkingState : PlayerBaseState {
         ResetCoyoteTimer(player);
         base.ProcessMovementInput(player);
 
+        if (base.CheckTransitionToGunBoots(player)) return;
         if (CheckTransitionToGrounded(player)) return;
         if (base.CheckTransitionToFalling(player)) return;
         if (base.CheckTransitionToJumping(player)) return;

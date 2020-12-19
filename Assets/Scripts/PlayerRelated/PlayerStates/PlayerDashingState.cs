@@ -20,6 +20,7 @@ public class PlayerDashingState : PlayerBaseState {
         }
 
         StopDashing(player);
+        if (base.CheckTransitionToGunBoots(player)) return;
         if (base.CheckTransitionToGrounded(player)) return;
         if (base.CheckTransitionToDoubleJumping(player)) return;
         if (CheckTransitionToWallSliding(player)) return;

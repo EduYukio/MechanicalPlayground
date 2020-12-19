@@ -9,6 +9,7 @@ public class PlayerGroundedState : PlayerBaseState {
     public override void Update(PlayerFSM player) {
         PlayAnimationIfCan(player);
 
+        if (base.CheckTransitionToGunBoots(player)) return;
         if (base.CheckTransitionToFalling(player)) return;
         if (base.CheckTransitionToJumping(player)) return;
         if (base.CheckTransitionToWalking(player)) return;

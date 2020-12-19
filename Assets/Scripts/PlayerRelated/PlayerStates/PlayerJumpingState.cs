@@ -10,6 +10,7 @@ public class PlayerJumpingState : PlayerBaseState {
         PlayAnimationIfCan(player);
         base.ProcessMovementInput(player);
 
+        if (base.CheckTransitionToGunBoots(player)) return;
         if (base.CheckTransitionToWallSliding(player)) return;
         if (base.CheckTransitionToFalling(player)) return;
         if (base.CheckTransitionToDashing(player)) return;

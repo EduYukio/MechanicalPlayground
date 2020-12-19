@@ -53,3 +53,5 @@ MonoBehaviour:
     Enabled: 1
   - Name: Shotgun
     Enabled: 0
+  - Name: Gun Boots
+    Enabled: 0
