@@ -54,5 +54,14 @@ public class PlayerConfig : ScriptableObject {
     public float startShieldCooldownTime = 0.75f;
     public float startParryTime = 0.15f;
     public float parryPauseDuration = 0.25f;
+
+    [Header("Shotgun")]
+    public float startShotgunCooldownTime = 0.5f;
+    public float explosionRadius = 0.4f;
+    public float explosionDamageRate = 0.5f;
+    public float xRange = 1.2f;
+    public float yRange = 1.3f;
+
+
 }
 

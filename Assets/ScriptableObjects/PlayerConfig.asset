@@ -40,3 +40,8 @@ MonoBehaviour:
   startShieldCooldownTime: 0.75
   startParryTime: 0.15
   parryPauseDuration: 0.2
+  startShotgunCooldownTime: 1
+  explosionRadius: 0.4
+  explosionDamageRate: 0.5
+  xRange: 1.2
+  yRange: 1.3
