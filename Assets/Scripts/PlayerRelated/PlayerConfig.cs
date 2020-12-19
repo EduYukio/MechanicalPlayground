@@ -65,5 +65,7 @@ public class PlayerConfig : ScriptableObject {
     [Header("Gun Boots")]
     public float startGunBootsCooldownTimer = 0.2f;
     public float bootsBulletSpeed = 6f;
+    public float gunBootsForce = 3f;
+    public float gunBootsMaxSpeed = 50f;
 }
 

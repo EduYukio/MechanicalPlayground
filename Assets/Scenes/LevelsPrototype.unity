@@ -44421,13 +44421,25 @@ PrefabInstance:
       propertyPath: bootsBulletPrefab
       value: 
       objectReference: {fileID: 6032149390923088076, guid: 31d19dcac38f81246ab739e8818132e0, type: 3}
+    - target: {fileID: 6671967020987745497, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
+      propertyPath: canActivateSlowMotion
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671967020987745497, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
+      propertyPath: printDebugStates
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671967020987745497, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
+      propertyPath: ignoreCheckpoints
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6671967020987745500, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.66
+      value: 34.54
       objectReference: {fileID: 0}
     - target: {fileID: 6671967020987745500, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.11
+      value: 32.6
       objectReference: {fileID: 0}
     - target: {fileID: 6671967020987745500, guid: 6815cc5f86d46994c89c5011efaa954f, type: 3}
       propertyPath: m_LocalPosition.z

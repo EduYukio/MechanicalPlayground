@@ -32,7 +32,7 @@ public class PlayerGunBootsState : PlayerBaseState {
         if (player.gunBootsCooldownTimer > 0) return;
 
         float xOffset = UnityEngine.Random.Range(-0.2f, 0.2f);
-        Vector3 spawnPosition = player.transform.position + new Vector3(xOffset, -0.4f, 0f);
+        Vector3 spawnPosition = player.transform.position + new Vector3(xOffset, -0.55f, 0f);
         GameObject bullet = MonoBehaviour.Instantiate(player.bootsBulletPrefab, spawnPosition, Quaternion.identity);
         Vector3 direction = Vector3.down;
 
@@ -40,7 +40,8 @@ public class PlayerGunBootsState : PlayerBaseState {
 
         player.gunBootsCooldownTimer = player.config.startGunBootsCooldownTimer;
 
-        // player.rb.velocity = new Vector2(player.rb.velocity.x, player.config.jumpForce);
+        float ySpeed = Mathf.Clamp(player.rb.velocity.y + player.config.gunBootsForce, 0f, player.config.gunBootsMaxSpeed);
+        player.rb.velocity = new Vector2(player.rb.velocity.x, ySpeed);
     }
 
     // private void PlayAnimationIfCan(PlayerFSM player) {

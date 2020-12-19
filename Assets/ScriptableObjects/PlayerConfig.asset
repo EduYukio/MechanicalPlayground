@@ -46,4 +46,6 @@ MonoBehaviour:
   xRange: 1.2
   yRange: 1.3
   startGunBootsCooldownTimer: 0.1
-  bootsBulletSpeed: 6
+  bootsBulletSpeed: 9
+  gunBootsForce: 5
+  gunBootsMaxSpeed: 10
