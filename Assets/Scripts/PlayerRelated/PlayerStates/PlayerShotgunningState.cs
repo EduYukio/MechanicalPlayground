@@ -10,8 +10,11 @@ public class PlayerShotgunningState : PlayerBaseState {
     Vector3 leftDistance = new Vector3(-1.5f, -0.12f, 0f);
     Vector3 upDistance = new Vector3(0, 1.6f, 0f);
     Vector3 downDistance = new Vector3(0, -1.6f, 0f);
+    Animator explosionAnimator;
 
     public override void EnterState(PlayerFSM player) {
+        explosionAnimator = player.explosionEffect.GetComponent<Animator>();
+        explosionAnimator.Play("Explosion");
         player.animator.Play("PlayerShotgunning");
         Setup(player);
         ShotgunAction(player);
@@ -20,6 +23,7 @@ public class PlayerShotgunningState : PlayerBaseState {
     public override void Update(PlayerFSM player) {
         base.ProcessMovementInput(player);
 
+        if (CheckTransitionToWallSliding(player)) return;
         if (base.CheckTransitionToFalling(player)) return;
         if (base.CheckTransitionToGrounded(player)) return;
         if (base.CheckTransitionToWalking(player)) return;
@@ -46,7 +50,7 @@ public class PlayerShotgunningState : PlayerBaseState {
             CheckDestroyObject(player, colliderHit);
         }
 
-        player.explosionEffect.transform.localPosition = explosionDistance;
+        player.explosionEffect.transform.position = explosionPosition;
     }
 
     void CheckDamageEnemy(PlayerFSM player, Collider2D colliderHit) {
@@ -70,5 +74,15 @@ public class PlayerShotgunningState : PlayerBaseState {
     void InputBuffer() {
         xInput = Input.GetAxisRaw("Horizontal");
         yInput = Input.GetAxisRaw("Vertical");
+    }
+
+    public override bool CheckTransitionToWallSliding(PlayerFSM player) {
+        if (!player.mechanics.IsEnabled("Wall Slide")) return false;
+
+        if (player.isTouchingWall && !player.isGrounded) {
+            player.TransitionToState(player.WallSlidingState);
+            return true;
+        }
+        return false;
     }
 }
