@@ -22,15 +22,15 @@ MonoBehaviour:
   - Name: Dash
     Enabled: 1
   - Name: Attack
-    Enabled: 1
+    Enabled: 0
   - Name: Wall Slide
     Enabled: 1
   - Name: Wall Jump
     Enabled: 1
   - Name: Blink
-    Enabled: 1
+    Enabled: 0
   - Name: Ethereal Dash
-    Enabled: 1
+    Enabled: 0
   - Name: Move Speed Boost
     Enabled: 0
   - Name: Spike Invulnerability
@@ -46,11 +46,11 @@ MonoBehaviour:
   - Name: Reflect Projectile
     Enabled: 0
   - Name: Range Boost
-    Enabled: 1
+    Enabled: 0
   - Name: Destroy Projectile
-    Enabled: 1
+    Enabled: 0
   - Name: Pogo
-    Enabled: 1
+    Enabled: 0
   - Name: Shotgun
     Enabled: 0
   - Name: Gun Boots

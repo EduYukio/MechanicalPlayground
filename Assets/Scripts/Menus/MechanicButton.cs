@@ -49,12 +49,18 @@ public class MechanicButton : MonoBehaviour {
             DeactivateButtonImage();
             mechMenu.mechanics.Deactivate(mechanicName);
             mechMenu.changedMechanics = true;
+            mechMenu.skillPoints++;
+            mechMenu.UpdateSkillPointsText();
         }
         else {
             // ativa
+            if (mechMenu.skillPoints == 0) return;
+            // fazer text piscar, dar feedback de que ta sem pontos
             ActivateButtonImage();
             mechMenu.mechanics.Activate(mechanicName);
             mechMenu.changedMechanics = true;
+            mechMenu.skillPoints--;
+            mechMenu.UpdateSkillPointsText();
         }
     }
 

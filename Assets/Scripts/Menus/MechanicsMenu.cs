@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
 using UnityEngine.EventSystems;
+using System;
 
 public class MechanicsMenu : MonoBehaviour {
     public TMP_Text title;
@@ -17,6 +18,8 @@ public class MechanicsMenu : MonoBehaviour {
     public GameObject confirmationPopup;
     public GameObject popupSaveButton;
     public bool changedMechanics = false;
+    public TMP_Text skillPointsText;
+    public int skillPoints = 8;
 
     private MechanicButton[] buttons;
     private PlayerFSM player;
@@ -36,6 +39,7 @@ public class MechanicsMenu : MonoBehaviour {
     private void OnEnable() {
         mechanics.SaveState();
         changedMechanics = false;
+        UpdateSkillPointsText();
     }
 
     void CleanInfo() {
@@ -51,6 +55,7 @@ public class MechanicsMenu : MonoBehaviour {
             button.DeactivateButtonImage();
         }
         changedMechanics = true;
+        UpdateSkillPointsText();
     }
 
     public void ConfirmMechanics() {
@@ -93,11 +98,22 @@ public class MechanicsMenu : MonoBehaviour {
                 button.DeactivateButtonImage();
             }
         }
+        UpdateSkillPointsText();
     }
 
     void CheckMenuExitInput() {
         if (Input.GetButtonDown("Esc") || Input.GetButtonDown("Circle")) {
             ConfirmMechanics();
         }
+    }
+
+    public void UpdateSkillPointsText() {
+        skillPoints = 8;
+        foreach (var button in buttons) {
+            if (mechanics.IsEnabled(button.mechanicName)) {
+                skillPoints--;
+            }
+        }
+        skillPointsText.text = "Skill Points: " + Convert.ToString(skillPoints);
     }
 }
