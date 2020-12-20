@@ -9,7 +9,9 @@ public class MechanicButton : MonoBehaviour {
     public VideoClip mechanicClip;
     public string mechanicName;
     public string description;
+    public List<string> requirements;
     public static MechanicsMenu mechMenu;
+    public Mechanics mechanics;
 
     public bool isBlocked = false;
     public bool isActive = false;
@@ -19,6 +21,7 @@ public class MechanicButton : MonoBehaviour {
     private Color inactiveColor = new Color(160 / 255f, 160 / 255f, 160 / 255f, 1f);
     private Color blockedColor = new Color(160 / 255f, 160 / 255f, 160 / 255f, 0.5f);
     private Color blockedTextColor = new Color(1, 1, 1, 0.5f);
+    private Color normalTextColor = new Color(1, 1, 1, 1f);
 
     private void Awake() {
         if (mechMenu == null) mechMenu = GameObject.FindObjectOfType<MechanicsMenu>();
@@ -27,40 +30,44 @@ public class MechanicButton : MonoBehaviour {
     }
 
     private void OnEnable() {
-        if (isBlocked) {
-            buttonImage.color = blockedColor;
-            GetComponentInChildren<TextMeshProUGUI>().color = blockedTextColor;
-        }
-        else if (mechMenu.mechanics.IsEnabled(mechanicName)) {
-            isActive = true;
-            buttonImage.color = activeColor;
-        }
-        else {
-            isActive = false;
-            buttonImage.color = inactiveColor;
-        }
     }
 
     public void ClickedOnMechanic() {
         if (isBlocked) return;
 
         if (isActive) {
-            // desativa
-            DeactivateButtonImage();
-            mechMenu.mechanics.Deactivate(mechanicName);
-            mechMenu.changedMechanics = true;
-            mechMenu.skillPoints++;
-            mechMenu.UpdateSkillPointsText();
+            DeactivateMechanic(mechanicName);
+            DeactivateThoseWhoRequireThis();
         }
         else {
-            // ativa
             if (mechMenu.skillPoints == 0) return;
             // fazer text piscar, dar feedback de que ta sem pontos
-            ActivateButtonImage();
-            mechMenu.mechanics.Activate(mechanicName);
-            mechMenu.changedMechanics = true;
-            mechMenu.skillPoints--;
-            mechMenu.UpdateSkillPointsText();
+            ActivateMechanic(mechanicName);
+        }
+        mechMenu.changedMechanics = true;
+        mechMenu.UpdateButtonsState();
+    }
+
+    private void ActivateMechanic(string name) {
+        ActivateButtonImage();
+        mechanics.Activate(name);
+        mechMenu.skillPoints--;
+
+    }
+
+    private void DeactivateMechanic(string name) {
+        DeactivateButtonImage();
+        mechanics.Deactivate(name);
+        mechMenu.skillPoints++;
+    }
+
+    private void DeactivateThoseWhoRequireThis() {
+        foreach (var button in mechMenu.buttons) {
+            if (button.requirements.Contains(this.mechanicName)) {
+                if (mechanics.IsEnabled(button.mechanicName)) {
+                    DeactivateMechanic(button.mechanicName);
+                }
+            }
         }
     }
 
@@ -91,5 +98,35 @@ public class MechanicButton : MonoBehaviour {
         if (isBlocked) return;
         isActive = false;
         buttonImage.color = inactiveColor;
+    }
+
+    public void DecideIfIsBlocked() {
+        isBlocked = false;
+        if (requirements.Count == 0) return;
+
+        foreach (string requirement in requirements) {
+            if (!mechanics.IsEnabled(requirement)) {
+                isBlocked = true;
+                return;
+            }
+        }
+    }
+
+    public void SetButtonAppearance() {
+        buttonImage = GetComponent<Image>();
+        if (isBlocked) {
+            buttonImage.color = blockedColor;
+            GetComponentInChildren<TextMeshProUGUI>().color = blockedTextColor;
+        }
+        else if (mechanics.IsEnabled(mechanicName)) {
+            isActive = true;
+            buttonImage.color = activeColor;
+            GetComponentInChildren<TextMeshProUGUI>().color = normalTextColor;
+        }
+        else {
+            isActive = false;
+            buttonImage.color = inactiveColor;
+            GetComponentInChildren<TextMeshProUGUI>().color = normalTextColor;
+        }
     }
 }

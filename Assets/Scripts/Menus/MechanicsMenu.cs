@@ -21,7 +21,7 @@ public class MechanicsMenu : MonoBehaviour {
     public TMP_Text skillPointsText;
     public int skillPoints = 8;
 
-    private MechanicButton[] buttons;
+    [HideInInspector] public MechanicButton[] buttons;
     private PlayerFSM player;
     private Menu menu;
 
@@ -39,7 +39,8 @@ public class MechanicsMenu : MonoBehaviour {
     private void OnEnable() {
         mechanics.SaveState();
         changedMechanics = false;
-        UpdateSkillPointsText();
+        buttons = buttonObjects.GetComponentsInChildren<MechanicButton>();
+        UpdateButtonsState();
     }
 
     void CleanInfo() {
@@ -55,7 +56,7 @@ public class MechanicsMenu : MonoBehaviour {
             button.DeactivateButtonImage();
         }
         changedMechanics = true;
-        UpdateSkillPointsText();
+        UpdateButtonsState();
     }
 
     public void ConfirmMechanics() {
@@ -98,7 +99,7 @@ public class MechanicsMenu : MonoBehaviour {
                 button.DeactivateButtonImage();
             }
         }
-        UpdateSkillPointsText();
+        UpdateButtonsState();
     }
 
     void CheckMenuExitInput() {
@@ -115,5 +116,13 @@ public class MechanicsMenu : MonoBehaviour {
             }
         }
         skillPointsText.text = "Skill Points: " + Convert.ToString(skillPoints);
+    }
+
+    public void UpdateButtonsState() {
+        foreach (var button in buttons) {
+            button.DecideIfIsBlocked();
+            button.SetButtonAppearance();
+            UpdateSkillPointsText();
+        }
     }
 }

@@ -137,6 +137,8 @@ MonoBehaviour:
   mechanicClip: {fileID: 32900000, guid: 72831019234884a4b942d5fc93f6d9a6, type: 3}
   mechanicName: Double Jump
   description: You can jump again, in the air!
+  requirements: []
+  mechanics: {fileID: 11400000, guid: daa8efa45546dec43a6bb1e2bd1561e0, type: 2}
   isBlocked: 0
   isActive: 0
 --- !u!114 &1887519762526184959
