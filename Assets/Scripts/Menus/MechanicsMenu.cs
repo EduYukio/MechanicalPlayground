@@ -61,8 +61,10 @@ public class MechanicsMenu : MonoBehaviour {
 
     public void ConfirmMechanics() {
         // check if all skill points were spent
-        if (changedMechanics && !player.ignoreConfirmationPopup) {
-            OpenConfirmationPopup();
+        if (changedMechanics) {
+            ReloadLevel();
+            // if (changedMechanics && !player.ignoreConfirmationPopup) {
+            //     OpenConfirmationPopup();
         }
         else {
             BackToPauseMenu();
