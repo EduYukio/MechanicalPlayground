@@ -177,15 +177,4 @@ public class PlayerFSM : MonoBehaviour {
             moveSpeed = config.moveSpeedBoosted;
         }
     }
-
-    // private void OnDrawGizmosSelected() {
-    //     Vector3 center = transform.position + new Vector3(1, -0.16f, 0f);
-    //     Vector3 left = center + new Vector3(-3.65f * 0.64f / 2, 0f, 0f);
-    //     Vector3 right = center + new Vector3(+3.65f * 0.64f / 2, 0f, 0f);
-    //     float radius = 3.65f * 0.5f / 2;
-    //     DebugExtension.DebugCapsule(left, right, Color.red, radius);
-
-    //     Gizmos.DrawWireSphere(transform.position + new Vector3(1.5f, -0.12f, 0f), 0.4f);
-    //     Gizmos.DrawWireSphere(transform.position + new Vector3(0, -1.6f, 0f), 0.4f);
-    // }
 }
