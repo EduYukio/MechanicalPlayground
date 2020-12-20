@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerGunBootsState : PlayerBaseState {
     public override void EnterState(PlayerFSM player) {
+        player.animator.Play("PlayerGunBoots");
         Setup(player);
     }
 
@@ -12,8 +13,6 @@ public class PlayerGunBootsState : PlayerBaseState {
             GunBootsAction(player);
             return;
         }
-
-        // PlayAnimationIfCan(player);
 
         if (CheckTransitionToFalling(player)) return;
         if (base.CheckTransitionToWalking(player)) return;
@@ -56,12 +55,4 @@ public class PlayerGunBootsState : PlayerBaseState {
 
         return false;
     }
-
-    // private void PlayAnimationIfCan(PlayerFSM player) {
-    //     if (IsPlayingAnimation("PlayerJump", player)) return;
-    //     if (IsPlayingAnimation("PlayerAttacking", player)) return;
-    //     if (IsPlayingAnimation("PlayerAttackingBoosted", player)) return;
-
-    //     player.animator.Play("PlayerJump");
-    // }
 }
