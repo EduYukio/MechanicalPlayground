@@ -15,6 +15,7 @@ public class PlayerWallSlidingState : PlayerBaseState {
         if (base.CheckTransitionToDashing(player)) return;
         if (base.CheckTransitionToBlinking(player)) return;
         if (base.CheckTransitionToShotgunning(player)) return;
+        if (CheckDettachmentFromWall(player)) return;
 
         if (stickyTimer > 0) {
             WallSlideAction(player);
@@ -58,6 +59,16 @@ public class PlayerWallSlidingState : PlayerBaseState {
         if (stickyTimer <= 0 || !player.isTouchingWall) {
             player.TransitionToState(player.FallingState);
             return true;
+        }
+        return false;
+    }
+
+    public bool CheckDettachmentFromWall(PlayerFSM player) {
+        if (!player.mechanics.IsEnabled("Wall Jump")) {
+            if (Input.GetButtonDown("Jump")) {
+                player.TransitionToState(player.FallingState);
+                return true;
+            }
         }
         return false;
     }
