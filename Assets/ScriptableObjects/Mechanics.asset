@@ -18,7 +18,7 @@ MonoBehaviour:
   - Name: Jump
     Enabled: 1
   - Name: Double Jump
-    Enabled: 0
+    Enabled: 1
   - Name: Dash
     Enabled: 0
   - Name: Attack

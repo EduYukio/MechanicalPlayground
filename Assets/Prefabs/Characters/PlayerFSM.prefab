@@ -308,8 +308,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba6cf3b9f2cf4142a4493531802ac32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreConfirmationPopup: 1
-  ignoreCheckpoints: 1
+  ignoreConfirmationPopup: 0
+  ignoreCheckpoints: 0
   canActivateSlowMotion: 0
   activateSlowMotion: 0
   printDebugStates: 0
@@ -317,6 +317,7 @@ MonoBehaviour:
   config: {fileID: 11400000, guid: 99225b8b90d80ac4886b876914cadcf2, type: 2}
   mechanics: {fileID: 11400000, guid: daa8efa45546dec43a6bb1e2bd1561e0, type: 2}
   platformPrefab: {fileID: 2555538721634559807, guid: 8460e2a49474a9d4b8ea8040d224a3b0, type: 3}
+  bootsBulletPrefab: {fileID: 6032149390923088076, guid: 31d19dcac38f81246ab739e8818132e0, type: 3}
   normalSlash: {fileID: 6109113390298202619}
   boostedSlash: {fileID: 9207082028237954057}
   explosionEffect: {fileID: 0}
@@ -336,6 +337,8 @@ MonoBehaviour:
   attackCooldownTimer: 0
   blinkCooldownTimer: 0
   shieldCooldownTimer: 0
+  shotgunCooldownTimer: 0
+  gunBootsCooldownTimer: 0
   coyoteTimer: 0
   bunnyHopTimer: 0
   parryTimer: 0
