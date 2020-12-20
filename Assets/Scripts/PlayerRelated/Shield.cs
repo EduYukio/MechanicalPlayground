@@ -76,7 +76,7 @@ public class Shield : MonoBehaviour {
     }
 
     public void ReflectBullet(GameObject parriedObject) {
-        Bullet bullet = parriedObject.GetComponent<Bullet>();
+        EnemyBullet bullet = parriedObject.GetComponent<EnemyBullet>();
         if (bullet == null) return;
 
         bullet.alreadyProcessedHit = false;

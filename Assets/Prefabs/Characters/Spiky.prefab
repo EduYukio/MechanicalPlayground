@@ -288,7 +288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   rb: {fileID: 0}
-  maxHealth: 25
+  maxHealth: 10
   currentHealth: 0
   bullet: {fileID: 295229867403493645, guid: 442ac6581c5fe1642924d90ed42a9ec5, type: 3}
   bulletStartTransforms:

@@ -261,7 +261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   rb: {fileID: 0}
-  maxHealth: 25
+  maxHealth: 10
   currentHealth: 0
   moveSpeed: 4
   bullet: {fileID: 295229867403493645, guid: fc0d9a7a544ae9242ae9d6d99fb810c1, type: 3}

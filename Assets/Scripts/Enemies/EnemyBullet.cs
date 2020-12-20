@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Bullet : MonoBehaviour {
+public class EnemyBullet : MonoBehaviour {
     public Rigidbody2D rb;
     public bool alreadyProcessedHit = false;
 

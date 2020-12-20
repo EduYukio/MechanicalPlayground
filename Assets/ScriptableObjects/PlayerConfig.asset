@@ -28,7 +28,7 @@ MonoBehaviour:
   wallSlidingSpeed: 1.75
   startStickyTime: 0.1
   startWallJumpDurationTime: 0.1
-  attackDamage: 10
+  attackDamage: 4
   startAttackCooldownTime: 0.33
   pogoForce: 11
   blinkDistance: 2.8
@@ -49,3 +49,4 @@ MonoBehaviour:
   bootsBulletSpeed: 9
   gunBootsForce: 5
   gunBootsMaxSpeed: 10
+  gunBootsDamage: 1
