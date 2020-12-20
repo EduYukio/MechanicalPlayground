@@ -44,14 +44,6 @@ public class PlayerGunBootsState : PlayerBaseState {
         player.rb.velocity = new Vector2(player.rb.velocity.x, ySpeed);
     }
 
-    // private void PlayAnimationIfCan(PlayerFSM player) {
-    //     if (IsPlayingAnimation("PlayerJump", player)) return;
-    //     if (IsPlayingAnimation("PlayerAttacking", player)) return;
-    //     if (IsPlayingAnimation("PlayerAttackingBoosted", player)) return;
-
-    //     player.animator.Play("PlayerJump");
-    // }
-
     public override bool CheckTransitionToFalling(PlayerFSM player) {
         if (player.isGrounded) return false;
 
@@ -64,4 +56,12 @@ public class PlayerGunBootsState : PlayerBaseState {
 
         return false;
     }
+
+    // private void PlayAnimationIfCan(PlayerFSM player) {
+    //     if (IsPlayingAnimation("PlayerJump", player)) return;
+    //     if (IsPlayingAnimation("PlayerAttacking", player)) return;
+    //     if (IsPlayingAnimation("PlayerAttackingBoosted", player)) return;
+
+    //     player.animator.Play("PlayerJump");
+    // }
 }

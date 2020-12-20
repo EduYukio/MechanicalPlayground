@@ -67,5 +67,6 @@ public class PlayerConfig : ScriptableObject {
     public float bootsBulletSpeed = 6f;
     public float gunBootsForce = 3f;
     public float gunBootsMaxSpeed = 50f;
+    public float gunBootsDamage = 1f;
 }
 
