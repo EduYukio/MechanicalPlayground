@@ -27,7 +27,7 @@ public class PlayerAttackingState : PlayerBaseState {
     }
 
     void Setup(PlayerFSM player) {
-        hitLayers = LayerMask.GetMask("Enemies", "Obstacles", "Projectiles");
+        hitLayers = LayerMask.GetMask("Enemies", "Obstacles", "Projectiles", "BulletEthereal");
         player.attackCooldownTimer = player.config.startAttackCooldownTime;
         isBoosted = player.mechanics.IsEnabled("Range Boost");
         attackDirection = CalculateDirection(player);
