@@ -10,7 +10,7 @@ public class PlayerWallSlidingState : PlayerBaseState {
 
     public override void Update(PlayerFSM player) {
         if (base.CheckTransitionToGunBoots(player)) return;
-        if (base.CheckTransitionToGrounded(player)) return;
+        if (CheckTransitionToGrounded(player)) return;
         if (base.CheckTransitionToWallJumping(player)) return;
         if (base.CheckTransitionToDashing(player)) return;
         if (base.CheckTransitionToBlinking(player)) return;
@@ -61,6 +61,11 @@ public class PlayerWallSlidingState : PlayerBaseState {
             return true;
         }
         return false;
+    }
+
+    public override bool CheckTransitionToGrounded(PlayerFSM player) {
+        if (player.rb.velocity.y > 0) return false;
+        return base.CheckTransitionToGrounded(player);
     }
 
     public bool CheckDettachmentFromWall(PlayerFSM player) {
