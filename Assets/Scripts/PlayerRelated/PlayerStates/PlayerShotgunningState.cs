@@ -24,7 +24,7 @@ public class PlayerShotgunningState : PlayerBaseState {
     void Setup(PlayerFSM player) {
         InputBuffer();
         SetExplosionRanges(player);
-        hitLayers = LayerMask.GetMask("Enemies", "Obstacles", "Projectiles");
+        hitLayers = LayerMask.GetMask("Enemies", "Obstacles", "Projectiles", "Gate");
         player.shotgunCooldownTimer = player.config.startShotgunCooldownTime;
     }
 
@@ -51,8 +51,9 @@ public class PlayerShotgunningState : PlayerBaseState {
 
     void CheckDestroyObject(PlayerFSM player, Collider2D colliderHit) {
         bool hitObstacle = colliderHit.gameObject.layer == LayerMask.NameToLayer("Obstacles");
+        bool hitGate = colliderHit.gameObject.layer == LayerMask.NameToLayer("Gate");
         bool hitProjectile = colliderHit.gameObject.CompareTag("Projectile");
-        if (hitObstacle || hitProjectile) {
+        if (hitObstacle || hitProjectile || hitGate) {
             MonoBehaviour.Destroy(colliderHit.gameObject);
         }
     }

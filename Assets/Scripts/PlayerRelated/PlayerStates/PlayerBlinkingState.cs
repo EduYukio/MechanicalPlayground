@@ -57,15 +57,15 @@ public class PlayerBlinkingState : PlayerBaseState {
     Vector3 ValidDestinationPosition(PlayerFSM player, Vector3 blinkDirection) {
         float distance = player.config.blinkDistance;
         Vector3 finalPosition = blinkDirection * distance;
-        LayerMask groundLayer = LayerMask.GetMask("Ground");
+        LayerMask invalidLayers = LayerMask.GetMask("Ground", "Gate");
         float radius = player.config.blinkGroundCheckRadius;
         float step = 0.1f;
 
-        Collider2D[] destinationColliders = Physics2D.OverlapCircleAll(player.transform.localPosition + finalPosition, radius, groundLayer);
+        Collider2D[] destinationColliders = Physics2D.OverlapCircleAll(player.transform.localPosition + finalPosition, radius, invalidLayers);
         while (destinationColliders.Length > 0) {
             distance = distance - step;
             finalPosition = blinkDirection * distance;
-            destinationColliders = Physics2D.OverlapCircleAll(player.transform.localPosition + finalPosition, radius, groundLayer);
+            destinationColliders = Physics2D.OverlapCircleAll(player.transform.localPosition + finalPosition, radius, invalidLayers);
         }
 
         return finalPosition;

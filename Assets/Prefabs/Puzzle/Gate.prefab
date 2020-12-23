@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 3241342182808679069}
   - component: {fileID: 3241342182808679064}
   - component: {fileID: 3241342182808679068}
-  m_Layer: 12
+  m_Layer: 15
   m_Name: Gate
-  m_TagString: Obstacle
+  m_TagString: Gate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

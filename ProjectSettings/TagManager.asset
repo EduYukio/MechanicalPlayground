@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - Shield
   - Projectile
+  - Gate
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - Obstacles
   - ParriedBullet
   - Projectiles
-  - 
+  - Gate
   - 
   - 
   - 

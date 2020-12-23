@@ -37,8 +37,9 @@ public class TrunkMovingState : TrunkBaseState {
                     bool isWall = obj.collider.CompareTag("Ground");
                     bool isEnemy = obj.collider.CompareTag("Enemy");
                     bool isObstacle = obj.collider.CompareTag("Obstacle");
+                    bool isGate = obj.collider.CompareTag("Gate");
 
-                    bool hasHitObstacle = isObstacle || isWall || isEnemy;
+                    bool hasHitObstacle = isObstacle || isWall || isEnemy || isGate;
                     if (hasHitObstacle) {
                         return true;
                     }

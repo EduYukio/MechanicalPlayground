@@ -82,6 +82,7 @@ public abstract class TrunkBaseState {
             foreach (var obj in frontRay) {
                 if (obj.collider != null && obj.collider.CompareTag("Ground")) return false;
                 if (obj.collider != null && obj.collider.CompareTag("Obstacle")) return false;
+                if (obj.collider != null && obj.collider.CompareTag("Gate")) return false;
                 if (obj.collider != null && obj.collider.CompareTag("Player")) return true;
             }
         }

@@ -19,7 +19,8 @@ public class GunBullet : MonoBehaviour {
 
         bool hitGround = collidedObj.CompareTag("Ground");
         bool hitObstacle = collidedObj.CompareTag("Obstacle");
-        bool shouldAutoDestroy = hitEnemy || hitGround || hitObstacle;
+        bool hitGate = collidedObj.CompareTag("Gate");
+        bool shouldAutoDestroy = hitEnemy || hitGround || hitObstacle || hitGate;
 
         if (shouldAutoDestroy) Destroy(gameObject);
     }

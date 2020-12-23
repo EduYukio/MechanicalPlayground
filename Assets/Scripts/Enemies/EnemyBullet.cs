@@ -28,7 +28,8 @@ public class EnemyBullet : MonoBehaviour {
         bool hitPlayer = collidedObj.CompareTag("Player");
         bool hitGround = collidedObj.CompareTag("Ground");
         bool hitObstacle = collidedObj.CompareTag("Obstacle");
-        bool shouldAutoDestroy = hitPlayer || hitGround || hitObstacle;
+        bool hitGate = collidedObj.CompareTag("Gate");
+        bool shouldAutoDestroy = hitPlayer || hitGround || hitObstacle || hitGate;
 
         if (shouldAutoDestroy) Destroy(gameObject);
         if (hitPlayer) KillPlayer(collidedObj);
