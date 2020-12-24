@@ -49,7 +49,7 @@ MonoBehaviour:
     Enabled: 0
   - Name: Destroy Projectile
     Enabled: 0
-  - Name: Pogo
+  - Name: Pogo Jump
     Enabled: 0
   - Name: Shotgun
     Enabled: 0

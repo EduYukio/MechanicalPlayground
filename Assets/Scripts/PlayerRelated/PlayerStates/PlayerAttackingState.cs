@@ -80,7 +80,7 @@ public class PlayerAttackingState : PlayerBaseState {
     }
 
     void CheckPogo(PlayerFSM player, Collider2D colliderHit) {
-        if (!player.mechanics.IsEnabled("Pogo")) return;
+        if (!player.mechanics.IsEnabled("Pogo Jump")) return;
 
         bool hitEnemy = colliderHit.gameObject.layer == LayerMask.NameToLayer("Enemies");
         bool hitProjectile = colliderHit.gameObject.layer == LayerMask.NameToLayer("Projectiles");
@@ -136,7 +136,7 @@ public class PlayerAttackingState : PlayerBaseState {
     }
 
     public bool CheckTransitionToPogoing(PlayerFSM player) {
-        if (!player.mechanics.IsEnabled("Pogo")) return false;
+        if (!player.mechanics.IsEnabled("Pogo Jump")) return false;
 
         if (shouldPogo) {
             shouldPogo = false;

@@ -32896,7 +32896,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184956, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: mechanicName
-      value: Pogo
+      value: Pogo Jump
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762526184956, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: description
@@ -32912,7 +32912,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762786928088, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: m_text
-      value: Pogo
+      value: Pogo Jump
       objectReference: {fileID: 0}
     - target: {fileID: 1887519762786928088, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: m_fontSize
