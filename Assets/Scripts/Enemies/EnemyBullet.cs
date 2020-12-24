@@ -3,9 +3,14 @@ using UnityEngine;
 public class EnemyBullet : MonoBehaviour {
     public Rigidbody2D rb;
     public bool alreadyProcessedHit = false;
+    public float initialSpeed;
+    public Vector3 initialDirection;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
+        if (initialSpeed != 0f) {
+            rb.velocity = initialDirection * initialSpeed;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
