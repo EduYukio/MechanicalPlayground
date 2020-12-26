@@ -40,7 +40,7 @@ public class PlayerFSM : MonoBehaviour {
     public GameObject bootsBulletPrefab;
     public GameObject normalSlash;
     public GameObject boostedSlash;
-    public GameObject explosionEffect;
+    public GameObject explosionPrefab;
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Animator animator;
     [HideInInspector] public SpriteRenderer spriteRenderer;

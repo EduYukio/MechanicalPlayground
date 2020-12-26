@@ -4,11 +4,8 @@ public class PlayerShotgunningState : PlayerBaseState {
     public LayerMask hitLayers;
     float xInput, yInput;
     Vector3 rightDistance, leftDistance, upDistance, downDistance;
-    Animator explosionAnimator;
 
     public override void EnterState(PlayerFSM player) {
-        explosionAnimator = player.explosionEffect.GetComponent<Animator>();
-        explosionAnimator.Play("Explosion");
         player.animator.Play("PlayerShotgunning");
         Setup(player);
         ShotgunAction(player);
@@ -31,7 +28,8 @@ public class PlayerShotgunningState : PlayerBaseState {
     void ShotgunAction(PlayerFSM player) {
         Vector3 explosionDistance = CalculateExplosionDistance(player);
         Vector3 explosionPosition = player.transform.position + explosionDistance;
-        player.explosionEffect.transform.position = explosionPosition;
+        GameObject explosion = MonoBehaviour.Instantiate(player.explosionPrefab, explosionPosition, Quaternion.identity);
+        explosion.GetComponent<Animator>().Play("Explosion");
 
         Collider2D[] hitTargets = Physics2D.OverlapCircleAll(explosionPosition, player.config.explosionRadius, hitLayers);
         foreach (Collider2D colliderHit in hitTargets) {

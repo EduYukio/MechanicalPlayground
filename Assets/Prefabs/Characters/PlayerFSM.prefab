@@ -320,7 +320,7 @@ MonoBehaviour:
   bootsBulletPrefab: {fileID: 6032149390923088076, guid: 31d19dcac38f81246ab739e8818132e0, type: 3}
   normalSlash: {fileID: 6109113390298202619}
   boostedSlash: {fileID: 9207082028237954057}
-  explosionEffect: {fileID: 0}
+  explosionPrefab: {fileID: 5159955965960736356, guid: 7d4869d9266459840b82a201c6c0411c, type: 3}
   rb: {fileID: 0}
   animator: {fileID: 0}
   spriteRenderer: {fileID: 0}

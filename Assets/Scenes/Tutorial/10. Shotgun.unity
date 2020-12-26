@@ -1914,25 +1914,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5159955965960736356, guid: 7d4869d9266459840b82a201c6c0411c, type: 3}
   m_PrefabInstance: {fileID: 1262531773}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &524631523
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 524631522}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 93ac62237ebbf6543958679217f934b5, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &587904845
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11238,25 +11219,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1457733906168451962, guid: 7d4869d9266459840b82a201c6c0411c, type: 3}
-      propertyPath: m_SortingOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1457733906168451962, guid: 7d4869d9266459840b82a201c6c0411c, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1457733906168451962, guid: 7d4869d9266459840b82a201c6c0411c, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5159955965960736356, guid: 7d4869d9266459840b82a201c6c0411c, type: 3}
       propertyPath: m_Name
       value: Explosion
-      objectReference: {fileID: 0}
-    - target: {fileID: 5159955965960736356, guid: 7d4869d9266459840b82a201c6c0411c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8636589961126555522, guid: 7d4869d9266459840b82a201c6c0411c, type: 3}
       propertyPath: m_LocalPosition.x
