@@ -80,7 +80,7 @@ public class Shield : MonoBehaviour {
         if (bullet == null) return;
 
         bullet.alreadyProcessedHit = false;
-        bullet.rb.velocity = -2 * bullet.rb.velocity;
+        bullet.rb.velocity = -4 * bullet.rb.velocity;
         Vector3 angle = bullet.transform.eulerAngles;
         bullet.transform.eulerAngles = new Vector3(angle.x, angle.y, angle.z + 180);
         bullet.gameObject.layer = LayerMask.NameToLayer("ParriedBullet");
