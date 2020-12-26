@@ -29,10 +29,11 @@ namespace Tests {
             // ~~~~~~~~~~
 
             // Prepare
-            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerFSM.prefab");
+            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Characters/PlayerFSM.prefab");
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 0, 0), Quaternion.identity);
 
             PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.ignoreCheckpoints = true;
             playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
             playerScript.mechanics.Activate("Dash");
@@ -66,10 +67,11 @@ namespace Tests {
             // ~~~~~~~~~~
 
             // Prepare
-            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerFSM.prefab");
+            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Characters/PlayerFSM.prefab");
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 0, 0), Quaternion.identity);
 
             PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.ignoreCheckpoints = true;
             playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
             playerScript.mechanics.Activate("Dash");
@@ -124,10 +126,11 @@ namespace Tests {
             // ~~~~~~~~~~
 
             // Prepare
-            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerFSM.prefab");
+            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Characters/PlayerFSM.prefab");
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 0, 0), Quaternion.identity);
 
             PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.ignoreCheckpoints = true;
             playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
             playerScript.mechanics.Activate("Dash");
@@ -163,10 +166,11 @@ namespace Tests {
             // ~~~~~~~~~~
 
             // Prepare
-            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerFSM.prefab");
+            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Characters/PlayerFSM.prefab");
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 0, 0), Quaternion.identity);
 
             PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.ignoreCheckpoints = true;
             playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
             playerScript.mechanics.Activate("Dash");
@@ -205,10 +209,11 @@ namespace Tests {
             // ~~~~~~~~~~
 
             // Prepare
-            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerFSM.prefab");
+            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Characters/PlayerFSM.prefab");
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 0, 0), Quaternion.identity);
 
             PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.ignoreCheckpoints = true;
             playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
             playerScript.mechanics.Activate("Dash");
@@ -223,7 +228,7 @@ namespace Tests {
 
             float dashDuration = playerScript.config.startDashDurationTime;
 
-            yield return new WaitForSeconds(dashDuration * 1.2f);
+            yield return new WaitForSeconds(dashDuration * 1.5f);
             yield return null;
 
             Assert.IsFalse(player.GetComponent<Rigidbody2D>().velocity.x > 0);

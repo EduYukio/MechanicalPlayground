@@ -29,16 +29,17 @@ namespace Tests {
             // ~~~~~~~~~~
 
             // Prepare
-            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerFSM.prefab");
+            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Characters/PlayerFSM.prefab");
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(0, 0, 0), Quaternion.identity);
 
             PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.ignoreCheckpoints = true;
             playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
             playerScript.mechanics.Activate("Attack");
 
-            var enemyAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Slime.prefab");
-            GameObject enemy = GameObject.Instantiate(enemyAsset, new Vector3(1f, 0, 0), Quaternion.identity);
+            var enemyAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Characters/Trunk.prefab");
+            GameObject enemy = GameObject.Instantiate(enemyAsset, new Vector3(1, -0.8f, 0), Quaternion.identity);
 
             yield return new WaitForSeconds(1f);
 
@@ -48,9 +49,6 @@ namespace Tests {
 
             InputSimulator IS = new InputSimulator();
             IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.VK_X);
-
-            yield return null;
-            Assert.IsTrue(GameObject.Find("Circular").activeSelf);
 
             yield return new WaitForSeconds(0.2f);
 

@@ -29,10 +29,12 @@ namespace Tests {
             // ~~~~~~~~~~
 
             // Prepare
-            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerFSM.prefab");
+            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Characters/PlayerFSM.prefab");
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(-15, 0, 0), Quaternion.identity);
 
             PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.ignoreCheckpoints = true;
+            playerScript.ignoreCheckpoints = true;
             playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
             playerScript.mechanics.Activate("Walk");
@@ -65,10 +67,11 @@ namespace Tests {
             // ~~~~~~~~~~
 
             // Prepare
-            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PlayerFSM.prefab");
+            var playerAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Characters/PlayerFSM.prefab");
             GameObject player = GameObject.Instantiate(playerAsset, new Vector3(-15, 0, 0), Quaternion.identity);
 
             PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
+            playerScript.ignoreCheckpoints = true;
             playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
             playerScript.mechanics.Activate("Walk");
