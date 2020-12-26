@@ -30,7 +30,6 @@ public class Goal : MonoBehaviour {
         yield return new WaitForSecondsRealtime(duration * 2.5f);
         Time.timeScale = 1;
         Checkpoint.ResetCheckPointState();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
