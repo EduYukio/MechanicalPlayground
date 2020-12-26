@@ -145,9 +145,8 @@ public abstract class PlayerBaseState {
 
     public virtual bool CheckTransitionToGunBoots(PlayerFSM player) {
         if (!player.mechanics.IsEnabled("Gun Boots")) return false;
-        // if (player.shotgunCooldownTimer > 0) return false;
 
-        if (Input.GetButton("Gun Boots")) {
+        if (Input.GetAxisRaw("Gun Boots") > 0 || Input.GetButton("Gun Boots")) {
             player.TransitionToState(player.GunBootsState);
             return true;
         }

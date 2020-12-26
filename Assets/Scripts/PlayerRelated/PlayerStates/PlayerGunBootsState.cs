@@ -9,7 +9,7 @@ public class PlayerGunBootsState : PlayerBaseState {
     public override void Update(PlayerFSM player) {
         base.ProcessMovementInput(player);
 
-        while (Input.GetButton("Gun Boots")) {
+        if (Input.GetAxisRaw("Gun Boots") > 0 || Input.GetButton("Gun Boots")) {
             GunBootsAction(player);
             return;
         }
