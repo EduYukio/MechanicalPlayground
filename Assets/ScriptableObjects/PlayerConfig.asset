@@ -38,7 +38,7 @@ MonoBehaviour:
   startBlinkCooldownTime: 0.3
   moveSpeedBoosted: 8
   startShieldCooldownTime: 0.75
-  startParryTime: 0.15
+  startParryTime: 0.125
   parryPauseDuration: 0.2
   startShotgunCooldownTime: 0.5
   explosionRadius: 0.5
