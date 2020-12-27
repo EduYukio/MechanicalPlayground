@@ -8,6 +8,7 @@ using UnityEngine;
 public class Mechanics : ScriptableObject {
     public List<Mechanic> mechanicList = new List<Mechanic>();
     private List<Mechanic> savedState = new List<Mechanic>();
+    public static Action MechanicChanged;
 
     public void ResetMechanics() {
         foreach (var mechanic in mechanicList) {
@@ -42,6 +43,7 @@ public class Mechanics : ScriptableObject {
         Mechanic mechanic = GetMechanic(name, mechanicList);
         if (mechanic != null) {
             mechanic.Enabled = true;
+            MechanicChanged.Invoke();
         }
     }
 
@@ -49,6 +51,7 @@ public class Mechanics : ScriptableObject {
         Mechanic mechanic = GetMechanic(name, mechanicList);
         if (mechanic != null) {
             mechanic.Enabled = false;
+            MechanicChanged.Invoke();
         }
     }
 

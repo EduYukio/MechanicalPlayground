@@ -3,6 +3,18 @@ using UnityEngine;
 
 public class Spike : MonoBehaviour {
     private void Start() {
+        CheckInvulnerability();
+    }
+
+    private void OnEnable() {
+        Mechanics.MechanicChanged += CheckInvulnerability;
+    }
+
+    private void OnDisable() {
+        Mechanics.MechanicChanged -= CheckInvulnerability;
+    }
+
+    private void CheckInvulnerability() {
         GameObject playerObj = GameObject.Find("PlayerFSM");
         if (PlayerIsInvulnerableToSpike(playerObj)) {
             gameObject.tag = "Ground";
