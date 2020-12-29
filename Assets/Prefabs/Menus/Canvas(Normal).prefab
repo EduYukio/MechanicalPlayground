@@ -226,6 +226,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2154335241303310607}
+    - target: {fileID: 1049133017725060131, guid: ea345f1c9c646dd48a8b2687aa490440, type: 3}
+      propertyPath: m_text
+      value: Skills
+      objectReference: {fileID: 0}
     - target: {fileID: 1049133017767737678, guid: ea345f1c9c646dd48a8b2687aa490440, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -363,6 +367,30 @@ PrefabInstance:
     - target: {fileID: 5450945894461547099, guid: bc23bb3a058c60649a0e827e84b22e42, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5450945895537777837, guid: bc23bb3a058c60649a0e827e84b22e42, type: 3}
+      propertyPath: m_text
+      value: Skill Name
+      objectReference: {fileID: 0}
+    - target: {fileID: 5878454599409681135, guid: bc23bb3a058c60649a0e827e84b22e42, type: 3}
+      propertyPath: requirements.Array.data[4]
+      value: Pogo Jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 5878454599514868923, guid: bc23bb3a058c60649a0e827e84b22e42, type: 3}
+      propertyPath: m_text
+      value: Pogo Jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 5878454600180544913, guid: bc23bb3a058c60649a0e827e84b22e42, type: 3}
+      propertyPath: requirements.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5878454600180544913, guid: bc23bb3a058c60649a0e827e84b22e42, type: 3}
+      propertyPath: requirements.Array.data[1]
+      value: Shield
+      objectReference: {fileID: 0}
+    - target: {fileID: 5878454600864803999, guid: bc23bb3a058c60649a0e827e84b22e42, type: 3}
+      propertyPath: mechanicName
+      value: Pogo Jump
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc23bb3a058c60649a0e827e84b22e42, type: 3}
