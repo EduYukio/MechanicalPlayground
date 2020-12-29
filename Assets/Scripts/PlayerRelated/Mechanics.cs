@@ -43,7 +43,7 @@ public class Mechanics : ScriptableObject {
         Mechanic mechanic = GetMechanic(name, mechanicList);
         if (mechanic != null) {
             mechanic.Enabled = true;
-            MechanicChanged.Invoke();
+            MechanicChanged?.Invoke();
         }
     }
 
@@ -51,7 +51,7 @@ public class Mechanics : ScriptableObject {
         Mechanic mechanic = GetMechanic(name, mechanicList);
         if (mechanic != null) {
             mechanic.Enabled = false;
-            MechanicChanged.Invoke();
+            MechanicChanged?.Invoke();
         }
     }
 
