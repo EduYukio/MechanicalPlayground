@@ -19,7 +19,7 @@ public class MechanicsMenu : MonoBehaviour {
     public GameObject popupSaveButton;
     public bool changedMechanics = false;
     public TMP_Text skillPointsText;
-    public int skillPoints = 8;
+    public int skillPoints;
 
     [HideInInspector] public MechanicButton[] buttons;
     private PlayerFSM player;
@@ -30,6 +30,7 @@ public class MechanicsMenu : MonoBehaviour {
         buttons = buttonObjects.GetComponentsInChildren<MechanicButton>();
         player = GameObject.FindObjectOfType<PlayerFSM>();
         menu = GameObject.FindObjectOfType<Menu>();
+        skillPoints = player.config.skillPoints;
     }
 
     private void Update() {
@@ -111,7 +112,7 @@ public class MechanicsMenu : MonoBehaviour {
     }
 
     public void UpdateSkillPointsText() {
-        skillPoints = 8;
+        skillPoints = player.config.skillPoints;
         foreach (var button in buttons) {
             if (mechanics.IsEnabled(button.mechanicName)) {
                 skillPoints--;
