@@ -6,48 +6,63 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/Scenes/Menus/MainMenu.unity
     guid: d2932b5a5e9a90e4184aa76382d43723
   - enabled: 1
-    path: Assets/Scenes/Tutorial/1. DoubleJump.unity
+    path: Assets/Scenes/Levels/Tutorial/1. DoubleJump.unity
     guid: 5207c5ecd7093fa4cb8cfbc9b2c4f1ad
   - enabled: 1
-    path: Assets/Scenes/Tutorial/2. Dash.unity
+    path: Assets/Scenes/Levels/Tutorial/2. Dash.unity
     guid: 4a9c649c027660648aad726be0848d2e
   - enabled: 1
-    path: Assets/Scenes/Tutorial/3. Ethereal Dash.unity
+    path: Assets/Scenes/Levels/Tutorial/3. Ethereal Dash.unity
     guid: fd5f587f797fb504492d059a9e8c846e
   - enabled: 1
-    path: Assets/Scenes/Tutorial/4. Wall Slide.unity
+    path: Assets/Scenes/Levels/Tutorial/4. Wall Slide.unity
     guid: 75a4f86a2ea73044e864f696f01ef923
   - enabled: 1
-    path: Assets/Scenes/Tutorial/5. Wall Jump.unity
+    path: Assets/Scenes/Levels/Tutorial/5. Wall Jump.unity
     guid: 632b70bca15bdc445afda088642a54ea
   - enabled: 1
-    path: Assets/Scenes/Tutorial/6. Blink.unity
+    path: Assets/Scenes/Levels/Tutorial/6. Blink.unity
     guid: 0c99e9b4839835347b8c362dd156d600
   - enabled: 1
-    path: Assets/Scenes/Tutorial/7. Melee Attack.unity
+    path: Assets/Scenes/Levels/Tutorial/7. Melee Attack.unity
     guid: eb80ec5e05c5165479ce45d0987d6390
   - enabled: 1
-    path: Assets/Scenes/Tutorial/8. Pogo Jump.unity
+    path: Assets/Scenes/Levels/Tutorial/8. Pogo Jump.unity
     guid: d841862befd4ec34b8aa66ac6c1fe28b
   - enabled: 1
-    path: Assets/Scenes/Tutorial/9. Gun Boots.unity
+    path: Assets/Scenes/Levels/Tutorial/9. Gun Boots.unity
     guid: 26d32dcafb64f4849acda14c7d03ec71
   - enabled: 1
-    path: Assets/Scenes/Tutorial/10. Shotgun.unity
+    path: Assets/Scenes/Levels/Tutorial/10. Shotgun.unity
     guid: 6fc956d4cbe0ff94b8d1093c8d421649
   - enabled: 1
-    path: Assets/Scenes/Tutorial/11. Shield.unity
+    path: Assets/Scenes/Levels/Tutorial/11. Shield.unity
     guid: f0a434edc285b9e43999db10c6316e70
   - enabled: 1
-    path: Assets/Scenes/LevelsPrototype.unity
-    guid: c9108291e8464274a92547b370561ed1
+    path: Assets/Scenes/Levels/Tutorial/12. Create Platform.unity
+    guid: d0ff5cd068c420345bd212703a53069a
   - enabled: 1
-    path: Assets/Scenes/Credits.unity
+    path: Assets/Scenes/Levels/Tutorial/13. Spike-Saw Invul.unity
+    guid: cdea11197a8edde4eb4bad601ecbbebf
+  - enabled: 1
+    path: Assets/Scenes/Levels/14. BeeLevel.unity
+    guid: d3b2cb0a787b3ae4d895580f8ebfbac4
+  - enabled: 1
+    path: Assets/Scenes/Levels/15. LayersLevel.unity
+    guid: 38ae06061c3d89d4fbf159f936d3f6df
+  - enabled: 1
+    path: Assets/Scenes/Menus/Credits.unity
     guid: f2f58525cc925684b940ac042ebf98b3
   - enabled: 1
-    path: Assets/Scenes/TestScene.unity
+    path: Assets/Scenes/TestLevels/FirstPrototype.unity
+    guid: 2eff2325c69d6c64587fda7d8c49c23c
+  - enabled: 1
+    path: Assets/Scenes/TestLevels/LevelsPrototype.unity
+    guid: c9108291e8464274a92547b370561ed1
+  - enabled: 1
+    path: Assets/Scenes/TestLevels/TestScene.unity
     guid: c07b4a6b06e03624bac1a7eff59154c9
   m_configObjects: {}
