@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,7 +13,7 @@ public class BeeFSM : Enemy {
 
     public GameObject bulletPrefab;
     public Transform bulletSpawnTransform;
-    public Transform bulletDirection;
+    public Transform bulletDirectionTransform;
     public float bulletSpeed = 2f;
     public float moveSpeed = 3f;
     public float distanceToMove = 3f;
@@ -76,7 +76,7 @@ public class BeeFSM : Enemy {
 
     public void SpawnBullet(Vector3 spawnPosition) {
         GameObject bullet = MonoBehaviour.Instantiate(bulletPrefab, spawnPosition, transform.rotation);
-        Vector2 direction = (bulletDirection.position - bulletSpawnTransform.position).normalized;
+        Vector3 direction = CalculateDirection();
         bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
     }
 
@@ -86,7 +86,7 @@ public class BeeFSM : Enemy {
         float delta_t = startAttackCooldownTimer;
         float distance = bulletSpeed * delta_t;
 
-        Vector3 direction = (bulletDirection.position - bulletSpawnTransform.position).normalized;
+        Vector3 direction = CalculateDirection();
         float timeStep = bulletSpawnTimerSyncedWithAnimation + startAttackCooldownTimer;
         Vector3 initialPosition = bulletSpawnTransform.position;
         while (distance < maxLength) {
@@ -101,7 +101,7 @@ public class BeeFSM : Enemy {
         float arbitraryMaxLength = 100f;
         int layersToCollide = LayerMask.GetMask("Ground", "Obstacles", "Gate");
 
-        Vector3 direction = (bulletDirection.position - bulletSpawnTransform.position).normalized;
+        Vector3 direction = CalculateDirection();
         RaycastHit2D frontRay = Physics2D.Raycast(bulletSpawnTransform.position, direction, arbitraryMaxLength, layersToCollide);
 
         if (frontRay.collider == null) {
@@ -119,5 +119,9 @@ public class BeeFSM : Enemy {
         }
 
         return arbitraryMaxLength;
+    }
+
+    Vector3 CalculateDirection() {
+        return (bulletDirectionTransform.position - bulletSpawnTransform.position).normalized;
     }
 }
