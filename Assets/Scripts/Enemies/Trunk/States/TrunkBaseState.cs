@@ -64,14 +64,7 @@ public abstract class TrunkBaseState {
     }
 
     public Vector2 CalculateDirection(TrunkFSM trunk) {
-        Vector2 direction;
-        if (trunk.transform.eulerAngles.y == 0) {
-            direction = Vector2.left;
-        }
-        else {
-            direction = Vector2.right;
-        }
-        return direction;
+        return (trunk.bulletDirectionTransform.position - trunk.bulletSpawnTransform.position).normalized;
     }
 
     public bool PlayerIsOnSight(TrunkFSM trunk) {

@@ -22,17 +22,12 @@ public class TrunkAttackingState : TrunkBaseState {
     }
 
     void Setup(TrunkFSM trunk) {
-        attackingTimer = Helper.GetAnimationDuration("Attacking", trunk.animator) * 0.7f;
+        attackingTimer = trunk.bulletSpawnTimerSyncedWithAnimation;
         trunk.rb.velocity = Vector2.zero;
     }
 
     void AttackAction(TrunkFSM trunk) {
-        Vector2 direction = CalculateDirection(trunk);
-
-        Transform spawnTransform = trunk.bulletSpawnPosition;
-        GameObject bullet = MonoBehaviour.Instantiate(trunk.bullet, spawnTransform.position, trunk.transform.rotation);
-        bullet.GetComponent<Rigidbody2D>().velocity = direction * trunk.bulletSpeed;
-
+        trunk.SpawnBullet(trunk.bulletSpawnTransform.position);
         trunk.attackCooldownTimer = trunk.startAttackCooldownTimer;
     }
 }

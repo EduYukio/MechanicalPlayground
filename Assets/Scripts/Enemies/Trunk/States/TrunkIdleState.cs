@@ -5,12 +5,13 @@ public class TrunkIdleState : TrunkBaseState {
     float idleTimer;
 
     public override void EnterState(TrunkFSM trunk) {
-        trunk.animator.Play("Idle");
+        PlayAnimationIfCan(trunk);
         Setup(trunk);
         IdleAction(trunk);
     }
 
     public override void Update(TrunkFSM trunk) {
+        PlayAnimationIfCan(trunk);
         if (base.CheckTransitionToBeingHit(trunk)) return;
         if (base.CheckTransitionToAttacking(trunk)) return;
 
@@ -28,5 +29,12 @@ public class TrunkIdleState : TrunkBaseState {
 
     void IdleAction(TrunkFSM trunk) {
         trunk.rb.velocity = Vector2.zero;
+    }
+
+    private void PlayAnimationIfCan(TrunkFSM trunk) {
+        if (Helper.IsPlayingAnimation("Attacking", trunk.animator)) return;
+        if (Helper.IsPlayingAnimation("Idle", trunk.animator)) return;
+
+        trunk.animator.Play("Idle");
     }
 }
