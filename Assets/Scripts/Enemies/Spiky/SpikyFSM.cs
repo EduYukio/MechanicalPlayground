@@ -12,7 +12,7 @@ public class SpikyFSM : Enemy {
     public readonly SpikyBeingHitState BeingHitState = new SpikyBeingHitState();
     public readonly SpikyDyingState DyingState = new SpikyDyingState();
 
-    public GameObject bullet;
+    public GameObject bulletPrefab;
     public Transform[] bulletStartTransforms;
     public Transform[] bulletEndTransforms;
     public float bulletSpeed = 2f;
@@ -50,5 +50,27 @@ public class SpikyFSM : Enemy {
     private void ProcessTimers() {
         float step = Time.deltaTime;
         if (attackCooldownTimer >= 0) attackCooldownTimer -= step;
+    }
+
+    public void SpawnBullets(Vector3[] spawnPositions, Vector3[] spawnAngles) {
+        Vector2[] bulletDirections = CalculateDirections();
+
+        for (int i = 0; i < bulletDirections.Length; i++) {
+            GameObject bullet = MonoBehaviour.Instantiate(bulletPrefab, spawnPositions[i], Quaternion.identity);
+            bullet.transform.eulerAngles = spawnAngles[i];
+            bullet.GetComponent<Rigidbody2D>().velocity = bulletDirections[i] * bulletSpeed;
+        }
+    }
+
+    Vector2[] CalculateDirections() {
+        Vector2[] bulletDirections = new Vector2[5];
+        Transform[] end = bulletEndTransforms;
+        Transform[] start = bulletStartTransforms;
+
+        for (int i = 0; i < bulletDirections.Length; i++) {
+            bulletDirections[i] = (end[i].position - start[i].position).normalized;
+        }
+
+        return bulletDirections;
     }
 }

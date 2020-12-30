@@ -24,21 +24,17 @@ public class SpikyAttackingState : SpikyBaseState {
 
     void Setup(SpikyFSM spiky) {
         attackingTimer = Helper.GetAnimationDuration("Attacking", spiky.animator);
-        Transform[] end = spiky.bulletEndTransforms;
-        Transform[] start = spiky.bulletStartTransforms;
-        for (int i = 0; i < bulletDirections.Length; i++) {
-            bulletDirections[i] = (end[i].position - start[i].position).normalized;
-        }
     }
 
     void AttackAction(SpikyFSM spiky) {
-        for (int i = 0; i < bulletDirections.Length; i++) {
-            Transform spawnTransform = spiky.bulletStartTransforms[i];
-            GameObject bullet = MonoBehaviour.Instantiate(spiky.bullet, spawnTransform.position, Quaternion.identity);
-            bullet.transform.eulerAngles = spawnTransform.eulerAngles;
-            bullet.GetComponent<Rigidbody2D>().velocity = bulletDirections[i] * spiky.bulletSpeed;
+        Transform[] spawnTransforms = spiky.bulletStartTransforms;
+        Vector3[] spawnPositions = new Vector3[5];
+        Vector3[] spawnAngles = new Vector3[5];
+        for (int i = 0; i < spawnTransforms.Length; i++) {
+            spawnPositions[i] = spawnTransforms[i].position;
+            spawnAngles[i] = spawnTransforms[i].eulerAngles;
         }
-
+        spiky.SpawnBullets(spawnPositions, spawnAngles);
         spiky.attackCooldownTimer = spiky.startAttackCooldownTimer;
     }
 }

@@ -290,7 +290,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   maxHealth: 10
   currentHealth: 0
-  bullet: {fileID: 295229867403493645, guid: 442ac6581c5fe1642924d90ed42a9ec5, type: 3}
+  bulletPrefab: {fileID: 295229867403493645, guid: 442ac6581c5fe1642924d90ed42a9ec5, type: 3}
   bulletStartTransforms:
   - {fileID: 3197936860518604601}
   - {fileID: 4471357042532641701}
