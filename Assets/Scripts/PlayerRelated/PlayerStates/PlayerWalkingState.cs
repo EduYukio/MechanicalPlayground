@@ -35,10 +35,10 @@ public class PlayerWalkingState : PlayerBaseState {
     }
 
     private void PlayAnimationIfCan(PlayerFSM player) {
-        if (IsPlayingAnimation("PlayerWalk", player)) return;
-        if (IsPlayingAnimation("PlayerAttacking", player)) return;
-        if (IsPlayingAnimation("PlayerAttackingBoosted", player)) return;
-        if (IsPlayingAnimation("PlayerShotgunning", player)) return;
+        if (Helper.IsPlayingAnimation("PlayerWalk", player.animator)) return;
+        if (Helper.IsPlayingAnimation("PlayerAttacking", player.animator)) return;
+        if (Helper.IsPlayingAnimation("PlayerAttackingBoosted", player.animator)) return;
+        if (Helper.IsPlayingAnimation("PlayerShotgunning", player.animator)) return;
 
         player.animator.Play("PlayerWalk");
     }

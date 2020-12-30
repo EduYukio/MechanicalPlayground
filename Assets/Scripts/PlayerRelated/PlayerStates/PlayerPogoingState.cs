@@ -30,9 +30,9 @@ public class PlayerPogoingState : PlayerBaseState {
     }
 
     private void PlayAnimationIfCan(PlayerFSM player) {
-        if (IsPlayingAnimation("PlayerJump", player)) return;
-        if (IsPlayingAnimation("PlayerAttacking", player)) return;
-        if (IsPlayingAnimation("PlayerAttackingBoosted", player)) return;
+        if (Helper.IsPlayingAnimation("PlayerJump", player.animator)) return;
+        if (Helper.IsPlayingAnimation("PlayerAttacking", player.animator)) return;
+        if (Helper.IsPlayingAnimation("PlayerAttackingBoosted", player.animator)) return;
 
         player.animator.Play("PlayerJump");
     }

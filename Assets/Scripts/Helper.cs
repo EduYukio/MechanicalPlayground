@@ -12,4 +12,8 @@ public static class Helper {
         Debug.Log("ERROR! No clip with this name was found: " + clipName);
         return 0;
     }
+
+    public static bool IsPlayingAnimation(string stateName, Animator animator) {
+        return animator.GetCurrentAnimatorStateInfo(0).IsName(stateName);
+    }
 }

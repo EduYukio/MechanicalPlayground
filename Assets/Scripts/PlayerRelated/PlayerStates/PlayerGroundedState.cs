@@ -29,12 +29,12 @@ public class PlayerGroundedState : PlayerBaseState {
     }
 
     private void PlayAnimationIfCan(PlayerFSM player) {
-        if (IsPlayingAnimation("PlayerIdle", player)) return;
-        if (IsPlayingAnimation("PlayerAttacking", player)) return;
-        if (IsPlayingAnimation("PlayerAttackingBoosted", player)) return;
-        if (IsPlayingAnimation("PlayerAppear", player)) return;
-        if (IsPlayingAnimation("PlayerDisappear", player)) return;
-        if (IsPlayingAnimation("PlayerShotgunning", player)) return;
+        if (Helper.IsPlayingAnimation("PlayerIdle", player.animator)) return;
+        if (Helper.IsPlayingAnimation("PlayerAttacking", player.animator)) return;
+        if (Helper.IsPlayingAnimation("PlayerAttackingBoosted", player.animator)) return;
+        if (Helper.IsPlayingAnimation("PlayerAppear", player.animator)) return;
+        if (Helper.IsPlayingAnimation("PlayerDisappear", player.animator)) return;
+        if (Helper.IsPlayingAnimation("PlayerShotgunning", player.animator)) return;
 
         player.animator.Play("PlayerIdle");
     }

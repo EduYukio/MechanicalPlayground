@@ -207,9 +207,5 @@ public abstract class PlayerBaseState {
         }
     }
 
-    public bool IsPlayingAnimation(string stateName, PlayerFSM player) {
-        return player.animator.GetCurrentAnimatorStateInfo(0).IsName(stateName);
-    }
-
     #endregion
 }

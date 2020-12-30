@@ -41,12 +41,12 @@ public class PlayerFallingState : PlayerBaseState {
     }
 
     void PlayAnimationIfCan(PlayerFSM player) {
-        if (IsPlayingAnimation("PlayerFall", player)) return;
-        if (IsPlayingAnimation("PlayerDoubleJump", player)) return;
-        if (IsPlayingAnimation("PlayerAttacking", player)) return;
-        if (IsPlayingAnimation("PlayerAttackingBoosted", player)) return;
-        if (IsPlayingAnimation("PlayerAppear", player)) return;
-        if (IsPlayingAnimation("PlayerShotgunning", player)) return;
+        if (Helper.IsPlayingAnimation("PlayerFall", player.animator)) return;
+        if (Helper.IsPlayingAnimation("PlayerDoubleJump", player.animator)) return;
+        if (Helper.IsPlayingAnimation("PlayerAttacking", player.animator)) return;
+        if (Helper.IsPlayingAnimation("PlayerAttackingBoosted", player.animator)) return;
+        if (Helper.IsPlayingAnimation("PlayerAppear", player.animator)) return;
+        if (Helper.IsPlayingAnimation("PlayerShotgunning", player.animator)) return;
 
         player.animator.Play("PlayerFall");
     }
