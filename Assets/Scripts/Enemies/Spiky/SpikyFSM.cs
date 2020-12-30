@@ -18,15 +18,20 @@ public class SpikyFSM : Enemy {
     public float bulletSpeed = 2f;
     public float startAttackCooldownTimer = 1.5f;
     public float attackCooldownTimer = 0;
+    [HideInInspector] public float bulletSpawnTimerSyncedWithAnimation;
     [HideInInspector] public bool isBeingHit = false;
     [HideInInspector] public SpriteRenderer spriteRenderer;
 
-    private void Start() {
-        currentHealth = maxHealth;
+    private void Awake() {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        bulletSpawnTimerSyncedWithAnimation = Helper.GetAnimationDuration("Attacking", animator);
+        PreInstantiateBullets();
+    }
 
+    private void Start() {
+        currentHealth = maxHealth;
         attackCooldownTimer = 0f;
         TransitionToState(IdleState);
     }
@@ -52,18 +57,14 @@ public class SpikyFSM : Enemy {
         if (attackCooldownTimer >= 0) attackCooldownTimer -= step;
     }
 
-    public void SpawnBullets(Vector3[] spawnPositions, Vector3[] spawnAngles) {
-        Vector2[] bulletDirections = CalculateDirections();
-
-        for (int i = 0; i < bulletDirections.Length; i++) {
-            GameObject bullet = MonoBehaviour.Instantiate(bulletPrefab, spawnPositions[i], Quaternion.identity);
-            bullet.transform.eulerAngles = spawnAngles[i];
-            bullet.GetComponent<Rigidbody2D>().velocity = bulletDirections[i] * bulletSpeed;
-        }
+    public void SpawnBullet(Vector3 spawnPosition, Vector3 spawnAngle, Vector3 direction) {
+        GameObject bullet = MonoBehaviour.Instantiate(bulletPrefab, spawnPosition, Quaternion.identity);
+        bullet.transform.eulerAngles = spawnAngle;
+        bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
     }
 
-    Vector2[] CalculateDirections() {
-        Vector2[] bulletDirections = new Vector2[5];
+    public Vector3[] CalculateDirections() {
+        Vector3[] bulletDirections = new Vector3[5];
         Transform[] end = bulletEndTransforms;
         Transform[] start = bulletStartTransforms;
 
@@ -72,5 +73,49 @@ public class SpikyFSM : Enemy {
         }
 
         return bulletDirections;
+    }
+
+    void PreInstantiateBullets() {
+        Vector3[] directions = CalculateDirections();
+
+        for (int i = 0; i < directions.Length; i++) {
+            Vector3 initialPosition = bulletStartTransforms[i].position;
+            float maxLength = CalculateMaxRayLength(initialPosition, directions[i]);
+
+            float delta_t = startAttackCooldownTimer;
+            float distance = bulletSpeed * delta_t;
+
+            float timeStep = bulletSpawnTimerSyncedWithAnimation + startAttackCooldownTimer;
+            while (distance < maxLength) {
+                Vector3 spawnPosition = initialPosition + directions[i] * distance;
+                Vector3 spawnAngle = bulletStartTransforms[i].eulerAngles;
+                SpawnBullet(spawnPosition, spawnAngle, directions[i]);
+                delta_t += timeStep;
+                distance = bulletSpeed * delta_t;
+            }
+        }
+    }
+
+    float CalculateMaxRayLength(Vector3 initialPosition, Vector3 direction) {
+        float arbitraryMaxLength = 100f;
+        int layersToCollide = LayerMask.GetMask("Ground", "Obstacles", "Gate");
+
+        RaycastHit2D frontRay = Physics2D.Raycast(initialPosition, direction, arbitraryMaxLength, layersToCollide);
+
+        if (frontRay.collider == null) {
+            return arbitraryMaxLength;
+        }
+
+        bool isGround = frontRay.collider.CompareTag("Ground");
+        bool isObstacle = frontRay.collider.CompareTag("Obstacle");
+        bool isGate = frontRay.collider.CompareTag("Gate");
+
+        bool hitBlockable = isGround || isObstacle || isGate;
+
+        if (hitBlockable) {
+            return frontRay.distance;
+        }
+
+        return arbitraryMaxLength;
     }
 }
