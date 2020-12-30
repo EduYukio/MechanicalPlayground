@@ -81,19 +81,43 @@ public class BeeFSM : Enemy {
     }
 
     void PreInstantiateBullets() {
-        float maxLength = 10f;
+        float maxLength = CalculateMaxRayLength();
 
         float delta_t = startAttackCooldownTimer;
         float distance = bulletSpeed * delta_t;
 
         Vector3 direction = (bulletDirection.position - bulletSpawnTransform.position).normalized;
         float timeStep = bulletSpawnTimerSyncedWithAnimation + startAttackCooldownTimer;
+        Vector3 initialPosition = bulletSpawnTransform.position;
         while (distance < maxLength) {
-            Vector3 initialPosition = bulletSpawnTransform.position;
             Vector3 spawnPosition = initialPosition + direction * distance;
             SpawnBullet(spawnPosition);
             delta_t += timeStep;
             distance = bulletSpeed * delta_t;
         }
+    }
+
+    float CalculateMaxRayLength() {
+        float arbitraryMaxLength = 100f;
+        int layersToCollide = LayerMask.GetMask("Ground", "Obstacles", "Gate");
+
+        Vector3 direction = (bulletDirection.position - bulletSpawnTransform.position).normalized;
+        RaycastHit2D frontRay = Physics2D.Raycast(bulletSpawnTransform.position, direction, arbitraryMaxLength, layersToCollide);
+
+        if (frontRay.collider == null) {
+            return arbitraryMaxLength;
+        }
+
+        bool isGround = frontRay.collider.CompareTag("Ground");
+        bool isObstacle = frontRay.collider.CompareTag("Obstacle");
+        bool isGate = frontRay.collider.CompareTag("Gate");
+
+        bool hitBlockable = isGround || isObstacle || isGate;
+
+        if (hitBlockable) {
+            return frontRay.distance;
+        }
+
+        return arbitraryMaxLength;
     }
 }
