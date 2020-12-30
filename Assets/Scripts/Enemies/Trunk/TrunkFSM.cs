@@ -32,7 +32,7 @@ public class TrunkFSM : Enemy {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        attackCooldownTimer = startAttackCooldownTimer;
+        attackCooldownTimer = 0f;
         TransitionToState(IdleState);
     }
 

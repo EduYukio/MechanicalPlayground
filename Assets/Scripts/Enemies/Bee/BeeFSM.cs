@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -32,7 +32,7 @@ public class BeeFSM : Enemy {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         MoveSetup();
-        attackCooldownTimer = startAttackCooldownTimer;
+        attackCooldownTimer = 0f;
         TransitionToState(MovingState);
     }
 

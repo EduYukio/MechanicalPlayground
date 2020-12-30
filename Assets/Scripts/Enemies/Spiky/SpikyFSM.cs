@@ -27,7 +27,7 @@ public class SpikyFSM : Enemy {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        attackCooldownTimer = startAttackCooldownTimer;
+        attackCooldownTimer = 0f;
         TransitionToState(IdleState);
     }
 
