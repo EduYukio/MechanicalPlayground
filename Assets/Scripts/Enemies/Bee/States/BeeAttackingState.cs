@@ -24,16 +24,11 @@ public class BeeAttackingState : BeeBaseState {
     }
 
     void Setup(BeeFSM bee) {
-        attackingTimer = Helper.GetAnimationDuration("Attacking", bee.animator) * 0.8f;
+        attackingTimer = bee.bulletSpawnTimerSyncedWithAnimation;
     }
 
     void AttackAction(BeeFSM bee) {
-        Transform spawnTransform = bee.bulletSpawnPosition;
-        GameObject bullet = MonoBehaviour.Instantiate(bee.bullet, spawnTransform.position, bee.transform.rotation);
-        Vector2 direction = (bee.bulletDirection.position - bee.bulletSpawnPosition.position).normalized;
-
-        bullet.GetComponent<Rigidbody2D>().velocity = direction * bee.bulletSpeed;
-
+        bee.SpawnBullet(bee.bulletSpawnTransform.position);
         bee.attackCooldownTimer = bee.startAttackCooldownTimer;
     }
 }

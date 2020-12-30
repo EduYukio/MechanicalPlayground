@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,8 +11,8 @@ public class BeeFSM : Enemy {
     public readonly BeeBeingHitState BeingHitState = new BeeBeingHitState();
     public readonly BeeDyingState DyingState = new BeeDyingState();
 
-    public GameObject bullet;
-    public Transform bulletSpawnPosition;
+    public GameObject bulletPrefab;
+    public Transform bulletSpawnTransform;
     public Transform bulletDirection;
     public float bulletSpeed = 2f;
     public float moveSpeed = 3f;
@@ -20,16 +20,22 @@ public class BeeFSM : Enemy {
     public bool moveVertically = true;
     public float startAttackCooldownTimer = 1.5f;
     public float attackCooldownTimer = 0;
+    [HideInInspector] public float bulletSpawnTimerSyncedWithAnimation;
     [HideInInspector] public float initialCoord;
     [HideInInspector] public Vector2 targetPosition;
     [HideInInspector] public bool isBeingHit = false;
     [HideInInspector] public SpriteRenderer spriteRenderer;
 
-    private void Start() {
-        currentHealth = maxHealth;
+    private void Awake() {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        bulletSpawnTimerSyncedWithAnimation = Helper.GetAnimationDuration("Attacking", animator) * 0.625f;
+        PreInstantiateBullets();
+    }
+
+    private void Start() {
+        currentHealth = maxHealth;
 
         MoveSetup();
         attackCooldownTimer = 0f;
@@ -66,5 +72,28 @@ public class BeeFSM : Enemy {
     private void ProcessTimers() {
         float step = Time.deltaTime;
         if (attackCooldownTimer >= 0) attackCooldownTimer -= step;
+    }
+
+    public void SpawnBullet(Vector3 spawnPosition) {
+        GameObject bullet = MonoBehaviour.Instantiate(bulletPrefab, spawnPosition, transform.rotation);
+        Vector2 direction = (bulletDirection.position - bulletSpawnTransform.position).normalized;
+        bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
+    }
+
+    void PreInstantiateBullets() {
+        float maxLength = 10f;
+
+        float delta_t = startAttackCooldownTimer;
+        float distance = bulletSpeed * delta_t;
+
+        Vector3 direction = (bulletDirection.position - bulletSpawnTransform.position).normalized;
+        float timeStep = bulletSpawnTimerSyncedWithAnimation + startAttackCooldownTimer;
+        while (distance < maxLength) {
+            Vector3 initialPosition = bulletSpawnTransform.position;
+            Vector3 spawnPosition = initialPosition + direction * distance;
+            SpawnBullet(spawnPosition);
+            delta_t += timeStep;
+            distance = bulletSpeed * delta_t;
+        }
     }
 }

@@ -170,8 +170,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   maxHealth: 10
   currentHealth: 0
-  bullet: {fileID: 295229867403493645, guid: 14232a25e27285942bd9ea8b23b5389c, type: 3}
-  bulletSpawnPosition: {fileID: 3197936860518604601}
+  bulletPrefab: {fileID: 295229867403493645, guid: 14232a25e27285942bd9ea8b23b5389c, type: 3}
+  bulletSpawnTransform: {fileID: 3197936860518604601}
   bulletDirection: {fileID: 155489786985155022}
   bulletSpeed: 5
   moveSpeed: 2.5
@@ -237,7 +237,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8463599246026836524}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.33, z: 0}
+  m_LocalPosition: {x: 0, y: -0.456, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2331374248252561178}
