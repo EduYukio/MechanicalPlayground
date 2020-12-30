@@ -172,13 +172,14 @@ MonoBehaviour:
   currentHealth: 0
   bulletPrefab: {fileID: 295229867403493645, guid: 4e4d4ee941d961d409145a12edfc0e5f, type: 3}
   bulletSpawnTransform: {fileID: 1605484121568780331}
-  bulletDirection: {fileID: 4039413098959238876}
+  bulletDirectionTransform: {fileID: 4039413098959238876}
   bulletSpeed: 6
   moveSpeed: 3
   distanceToMove: 1
   moveVertically: 0
   startAttackCooldownTimer: 0.4
   attackCooldownTimer: 0
+  bulletSpawnTimerSyncedWithAnimation: 0
   initialCoord: 0
   targetPosition: {x: 0, y: 0}
   isBeingHit: 0
