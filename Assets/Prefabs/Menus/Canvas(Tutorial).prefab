@@ -225,6 +225,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 592100312280060388, guid: f980d96e3f4e6bc4a85ee6c9597f61f5, type: 3}
+      propertyPath: m_Color.a
+      value: 0.7058824
+      objectReference: {fileID: 0}
     - target: {fileID: 592100312510519993, guid: f980d96e3f4e6bc4a85ee6c9597f61f5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
