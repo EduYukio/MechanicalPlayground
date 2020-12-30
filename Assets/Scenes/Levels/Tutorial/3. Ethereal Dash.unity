@@ -306,7 +306,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Now your Dash passes through obstacles!
+  m_text: 'Ethereal Dash: it passes through obstacles'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -435,7 +435,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10.52, y: 2.46}
+  m_AnchoredPosition: {x: 9.946, y: 2.386}
   m_SizeDelta: {x: 10, y: 3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &212657306
@@ -7358,7 +7358,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2962079195829286088, guid: 1584183f05a9d9848921cffd7a693b3f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.04
+      value: 7.54
       objectReference: {fileID: 0}
     - target: {fileID: 2962079195829286088, guid: 1584183f05a9d9848921cffd7a693b3f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8295,7 +8295,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2962079195829286088, guid: 1584183f05a9d9848921cffd7a693b3f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.98
+      value: 9.48
       objectReference: {fileID: 0}
     - target: {fileID: 2962079195829286088, guid: 1584183f05a9d9848921cffd7a693b3f, type: 3}
       propertyPath: m_LocalPosition.y
