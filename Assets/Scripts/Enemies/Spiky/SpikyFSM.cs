@@ -19,7 +19,6 @@ public class SpikyFSM : Enemy {
     public float startAttackCooldownTimer = 1.5f;
     public float attackCooldownTimer = 0;
     [HideInInspector] public float bulletSpawnTimerSyncedWithAnimation;
-    [HideInInspector] public bool isBeingHit = false;
     [HideInInspector] public SpriteRenderer spriteRenderer;
 
     private void Awake() {
@@ -48,8 +47,8 @@ public class SpikyFSM : Enemy {
     }
 
     public override void TakeDamage(float damage) {
-        isBeingHit = true;
         currentHealth -= damage;
+        TransitionToState(BeingHitState);
     }
 
     private void ProcessTimers() {

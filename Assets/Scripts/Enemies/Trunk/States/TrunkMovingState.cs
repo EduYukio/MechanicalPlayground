@@ -9,7 +9,6 @@ public class TrunkMovingState : TrunkBaseState {
     }
 
     public override void Update(TrunkFSM trunk) {
-        if (base.CheckTransitionToBeingHit(trunk)) return;
         if (base.CheckTransitionToAttacking(trunk)) return;
 
         base.MoveAction(trunk);

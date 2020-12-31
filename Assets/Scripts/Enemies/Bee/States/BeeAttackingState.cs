@@ -9,8 +9,6 @@ public class BeeAttackingState : BeeBaseState {
     }
 
     public override void Update(BeeFSM bee) {
-        if (base.CheckTransitionToBeingHit(bee)) return;
-
         base.MoveAction(bee);
 
         if (attackingTimer >= 0) {

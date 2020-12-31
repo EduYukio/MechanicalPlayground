@@ -18,14 +18,6 @@ public abstract class TrunkBaseState {
         return true;
     }
 
-    public virtual bool CheckTransitionToBeingHit(TrunkFSM trunk) {
-        if (trunk.isBeingHit) {
-            trunk.TransitionToState(trunk.BeingHitState);
-            return true;
-        }
-        return false;
-    }
-
     public virtual bool CheckTransitionToAttacking(TrunkFSM trunk) {
         if (trunk.attackCooldownTimer <= 0 && PlayerIsOnSight(trunk)) {
             trunk.TransitionToState(trunk.AttackingState);

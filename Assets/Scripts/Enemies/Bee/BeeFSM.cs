@@ -23,7 +23,6 @@ public class BeeFSM : Enemy {
     [HideInInspector] public float bulletSpawnTimerSyncedWithAnimation;
     [HideInInspector] public float initialCoord;
     [HideInInspector] public Vector2 targetPosition;
-    [HideInInspector] public bool isBeingHit = false;
     [HideInInspector] public SpriteRenderer spriteRenderer;
 
     private void Awake() {
@@ -54,8 +53,8 @@ public class BeeFSM : Enemy {
     }
 
     public override void TakeDamage(float damage) {
-        isBeingHit = true;
         currentHealth -= damage;
+        TransitionToState(BeingHitState);
     }
 
     void MoveSetup() {

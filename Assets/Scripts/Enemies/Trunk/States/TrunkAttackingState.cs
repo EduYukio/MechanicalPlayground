@@ -9,8 +9,6 @@ public class TrunkAttackingState : TrunkBaseState {
     }
 
     public override void Update(TrunkFSM trunk) {
-        if (base.CheckTransitionToBeingHit(trunk)) return;
-
         if (attackingTimer >= 0) {
             attackingTimer -= Time.deltaTime;
             return;

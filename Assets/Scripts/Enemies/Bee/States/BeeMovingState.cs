@@ -8,7 +8,6 @@ public class BeeMovingState : BeeBaseState {
         PlayAnimationIfCan(bee);
         base.MoveAction(bee);
 
-        if (base.CheckTransitionToBeingHit(bee)) return;
         if (base.CheckTransitionToAttacking(bee)) return;
     }
 

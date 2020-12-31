@@ -10,8 +10,6 @@ public class SpikyAttackingState : SpikyBaseState {
     }
 
     public override void Update(SpikyFSM spiky) {
-        if (base.CheckTransitionToBeingHit(spiky)) return;
-
         if (attackingTimer >= 0) {
             attackingTimer -= Time.deltaTime;
             return;

@@ -12,7 +12,6 @@ public class TrunkIdleState : TrunkBaseState {
 
     public override void Update(TrunkFSM trunk) {
         PlayAnimationIfCan(trunk);
-        if (base.CheckTransitionToBeingHit(trunk)) return;
         if (base.CheckTransitionToAttacking(trunk)) return;
 
         if (idleTimer >= 0) {

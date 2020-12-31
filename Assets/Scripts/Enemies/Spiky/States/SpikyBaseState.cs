@@ -11,14 +11,6 @@ public abstract class SpikyBaseState {
         return true;
     }
 
-    public virtual bool CheckTransitionToBeingHit(SpikyFSM spiky) {
-        if (spiky.isBeingHit) {
-            spiky.TransitionToState(spiky.BeingHitState);
-            return true;
-        }
-        return false;
-    }
-
     public virtual bool CheckTransitionToAttacking(SpikyFSM spiky) {
         if (spiky.attackCooldownTimer <= 0) {
             spiky.TransitionToState(spiky.AttackingState);

@@ -4,7 +4,7 @@ public class TrunkBeingHitState : TrunkBaseState {
     float hitTimer;
 
     public override void EnterState(TrunkFSM trunk) {
-        trunk.animator.Play("BeingHit");
+        trunk.animator.Play("BeingHit", -1, 0f);
         Setup(trunk);
         BeingHitAction(trunk);
     }
@@ -23,7 +23,6 @@ public class TrunkBeingHitState : TrunkBaseState {
 
     void Setup(TrunkFSM trunk) {
         hitTimer = Helper.GetAnimationDuration("BeingHit", trunk.animator);
-        trunk.isBeingHit = false;
     }
 
     void BeingHitAction(TrunkFSM trunk) {

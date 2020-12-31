@@ -4,7 +4,7 @@ public class SpikyBeingHitState : SpikyBaseState {
     float hitTimer;
 
     public override void EnterState(SpikyFSM spiky) {
-        spiky.animator.Play("BeingHit");
+        spiky.animator.Play("BeingHit", -1, 0f);
         Setup(spiky);
         BeingHitAction(spiky);
     }
@@ -22,7 +22,6 @@ public class SpikyBeingHitState : SpikyBaseState {
 
     void Setup(SpikyFSM spiky) {
         hitTimer = Helper.GetAnimationDuration("BeingHit", spiky.animator);
-        spiky.isBeingHit = false;
     }
 
     void BeingHitAction(SpikyFSM spiky) {

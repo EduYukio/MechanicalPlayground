@@ -7,7 +7,6 @@ public class SpikyIdleState : SpikyBaseState {
     }
 
     public override void Update(SpikyFSM spiky) {
-        if (base.CheckTransitionToBeingHit(spiky)) return;
         if (base.CheckTransitionToAttacking(spiky)) return;
     }
 
