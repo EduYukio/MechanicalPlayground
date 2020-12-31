@@ -36,6 +36,7 @@ public class PlayerFSM : MonoBehaviour {
     [Header("Config")]
     public PlayerConfig config;
     public Mechanics mechanics;
+    public Shield shield;
     public GameObject platformPrefab;
     public GameObject bootsBulletPrefab;
     public GameObject normalSlash;
@@ -71,22 +72,20 @@ public class PlayerFSM : MonoBehaviour {
 
     [HideInInspector] public float moveSpeed;
     [HideInInspector] public int lastDirection = 1;
-    [HideInInspector] public int items;
-    [HideInInspector] public Vector3 centerPosition;
     public Transform centerTransform;
     public static Vector3 respawnPosition;
     public Vector3 originalPosition = new Vector3(0, 0, 0);
     public bool freezePlayerState = false;
-    public Shield shield;
+    public List<GameObject> keys;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        centerPosition = centerTransform.position;
         freezePlayerState = false;
         hasResetDashTrigger = true;
-        items = 0;
+        keys = new List<GameObject>();
+        Key.ResetAllSlots();
         SetMoveSpeed();
 
         //DEBUG
