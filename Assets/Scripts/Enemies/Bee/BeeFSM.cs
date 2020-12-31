@@ -99,7 +99,13 @@ public class BeeFSM : Enemy {
 
     float CalculateMaxRayLength() {
         float arbitraryMaxLength = 100f;
-        int layersToCollide = LayerMask.GetMask("Ground", "Obstacles", "Gate");
+        int layersToCollide;
+        if (gameObject.name.Contains("Red")) {
+            layersToCollide = LayerMask.GetMask("Gate");
+        }
+        else {
+            layersToCollide = LayerMask.GetMask("Ground", "Obstacles", "Gate");
+        }
 
         Vector3 direction = CalculateDirection();
         RaycastHit2D frontRay = Physics2D.Raycast(bulletSpawnTransform.position, direction, arbitraryMaxLength, layersToCollide);
