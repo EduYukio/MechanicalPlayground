@@ -18,26 +18,28 @@ MonoBehaviour:
   - Name: Jump
     Enabled: 1
   - Name: Double Jump
-    Enabled: 0
-  - Name: Dash
-    Enabled: 0
-  - Name: Attack
-    Enabled: 0
+    Enabled: 1
   - Name: Wall Slide
-    Enabled: 0
+    Enabled: 1
   - Name: Wall Jump
-    Enabled: 0
-  - Name: Blink
+    Enabled: 1
+  - Name: Dash
     Enabled: 0
   - Name: Ethereal Dash
     Enabled: 0
-  - Name: Move Speed Boost
+  - Name: Blink
     Enabled: 0
-  - Name: Spike Invulnerability
+  - Name: Attack
+    Enabled: 1
+  - Name: Range Boost
+    Enabled: 1
+  - Name: Destroy Projectile
+    Enabled: 1
+  - Name: Pogo Jump
     Enabled: 0
-  - Name: Saw Invulnerability
+  - Name: Gun Boots
     Enabled: 0
-  - Name: Create Platform
+  - Name: Explosion
     Enabled: 0
   - Name: Shield
     Enabled: 0
@@ -45,13 +47,9 @@ MonoBehaviour:
     Enabled: 0
   - Name: Reflect Projectile
     Enabled: 0
-  - Name: Range Boost
+  - Name: Spike Invulnerability
     Enabled: 0
-  - Name: Destroy Projectile
+  - Name: Saw Invulnerability
     Enabled: 0
-  - Name: Pogo Jump
-    Enabled: 0
-  - Name: Explosion
-    Enabled: 0
-  - Name: Gun Boots
+  - Name: Create Platform
     Enabled: 0
