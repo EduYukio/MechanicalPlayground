@@ -83,6 +83,11 @@ public class Shield : MonoBehaviour {
         bullet.rb.velocity = -4 * bullet.rb.velocity;
         Vector3 angle = bullet.transform.eulerAngles;
         bullet.transform.eulerAngles = new Vector3(angle.x, angle.y, angle.z + 180);
-        bullet.gameObject.layer = LayerMask.NameToLayer("ParriedBullet");
+        if (bullet.name.Contains("Ethereal")) {
+            bullet.gameObject.layer = LayerMask.NameToLayer("EtherealParriedBullet");
+        }
+        else {
+            bullet.gameObject.layer = LayerMask.NameToLayer("ParriedBullet");
+        }
     }
 }
