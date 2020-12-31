@@ -1635,7 +1635,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8888763023719604342, guid: a5fe04f0c886bbc47866c56277a40cb0, type: 3}
       propertyPath: bulletSpeed
-      value: 6
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 8888763023719604342, guid: a5fe04f0c886bbc47866c56277a40cb0, type: 3}
       propertyPath: startAttackCooldownTimer
@@ -11706,7 +11706,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8373479253327382331, guid: 2d9e0915fcc45194b8a10739162ae020, type: 3}
       propertyPath: bulletSpeed
-      value: 5
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 8373479253327382331, guid: 2d9e0915fcc45194b8a10739162ae020, type: 3}
       propertyPath: startAttackCooldownTimer
@@ -12118,7 +12118,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Block right at the time of impact to avoid entering on cooldown!
+  m_text: Block right at the time of impact to parry. This way, you can reuse the
+    shield immediately!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12247,7 +12248,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 45.03, y: -1.79}
+  m_AnchoredPosition: {x: 45.03, y: -2.29}
   m_SizeDelta: {x: 10, y: 3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1207276306
