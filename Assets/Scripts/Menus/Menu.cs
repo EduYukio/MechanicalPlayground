@@ -47,16 +47,16 @@ public class Menu : MonoBehaviour {
     }
 
     void CheckMenuInput() {
-        if (Input.GetButtonDown("Esc")) {
+        bool hitEsc = Input.GetButtonDown("Esc");
+        bool hitStart = Input.GetButtonDown("Start");
+        bool hitCircle = Input.GetButtonDown("Circle");
+        if (hitEsc || hitStart || hitCircle) {
             if (pauseMenu.activeSelf) {
                 ClosePauseMenu();
             }
-            else {
+            else if (!mechanicsMenu.activeSelf) {
                 OpenPauseMenu();
             }
-        }
-        else if (Input.GetButtonDown("Circle") && pauseMenu.activeSelf) {
-            ClosePauseMenu();
         }
     }
 

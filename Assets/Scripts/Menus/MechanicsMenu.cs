@@ -61,11 +61,8 @@ public class MechanicsMenu : MonoBehaviour {
     }
 
     public void ConfirmMechanics() {
-        // check if all skill points were spent
         if (changedMechanics) {
             ReloadLevel();
-            // if (changedMechanics && !player.ignoreConfirmationPopup) {
-            //     OpenConfirmationPopup();
         }
         else {
             BackToPauseMenu();
@@ -106,7 +103,10 @@ public class MechanicsMenu : MonoBehaviour {
     }
 
     void CheckMenuExitInput() {
-        if (Input.GetButtonDown("Esc") || Input.GetButtonDown("Circle")) {
+        bool hitEsc = Input.GetButtonDown("Esc");
+        bool hitStart = Input.GetButtonDown("Start");
+        bool hitCircle = Input.GetButtonDown("Circle");
+        if (hitEsc || hitStart || hitCircle) {
             ConfirmMechanics();
         }
     }
