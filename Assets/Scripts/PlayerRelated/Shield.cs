@@ -6,11 +6,11 @@ public class Shield : MonoBehaviour {
     bool canDefend = true;
 
     private void Update() {
-        gameObject.transform.position = player.transform.position;
+        gameObject.transform.position = player.transform.position + new Vector3(0, -0.1f, 0);
     }
 
     private void OnEnable() {
-        gameObject.transform.position = player.transform.position;
+        gameObject.transform.position = player.transform.position + new Vector3(0, -0.1f, 0);
     }
 
     public void CheckShieldInput() {

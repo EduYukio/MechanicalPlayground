@@ -337,7 +337,7 @@ MonoBehaviour:
   attackCooldownTimer: 0
   blinkCooldownTimer: 0
   shieldCooldownTimer: 0
-  shotgunCooldownTimer: 0
+  explosionCooldownTimer: 0
   gunBootsCooldownTimer: 0
   coyoteTimer: 0
   bunnyHopTimer: 0
@@ -627,17 +627,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shield
       objectReference: {fileID: 0}
+    - target: {fileID: 2502816624490683032, guid: 0023ca1b823679243a254b13e646cb10, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4787798008579185570, guid: 0023ca1b823679243a254b13e646cb10, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 6671967020987745497}
     - target: {fileID: 8234664114435579109, guid: 0023ca1b823679243a254b13e646cb10, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.008
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8234664114435579109, guid: 0023ca1b823679243a254b13e646cb10, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.108
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8234664114435579109, guid: 0023ca1b823679243a254b13e646cb10, type: 3}
       propertyPath: m_LocalPosition.z
@@ -674,6 +678,14 @@ PrefabInstance:
     - target: {fileID: 8234664114435579109, guid: 0023ca1b823679243a254b13e646cb10, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8234664114435579109, guid: 0023ca1b823679243a254b13e646cb10, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8234664114435579109, guid: 0023ca1b823679243a254b13e646cb10, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0023ca1b823679243a254b13e646cb10, type: 3}
