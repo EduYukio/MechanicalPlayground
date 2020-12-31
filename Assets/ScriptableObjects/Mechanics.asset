@@ -51,7 +51,7 @@ MonoBehaviour:
     Enabled: 0
   - Name: Pogo Jump
     Enabled: 0
-  - Name: Shotgun
+  - Name: Explosion
     Enabled: 0
   - Name: Gun Boots
     Enabled: 0

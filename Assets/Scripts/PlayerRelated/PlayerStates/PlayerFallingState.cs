@@ -20,7 +20,7 @@ public class PlayerFallingState : PlayerBaseState {
         if (base.CheckTransitionToWallSliding(player)) return;
         if (base.CheckTransitionToAttacking(player)) return;
         if (base.CheckTransitionToBlinking(player)) return;
-        if (base.CheckTransitionToShotgunning(player)) return;
+        if (base.CheckTransitionToExploding(player)) return;
     }
 
     void BetterFalling(PlayerFSM player) {
@@ -46,7 +46,7 @@ public class PlayerFallingState : PlayerBaseState {
         if (Helper.IsPlayingAnimation("PlayerAttacking", player.animator)) return;
         if (Helper.IsPlayingAnimation("PlayerAttackingBoosted", player.animator)) return;
         if (Helper.IsPlayingAnimation("PlayerAppear", player.animator)) return;
-        if (Helper.IsPlayingAnimation("PlayerShotgunning", player.animator)) return;
+        if (Helper.IsPlayingAnimation("PlayerExploding", player.animator)) return;
 
         player.animator.Play("PlayerFall");
     }

@@ -131,12 +131,12 @@ public abstract class PlayerBaseState {
         return false;
     }
 
-    public virtual bool CheckTransitionToShotgunning(PlayerFSM player) {
-        if (!player.mechanics.IsEnabled("Shotgun")) return false;
-        if (player.shotgunCooldownTimer > 0) return false;
+    public virtual bool CheckTransitionToExploding(PlayerFSM player) {
+        if (!player.mechanics.IsEnabled("Explosion")) return false;
+        if (player.explosionCooldownTimer > 0) return false;
 
-        if (Input.GetButtonDown("Shotgun")) {
-            player.TransitionToState(player.ShotgunningState);
+        if (Input.GetButtonDown("Explosion")) {
+            player.TransitionToState(player.ExplodingState);
             return true;
         }
 

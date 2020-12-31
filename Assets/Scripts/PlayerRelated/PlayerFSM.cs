@@ -20,7 +20,7 @@ public class PlayerFSM : MonoBehaviour {
     public readonly PlayerBlinkingState BlinkingState = new PlayerBlinkingState();
     public readonly PlayerDyingState DyingState = new PlayerDyingState();
     public readonly PlayerPogoingState PogoingState = new PlayerPogoingState();
-    public readonly PlayerShotgunningState ShotgunningState = new PlayerShotgunningState();
+    public readonly PlayerExplodingState ExplodingState = new PlayerExplodingState();
     public readonly PlayerGunBootsState GunBootsState = new PlayerGunBootsState();
 
     //DEBUG
@@ -61,7 +61,7 @@ public class PlayerFSM : MonoBehaviour {
     public float attackCooldownTimer;
     public float blinkCooldownTimer;
     public float shieldCooldownTimer;
-    public float shotgunCooldownTimer;
+    public float explosionCooldownTimer;
     public float gunBootsCooldownTimer;
 
     public float coyoteTimer;
@@ -154,7 +154,7 @@ public class PlayerFSM : MonoBehaviour {
     private void ProcessTimers() {
         float step = Time.deltaTime;
         if (gunBootsCooldownTimer >= 0) gunBootsCooldownTimer -= step;
-        if (shotgunCooldownTimer >= 0) shotgunCooldownTimer -= step;
+        if (explosionCooldownTimer >= 0) explosionCooldownTimer -= step;
         if (attackCooldownTimer >= 0) attackCooldownTimer -= step;
         if (shieldCooldownTimer >= 0) shieldCooldownTimer -= step;
         if (blinkCooldownTimer >= 0) blinkCooldownTimer -= step;

@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class PlayerShotgunningState : PlayerBaseState {
+public class PlayerExplodingState : PlayerBaseState {
     public LayerMask hitLayers;
     float xInput, yInput;
     Vector3 rightDistance, leftDistance, upDistance, downDistance;
 
     public override void EnterState(PlayerFSM player) {
-        player.animator.Play("PlayerShotgunning");
+        player.animator.Play("PlayerExploding");
         Setup(player);
-        ShotgunAction(player);
+        ExplosionAction(player);
     }
 
     public override void Update(PlayerFSM player) {
@@ -22,10 +22,10 @@ public class PlayerShotgunningState : PlayerBaseState {
         InputBuffer();
         SetExplosionRanges(player);
         hitLayers = LayerMask.GetMask("Enemies", "Obstacles", "Projectiles", "Gate");
-        player.shotgunCooldownTimer = player.config.startShotgunCooldownTime;
+        player.explosionCooldownTimer = player.config.startExplosionCooldownTime;
     }
 
-    void ShotgunAction(PlayerFSM player) {
+    void ExplosionAction(PlayerFSM player) {
         Vector3 explosionDistance = CalculateExplosionDistance(player);
         Vector3 explosionPosition = player.transform.position + explosionDistance;
         GameObject explosion = MonoBehaviour.Instantiate(player.explosionPrefab, explosionPosition, Quaternion.identity);

@@ -21,7 +21,7 @@ public class PlayerJumpingState : PlayerBaseState {
         if (base.CheckTransitionToDoubleJumping(player)) return;
         if (base.CheckTransitionToAttacking(player)) return;
         if (base.CheckTransitionToBlinking(player)) return;
-        if (base.CheckTransitionToShotgunning(player)) return;
+        if (base.CheckTransitionToExploding(player)) return;
     }
 
     void Setup(PlayerFSM player) {

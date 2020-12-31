@@ -36,7 +36,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Tutorial/9. Gun Boots.unity
     guid: 26d32dcafb64f4849acda14c7d03ec71
   - enabled: 1
-    path: Assets/Scenes/Levels/Tutorial/10. Shotgun.unity
+    path: Assets/Scenes/Levels/Tutorial/10. Explosion.unity
     guid: 6fc956d4cbe0ff94b8d1093c8d421649
   - enabled: 1
     path: Assets/Scenes/Levels/Tutorial/11. Shield.unity

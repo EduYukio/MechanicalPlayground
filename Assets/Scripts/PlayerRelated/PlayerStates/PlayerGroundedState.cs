@@ -16,7 +16,7 @@ public class PlayerGroundedState : PlayerBaseState {
         if (base.CheckTransitionToDashing(player)) return;
         if (base.CheckTransitionToAttacking(player)) return;
         if (base.CheckTransitionToBlinking(player)) return;
-        if (base.CheckTransitionToShotgunning(player)) return;
+        if (base.CheckTransitionToExploding(player)) return;
     }
 
     void Setup(PlayerFSM player) {
@@ -34,7 +34,7 @@ public class PlayerGroundedState : PlayerBaseState {
         if (Helper.IsPlayingAnimation("PlayerAttackingBoosted", player.animator)) return;
         if (Helper.IsPlayingAnimation("PlayerAppear", player.animator)) return;
         if (Helper.IsPlayingAnimation("PlayerDisappear", player.animator)) return;
-        if (Helper.IsPlayingAnimation("PlayerShotgunning", player.animator)) return;
+        if (Helper.IsPlayingAnimation("PlayerExploding", player.animator)) return;
 
         player.animator.Play("PlayerIdle");
     }

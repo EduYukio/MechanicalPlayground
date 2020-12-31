@@ -17,7 +17,7 @@ public class PlayerGunBootsState : PlayerBaseState {
         if (CheckTransitionToFalling(player)) return;
         if (base.CheckTransitionToWalking(player)) return;
         if (base.CheckTransitionToAttacking(player)) return;
-        if (base.CheckTransitionToShotgunning(player)) return;
+        if (base.CheckTransitionToExploding(player)) return;
         if (base.CheckTransitionToDashing(player)) return;
         if (base.CheckTransitionToBlinking(player)) return;
         if (base.CheckTransitionToGrounded(player)) return;
