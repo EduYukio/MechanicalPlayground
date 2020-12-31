@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -16,8 +17,16 @@ public class Menu : MonoBehaviour {
 
     private PlayerFSM player;
 
+    public TMP_Text levelIndicator;
+    private const int finalLevel = 15;
+
     private void Awake() {
         player = GameObject.FindObjectOfType<PlayerFSM>();
+    }
+
+    private void Start() {
+        string currentLevelText = SceneManager.GetActiveScene().buildIndex.ToString();
+        levelIndicator.text = "Level: " + currentLevelText + "/" + finalLevel.ToString();
     }
 
     void Update() {
