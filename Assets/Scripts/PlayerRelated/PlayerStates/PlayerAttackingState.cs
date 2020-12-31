@@ -11,10 +11,10 @@ public class PlayerAttackingState : PlayerBaseState {
     public override void EnterState(PlayerFSM player) {
         Setup(player);
         if (isBoosted) {
-            player.animator.Play("PlayerAttackingBoosted");
+            player.animator.Play("PlayerAttackingBoosted", -1, 0f);
         }
         else {
-            player.animator.Play("PlayerAttacking");
+            player.animator.Play("PlayerAttacking", -1, 0f);
         }
         AttackAction(player);
     }
