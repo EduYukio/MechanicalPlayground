@@ -12,7 +12,7 @@ public class Mechanics : ScriptableObject {
 
     public void ResetMechanics() {
         foreach (var mechanic in mechanicList) {
-            mechanic.Enabled = false;
+            Deactivate(mechanic.Name);
         }
     }
 

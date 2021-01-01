@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour {
+    private PlayerFSM player;
+
     public GameObject pauseMenu;
     public GameObject mechanicsMenu;
 
@@ -15,7 +17,8 @@ public class Menu : MonoBehaviour {
 
     public GameObject firstMechanicButton;
 
-    private PlayerFSM player;
+    public GameObject skillUICompactChildAggregator;
+    public GameObject skillUILargeChildAggregator;
 
     public TMP_Text levelIndicator;
     private const int finalLevel = 15;
@@ -31,6 +34,7 @@ public class Menu : MonoBehaviour {
 
     void Update() {
         CheckMenuInput();
+        CheckSkillControlsInput();
     }
 
     public void ContinueButton() {
@@ -63,9 +67,19 @@ public class Menu : MonoBehaviour {
             if (pauseMenu.activeSelf) {
                 ClosePauseMenu();
             }
-            else if (!mechanicsMenu.activeSelf) {
+            else if (mechanicsMenu && !mechanicsMenu.activeSelf) {
                 OpenPauseMenu();
             }
+        }
+    }
+
+    void CheckSkillControlsInput() {
+        if (Input.GetButtonDown("Select")) {
+            if (pauseMenu.activeSelf) return;
+            if (mechanicsMenu && mechanicsMenu.activeSelf) return;
+
+            skillUICompactChildAggregator.SetActive(!skillUICompactChildAggregator.activeSelf);
+            skillUILargeChildAggregator.SetActive(!skillUILargeChildAggregator.activeSelf);
         }
     }
 
