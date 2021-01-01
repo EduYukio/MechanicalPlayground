@@ -33,13 +33,15 @@ public class Key : MonoBehaviour {
     }
 
     public static void ResetAllSlots() {
+        float xDist = 0.65f;
+        float yDist = 0.65f;
         Key.slots = new List<Vector3>();
-        Key.slots.Add(new Vector3(-1, 1, 1));
-        Key.slots.Add(new Vector3(-1, 0, 1));
-        Key.slots.Add(new Vector3(-1, -1, 1));
-        Key.slots.Add(new Vector3(1, 1, 1));
-        Key.slots.Add(new Vector3(1, 0, 1));
-        Key.slots.Add(new Vector3(1, -1, 1));
+        Key.slots.Add(new Vector3(-xDist, yDist, 1));
+        Key.slots.Add(new Vector3(-xDist, 0, 1));
+        Key.slots.Add(new Vector3(-xDist, -yDist, 1));
+        Key.slots.Add(new Vector3(xDist, yDist, 1));
+        Key.slots.Add(new Vector3(xDist, 0, 1));
+        Key.slots.Add(new Vector3(xDist, -yDist, 1));
     }
 
     public void RestoreOneSlot() {
