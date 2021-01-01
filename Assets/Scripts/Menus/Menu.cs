@@ -63,12 +63,18 @@ public class Menu : MonoBehaviour {
         bool hitEsc = Input.GetButtonDown("Esc");
         bool hitStart = Input.GetButtonDown("Start");
         bool hitCircle = Input.GetButtonDown("Circle");
-        if (hitEsc || hitStart || hitCircle) {
+        if (hitEsc || hitStart) {
             if (pauseMenu.activeSelf) {
                 ClosePauseMenu();
             }
-            else if (mechanicsMenu && !mechanicsMenu.activeSelf) {
+            else if (mechanicsMenu == null || !mechanicsMenu.activeSelf) {
                 OpenPauseMenu();
+            }
+        }
+
+        if (hitCircle) {
+            if (pauseMenu.activeSelf) {
+                ClosePauseMenu();
             }
         }
     }

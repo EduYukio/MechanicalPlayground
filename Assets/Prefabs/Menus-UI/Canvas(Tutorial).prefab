@@ -483,6 +483,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2471871937353110780}
     m_Modifications:
+    - target: {fileID: 592100311208572893, guid: f980d96e3f4e6bc4a85ee6c9597f61f5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2471871937353110781}
+    - target: {fileID: 592100311208572893, guid: f980d96e3f4e6bc4a85ee6c9597f61f5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OptionsButton
+      objectReference: {fileID: 0}
     - target: {fileID: 592100311902867361, guid: f980d96e3f4e6bc4a85ee6c9597f61f5, type: 3}
       propertyPath: m_Name
       value: PauseMenu(NoMech)
@@ -574,6 +582,22 @@ PrefabInstance:
     - target: {fileID: 592100311902867366, guid: f980d96e3f4e6bc4a85ee6c9597f61f5, type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 592100312510519993, guid: f980d96e3f4e6bc4a85ee6c9597f61f5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2471871937353110781}
+    - target: {fileID: 592100312510519993, guid: f980d96e3f4e6bc4a85ee6c9597f61f5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ContinueButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 592100312988048341, guid: f980d96e3f4e6bc4a85ee6c9597f61f5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2471871937353110781}
+    - target: {fileID: 592100312988048341, guid: f980d96e3f4e6bc4a85ee6c9597f61f5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitToMenuButton
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f980d96e3f4e6bc4a85ee6c9597f61f5, type: 3}
