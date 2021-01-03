@@ -83,10 +83,17 @@ public class Menu : MonoBehaviour {
         if (Input.GetButtonDown("Select")) {
             if (pauseMenu.activeSelf) return;
             if (mechanicsMenu && mechanicsMenu.activeSelf) return;
+            if (IsHidingUI()) return;
 
             skillUICompactChildAggregator.SetActive(!skillUICompactChildAggregator.activeSelf);
             skillUILargeChildAggregator.SetActive(!skillUILargeChildAggregator.activeSelf);
         }
+    }
+
+    bool IsHidingUI() {
+        if (!skillUICompactChildAggregator.activeSelf && !skillUILargeChildAggregator.activeSelf) return true;
+
+        return false;
     }
 
     void ClosePauseMenu() {
