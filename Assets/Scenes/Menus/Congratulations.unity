@@ -369,7 +369,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 491838872}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f45ea7e7c9d93ac448ef77cc06713b5d, type: 3}
+  m_Script: {fileID: 11500000, guid: 728ebf01e012b9c4c9ea7ff837166994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &976521996
@@ -949,7 +949,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 491838877}
-        m_TargetAssemblyTypeName: MainMenu, Scripts
+        m_TargetAssemblyTypeName: BackButton, Scripts
         m_MethodName: CreditsBackButton
         m_Mode: 1
         m_Arguments:
