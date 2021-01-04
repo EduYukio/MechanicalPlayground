@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 216811403}
   - component: {fileID: 216811402}
   m_Layer: 5
-  m_Name: Button
+  m_Name: PlayButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -505,6 +505,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f45ea7e7c9d93ac448ef77cc06713b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttons:
+  - {fileID: 216811402}
+  - {fileID: 1790210244}
+  - {fileID: 1915451131}
+  playButton: {fileID: 216811400}
 --- !u!1 &873234776
 GameObject:
   m_ObjectHideFlags: 0
@@ -1144,7 +1149,7 @@ GameObject:
   - component: {fileID: 1790210245}
   - component: {fileID: 1790210244}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: CreditsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1276,7 +1281,7 @@ GameObject:
   - component: {fileID: 1915451132}
   - component: {fileID: 1915451131}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: QuitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
