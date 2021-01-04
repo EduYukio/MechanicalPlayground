@@ -8,10 +8,10 @@ using UnityEngine.UI;
 public class MechanicButton : MonoBehaviour {
     public VideoClip mechanicClip;
     public string mechanicName;
-    public string description;
     public List<string> requirements;
     public static MechanicsMenu mechMenu;
     public Mechanics mechanics;
+    public Descriptions descriptions;
 
     public bool isBlocked = false;
     public bool isActive = false;
@@ -78,7 +78,7 @@ public class MechanicButton : MonoBehaviour {
             mechMenu.rawImage.enabled = true;
         }
         mechMenu.title.text = mechanicName;
-        mechMenu.description.text = description;
+        mechMenu.description.text = descriptions.GetDescription(mechanicName);
     }
 
     public void ClearTutorialInfo() {

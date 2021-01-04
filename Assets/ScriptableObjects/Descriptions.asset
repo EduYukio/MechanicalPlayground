@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e71f09d106750b4789793f5561c5b01, type: 3}
+  m_Name: Descriptions
+  m_EditorClassIdentifier: 
+  doubleJump: Jump again while in the air.
+  wallSlide: Slide on walls.
+  wallJump: Jump while sliding on the walls.
+  dash: Rapid burst of forward movement.
+  etherealDash: You pass through enemies and obstacles while dashing (not walls and
+    gates).
+  blink: Medium range teleport that can pass through anything (including walls and
+    gates).
+  attack: Melee attack that can damage enemies.
+  rangeBoost: More range on your attacks.
+  destroyProjectiles: Your attacks destroy projectiles.
+  pogoJump: Attack enemies and obstacles downwards while jumping to do another jump.
+  gunBoots: Shoot bullets from your boots, damaging enemies and launching yourself
+    upwards.
+  explosion: Create a low range explosion that can destroy enemies, obstacles and
+    gates.
+  shield: Block enemy projectiles. After it blocks, it is consumed and takes a second
+    to be used again.
+  parry: If you block right at the moment of impact, the shield will not be consumed
+    and you can reuse it immediately.
+  reflectProjectiles: Parried projectiles will be reflected to the enemy.
+  spikeInvul: You will no longer take damage from spikes.
+  sawInvul: You will no longer take damage from saws.
+  createPlatform: Create platforms underneath you. You can jump from them and they
+    also block enemy projectiles.
