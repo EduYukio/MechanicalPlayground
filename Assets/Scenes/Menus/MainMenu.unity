@@ -402,6 +402,7 @@ GameObject:
   - component: {fileID: 491838874}
   - component: {fileID: 491838873}
   - component: {fileID: 491838877}
+  - component: {fileID: 491838878}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -505,11 +506,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f45ea7e7c9d93ac448ef77cc06713b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttons:
-  - {fileID: 216811402}
-  - {fileID: 1790210244}
-  - {fileID: 1915451131}
-  playButton: {fileID: 216811400}
+--- !u!114 &491838878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491838872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f77d12fac4e00314ea563a03024581c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstButton: {fileID: 216811400}
 --- !u!1 &873234776
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,7 +836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 216811400}
+  m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1207276309

@@ -25,11 +25,16 @@ public class Menu : MonoBehaviour {
 
     private void Awake() {
         player = GameObject.FindObjectOfType<PlayerFSM>();
+        Cursor.visible = false;
     }
 
     private void Start() {
         string currentLevelText = SceneManager.GetActiveScene().buildIndex.ToString();
         levelIndicator.text = "Level: " + currentLevelText + "/" + finalLevel.ToString();
+    }
+
+    private void OnDestroy() {
+        Cursor.visible = true;
     }
 
     void Update() {
@@ -115,6 +120,7 @@ public class Menu : MonoBehaviour {
         yield return new WaitForSecondsRealtime(0.05f);
         Time.timeScale = 1f;
         player.freezePlayerState = false;
+        Cursor.visible = false;
     }
 
 }
