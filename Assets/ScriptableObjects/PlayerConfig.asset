@@ -29,7 +29,7 @@ MonoBehaviour:
   wallSlidingSpeed: 1.75
   startStickyTime: 0.1
   startWallJumpDurationTime: 0.1
-  attackDamage: 3
+  attackDamage: 4
   startAttackCooldownTime: 0.15
   pogoForce: 11
   blinkDistance: 2.8

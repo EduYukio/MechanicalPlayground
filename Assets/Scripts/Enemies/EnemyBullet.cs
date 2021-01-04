@@ -5,12 +5,16 @@ public class EnemyBullet : MonoBehaviour {
     public bool alreadyProcessedHit = false;
     public float initialSpeed;
     public Vector3 initialDirection;
+    public float hitsToKill;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
         if (initialSpeed != 0f) {
             rb.velocity = initialDirection * initialSpeed;
         }
+
+        PlayerFSM player = GameObject.Find("PlayerFSM").GetComponent<PlayerFSM>();
+        hitsToKill = player.config.reflectedBulletsNeededToKill;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -74,7 +78,7 @@ public class EnemyBullet : MonoBehaviour {
 
     void DamageEnemy(GameObject collidedObj) {
         Enemy enemy = collidedObj.GetComponent<Enemy>();
-        float damage = 0.1f + enemy.maxHealth / 2;
+        float damage = 0.1f + enemy.maxHealth / hitsToKill;
         enemy.TakeDamage(damage);
         Destroy(gameObject);
     }

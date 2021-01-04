@@ -57,6 +57,7 @@ public class PlayerConfig : ScriptableObject {
     public float startShieldCooldownTime = 0.75f;
     public float startParryTime = 0.15f;
     public float parryPauseDuration = 0.25f;
+    public float reflectedBulletsNeededToKill = 1;
 
     [Header("Explosion")]
     public float startExplosionCooldownTime = 0.5f;
