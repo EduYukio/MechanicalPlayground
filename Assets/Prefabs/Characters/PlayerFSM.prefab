@@ -89,7 +89,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -316,6 +316,7 @@ MonoBehaviour:
   debugState: 
   config: {fileID: 11400000, guid: 99225b8b90d80ac4886b876914cadcf2, type: 2}
   mechanics: {fileID: 11400000, guid: daa8efa45546dec43a6bb1e2bd1561e0, type: 2}
+  shield: {fileID: 2715606343044226073}
   platformPrefab: {fileID: 2555538721634559807, guid: 8460e2a49474a9d4b8ea8040d224a3b0, type: 3}
   bootsBulletPrefab: {fileID: 6032149390923088076, guid: 31d19dcac38f81246ab739e8818132e0, type: 3}
   normalSlash: {fileID: 6109113390298202619}
@@ -345,12 +346,10 @@ MonoBehaviour:
   airJumpInputBuffer: 0
   moveSpeed: 0
   lastDirection: 1
-  items: 0
-  centerPosition: {x: 0, y: 0, z: 0}
   centerTransform: {fileID: 5094750580995452676}
   originalPosition: {x: 0, y: 0, z: 0}
   freezePlayerState: 0
-  shield: {fileID: 2715606343044226073}
+  keys: []
 --- !u!212 &6671967020987745501
 SpriteRenderer:
   m_ObjectHideFlags: 0
