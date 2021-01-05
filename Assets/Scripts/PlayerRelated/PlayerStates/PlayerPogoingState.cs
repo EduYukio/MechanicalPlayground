@@ -10,6 +10,7 @@ public class PlayerPogoingState : PlayerBaseState {
         PlayAnimationIfCan(player);
         base.ProcessMovementInput(player);
 
+        if (base.CheckTransitionToGrounded(player)) return;
         if (base.CheckTransitionToGunBoots(player)) return;
         if (base.CheckTransitionToWallSliding(player)) return;
         if (CheckTransitionToFalling(player)) return;
