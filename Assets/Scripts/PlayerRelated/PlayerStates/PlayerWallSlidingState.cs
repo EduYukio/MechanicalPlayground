@@ -4,7 +4,7 @@ public class PlayerWallSlidingState : PlayerBaseState {
     private float stickyTimer;
 
     public override void EnterState(PlayerFSM player) {
-        player.animator.Play("PlayerWallSlide");
+        player.animator.Play("PlayerWallSlide", -1, 0f);
         Setup(player);
     }
 
