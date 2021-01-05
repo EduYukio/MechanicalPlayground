@@ -205,7 +205,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Ethereal Dash: it passes through obstacles'
+  m_text: Now your dash passes through obstacles!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
@@ -732,7 +732,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9.19, y: 2.5}
+  m_AnchoredPosition: {x: 9.19, y: 3.5}
   m_SizeDelta: {x: 10, y: 3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &778239671
@@ -7261,7 +7261,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2962079195829286088, guid: 1584183f05a9d9848921cffd7a693b3f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.52
+      value: 1.52
       objectReference: {fileID: 0}
     - target: {fileID: 2962079195829286088, guid: 1584183f05a9d9848921cffd7a693b3f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7382,7 +7382,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 166212877342176880, guid: 86028cf9bafd0b74880d576192eea5a3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 51.75
+      value: 51.5
       objectReference: {fileID: 0}
     - target: {fileID: 166212877342176880, guid: 86028cf9bafd0b74880d576192eea5a3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7540,7 +7540,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2331374248252561178, guid: a5fe04f0c886bbc47866c56277a40cb0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 34
+      value: 30.5
       objectReference: {fileID: 0}
     - target: {fileID: 2331374248252561178, guid: a5fe04f0c886bbc47866c56277a40cb0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8299,7 +8299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2962079195829286088, guid: 1584183f05a9d9848921cffd7a693b3f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.52
+      value: 1.52
       objectReference: {fileID: 0}
     - target: {fileID: 2962079195829286088, guid: 1584183f05a9d9848921cffd7a693b3f, type: 3}
       propertyPath: m_LocalPosition.z
