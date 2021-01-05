@@ -19,12 +19,22 @@ public class PlayerDyingState : PlayerBaseState {
 
     void Setup(PlayerFSM player) {
         player.isDying = true;
-        player.rb.simulated = false;
         player.spriteRenderer.color = Color.white;
 
-        dyingTimer = Helper.GetAnimationDuration("PlayerDisappear", player.animator);
         player.animator.SetFloat("disappearSpeedMultiplier", 1f);
-        player.animator.Play("PlayerDisappear");
+        dyingTimer = 0.5f;
+        player.animator.Play("PlayerHit");
+
+        //TODO: refatorar isso aqui
+        Camera camera = player.gameObject.GetComponentInChildren<Camera>();
+        if (camera != null) camera.transform.parent = null;
+        float direction = -player.lastDirection;
+        player.rb.bodyType = RigidbodyType2D.Dynamic;
+        player.rb.velocity = new Vector3(direction * 3f, 6f, 0);
+        player.rb.constraints = RigidbodyConstraints2D.None;
+        player.rb.angularVelocity = direction * -40f;
+        player.rb.gravityScale = 2f;
+        player.GetComponent<Collider2D>().enabled = false;
     }
 
     void DieAction(PlayerFSM player) {

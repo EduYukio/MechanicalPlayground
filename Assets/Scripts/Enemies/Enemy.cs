@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour {
         PlayerFSM player = GameObject.FindObjectOfType<PlayerFSM>();
         if (player != null) direction = player.lastDirection;
 
+        //TODO: refatorar isso aqui
         Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.velocity = new Vector3(direction * 3f, 6f, 0);
