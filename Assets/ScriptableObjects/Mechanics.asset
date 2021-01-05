@@ -18,11 +18,11 @@ MonoBehaviour:
   - Name: Jump
     Enabled: 1
   - Name: Double Jump
-    Enabled: 1
+    Enabled: 0
   - Name: Wall Slide
-    Enabled: 1
+    Enabled: 0
   - Name: Wall Jump
-    Enabled: 1
+    Enabled: 0
   - Name: Dash
     Enabled: 0
   - Name: Ethereal Dash
@@ -30,11 +30,11 @@ MonoBehaviour:
   - Name: Blink
     Enabled: 0
   - Name: Attack
-    Enabled: 1
+    Enabled: 0
   - Name: Range Boost
-    Enabled: 1
+    Enabled: 0
   - Name: Destroy Projectile
-    Enabled: 1
+    Enabled: 0
   - Name: Pogo Jump
     Enabled: 0
   - Name: Gun Boots
