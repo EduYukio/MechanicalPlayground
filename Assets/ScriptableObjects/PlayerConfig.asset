@@ -30,7 +30,7 @@ MonoBehaviour:
   startStickyTime: 0.1
   startWallJumpDurationTime: 0.1
   attackDamage: 4
-  startAttackCooldownTime: 0.15
+  startAttackCooldownTime: 0.125
   pogoForce: 11
   blinkDistance: 2.8
   blinkGroundCheckRadius: 0.25
@@ -41,6 +41,7 @@ MonoBehaviour:
   startShieldCooldownTime: 0.75
   startParryTime: 0.125
   parryPauseDuration: 0.2
+  reflectedBulletsNeededToKill: 1
   startExplosionCooldownTime: 0.5
   explosionRadius: 0.5
   explosionDamageRate: 0.5
