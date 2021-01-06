@@ -7,6 +7,7 @@ public class PlayerDashingState : PlayerBaseState {
 
     public override void EnterState(PlayerFSM player) {
         player.animator.Play("PlayerDash");
+        Manager.audio.Play("Slash2");
         Setup(player);
         DashAction(player);
     }

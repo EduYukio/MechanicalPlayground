@@ -15,7 +15,7 @@ public class PlayerFallingState : PlayerBaseState {
         if (base.CheckTransitionToGunBoots(player)) return;
         if (base.CheckTransitionToWallJumping(player)) return;
         if (base.CheckTransitionToDoubleJumping(player)) return;
-        if (base.CheckTransitionToGrounded(player)) return;
+        if (CheckTransitionToGrounded(player)) return;
         if (base.CheckTransitionToDashing(player)) return;
         if (base.CheckTransitionToWallSliding(player)) return;
         if (base.CheckTransitionToAttacking(player)) return;
@@ -64,6 +64,16 @@ public class PlayerFallingState : PlayerBaseState {
 
         if (player.coyoteTimer > 0) {
             return base.CheckTransitionToJumping(player);
+        }
+
+        return false;
+    }
+
+    public override bool CheckTransitionToGrounded(PlayerFSM player) {
+        if (player.isGrounded) {
+            Manager.audio.Play("Landing");
+            player.TransitionToState(player.GroundedState);
+            return true;
         }
 
         return false;

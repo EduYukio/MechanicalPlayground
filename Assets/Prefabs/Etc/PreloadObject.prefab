@@ -1,0 +1,144 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1671344374316473883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1671344374316473884}
+  - component: {fileID: 1671344374316473886}
+  - component: {fileID: 1671344374316473885}
+  m_Layer: 0
+  m_Name: PreloadObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1671344374316473884
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671344374316473883}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1671344374316473886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671344374316473883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d63e2241609aef40be199a564d480c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentBGM:
+    name: 
+    clip: {fileID: 0}
+    volume: 0.75
+    volumeVariance: 0.1
+    pitch: 1
+    pitchVariance: 0.1
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  currentBGMIndex: 0
+  maxBGMIndex: 2
+--- !u!114 &1671344374316473885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671344374316473883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a09c0ea0a03fcb64d9ad36cb772a39b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixerGroup: {fileID: 0}
+  sounds:
+  - name: BGM0
+    clip: {fileID: 8300000, guid: 69d52f450fcee864a862141e9f206b39, type: 3}
+    volume: 0.8
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: BGM1
+    clip: {fileID: 8300000, guid: 558ebc478f411d440a635477c9e40754, type: 3}
+    volume: 0.8
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: BGM2
+    clip: {fileID: 8300000, guid: f153d5c1dea30f54e8598e4bd8d2c05f, type: 3}
+    volume: 0.8
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Explosion
+    clip: {fileID: 8300000, guid: e95442685dfac584d8dbc028f074f4c2, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Slash1
+    clip: {fileID: 8300000, guid: 3c4c4fe17745d474a888a292a455ecd4, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Slash2
+    clip: {fileID: 8300000, guid: 3cc0cb9eb0152b44aa7ddc4cf6b5598b, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 0.55
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Landing
+    clip: {fileID: 8300000, guid: 46f29db2ec7f3954b8ca23a235d2a927, type: 3}
+    volume: 0.5
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Parry
+    clip: {fileID: 8300000, guid: 5e3493bf933fc18428c3ba807b246133, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1.4
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}

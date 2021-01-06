@@ -16,6 +16,7 @@ public class PlayerAttackingState : PlayerBaseState {
         else {
             player.animator.Play("PlayerAttacking", -1, 0f);
         }
+        Manager.audio.Play("Slash1");
         AttackAction(player);
     }
 
