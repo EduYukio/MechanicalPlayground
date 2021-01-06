@@ -64,6 +64,11 @@ public class MechanicsMenu : MonoBehaviour {
     }
 
     public void ConfirmMechanics() {
+        if (skillPoints > 0) {
+            SkillPointsWarning();
+            return;
+        }
+
         if (changedMechanics) {
             ReloadLevel();
         }
@@ -120,12 +125,14 @@ public class MechanicsMenu : MonoBehaviour {
     }
 
     void SkillPointsWarning() {
-        blinkRed = true;
         skillPointsText.color = Color.red;
+        blinkRed = true;
     }
 
     private void CheckIfNeedToBlinkRed() {
         if (blinkRed) {
+            skillPointsText.enabled = false;
+            skillPointsText.enabled = true;
             float step = 0.02f;
 
             Color currentColor = skillPointsText.color;
