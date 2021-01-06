@@ -21,9 +21,8 @@ public class PlayerAttackingState : PlayerBaseState {
 
     public override void Update(PlayerFSM player) {
         if (CheckTransitionToPogoing(player)) return;
-        if (base.CheckTransitionToWalking(player)) return;
-        if (base.CheckTransitionToGrounded(player)) return;
         if (base.CheckTransitionToFalling(player)) return;
+        if (base.CheckTransitionToGrounded(player)) return;
     }
 
     void Setup(PlayerFSM player) {
