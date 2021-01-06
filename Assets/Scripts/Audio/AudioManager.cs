@@ -17,15 +17,22 @@ public class AudioManager : MonoBehaviour {
     }
 
     public void Play(string soundName) {
-        Sound sound = Array.Find(sounds, (Predicate<Sound>)(item => item.name == soundName));
-        if (sound == null) {
-            Debug.LogWarning("Sound: " + soundName + " not found!");
-            return;
-        }
+        Sound sound = FindSound(soundName);
+        if (sound == null) return;
 
         sound.source.volume = sound.volume * (1f + UnityEngine.Random.Range(-sound.volumeVariance / 2f, sound.volumeVariance / 2f));
         sound.source.pitch = sound.pitch * (1f + UnityEngine.Random.Range(-sound.pitchVariance / 2f, sound.pitchVariance / 2f));
 
         sound.source.Play();
+    }
+
+    public Sound FindSound(string soundName) {
+        Sound sound = Array.Find(sounds, (Predicate<Sound>)(item => item.name == soundName));
+        if (sound == null) {
+            Debug.LogWarning("Sound: " + soundName + " not found!");
+            return null;
+        }
+
+        return sound;
     }
 }

@@ -169,8 +169,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mixerGroup: {fileID: 0}
   sounds:
-  - name: BGM1
+  - name: BGM0
     clip: {fileID: 8300000, guid: 69d52f450fcee864a862141e9f206b39, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: BGM1
+    clip: {fileID: 8300000, guid: 558ebc478f411d440a635477c9e40754, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: BGM2
+    clip: {fileID: 8300000, guid: f153d5c1dea30f54e8598e4bd8d2c05f, type: 3}
     volume: 1
     volumeVariance: 0
     pitch: 1
@@ -190,3 +208,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d63e2241609aef40be199a564d480c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentBGM:
+    name: 
+    clip: {fileID: 0}
+    volume: 0.75
+    volumeVariance: 0.1
+    pitch: 1
+    pitchVariance: 0.1
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  currentBGMIndex: 0
+  maxBGMIndex: 2
