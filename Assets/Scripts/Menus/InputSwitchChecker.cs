@@ -25,10 +25,6 @@ public class InputSwitchChecker : MonoBehaviour {
         CheckGamePadInput();
     }
 
-    private void OnDestroy() {
-        Cursor.visible = true;
-    }
-
     public List<RaycastResult> ThrowRayCastAtMousePosition() {
         PointerEventData pointer = new PointerEventData(EventSystem.current);
         pointer.position = Input.mousePosition;
