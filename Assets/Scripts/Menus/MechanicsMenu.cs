@@ -24,17 +24,20 @@ public class MechanicsMenu : MonoBehaviour {
     [HideInInspector] public MechanicButton[] buttons;
     private PlayerFSM player;
     private Menu menu;
+    private bool blinkRed;
 
     private void Awake() {
         CleanInfo();
         buttons = buttonObjects.GetComponentsInChildren<MechanicButton>();
         player = GameObject.FindObjectOfType<PlayerFSM>();
         menu = GameObject.FindObjectOfType<Menu>();
-        skillPoints = player.config.skillPoints;
+        skillPoints = player.config.maxSkillPoints;
+        skillPointsText.color = Color.black;
     }
 
     private void Update() {
         CheckMenuExitInput();
+        CheckIfNeedToBlinkRed();
     }
 
     private void OnEnable() {
@@ -107,12 +110,36 @@ public class MechanicsMenu : MonoBehaviour {
         bool hitStart = Input.GetButtonDown("Start");
         bool hitCircle = Input.GetButtonDown("Circle");
         if (hitEsc || hitStart || hitCircle) {
+            if (skillPoints > 0) {
+                SkillPointsWarning();
+                return;
+            }
+
             ConfirmMechanics();
         }
     }
 
+    void SkillPointsWarning() {
+        blinkRed = true;
+        skillPointsText.color = Color.red;
+    }
+
+    private void CheckIfNeedToBlinkRed() {
+        if (blinkRed) {
+            float step = 0.02f;
+
+            Color currentColor = skillPointsText.color;
+            Color newColor = new Color(currentColor.r - step, 0, 0);
+            skillPointsText.color = newColor;
+
+            if (newColor.r <= 0f) {
+                blinkRed = false;
+            }
+        }
+    }
+
     public void UpdateSkillPointsText() {
-        skillPoints = player.config.skillPoints;
+        skillPoints = player.config.maxSkillPoints;
         foreach (var button in buttons) {
             if (mechanics.IsEnabled(button.mechanicName)) {
                 skillPoints--;

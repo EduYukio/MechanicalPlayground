@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu()]
 public class PlayerConfig : ScriptableObject {
     [Header("Mechanics Menu")]
-    public int skillPoints = 6;
+    public int maxSkillPoints = 6;
 
     [Header("Walk")]
     public float moveSpeed = 6f;
