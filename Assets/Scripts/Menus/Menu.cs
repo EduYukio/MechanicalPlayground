@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -29,7 +29,7 @@ public class Menu : MonoBehaviour {
     }
 
     private void Start() {
-        string currentLevelText = SceneManager.GetActiveScene().buildIndex.ToString();
+        string currentLevelText = (SceneManager.GetActiveScene().buildIndex - 1).ToString();
         levelIndicator.text = "Level: " + currentLevelText + "/" + finalLevel.ToString();
     }
 
