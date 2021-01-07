@@ -180,147 +180,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
       propertyPath: sounds.Array.size
-      value: 20
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[17].pitchVariance
+      propertyPath: sounds.Array.data[20].name
+      value: Destroy Projectile
+      objectReference: {fileID: 0}
+    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
+      propertyPath: sounds.Array.data[20].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0dfde348178287240a3a0719927864cc, type: 3}
+    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
+      propertyPath: sounds.Array.data[20].volume
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
+      propertyPath: sounds.Array.data[20].volumeVariance
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[17].pitch
+      propertyPath: sounds.Array.data[20].pitch
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[17].volume
-      value: 0.33
+      propertyPath: sounds.Array.data[20].pitchVariance
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[16].volume
-      value: 1
+      propertyPath: sounds.Array.data[21].name
+      value: Wall Slide Begin
       objectReference: {fileID: 0}
     - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[15].volume
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[15].clip
+      propertyPath: sounds.Array.data[21].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 6c59e76e741cf9a4e8124ce7d5105ef2, type: 3}
+      objectReference: {fileID: 8300000, guid: 271c156021c367b47a5f6ba66c7ae326, type: 3}
     - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[11].name
-      value: PlayerDying
+      propertyPath: sounds.Array.data[21].volume
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[11].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 3b3d3e826b9d9354cab0877ab0f80073, type: 3}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[11].volume
+      propertyPath: sounds.Array.data[21].pitch
       value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[11].pitch
+      propertyPath: sounds.Array.data[22].name
+      value: Open Gate
+      objectReference: {fileID: 0}
+    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
+      propertyPath: sounds.Array.data[22].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8f70db641d550fd45a758d4cfdeffe6b, type: 3}
+    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
+      propertyPath: sounds.Array.data[22].volume
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
+      propertyPath: sounds.Array.data[22].pitch
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[12].name
-      value: Create Platform
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[12].pitch
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[13].name
-      value: Destroy Platform
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[13].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 8eecb8c9879134944be38f69b7d9b235, type: 3}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[13].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[14].name
-      value: Goal
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[14].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 9ceedfc3000c4684c869a58dd87c29d5, type: 3}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[14].volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[14].pitch
-      value: 1.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[15].name
-      value: Mechanic Item
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[16].name
-      value: Shield Returning
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[16].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 49e170615ab84e1478ed4719021e1442, type: 3}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[17].name
-      value: Shield Consumed
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[17].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 420a97a42126ced4bab76b531401aead, type: 3}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[18].name
-      value: Gun Shoot2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[18].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 64bd30f339285164a92f9e11db609852, type: 3}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[18].volume
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[18].pitch
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[18].pitchVariance
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[19].name
-      value: Gun Shoot
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[19].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 4baf108d7f136764f812bc6db9a50ea9, type: 3}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[19].volume
-      value: 0.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[19].pitch
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[19].pitchVariance
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671344374316473885, guid: 2e50695300f48b146a13855e35c12a47, type: 3}
-      propertyPath: sounds.Array.data[19].volumeVariance
-      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e50695300f48b146a13855e35c12a47, type: 3}

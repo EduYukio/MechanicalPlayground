@@ -7,6 +7,7 @@ public class Gate : MonoBehaviour {
         if (other.gameObject.CompareTag("Player")) {
             PlayerFSM player = other.gameObject.GetComponent<PlayerFSM>();
             if (player.keys.Count > 0) {
+                Manager.audio.Play("Open Gate");
                 ConsumeKey(player);
                 Destroy(gameObject, 0.1f);
             }

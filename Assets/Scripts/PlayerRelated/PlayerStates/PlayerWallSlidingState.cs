@@ -5,6 +5,7 @@ public class PlayerWallSlidingState : PlayerBaseState {
 
     public override void EnterState(PlayerFSM player) {
         player.animator.Play("PlayerWallSlide", -1, 0f);
+        Manager.audio.Play("Wall Slide Begin");
         Setup(player);
     }
 
