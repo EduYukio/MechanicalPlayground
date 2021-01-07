@@ -4944,7 +4944,7 @@ PrefabInstance:
     - target: {fileID: 1887519762526184955, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: m_Navigation.m_SelectOnDown
       value: 
-      objectReference: {fileID: 5450945894035786014}
+      objectReference: {fileID: 5450945894178892474}
     - target: {fileID: 1887519762526184955, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: m_Navigation.m_SelectOnLeft
       value: 
@@ -5562,7 +5562,7 @@ PrefabInstance:
     - target: {fileID: 1887519762526184955, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: m_Navigation.m_SelectOnDown
       value: 
-      objectReference: {fileID: 5450945894035786014}
+      objectReference: {fileID: 5450945895773063267}
     - target: {fileID: 1887519762526184955, guid: ca2f9127bfbb73c459cbab6b3c0482a7, type: 3}
       propertyPath: m_Navigation.m_SelectOnLeft
       value: 
