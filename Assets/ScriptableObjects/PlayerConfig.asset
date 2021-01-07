@@ -44,7 +44,7 @@ MonoBehaviour:
   reflectedBulletsNeededToKill: 1
   startExplosionCooldownTime: 0.5
   explosionRadius: 0.5
-  explosionDamageRate: 0.5
+  explosionDamageRate: 1
   xRange: 1.2
   yRange: 1.3
   startGunBootsCooldownTimer: 0.1
