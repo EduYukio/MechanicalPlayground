@@ -5,6 +5,7 @@ public class TrunkBeingHitState : TrunkBaseState {
 
     public override void EnterState(TrunkFSM trunk) {
         trunk.animator.Play("BeingHit", -1, 0f);
+        Manager.audio.Play("EnemyHit");
         Setup(trunk);
         BeingHitAction(trunk);
     }

@@ -25,6 +25,7 @@ public class Goal : MonoBehaviour {
         player.animator.Play("PlayerIdle");
         player.freezePlayerState = true;
         player.spriteRenderer.color = Color.white;
+        Manager.audio.Play("Goal");
 
         yield return null;
 

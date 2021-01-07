@@ -5,6 +5,7 @@ public class SpikyBeingHitState : SpikyBaseState {
 
     public override void EnterState(SpikyFSM spiky) {
         spiky.animator.Play("BeingHit", -1, 0f);
+        Manager.audio.Play("EnemyHit");
         Setup(spiky);
         BeingHitAction(spiky);
     }

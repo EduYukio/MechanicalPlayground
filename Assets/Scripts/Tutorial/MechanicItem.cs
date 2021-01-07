@@ -7,6 +7,7 @@ public class MechanicItem : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("Player")) {
+            Manager.audio.Play("Mechanic Item");
             WhenPicked.Invoke();
             PlayerFSM player = other.gameObject.GetComponent<PlayerFSM>();
             player.mechanics.Activate(mechanicName);
