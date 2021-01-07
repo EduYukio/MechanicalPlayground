@@ -20,10 +20,23 @@ public class AudioManager : MonoBehaviour {
         Sound sound = FindSound(soundName);
         if (sound == null) return;
 
-        sound.source.volume = sound.volume * (1f + UnityEngine.Random.Range(-sound.volumeVariance / 2f, sound.volumeVariance / 2f));
-        sound.source.pitch = sound.pitch * (1f + UnityEngine.Random.Range(-sound.pitchVariance / 2f, sound.pitchVariance / 2f));
+        SetSourceSettings(sound);
 
         sound.source.Play();
+    }
+
+    public void PlayDelayed(string soundName, float delay) {
+        Sound sound = FindSound(soundName);
+        if (sound == null) return;
+
+        SetSourceSettings(sound);
+
+        sound.source.PlayDelayed(delay);
+    }
+
+    void SetSourceSettings(Sound sound) {
+        sound.source.volume = sound.volume * (1f + UnityEngine.Random.Range(-sound.volumeVariance / 2f, sound.volumeVariance / 2f));
+        sound.source.pitch = sound.pitch * (1f + UnityEngine.Random.Range(-sound.pitchVariance / 2f, sound.pitchVariance / 2f));
     }
 
     public Sound FindSound(string soundName) {
