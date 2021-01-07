@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,8 +10,11 @@ public class PreloadScript : MonoBehaviour {
 
     void Awake() {
         DontDestroyOnLoad(gameObject);
-        InitializeFirstBGM();
         LoadNextScene();
+    }
+
+    private void Start() {
+        InitializeFirstBGM();
     }
 
     private void Update() {

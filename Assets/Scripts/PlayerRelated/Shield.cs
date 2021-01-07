@@ -70,9 +70,11 @@ public class Shield : MonoBehaviour {
     }
 
     public void ConsumeShield() {
+        Manager.audio.Play("Shield Consumed");
         gameObject.SetActive(false);
         canDefend = false;
         player.shieldCooldownTimer = player.config.startShieldCooldownTime;
+        Manager.audio.FindSound("Shield Returning").source.PlayDelayed(player.shieldCooldownTimer * 0.85f);
     }
 
     public void ReflectBullet(GameObject parriedObject) {

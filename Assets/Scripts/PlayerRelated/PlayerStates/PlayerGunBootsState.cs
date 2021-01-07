@@ -30,6 +30,7 @@ public class PlayerGunBootsState : PlayerBaseState {
     void GunBootsAction(PlayerFSM player) {
         if (player.gunBootsCooldownTimer > 0) return;
 
+        Manager.audio.Play("Gun Shoot");
         float xOffset = UnityEngine.Random.Range(-0.2f, 0.2f);
         Vector3 spawnPosition = player.transform.position + new Vector3(xOffset, -0.55f, 0f);
         GameObject bullet = MonoBehaviour.Instantiate(player.bootsBulletPrefab, spawnPosition, Quaternion.identity);

@@ -169,6 +169,15 @@ MonoBehaviour:
     loop: 0
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
+  - name: PlayerDying
+    clip: {fileID: 8300000, guid: 3b3d3e826b9d9354cab0877ab0f80073, type: 3}
+    volume: 0.8
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
   - name: Create Platform
     clip: {fileID: 8300000, guid: 8eecb8c9879134944be38f69b7d9b235, type: 3}
     volume: 1
@@ -202,6 +211,42 @@ MonoBehaviour:
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Shield Returning
+    clip: {fileID: 8300000, guid: 49e170615ab84e1478ed4719021e1442, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Shield Consumed
+    clip: {fileID: 8300000, guid: 420a97a42126ced4bab76b531401aead, type: 3}
+    volume: 0.33
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Gun Shoot2
+    clip: {fileID: 8300000, guid: 64bd30f339285164a92f9e11db609852, type: 3}
+    volume: 0.6
+    volumeVariance: 0
+    pitch: 0.8
+    pitchVariance: 0.2
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Gun Shoot
+    clip: {fileID: 8300000, guid: 4baf108d7f136764f812bc6db9a50ea9, type: 3}
+    volume: 0.42
+    volumeVariance: 0.15
+    pitch: 1.25
+    pitchVariance: 0.15
     loop: 0
     mixerGroup: {fileID: 0}
     source: {fileID: 0}

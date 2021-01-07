@@ -24,6 +24,7 @@ public class PlayerDyingState : PlayerBaseState {
         player.animator.SetFloat("disappearSpeedMultiplier", 1f);
         dyingTimer = 0.5f;
         player.animator.Play("PlayerHit");
+        Manager.audio.Play("PlayerDying");
 
         //TODO: refatorar isso aqui
         Camera camera = player.gameObject.GetComponentInChildren<Camera>();
