@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a83d4280368f2924b9a5e234e9c3ac84, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  skillPoints: 6
+  maxSkillPoints: 6
   moveSpeed: 6
   fallMultiplier: 3
   lowJumpMultiplier: 6
@@ -51,4 +51,4 @@ MonoBehaviour:
   bootsBulletSpeed: 9
   gunBootsForce: 5
   gunBootsMaxSpeed: 10
-  gunBootsDamage: 1
+  gunBootsDamage: 2
