@@ -21,6 +21,8 @@ public class Checkpoint : MonoBehaviour {
             DeactivateCurrentCheckpoint();
             PlayerFSM.respawnPosition = transform.position;
             animator.Play("FlagActivating");
+            Manager.audio.Play("Checkpoint Boing");
+            Manager.audio.PlayDelayed("Checkpoint Activated", Helper.GetAnimationDuration("FlagActivating", animator) * 0.85f);
             Checkpoint.currentCheckpoint = this;
         }
     }

@@ -153,7 +153,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: EnemyHit
     clip: {fileID: 8300000, guid: 35addd884e224624eb6028eaecc37877, type: 3}
-    volume: 0.45
+    volume: 0.55
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -247,6 +247,51 @@ MonoBehaviour:
     volumeVariance: 0.15
     pitch: 1.25
     pitchVariance: 0.15
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Destroy Projectile
+    clip: {fileID: 8300000, guid: 0dfde348178287240a3a0719927864cc, type: 3}
+    volume: 0.3
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Wall Slide Begin
+    clip: {fileID: 8300000, guid: 271c156021c367b47a5f6ba66c7ae326, type: 3}
+    volume: 0.4
+    volumeVariance: 0
+    pitch: 0.8
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Open Gate
+    clip: {fileID: 8300000, guid: 8f70db641d550fd45a758d4cfdeffe6b, type: 3}
+    volume: 0.6
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Checkpoint Boing
+    clip: {fileID: 8300000, guid: 4e03eb1fe6d8fa04eb7a8617746c4f4b, type: 3}
+    volume: 0.35
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Checkpoint Activated
+    clip: {fileID: 8300000, guid: 0839d679d756350458204f92520472d0, type: 3}
+    volume: 0.6
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
     loop: 0
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
