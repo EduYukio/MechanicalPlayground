@@ -8,14 +8,19 @@ public class Key : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("Player")) {
-            PlayerFSM player = other.gameObject.GetComponent<PlayerFSM>();
-            transform.parent.SetParent(player.transform);
-            PositionKey();
-            transform.parent.localScale = new Vector3(1.25f, 1.25f, 1);
-            player.keys.Add(transform.parent.gameObject);
-
-            GetComponent<Collider2D>().enabled = false;
+            AcquireKey(other);
         }
+    }
+
+    void AcquireKey(Collider2D other) {
+        Manager.audio.Play("Key Pick");
+        PlayerFSM player = other.gameObject.GetComponent<PlayerFSM>();
+        transform.parent.SetParent(player.transform);
+        PositionKey();
+        transform.parent.localScale = new Vector3(1.25f, 1.25f, 1);
+        player.keys.Add(transform.parent.gameObject);
+
+        GetComponent<Collider2D>().enabled = false;
     }
 
     void PositionKey() {
@@ -27,7 +32,7 @@ public class Key : MonoBehaviour {
             Key.slots.Remove(newPosition);
         }
         else {
-            Debug.Log("WARNING: Player got more keys than available slot positions");
+            Debug.LogWarning("WARNING: Player got more keys than available slot positions");
             transform.parent.localPosition = new Vector3(0, 1f, 0);
         }
     }

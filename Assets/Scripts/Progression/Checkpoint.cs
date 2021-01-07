@@ -22,7 +22,7 @@ public class Checkpoint : MonoBehaviour {
             PlayerFSM.respawnPosition = transform.position;
             animator.Play("FlagActivating");
             Manager.audio.Play("Checkpoint Boing");
-            Manager.audio.PlayDelayed("Checkpoint Activated", Helper.GetAnimationDuration("FlagActivating", animator) * 0.85f);
+            Manager.audio.PlayDelayed("Checkpoint Activated", Helper.GetAnimationDuration("FlagActivating", animator) * 0.5f);
             Checkpoint.currentCheckpoint = this;
         }
     }

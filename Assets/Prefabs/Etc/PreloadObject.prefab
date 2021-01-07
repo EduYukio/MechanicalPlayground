@@ -197,8 +197,8 @@ MonoBehaviour:
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
   - name: Goal
-    clip: {fileID: 8300000, guid: 9ceedfc3000c4684c869a58dd87c29d5, type: 3}
-    volume: 1
+    clip: {fileID: 8300000, guid: c93888098eca1f64a9010d2e4b1ce1ba, type: 3}
+    volume: 0.8
     volumeVariance: 0
     pitch: 1.1
     pitchVariance: 0
@@ -287,6 +287,15 @@ MonoBehaviour:
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
   - name: Checkpoint Activated
+    clip: {fileID: 8300000, guid: 0839d679d756350458204f92520472d0, type: 3}
+    volume: 0.6
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Key Pick
     clip: {fileID: 8300000, guid: 0839d679d756350458204f92520472d0, type: 3}
     volume: 0.6
     volumeVariance: 0
