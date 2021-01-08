@@ -60,6 +60,7 @@ public class Menu : MonoBehaviour {
     }
 
     public void QuitToMenuButton() {
+        Manager.audio.mixer.SetFloat("bgmVolume", 0f);
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         player.freezePlayerState = false;
@@ -73,6 +74,7 @@ public class Menu : MonoBehaviour {
         bool hitCircle = Input.GetButtonDown("Circle");
         if (hitEsc || hitStart) {
             if (pauseMenu.activeSelf) {
+                Manager.audio.Play("UI_Confirm");
                 ClosePauseMenu();
             }
             else if (mechanicsMenu == null || !mechanicsMenu.activeSelf) {
@@ -82,6 +84,7 @@ public class Menu : MonoBehaviour {
 
         if (hitCircle) {
             if (pauseMenu.activeSelf) {
+                Manager.audio.Play("UI_Confirm");
                 ClosePauseMenu();
             }
         }
@@ -126,9 +129,5 @@ public class Menu : MonoBehaviour {
         Time.timeScale = 1f;
         player.freezePlayerState = false;
         Cursor.visible = false;
-    }
-
-    public void PlayUISound(string soundName) {
-        Manager.audio.Play("UI_" + soundName);
     }
 }

@@ -37,6 +37,8 @@ public class PreloadScript : MonoBehaviour {
     }
 
     void CheckIfBGMEnded() {
+        if (currentBGM.source == null) return;
+
         if (!currentBGM.source.isPlaying) {
             if (currentBGMIndex == maxBGMIndex) {
                 currentBGMIndex = 0;

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -69,6 +69,7 @@ public class MechanicsMenu : MonoBehaviour {
             return;
         }
 
+        Manager.audio.Play("UI_Confirm");
         if (changedMechanics) {
             ReloadLevel();
         }
