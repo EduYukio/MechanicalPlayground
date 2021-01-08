@@ -79,7 +79,7 @@ public class MechanicsMenu : MonoBehaviour {
     }
 
     public void ReloadLevel() {
-        Manager.audio.mixer.SetFloat("bgmVolume", 0f);
+        Manager.audio.SetBGMVolumeToNormal();
         Time.timeScale = 1f;
         player.freezePlayerState = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

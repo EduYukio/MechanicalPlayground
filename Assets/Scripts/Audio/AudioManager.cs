@@ -6,6 +6,9 @@ public class AudioManager : MonoBehaviour {
     public AudioMixer mixer;
     public Sound[] sounds;
 
+    [HideInInspector] public float normalBGMVolume = 0f;
+    [HideInInspector] public float muffleEffect = 12.5f;
+
     void Awake() {
         foreach (Sound sound in sounds) {
             sound.source = gameObject.AddComponent<AudioSource>();
@@ -47,5 +50,13 @@ public class AudioManager : MonoBehaviour {
         }
 
         return sound;
+    }
+
+    public void SetBGMVolumeToNormal() {
+        mixer.SetFloat("bgmVolume", normalBGMVolume);
+    }
+
+    public void SetBGMVolumeToMuffled() {
+        mixer.SetFloat("bgmVolume", normalBGMVolume - muffleEffect);
     }
 }

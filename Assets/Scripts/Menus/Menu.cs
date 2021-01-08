@@ -11,6 +11,9 @@ public class Menu : MonoBehaviour {
     public GameObject pauseMenu;
     public GameObject mechanicsMenu;
 
+    public GameObject optionsMenu;
+    public GameObject firstOptionsButton;
+
     public GameObject continueButton;
     public GameObject mechanicsButton;
     public GameObject optionsButton;
@@ -50,22 +53,34 @@ public class Menu : MonoBehaviour {
     }
 
     public void OptionsButton() {
+        pauseMenu.SetActive(false);
+        optionsMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(firstOptionsButton);
     }
 
     public void RestartButton() {
-        Manager.audio.mixer.SetFloat("bgmVolume", 0f);
+        Manager.audio.SetBGMVolumeToNormal();
         Time.timeScale = 1f;
         player.freezePlayerState = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void QuitToMenuButton() {
-        Manager.audio.mixer.SetFloat("bgmVolume", 0f);
+        Manager.audio.SetBGMVolumeToNormal();
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         player.freezePlayerState = false;
         PlayerFSM.respawnPosition = Vector2.zero;
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void BackToPauseMenu() {
+        Manager.audio.SetBGMVolumeToMuffled();
+        optionsMenu.SetActive(false);
+        pauseMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(optionsButton);
     }
 
     void CheckMenuInput() {
@@ -77,6 +92,10 @@ public class Menu : MonoBehaviour {
                 Manager.audio.Play("UI_Confirm");
                 ClosePauseMenu();
             }
+            else if (optionsMenu.activeSelf) {
+                Manager.audio.Play("UI_Confirm");
+                BackToPauseMenu();
+            }
             else if (mechanicsMenu == null || !mechanicsMenu.activeSelf) {
                 OpenPauseMenu();
             }
@@ -86,6 +105,10 @@ public class Menu : MonoBehaviour {
             if (pauseMenu.activeSelf) {
                 Manager.audio.Play("UI_Confirm");
                 ClosePauseMenu();
+            }
+            else if (optionsMenu.activeSelf) {
+                Manager.audio.Play("UI_Confirm");
+                BackToPauseMenu();
             }
         }
     }
@@ -114,7 +137,7 @@ public class Menu : MonoBehaviour {
 
     void OpenPauseMenu() {
         pauseMenu.SetActive(true);
-        Manager.audio.mixer.SetFloat("bgmVolume", -12.5f);
+        Manager.audio.SetBGMVolumeToMuffled();
 
         Time.timeScale = 0f;
         player.freezePlayerState = true;
@@ -125,7 +148,7 @@ public class Menu : MonoBehaviour {
 
     IEnumerator WaitToClosePauseMenu() {
         pauseMenu.SetActive(false);
-        Manager.audio.mixer.SetFloat("bgmVolume", 0f);
+        Manager.audio.SetBGMVolumeToNormal();
         yield return new WaitForSecondsRealtime(0.05f);
         Time.timeScale = 1f;
         player.freezePlayerState = false;
