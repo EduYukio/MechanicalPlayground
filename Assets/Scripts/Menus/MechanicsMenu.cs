@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -37,7 +37,7 @@ public class MechanicsMenu : MonoBehaviour {
 
     private void Update() {
         CheckMenuExitInput();
-        CheckIfNeedToBlinkRed();
+        Helper.CheckIfNeedToBlinkRed(ref blinkRed, skillPointsText);
     }
 
     private void OnEnable() {
@@ -126,26 +126,10 @@ public class MechanicsMenu : MonoBehaviour {
         }
     }
 
-    void SkillPointsWarning() {
+    public void SkillPointsWarning() {
         skillPointsText.color = Color.red;
         blinkRed = true;
         Manager.audio.Play("UI_Fail");
-    }
-
-    private void CheckIfNeedToBlinkRed() {
-        if (blinkRed) {
-            skillPointsText.enabled = false;
-            skillPointsText.enabled = true;
-            float step = 0.02f;
-
-            Color currentColor = skillPointsText.color;
-            Color newColor = new Color(currentColor.r - step, 0, 0);
-            skillPointsText.color = newColor;
-
-            if (newColor.r <= 0f) {
-                blinkRed = false;
-            }
-        }
     }
 
     public void UpdateSkillPointsText() {
@@ -164,9 +148,5 @@ public class MechanicsMenu : MonoBehaviour {
             button.SetButtonAppearance();
             UpdateSkillPointsText();
         }
-    }
-
-    public void PlayUISound(string soundName) {
-        Manager.audio.Play("UI_" + soundName);
     }
 }

@@ -12,6 +12,8 @@ public class MechanicButton : MonoBehaviour {
     public static MechanicsMenu mechMenu;
     public Mechanics mechanics;
     public Descriptions descriptions;
+    public Image requirementImage;
+    public TMP_Text requirementText;
 
     public bool isBlocked = false;
     public bool isActive = false;
@@ -22,6 +24,8 @@ public class MechanicButton : MonoBehaviour {
     private Color blockedColor = new Color(160 / 255f, 160 / 255f, 160 / 255f, 0.5f);
     private Color blockedTextColor = new Color(1, 1, 1, 0.5f);
     private Color normalTextColor = new Color(1, 1, 1, 1f);
+    private bool blinkRedImage;
+    private bool blinkRedText;
 
     private void Awake() {
         if (mechMenu == null) mechMenu = GameObject.FindObjectOfType<MechanicsMenu>();
@@ -29,11 +33,16 @@ public class MechanicButton : MonoBehaviour {
         GetComponent<Button>().onClick.AddListener(ClickedOnMechanic);
     }
 
-    private void OnEnable() {
+    private void Update() {
+        Helper.CheckIfNeedToBlinkRed(ref blinkRedImage, requirementImage);
+        Helper.CheckIfNeedToBlinkRed(ref blinkRedText, requirementText);
     }
 
     public void ClickedOnMechanic() {
         if (isBlocked) {
+            if (CheckNoPoints()) return;
+
+            RequirementWarning(requirementImage, requirementText);
             Manager.audio.Play("UI_Fail");
             return;
         }
@@ -43,12 +52,19 @@ public class MechanicButton : MonoBehaviour {
             DeactivateThoseWhoRequireThis();
         }
         else {
-            if (mechMenu.skillPoints == 0) return;
-            // fazer text piscar, dar feedback de que ta sem pontos
+            if (CheckNoPoints()) return;
             ActivateMechanic(mechanicName);
         }
         mechMenu.changedMechanics = true;
         mechMenu.UpdateButtonsState();
+    }
+
+    bool CheckNoPoints() {
+        if (mechMenu.skillPoints == 0) {
+            mechMenu.SkillPointsWarning();
+            return true;
+        }
+        return false;
     }
 
     private void ActivateMechanic(string name) {
@@ -133,7 +149,15 @@ public class MechanicButton : MonoBehaviour {
         }
     }
 
-    public void PlayUISound(string soundName) {
-        Manager.audio.Play("UI_" + soundName);
+    public void RequirementWarning(Image image, TMP_Text text) {
+        if (image != null) {
+            image.color = Color.red;
+            blinkRedImage = true;
+        }
+
+        if (text != null) {
+            text.color = Color.red;
+            blinkRedText = true;
+        }
     }
 }
