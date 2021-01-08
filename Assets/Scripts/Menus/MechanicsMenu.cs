@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -78,6 +78,7 @@ public class MechanicsMenu : MonoBehaviour {
     }
 
     public void ReloadLevel() {
+        Manager.audio.mixer.SetFloat("bgmVolume", 0f);
         Time.timeScale = 1f;
         player.freezePlayerState = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

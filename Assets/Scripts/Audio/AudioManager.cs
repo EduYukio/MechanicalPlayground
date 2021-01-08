@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour {
-    public AudioMixerGroup mixerGroup;
+    public AudioMixer mixer;
     public Sound[] sounds;
 
     void Awake() {
@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour {
             sound.source.clip = sound.clip;
             sound.source.loop = sound.loop;
 
-            sound.source.outputAudioMixerGroup = mixerGroup;
+            sound.source.outputAudioMixerGroup = sound.mixerGroup;
         }
     }
 

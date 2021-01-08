@@ -52,6 +52,13 @@ public class Menu : MonoBehaviour {
     public void OptionsButton() {
     }
 
+    public void RestartButton() {
+        Manager.audio.mixer.SetFloat("bgmVolume", 0f);
+        Time.timeScale = 1f;
+        player.freezePlayerState = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     public void QuitToMenuButton() {
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
@@ -103,6 +110,7 @@ public class Menu : MonoBehaviour {
 
     void OpenPauseMenu() {
         pauseMenu.SetActive(true);
+        Manager.audio.mixer.SetFloat("bgmVolume", -12.5f);
 
         Time.timeScale = 0f;
         player.freezePlayerState = true;
@@ -113,6 +121,7 @@ public class Menu : MonoBehaviour {
 
     IEnumerator WaitToClosePauseMenu() {
         pauseMenu.SetActive(false);
+        Manager.audio.mixer.SetFloat("bgmVolume", 0f);
         yield return new WaitForSecondsRealtime(0.05f);
         Time.timeScale = 1f;
         player.freezePlayerState = false;
