@@ -16,7 +16,6 @@ public class PlayerExplodingState : PlayerBaseState {
         if (CheckTransitionToWallSliding(player)) return;
         if (base.CheckTransitionToFalling(player)) return;
         if (base.CheckTransitionToGrounded(player)) return;
-        if (base.CheckTransitionToWalking(player)) return;
     }
 
     void Setup(PlayerFSM player) {
