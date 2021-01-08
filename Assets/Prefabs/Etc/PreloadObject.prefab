@@ -279,7 +279,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Checkpoint Boing
     clip: {fileID: 8300000, guid: 4e03eb1fe6d8fa04eb7a8617746c4f4b, type: 3}
-    volume: 0.2
+    volume: 0.15
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -288,7 +288,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Checkpoint Activated
     clip: {fileID: 8300000, guid: 0839d679d756350458204f92520472d0, type: 3}
-    volume: 0.4
+    volume: 0.2
     volumeVariance: 0
     pitch: 0.9
     pitchVariance: 0
