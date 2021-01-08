@@ -592,6 +592,71 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0bfef442035cf945b38ac9a7f400bcb, type: 3}
+--- !u!1001 &243592988
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6536871124206469652, guid: b0bfef442035cf945b38ac9a7f400bcb, type: 3}
+      propertyPath: m_Name
+      value: Saw (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536871124206469673, guid: b0bfef442035cf945b38ac9a7f400bcb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 26.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536871124206469673, guid: b0bfef442035cf945b38ac9a7f400bcb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 52.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536871124206469673, guid: b0bfef442035cf945b38ac9a7f400bcb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536871124206469673, guid: b0bfef442035cf945b38ac9a7f400bcb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536871124206469673, guid: b0bfef442035cf945b38ac9a7f400bcb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536871124206469673, guid: b0bfef442035cf945b38ac9a7f400bcb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536871124206469673, guid: b0bfef442035cf945b38ac9a7f400bcb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536871124206469673, guid: b0bfef442035cf945b38ac9a7f400bcb, type: 3}
+      propertyPath: m_RootOrder
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536871124206469673, guid: b0bfef442035cf945b38ac9a7f400bcb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536871124206469673, guid: b0bfef442035cf945b38ac9a7f400bcb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536871124206469673, guid: b0bfef442035cf945b38ac9a7f400bcb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536871124206469673, guid: b0bfef442035cf945b38ac9a7f400bcb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536871124206469673, guid: b0bfef442035cf945b38ac9a7f400bcb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b0bfef442035cf945b38ac9a7f400bcb, type: 3}
 --- !u!1001 &424349025
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6190,8 +6255,8 @@ Tilemap:
   - first: {x: 25, y: 57, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 9
-      m_TileSpriteIndex: 9
+      m_TileIndex: 8
+      m_TileSpriteIndex: 8
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -6772,9 +6837,9 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 626
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 2b5d7a17831735a4ead773bc541e5038, type: 2}
+  - m_RefCount: 625
     m_Data: {fileID: 11400000, guid: 4d601d9bbe0e1ed459a2dee2ea224f42, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 0
@@ -6793,9 +6858,9 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 626
+  - m_RefCount: 1
+    m_Data: {fileID: -1240992638086678289, guid: 015c25e9bbf6db1488711ea9896c9e2a, type: 3}
+  - m_RefCount: 625
     m_Data: {fileID: 21300000, guid: ae159d1b550d3a14d94142c132a6789d, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 626
