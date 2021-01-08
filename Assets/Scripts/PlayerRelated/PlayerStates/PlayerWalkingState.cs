@@ -1,11 +1,15 @@
 using UnityEngine;
 
 public class PlayerWalkingState : PlayerBaseState {
+    float walkParticlesStartCooldown = 0.5f;
+
     public override void EnterState(PlayerFSM player) {
+        Setup(player);
     }
 
     public override void Update(PlayerFSM player) {
         PlayAnimationIfCan(player);
+        PlayParticleIfCan(player);
         ResetCoyoteTimer(player);
         base.ProcessMovementInput(player);
 
@@ -17,6 +21,10 @@ public class PlayerWalkingState : PlayerBaseState {
         if (base.CheckTransitionToAttacking(player)) return;
         if (base.CheckTransitionToBlinking(player)) return;
         if (base.CheckTransitionToExploding(player)) return;
+    }
+
+    void Setup(PlayerFSM player) {
+        player.walkParticlesCooldownTimer = 0f;
     }
 
     void ResetCoyoteTimer(PlayerFSM player) {
@@ -41,5 +49,12 @@ public class PlayerWalkingState : PlayerBaseState {
         if (Helper.IsPlayingAnimation("PlayerExploding", player.animator)) return;
 
         player.animator.Play("PlayerWalk");
+    }
+
+    private void PlayParticleIfCan(PlayerFSM player) {
+        if (player.walkParticlesCooldownTimer > 0) return;
+
+        player.walkParticles.Play();
+        player.walkParticlesCooldownTimer = walkParticlesStartCooldown;
     }
 }

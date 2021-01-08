@@ -46,6 +46,9 @@ public class PlayerFSM : MonoBehaviour {
     [HideInInspector] public Animator animator;
     [HideInInspector] public SpriteRenderer spriteRenderer;
 
+    [Header("Particles")]
+    public ParticleSystem walkParticles;
+
     [Header("Parameters")]
     public bool isGrounded;
     public bool isTouchingWall;
@@ -64,6 +67,7 @@ public class PlayerFSM : MonoBehaviour {
     public float shieldCooldownTimer;
     public float explosionCooldownTimer;
     public float gunBootsCooldownTimer;
+    public float walkParticlesCooldownTimer;
 
     public float coyoteTimer;
     public float bunnyHopTimer;
@@ -113,6 +117,7 @@ public class PlayerFSM : MonoBehaviour {
         //DEBUG
 
         UpdateFacingSprite();
+        PositionWalkParticles();
         ProcessTimers();
         if (!isDying) {
             CheckIfHasResetDashTrigger();
@@ -150,8 +155,20 @@ public class PlayerFSM : MonoBehaviour {
         }
     }
 
+    private void PositionWalkParticles() {
+        if (lastDirection == 1) {
+            walkParticles.transform.localPosition = new Vector3(-0.3f, -0.45f, 0);
+            walkParticles.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (lastDirection == -1) {
+            walkParticles.transform.localPosition = new Vector3(0.3f, -0.45f, 0);
+            walkParticles.transform.localScale = new Vector3(-1, 1, 1);
+        }
+    }
+
     private void ProcessTimers() {
         float step = Time.deltaTime;
+        if (walkParticlesCooldownTimer >= 0) walkParticlesCooldownTimer -= step;
         if (gunBootsCooldownTimer >= 0) gunBootsCooldownTimer -= step;
         if (explosionCooldownTimer >= 0) explosionCooldownTimer -= step;
         if (attackCooldownTimer >= 0) attackCooldownTimer -= step;
