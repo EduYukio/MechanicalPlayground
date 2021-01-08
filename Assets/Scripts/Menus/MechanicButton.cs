@@ -132,4 +132,8 @@ public class MechanicButton : MonoBehaviour {
             GetComponentInChildren<TextMeshProUGUI>().color = normalTextColor;
         }
     }
+
+    public void PlayUISound(string soundName) {
+        Manager.audio.Play("UI_" + soundName);
+    }
 }

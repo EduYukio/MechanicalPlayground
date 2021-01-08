@@ -164,4 +164,8 @@ public class MechanicsMenu : MonoBehaviour {
             UpdateSkillPointsText();
         }
     }
+
+    public void PlayUISound(string soundName) {
+        Manager.audio.Play("UI_" + soundName);
+    }
 }

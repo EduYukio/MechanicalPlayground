@@ -128,4 +128,7 @@ public class Menu : MonoBehaviour {
         Cursor.visible = false;
     }
 
+    public void PlayUISound(string soundName) {
+        Manager.audio.Play("UI_" + soundName);
+    }
 }
