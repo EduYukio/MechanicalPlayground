@@ -72,6 +72,8 @@ public class PlayerFallingState : PlayerBaseState {
     public override bool CheckTransitionToGrounded(PlayerFSM player) {
         if (player.isGrounded) {
             Manager.audio.Play("Landing");
+            player.leftSideParticles.Play();
+            player.rightSideParticles.Play();
             player.TransitionToState(player.GroundedState);
             return true;
         }
