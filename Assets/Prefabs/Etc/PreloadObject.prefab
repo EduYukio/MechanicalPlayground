@@ -315,7 +315,52 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: UI_Fail
     clip: {fileID: 8300000, guid: ffd20b6f1c8b1664f8219cabf9f7bc88, type: 3}
-    volume: 0.6
+    volume: 0.5
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
+    source: {fileID: 0}
+  - name: UI_Hover
+    clip: {fileID: 8300000, guid: a6fb161a530dd2e439f76f08d592c823, type: 3}
+    volume: 0.35
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
+    source: {fileID: 0}
+  - name: UI_Confirm
+    clip: {fileID: 8300000, guid: 42d7543778b6fbd479d6f60c346fe170, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
+    source: {fileID: 0}
+  - name: UI_Toggle
+    clip: {fileID: 8300000, guid: 11577fcdf94ee5d4496a3449c6aad362, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
+    source: {fileID: 0}
+  - name: UI_On
+    clip: {fileID: 8300000, guid: 72cf8f1d35ae1134199eca75560effd8, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
+    source: {fileID: 0}
+  - name: UI_Off
+    clip: {fileID: 8300000, guid: e062ad5c0ada06c43b0f7c5f779ea005, type: 3}
+    volume: 1
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0

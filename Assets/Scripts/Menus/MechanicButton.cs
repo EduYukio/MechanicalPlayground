@@ -68,6 +68,7 @@ public class MechanicButton : MonoBehaviour {
     }
 
     private void ActivateMechanic(string name) {
+        Manager.audio.Play("UI_On");
         ActivateButtonImage();
         mechanics.Activate(name);
         mechMenu.skillPoints--;
@@ -75,6 +76,7 @@ public class MechanicButton : MonoBehaviour {
     }
 
     private void DeactivateMechanic(string name) {
+        Manager.audio.Play("UI_Off");
         DeactivateButtonImage();
         mechanics.Deactivate(name);
         mechMenu.skillPoints++;

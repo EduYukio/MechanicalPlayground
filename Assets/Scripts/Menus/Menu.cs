@@ -96,6 +96,7 @@ public class Menu : MonoBehaviour {
             if (mechanicsMenu && mechanicsMenu.activeSelf) return;
             if (IsHidingUI()) return;
 
+            Manager.audio.Play("UI_Toggle");
             skillUICompactChildAggregator.SetActive(!skillUICompactChildAggregator.activeSelf);
             skillUILargeChildAggregator.SetActive(!skillUILargeChildAggregator.activeSelf);
         }
