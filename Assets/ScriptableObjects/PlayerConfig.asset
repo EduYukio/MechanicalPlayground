@@ -18,7 +18,7 @@ MonoBehaviour:
   lowJumpMultiplier: 6
   maxFallSpeed: -10
   jumpForce: 12
-  startBunnyHopDurationTime: 0.2
+  startBunnyHopDurationTime: 0.1
   startCoyoteDurationTime: 0.1
   doubleJumpForce: 12
   startAirJumpInputBuffer: 0.2
