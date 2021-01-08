@@ -23,6 +23,7 @@ public class PlayerJumpingState : PlayerBaseState {
     void Setup(PlayerFSM player) {
         player.coyoteTimer = 0;
         player.bunnyHopTimer = 0;
+        player.jumpParticles.Play();
     }
 
     void JumpAction(PlayerFSM player) {

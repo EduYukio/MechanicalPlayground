@@ -29,6 +29,7 @@ public class PlayerWallJumpingState : PlayerBaseState {
     }
 
     void Setup(PlayerFSM player) {
+        player.jumpParticles.Play();
         player.canDoubleJump = true;
         player.canDash = true;
         xVelocityTimer = player.config.startWallJumpDurationTime;

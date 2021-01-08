@@ -50,6 +50,7 @@ public class PlayerFSM : MonoBehaviour {
     public ParticleSystem walkParticles;
     public ParticleSystem leftSideParticles;
     public ParticleSystem rightSideParticles;
+    public ParticleSystem jumpParticles;
 
     [Header("Parameters")]
     public bool isGrounded;

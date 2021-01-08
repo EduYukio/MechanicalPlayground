@@ -22,6 +22,7 @@ public class PlayerDoubleJumpingState : PlayerBaseState {
 
     void Setup(PlayerFSM player) {
         player.canDoubleJump = false;
+        player.jumpParticles.Play();
     }
 
     void DoubleJumpAction(PlayerFSM player) {
