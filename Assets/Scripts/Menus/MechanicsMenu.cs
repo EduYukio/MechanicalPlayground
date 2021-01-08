@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -127,6 +127,7 @@ public class MechanicsMenu : MonoBehaviour {
     void SkillPointsWarning() {
         skillPointsText.color = Color.red;
         blinkRed = true;
+        Manager.audio.Play("UI_Fail");
     }
 
     private void CheckIfNeedToBlinkRed() {

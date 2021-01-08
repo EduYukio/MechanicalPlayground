@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a09c0ea0a03fcb64d9ad36cb772a39b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixerGroup: {fileID: 0}
+  mixer: {fileID: 24100000, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
   sounds:
   - name: BGM0
     clip: {fileID: 8300000, guid: 69d52f450fcee864a862141e9f206b39, type: 3}
@@ -77,7 +77,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -3846679042904816368, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: BGM1
     clip: {fileID: 8300000, guid: 558ebc478f411d440a635477c9e40754, type: 3}
@@ -86,7 +86,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -3846679042904816368, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: BGM2
     clip: {fileID: 8300000, guid: f153d5c1dea30f54e8598e4bd8d2c05f, type: 3}
@@ -95,7 +95,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -3846679042904816368, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: Explosion
     clip: {fileID: 8300000, guid: e95442685dfac584d8dbc028f074f4c2, type: 3}
@@ -104,7 +104,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: Slash1
     clip: {fileID: 8300000, guid: 3c4c4fe17745d474a888a292a455ecd4, type: 3}
@@ -113,7 +113,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: Slash2
     clip: {fileID: 8300000, guid: 3cc0cb9eb0152b44aa7ddc4cf6b5598b, type: 3}
@@ -122,7 +122,7 @@ MonoBehaviour:
     pitch: 0.55
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: LandingFoot
     clip: {fileID: 8300000, guid: 46f29db2ec7f3954b8ca23a235d2a927, type: 3}
@@ -131,7 +131,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: Parry
     clip: {fileID: 8300000, guid: 5e3493bf933fc18428c3ba807b246133, type: 3}
@@ -140,7 +140,7 @@ MonoBehaviour:
     pitch: 1.4
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: Landing
     clip: {fileID: 8300000, guid: b7a7f4e7120c52c4cb4334bcf2244a83, type: 3}
@@ -149,7 +149,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: EnemyHit
     clip: {fileID: 8300000, guid: 35addd884e224624eb6028eaecc37877, type: 3}
@@ -158,7 +158,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: EnemyDying
     clip: {fileID: 8300000, guid: 3b3d3e826b9d9354cab0877ab0f80073, type: 3}
@@ -167,7 +167,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: PlayerDying
     clip: {fileID: 8300000, guid: 3b3d3e826b9d9354cab0877ab0f80073, type: 3}
@@ -176,7 +176,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: Create Platform
     clip: {fileID: 8300000, guid: 8eecb8c9879134944be38f69b7d9b235, type: 3}
@@ -185,7 +185,7 @@ MonoBehaviour:
     pitch: 0.8
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: Destroy Platform
     clip: {fileID: 8300000, guid: 8eecb8c9879134944be38f69b7d9b235, type: 3}
@@ -194,7 +194,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: Goal
     clip: {fileID: 8300000, guid: c93888098eca1f64a9010d2e4b1ce1ba, type: 3}
@@ -203,7 +203,7 @@ MonoBehaviour:
     pitch: 1.1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: Mechanic Item
     clip: {fileID: 8300000, guid: 6c59e76e741cf9a4e8124ce7d5105ef2, type: 3}
@@ -212,7 +212,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: Shield Returning
     clip: {fileID: 8300000, guid: 49e170615ab84e1478ed4719021e1442, type: 3}
@@ -221,7 +221,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: Shield Consumed
     clip: {fileID: 8300000, guid: 420a97a42126ced4bab76b531401aead, type: 3}
@@ -230,7 +230,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: Gun Shoot2
     clip: {fileID: 8300000, guid: 64bd30f339285164a92f9e11db609852, type: 3}
@@ -239,7 +239,7 @@ MonoBehaviour:
     pitch: 0.8
     pitchVariance: 0.2
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: Gun Shoot
     clip: {fileID: 8300000, guid: 4baf108d7f136764f812bc6db9a50ea9, type: 3}
@@ -248,7 +248,7 @@ MonoBehaviour:
     pitch: 1.25
     pitchVariance: 0.15
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: Destroy Projectile
     clip: {fileID: 8300000, guid: 0dfde348178287240a3a0719927864cc, type: 3}
@@ -257,7 +257,7 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: Wall Slide Begin
     clip: {fileID: 8300000, guid: 271c156021c367b47a5f6ba66c7ae326, type: 3}
@@ -266,7 +266,7 @@ MonoBehaviour:
     pitch: 0.8
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: Open Gate
     clip: {fileID: 8300000, guid: 8f70db641d550fd45a758d4cfdeffe6b, type: 3}
@@ -275,32 +275,50 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: Checkpoint Boing
     clip: {fileID: 8300000, guid: 4e03eb1fe6d8fa04eb7a8617746c4f4b, type: 3}
-    volume: 0.35
+    volume: 0.2
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: Checkpoint Activated
     clip: {fileID: 8300000, guid: 0839d679d756350458204f92520472d0, type: 3}
-    volume: 0.6
+    volume: 0.4
     volumeVariance: 0
-    pitch: 1
+    pitch: 0.9
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: Key Pick
-    clip: {fileID: 8300000, guid: 0839d679d756350458204f92520472d0, type: 3}
+    clip: {fileID: 8300000, guid: b1c417ada06637d419e94b49666b0cb8, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
+    source: {fileID: 0}
+  - name: Blink
+    clip: {fileID: 8300000, guid: 2124dcf04e0dda046ab3c3937ecfc0ca, type: 3}
+    volume: 0.25
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 24300002, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
+    source: {fileID: 0}
+  - name: UI_Fail
+    clip: {fileID: 8300000, guid: ffd20b6f1c8b1664f8219cabf9f7bc88, type: 3}
     volume: 0.6
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}

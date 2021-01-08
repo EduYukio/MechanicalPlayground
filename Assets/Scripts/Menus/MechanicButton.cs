@@ -33,7 +33,10 @@ public class MechanicButton : MonoBehaviour {
     }
 
     public void ClickedOnMechanic() {
-        if (isBlocked) return;
+        if (isBlocked) {
+            Manager.audio.Play("UI_Fail");
+            return;
+        }
 
         if (isActive) {
             DeactivateMechanic(mechanicName);
