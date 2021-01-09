@@ -6,6 +6,7 @@ public class EnemyBullet : MonoBehaviour {
     public float initialSpeed;
     public Vector3 initialDirection;
     public float hitsToKill;
+    PlayerFSM player;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -13,7 +14,7 @@ public class EnemyBullet : MonoBehaviour {
             rb.velocity = initialDirection * initialSpeed;
         }
 
-        PlayerFSM player = GameObject.Find("PlayerFSM").GetComponent<PlayerFSM>();
+        player = GameObject.Find("PlayerFSM").GetComponent<PlayerFSM>();
         hitsToKill = player.config.reflectedBulletsNeededToKill;
     }
 
@@ -47,7 +48,6 @@ public class EnemyBullet : MonoBehaviour {
     bool HitPlayerWithShield(GameObject collidedObj) {
         if (!collidedObj.CompareTag("Player")) return false;
 
-        PlayerFSM player = collidedObj.GetComponent<PlayerFSM>();
         if (player.shield.gameObject.activeSelf) {
             BulletHitShieldAction(player);
             return true;
@@ -59,7 +59,6 @@ public class EnemyBullet : MonoBehaviour {
     bool HitShield(GameObject collidedObj) {
         if (!collidedObj.CompareTag("Shield")) return false;
 
-        PlayerFSM player = collidedObj.transform.parent.GetComponent<PlayerFSM>();
         BulletHitShieldAction(player);
         return true;
     }
@@ -84,7 +83,6 @@ public class EnemyBullet : MonoBehaviour {
     }
 
     void KillPlayer(GameObject collidedObj) {
-        PlayerFSM player = collidedObj.GetComponent<PlayerFSM>();
         player.TransitionToState(player.DyingState);
     }
 }
