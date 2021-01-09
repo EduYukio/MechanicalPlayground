@@ -18,6 +18,7 @@ public class PlayerDyingState : PlayerBaseState {
     }
 
     void Setup(PlayerFSM player) {
+        player.dyingParticles.Play();
         player.isDying = true;
         player.spriteRenderer.color = Color.white;
 

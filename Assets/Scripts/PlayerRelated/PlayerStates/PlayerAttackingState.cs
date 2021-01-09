@@ -66,7 +66,8 @@ public class PlayerAttackingState : PlayerBaseState {
     void CheckDamageEnemy(PlayerFSM player, Collider2D colliderHit) {
         bool hitEnemy = colliderHit.gameObject.CompareTag("Enemy");
         if (hitEnemy) {
-            colliderHit.GetComponent<Enemy>()?.TakeDamage(player.config.attackDamage);
+            GameObject enemyObj = colliderHit.gameObject;
+            enemyObj.GetComponent<Enemy>()?.TakeDamage(player.config.attackDamage);
         }
     }
 
