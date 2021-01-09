@@ -53,7 +53,7 @@ public class BeeFSM : Enemy {
     }
 
     public override void TakeDamage(float damage) {
-        currentHealth -= damage;
+        base.TakeDamage(damage);
         TransitionToState(BeingHitState);
     }
 

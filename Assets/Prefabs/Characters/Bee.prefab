@@ -170,6 +170,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   maxHealth: 10
   currentHealth: 0
+  particleColor: {r: 0.882353, g: 0.79215693, b: 0.20000002, a: 1}
+  beingHitParticlesObj: {fileID: 8788243709571617667, guid: c5389ef008de018429f20838d4d71823, type: 3}
   bulletPrefab: {fileID: 295229867403493645, guid: 14232a25e27285942bd9ea8b23b5389c, type: 3}
   bulletSpawnTransform: {fileID: 3197936860518604601}
   bulletDirectionTransform: {fileID: 155489786985155022}

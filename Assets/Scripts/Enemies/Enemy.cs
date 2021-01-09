@@ -8,8 +8,12 @@ public class Enemy : MonoBehaviour {
 
     public float maxHealth = 25f;
     public float currentHealth;
+    public Color particleColor;
+    public GameObject beingHitParticlesObj;
 
     public virtual void TakeDamage(float damage) {
+        currentHealth -= damage;
+        ThrowCustomParticles();
     }
 
     public static void DieAction(GameObject enemy) {
@@ -37,4 +41,10 @@ public class Enemy : MonoBehaviour {
         }
     }
 
+    public void ThrowCustomParticles() {
+        GameObject partObj = Instantiate(beingHitParticlesObj, transform.position, Quaternion.identity);
+        ParticleSystem partSystem = partObj.GetComponent<ParticleSystem>();
+        ParticleSystem.MainModule partMain = partSystem.main;
+        partMain.startColor = new ParticleSystem.MinMaxGradient(particleColor);
+    }
 }
