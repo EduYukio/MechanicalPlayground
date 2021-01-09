@@ -56,7 +56,7 @@ Canvas:
   m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 1
+  m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -261,237 +261,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &1222288771102327376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6940156262275598002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2471871937353110781}
-          m_TargetAssemblyTypeName: Menu, Scripts
-          m_MethodName: PlayUISound
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Hover
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 9
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2471871937353110781}
-          m_TargetAssemblyTypeName: Menu, Scripts
-          m_MethodName: PlayUISound
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Hover
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 15
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2471871937353110781}
-          m_TargetAssemblyTypeName: Menu, Scripts
-          m_MethodName: PlayUISound
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Confirm
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2471871937353110781}
-          m_TargetAssemblyTypeName: Menu, Scripts
-          m_MethodName: PlayUISound
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Confirm
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &3762022789656090379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6940156262889375710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2471871937353110781}
-          m_TargetAssemblyTypeName: Menu, Scripts
-          m_MethodName: PlayUISound
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Hover
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 9
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2471871937353110781}
-          m_TargetAssemblyTypeName: Menu, Scripts
-          m_MethodName: PlayUISound
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Hover
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 15
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2471871937353110781}
-          m_TargetAssemblyTypeName: Menu, Scripts
-          m_MethodName: PlayUISound
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Confirm
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2471871937353110781}
-          m_TargetAssemblyTypeName: Menu, Scripts
-          m_MethodName: PlayUISound
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Confirm
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &4683068412168449730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6940156263251160022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2471871937353110781}
-          m_TargetAssemblyTypeName: Menu, Scripts
-          m_MethodName: PlayUISound
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Hover
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 9
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2471871937353110781}
-          m_TargetAssemblyTypeName: Menu, Scripts
-          m_MethodName: PlayUISound
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Hover
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 15
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2471871937353110781}
-          m_TargetAssemblyTypeName: Menu, Scripts
-          m_MethodName: PlayUISound
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Confirm
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2471871937353110781}
-          m_TargetAssemblyTypeName: Menu, Scripts
-          m_MethodName: PlayUISound
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Confirm
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1001 &2209765964295388868
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -936,21 +705,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2471871937353110780}
     m_Modifications:
-    - target: {fileID: 592100311208572893, guid: f980d96e3f4e6bc4a85ee6c9597f61f5, type: 3}
+    - target: {fileID: 764991837, guid: f980d96e3f4e6bc4a85ee6c9597f61f5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2471871937353110781}
     - target: {fileID: 592100311208572893, guid: f980d96e3f4e6bc4a85ee6c9597f61f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OptionsButton
-      objectReference: {fileID: 0}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2471871937353110781}
     - target: {fileID: 592100311902867361, guid: f980d96e3f4e6bc4a85ee6c9597f61f5, type: 3}
       propertyPath: m_Name
       value: PauseMenu(NoMech)
-      objectReference: {fileID: 0}
-    - target: {fileID: 592100311902867361, guid: f980d96e3f4e6bc4a85ee6c9597f61f5, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 592100311902867366, guid: f980d96e3f4e6bc4a85ee6c9597f61f5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1040,18 +805,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2471871937353110781}
-    - target: {fileID: 592100312510519993, guid: f980d96e3f4e6bc4a85ee6c9597f61f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ContinueButton
-      objectReference: {fileID: 0}
     - target: {fileID: 592100312988048341, guid: f980d96e3f4e6bc4a85ee6c9597f61f5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2471871937353110781}
-    - target: {fileID: 592100312988048341, guid: f980d96e3f4e6bc4a85ee6c9597f61f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: QuitToMenuButton
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f980d96e3f4e6bc4a85ee6c9597f61f5, type: 3}
 --- !u!1 &6940156263949652904 stripped
@@ -1072,10 +829,5 @@ GameObject:
 --- !u!1 &6940156263251160022 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 592100311208572895, guid: f980d96e3f4e6bc4a85ee6c9597f61f5, type: 3}
-  m_PrefabInstance: {fileID: 7523249164188490761}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6940156262889375710 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 592100312988048343, guid: f980d96e3f4e6bc4a85ee6c9597f61f5, type: 3}
   m_PrefabInstance: {fileID: 7523249164188490761}
   m_PrefabAsset: {fileID: 0}
