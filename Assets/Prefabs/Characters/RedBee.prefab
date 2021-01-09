@@ -170,6 +170,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   maxHealth: 10
   currentHealth: 0
+  particleColor: {r: 0.9686275, g: 0.3529412, b: 0.20392159, a: 1}
+  beingHitParticlesObj: {fileID: 8788243709571617667, guid: c5389ef008de018429f20838d4d71823, type: 3}
   bulletPrefab: {fileID: 295229867403493645, guid: 4e4d4ee941d961d409145a12edfc0e5f, type: 3}
   bulletSpawnTransform: {fileID: 1605484121568780331}
   bulletDirectionTransform: {fileID: 4039413098959238876}
@@ -182,7 +184,6 @@ MonoBehaviour:
   bulletSpawnTimerSyncedWithAnimation: 0
   initialCoord: 0
   targetPosition: {x: 0, y: 0}
-  isBeingHit: 0
   spriteRenderer: {fileID: 0}
 --- !u!1 &5715691629051147582
 GameObject:
