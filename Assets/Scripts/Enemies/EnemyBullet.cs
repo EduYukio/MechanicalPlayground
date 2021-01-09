@@ -8,6 +8,9 @@ public class EnemyBullet : MonoBehaviour {
     public float hitsToKill;
     PlayerFSM player;
 
+    public GameObject parryParticles;
+    public GameObject destroyBulletParticles;
+
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
         if (initialSpeed != 0f) {
@@ -41,7 +44,11 @@ public class EnemyBullet : MonoBehaviour {
         bool hitGate = collidedObj.CompareTag("Gate");
         bool shouldAutoDestroy = hitPlayer || hitGround || hitObstacle || hitGate;
 
-        if (shouldAutoDestroy) Destroy(gameObject);
+        if (shouldAutoDestroy) {
+            Instantiate(destroyBulletParticles, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
+
         if (hitPlayer) KillPlayer(collidedObj);
     }
 
@@ -67,9 +74,11 @@ public class EnemyBullet : MonoBehaviour {
         alreadyProcessedHit = true;
 
         if (player.parryTimer > 0) {
+            Instantiate(parryParticles, transform.position, Quaternion.identity);
             player.shield.Parry(gameObject);
         }
         else {
+            Instantiate(destroyBulletParticles, transform.position, Quaternion.identity);
             Destroy(gameObject);
             player.shield.ConsumeShield();
         }

@@ -138,3 +138,6 @@ MonoBehaviour:
   alreadyProcessedHit: 0
   initialSpeed: 0
   initialDirection: {x: 0, y: 0, z: 0}
+  hitsToKill: 0
+  parryParticles: {fileID: 3794147038126478820, guid: 1135d7702687b3d428cc3b19cb55106f, type: 3}
+  destroyBulletParticles: {fileID: 7719651961326515463, guid: bc8023594df691c4d95e2428af8ba66f, type: 3}

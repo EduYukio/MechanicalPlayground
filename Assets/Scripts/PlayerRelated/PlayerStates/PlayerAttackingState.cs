@@ -77,7 +77,10 @@ public class PlayerAttackingState : PlayerBaseState {
         bool hitProjectile = colliderHit.gameObject.CompareTag("Projectile");
         if (hitProjectile) {
             Manager.audio.Play("Destroy Projectile");
-            MonoBehaviour.Destroy(colliderHit.gameObject);
+            GameObject bulletObj = colliderHit.gameObject;
+            EnemyBullet bullet = bulletObj.GetComponent<EnemyBullet>();
+            MonoBehaviour.Instantiate(bullet.destroyBulletParticles, bullet.transform.position, Quaternion.identity);
+            MonoBehaviour.Destroy(bulletObj);
         }
     }
 
