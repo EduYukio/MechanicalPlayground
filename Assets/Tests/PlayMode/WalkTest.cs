@@ -11,7 +11,13 @@ namespace Tests {
     public class WalkTest {
         bool sceneLoaded;
 
+        public void PreloadIfNeeded() {
+            if (GameObject.Find("PreloadObject") != null) return;
+            SceneManager.LoadScene("Preload", LoadSceneMode.Single);
+        }
+
         public void LoadTestScene() {
+            PreloadIfNeeded();
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.LoadScene("TestScene", LoadSceneMode.Single);
         }

@@ -11,7 +11,13 @@ namespace Tests {
     public class AttackTest {
         bool sceneLoaded;
 
+        public void PreloadIfNeeded() {
+            if (GameObject.Find("PreloadObject") != null) return;
+            SceneManager.LoadScene("Preload", LoadSceneMode.Single);
+        }
+
         public void LoadTestScene() {
+            PreloadIfNeeded();
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.LoadScene("TestScene", LoadSceneMode.Single);
         }
@@ -40,10 +46,11 @@ namespace Tests {
 
             var enemyAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Characters/Trunk.prefab");
             GameObject enemy = GameObject.Instantiate(enemyAsset, new Vector3(1, -0.8f, 0), Quaternion.identity);
+            Enemy enemyScript = enemy.GetComponent<Enemy>();
+            enemyScript.transform.localScale = new Vector3(-1f, 1, 1);
 
             yield return new WaitForSeconds(1f);
 
-            Enemy enemyScript = enemy.GetComponent<Enemy>();
             // Act
             Assert.IsTrue(enemyScript.currentHealth == enemyScript.maxHealth);
 

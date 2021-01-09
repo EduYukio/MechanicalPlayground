@@ -11,7 +11,13 @@ namespace Tests {
     public class DashTest {
         bool sceneLoaded;
 
+        public void PreloadIfNeeded() {
+            if (GameObject.Find("PreloadObject") != null) return;
+            SceneManager.LoadScene("Preload", LoadSceneMode.Single);
+        }
+
         public void LoadTestScene() {
+            PreloadIfNeeded();
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.LoadScene("TestScene", LoadSceneMode.Single);
         }
@@ -44,7 +50,8 @@ namespace Tests {
             Assert.IsTrue(playerScript.isGrounded);
             Assert.IsFalse(player.GetComponent<Rigidbody2D>().velocity.x > 0);
             InputSimulator IS = new InputSimulator();
-            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_C);
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_D);
+            // playerScript.TransitionToState(playerScript.DashingState);
 
             float dashDuration = playerScript.config.startDashDurationTime;
 
@@ -83,7 +90,7 @@ namespace Tests {
             Assert.IsTrue(playerScript.isGrounded);
             Assert.IsFalse(player.GetComponent<Rigidbody2D>().velocity.x > 0);
             InputSimulator IS = new InputSimulator();
-            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_C);
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_D);
 
             float dashDuration = playerScript.config.startDashDurationTime;
 
@@ -104,7 +111,7 @@ namespace Tests {
 
             yield return null;
 
-            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_C);
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_D);
 
             yield return new WaitForSeconds(dashDuration / 2);
 
@@ -141,7 +148,7 @@ namespace Tests {
             Assert.IsTrue(playerScript.isGrounded);
             Assert.IsFalse(player.GetComponent<Rigidbody2D>().velocity.x > 0);
             InputSimulator IS = new InputSimulator();
-            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_C);
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_D);
 
             float dashDuration = playerScript.config.startDashDurationTime;
 
@@ -149,7 +156,7 @@ namespace Tests {
 
             Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.x > 0);
 
-            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_C);
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_D);
 
             yield return new WaitForSeconds(dashDuration * 0.6f);
 
@@ -181,7 +188,7 @@ namespace Tests {
             Assert.IsTrue(playerScript.isGrounded);
             Assert.IsFalse(player.GetComponent<Rigidbody2D>().velocity.x > 0);
             InputSimulator IS = new InputSimulator();
-            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_C);
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_D);
 
             float dashDuration = playerScript.config.startDashDurationTime;
 
@@ -189,11 +196,11 @@ namespace Tests {
 
             Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.x > 0);
 
-            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_C);
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_D);
 
             yield return new WaitForSeconds(dashDuration * 0.6f);
 
-            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_C);
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_D);
 
             Assert.IsTrue(playerScript.dashCooldownTimer > 0);
             Assert.IsFalse(player.GetComponent<Rigidbody2D>().velocity.x > 0);
@@ -224,7 +231,7 @@ namespace Tests {
             Assert.IsTrue(playerScript.isGrounded);
             Assert.IsFalse(player.GetComponent<Rigidbody2D>().velocity.x > 0);
             InputSimulator IS = new InputSimulator();
-            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_C);
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_D);
 
             float dashDuration = playerScript.config.startDashDurationTime;
 
@@ -239,7 +246,7 @@ namespace Tests {
 
             Assert.IsFalse(player.GetComponent<Rigidbody2D>().velocity.x > 0);
 
-            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_C);
+            IS.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_D);
 
             yield return new WaitForSeconds(dashDuration * 0.5f);
 

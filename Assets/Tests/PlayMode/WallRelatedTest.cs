@@ -11,7 +11,13 @@ namespace Tests {
     public class WallRelatedTest {
         bool sceneLoaded;
 
+        public void PreloadIfNeeded() {
+            if (GameObject.Find("PreloadObject") != null) return;
+            SceneManager.LoadScene("Preload", LoadSceneMode.Single);
+        }
+
         public void LoadTestScene() {
+            PreloadIfNeeded();
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.LoadScene("TestScene", LoadSceneMode.Single);
         }
@@ -48,7 +54,7 @@ namespace Tests {
 
             InputSimulator IS = new InputSimulator();
             IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.LEFT);
-            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
+            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.VK_Z);
 
             yield return new WaitForSeconds(1f);
 
@@ -84,7 +90,7 @@ namespace Tests {
             // Act
             InputSimulator IS = new InputSimulator();
             IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.LEFT);
-            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
+            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.VK_Z);
 
             yield return new WaitForSeconds(1f);
 
@@ -93,14 +99,14 @@ namespace Tests {
             Assert.IsTrue(playerScript.isTouchingWall);
 
             IS.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.LEFT);
-            IS.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.UP);
+            IS.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.VK_Z);
 
             yield return new WaitForSeconds(0.2f);
 
             Assert.IsTrue(playerScript.rb.velocity.y < 0);
             Assert.IsTrue(playerScript.rb.velocity.x <= 0);
 
-            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
+            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.VK_Z);
 
             float wallJumpDuration = playerScript.config.startWallJumpDurationTime;
             yield return new WaitForSeconds(wallJumpDuration * 0.7f);

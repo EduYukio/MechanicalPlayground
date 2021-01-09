@@ -11,7 +11,13 @@ namespace Tests {
     public class JumpTest {
         bool sceneLoaded;
 
+        public void PreloadIfNeeded() {
+            if (GameObject.Find("PreloadObject") != null) return;
+            SceneManager.LoadScene("Preload", LoadSceneMode.Single);
+        }
+
         public void LoadTestScene() {
+            PreloadIfNeeded();
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.LoadScene("TestScene", LoadSceneMode.Single);
         }
@@ -46,7 +52,7 @@ namespace Tests {
             Assert.IsTrue(playerScript.isGrounded);
 
             InputSimulator IS = new InputSimulator();
-            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
+            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.VK_Z);
 
             yield return new WaitForSeconds(0.15f);
 
@@ -80,7 +86,7 @@ namespace Tests {
             var initialY = player.transform.position.y;
 
             InputSimulator IS = new InputSimulator();
-            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
+            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.VK_Z);
 
             yield return new WaitForSeconds(0.15f);
 
@@ -117,7 +123,7 @@ namespace Tests {
             Assert.IsTrue(playerScript.isGrounded);
 
             InputSimulator IS = new InputSimulator();
-            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
+            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.VK_Z);
 
             yield return new WaitForSeconds(0.2f);
 
@@ -126,14 +132,14 @@ namespace Tests {
             Assert.IsTrue(airY > initialY);
             Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.y > 0);
 
-            IS.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.UP);
+            IS.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.VK_Z);
 
             yield return new WaitForSeconds(0.1f);
 
             Assert.IsFalse(playerScript.isGrounded);
             Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.y < 0);
 
-            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
+            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.VK_Z);
             yield return new WaitForSeconds(0.1f);
             Assert.IsFalse(player.GetComponent<Rigidbody2D>().velocity.y > 0);
             playerScript.mechanics.RestoreState();

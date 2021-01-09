@@ -11,7 +11,13 @@ namespace Tests {
     public class DoubleJumpTest {
         bool sceneLoaded;
 
+        public void PreloadIfNeeded() {
+            if (GameObject.Find("PreloadObject") != null) return;
+            SceneManager.LoadScene("Preload", LoadSceneMode.Single);
+        }
+
         public void LoadTestScene() {
+            PreloadIfNeeded();
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.LoadScene("TestScene", LoadSceneMode.Single);
         }
@@ -47,15 +53,15 @@ namespace Tests {
             Assert.IsTrue(playerScript.isGrounded);
 
             InputSimulator IS = new InputSimulator();
-            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
+            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.VK_Z);
 
             yield return new WaitForSeconds(0.2f);
 
-            IS.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.UP);
+            IS.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.VK_Z);
             yield return new WaitForSeconds(0.05f);
             var airY = player.transform.position.y;
 
-            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
+            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.VK_Z);
 
             yield return new WaitForSeconds(0.2f);
 
@@ -96,7 +102,7 @@ namespace Tests {
 
             var initialY = player.transform.position.y;
             InputSimulator IS = new InputSimulator();
-            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
+            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.VK_Z);
 
             yield return new WaitForSeconds(0.2f);
 
@@ -133,7 +139,7 @@ namespace Tests {
 
             var initialY = player.transform.position.y;
             InputSimulator IS = new InputSimulator();
-            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
+            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.VK_Z);
 
             yield return new WaitForSeconds(0.2f);
 
@@ -141,13 +147,13 @@ namespace Tests {
             Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.y > 0);
             Assert.IsTrue(doubleJumpY > initialY);
 
-            IS.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.UP);
+            IS.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.VK_Z);
             yield return new WaitForSeconds(0.3f);
 
             Assert.IsFalse(playerScript.isGrounded);
             Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.y < 0);
 
-            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.UP);
+            IS.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.VK_Z);
             yield return new WaitForSeconds(0.2f);
             var finalY = player.transform.position.y;
             Assert.IsFalse(player.GetComponent<Rigidbody2D>().velocity.y > 0);
