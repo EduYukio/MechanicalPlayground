@@ -26,6 +26,7 @@ public class BeeAttackingState : BeeBaseState {
     }
 
     void AttackAction(BeeFSM bee) {
+        if (bee.spriteRenderer.isVisible) Manager.audio.Play("Enemy Shoot");
         bee.SpawnBullet(bee.bulletSpawnTransform.position);
         bee.attackCooldownTimer = bee.startAttackCooldownTimer;
     }

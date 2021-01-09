@@ -25,6 +25,7 @@ public class SpikyAttackingState : SpikyBaseState {
     }
 
     void AttackAction(SpikyFSM spiky) {
+        if (spiky.spriteRenderer.isVisible) Manager.audio.Play("Enemy Shoot");
         Vector3[] bulletDirections = spiky.CalculateDirections();
 
         for (int i = 0; i < bulletDirections.Length; i++) {

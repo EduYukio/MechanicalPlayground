@@ -25,6 +25,7 @@ public class TrunkAttackingState : TrunkBaseState {
     }
 
     void AttackAction(TrunkFSM trunk) {
+        if (trunk.spriteRenderer.isVisible) Manager.audio.Play("Enemy Shoot");
         trunk.SpawnBullet(trunk.bulletSpawnTransform.position);
         trunk.attackCooldownTimer = trunk.startAttackCooldownTimer;
     }
