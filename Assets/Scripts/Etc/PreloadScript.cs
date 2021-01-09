@@ -13,15 +13,11 @@ public class PreloadScript : MonoBehaviour {
         LoadNextScene();
     }
 
-    private void Start() {
-        InitializeFirstBGM();
-    }
-
     private void Update() {
         CheckIfBGMEnded();
     }
 
-    void InitializeFirstBGM() {
+    public void InitializeFirstBGM() {
         Manager.audio.Play("BGM0");
         currentBGM = Manager.audio.FindSound("BGM0");
         currentBGMIndex = 0;

@@ -3,7 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class PreloadInitializer {
 
-    // #if UNITY_EDITOR
     public static int selectedScene = -2;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -14,5 +13,4 @@ public class PreloadInitializer {
         selectedScene = sceneIndex;
         SceneManager.LoadScene(0);
     }
-    // #endif
 }
