@@ -5,6 +5,7 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour {
     private Animator animator;
     public static Checkpoint currentCheckpoint = null;
+    public GameObject checkpointParticles;
 
     private void Awake() {
         animator = GetComponent<Animator>();
@@ -22,9 +23,18 @@ public class Checkpoint : MonoBehaviour {
             PlayerFSM.respawnPosition = transform.position;
             animator.Play("FlagActivating");
             Manager.audio.Play("Checkpoint Boing");
-            Manager.audio.PlayDelayed("Checkpoint Activated", Helper.GetAnimationDuration("FlagActivating", animator) * 0.5f);
+
+            float soundDelay = Helper.GetAnimationDuration("FlagActivating", animator) * 0.75f;
+            Manager.audio.PlayDelayed("Checkpoint Activated", soundDelay);
+            StartCoroutine(nameof(WaitForPlayParticles), soundDelay);
             Checkpoint.currentCheckpoint = this;
         }
+    }
+
+    IEnumerator WaitForPlayParticles(float soundDelay) {
+        yield return new WaitForSecondsRealtime(soundDelay);
+        Vector3 particlePosition = transform.position + new Vector3(-0.25f, 0.45f, 0);
+        Instantiate(checkpointParticles, particlePosition, Quaternion.identity);
     }
 
     public static void DeactivateCurrentCheckpoint() {

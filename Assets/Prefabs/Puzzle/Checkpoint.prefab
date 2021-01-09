@@ -164,3 +164,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14873dc34724c4643ab8a6bf03583ca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkpointParticles: {fileID: 7088068823076715145, guid: 051440cc20e7a414bba507c156b0f189, type: 3}
