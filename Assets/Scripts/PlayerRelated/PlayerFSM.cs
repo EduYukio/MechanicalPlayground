@@ -42,6 +42,8 @@ public class PlayerFSM : MonoBehaviour {
     public GameObject normalSlash;
     public GameObject boostedSlash;
     public GameObject explosionPrefab;
+    public GameObject cameraHolder;
+    public GameObject cameraObj;
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Animator animator;
     [HideInInspector] public SpriteRenderer spriteRenderer;

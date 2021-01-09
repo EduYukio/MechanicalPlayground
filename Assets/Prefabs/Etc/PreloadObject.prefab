@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1671344374316473884}
   - component: {fileID: 1671344374316473886}
   - component: {fileID: 1671344374316473885}
+  - component: {fileID: 6027273342978180283}
   m_Layer: 0
   m_Name: PreloadObject
   m_TagString: Untagged
@@ -252,7 +253,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Destroy Projectile
     clip: {fileID: 8300000, guid: 0dfde348178287240a3a0719927864cc, type: 3}
-    volume: 0.3
+    volume: 0.1
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -306,12 +307,21 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Blink
     clip: {fileID: 8300000, guid: 2124dcf04e0dda046ab3c3937ecfc0ca, type: 3}
-    volume: 0.25
+    volume: 0.2
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 24300002, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
+    source: {fileID: 0}
+  - name: Enemy Shoot
+    clip: {fileID: 8300000, guid: 8eecb8c9879134944be38f69b7d9b235, type: 3}
+    volume: 0.75
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
   - name: UI_Fail
     clip: {fileID: 8300000, guid: ffd20b6f1c8b1664f8219cabf9f7bc88, type: 3}
@@ -367,3 +377,17 @@ MonoBehaviour:
     loop: 0
     mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
+  normalBGMVolume: 0
+  muffleEffect: 12.5
+--- !u!114 &6027273342978180283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671344374316473883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 222b150562e0cab428802725e2f335c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

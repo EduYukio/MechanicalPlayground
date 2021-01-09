@@ -28,8 +28,9 @@ public class PlayerDyingState : PlayerBaseState {
         Manager.audio.Play("PlayerDying");
 
         //TODO: refatorar isso aqui
-        Camera camera = player.gameObject.GetComponentInChildren<Camera>();
-        if (camera != null) camera.transform.parent = null;
+        Manager.shaker.Shake(player.cameraObj, player.config.dyingShakeDuration, player.config.dyingShakeMagnitude);
+        player.cameraHolder.transform.parent = null;
+
         float direction = -player.lastDirection;
         player.rb.bodyType = RigidbodyType2D.Dynamic;
         player.rb.velocity = new Vector3(direction * 3f, 6f, 0);

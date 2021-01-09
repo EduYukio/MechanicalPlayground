@@ -8,6 +8,10 @@ public class PlayerConfig : ScriptableObject {
     [Header("Mechanics Menu")]
     public int maxSkillPoints = 6;
 
+    [Header("Camera Shake")]
+    public float dyingShakeDuration = 0.15f;
+    public float dyingShakeMagnitude = 0.4f;
+
     [Header("Walk")]
     public float moveSpeed = 6f;
 
@@ -65,6 +69,8 @@ public class PlayerConfig : ScriptableObject {
     public float explosionDamageRate = 0.5f;
     public float xRange = 1.2f;
     public float yRange = 1.3f;
+    public float explosionShakeDuration = 0.15f;
+    public float explosionShakeMagnitude = 0.4f;
 
     [Header("Gun Boots")]
     public float startGunBootsCooldownTimer = 0.2f;

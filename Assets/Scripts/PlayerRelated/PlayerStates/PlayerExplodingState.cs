@@ -8,6 +8,7 @@ public class PlayerExplodingState : PlayerBaseState {
     public override void EnterState(PlayerFSM player) {
         player.animator.Play("PlayerExploding");
         Manager.audio.Play("Explosion");
+        Manager.shaker.Shake(player.cameraObj, player.config.explosionShakeDuration, player.config.explosionShakeMagnitude);
         Setup(player);
         ExplosionAction(player);
     }
