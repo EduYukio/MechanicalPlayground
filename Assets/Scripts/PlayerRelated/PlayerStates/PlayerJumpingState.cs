@@ -1,6 +1,7 @@
 using UnityEngine;
 
 public class PlayerJumpingState : PlayerBaseState {
+    bool leftGround;
     public override void EnterState(PlayerFSM player) {
         Setup(player);
         JumpAction(player);
@@ -9,7 +10,9 @@ public class PlayerJumpingState : PlayerBaseState {
     public override void Update(PlayerFSM player) {
         PlayAnimationIfCan(player);
         base.ProcessMovementInput(player);
+        CheckIfLeftGround(player);
 
+        if (CheckTransitionToGrounded(player)) return;
         if (base.CheckTransitionToGunBoots(player)) return;
         if (base.CheckTransitionToWallSliding(player)) return;
         if (base.CheckTransitionToFalling(player)) return;
@@ -21,6 +24,7 @@ public class PlayerJumpingState : PlayerBaseState {
     }
 
     void Setup(PlayerFSM player) {
+        leftGround = false;
         player.coyoteTimer = 0;
         player.bunnyHopTimer = 0;
         player.jumpParticles.Play();
@@ -36,5 +40,18 @@ public class PlayerJumpingState : PlayerBaseState {
         if (Helper.IsPlayingAnimation("PlayerAttackingBoosted", player.animator)) return;
 
         player.animator.Play("PlayerJump");
+    }
+
+    void CheckIfLeftGround(PlayerFSM player) {
+        if (leftGround) return;
+
+        if (!player.isGrounded) {
+            leftGround = true;
+        }
+    }
+
+    public override bool CheckTransitionToGrounded(PlayerFSM player) {
+        if (!leftGround) return false;
+        return base.CheckTransitionToGrounded(player);
     }
 }
