@@ -135,11 +135,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e135cb19c19b12a41a6c758ce3f4980a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mechanicClip: {fileID: 32900000, guid: 72831019234884a4b942d5fc93f6d9a6, type: 3}
+  mechanicClip: {fileID: 0}
   mechanicName: Double Jump
   requirements: []
   mechanics: {fileID: 11400000, guid: daa8efa45546dec43a6bb1e2bd1561e0, type: 2}
   descriptions: {fileID: 11400000, guid: 6acd725efa4c24344b034e34bdc011c5, type: 2}
+  requirementImage: {fileID: 0}
+  requirementText: {fileID: 0}
   isBlocked: 0
   isActive: 0
 --- !u!114 &1887519762526184959
