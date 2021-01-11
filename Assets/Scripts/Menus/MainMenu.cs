@@ -11,6 +11,10 @@ public class MainMenu : MonoBehaviour {
 
     private void Start() {
         preload = GameObject.Find("PreloadObject").GetComponent<PreloadScript>();
+        InputSwitchChecker inputSwitcher = GetComponent<InputSwitchChecker>();
+        if (!inputSwitcher.enabled) {
+            inputSwitcher.enabled = true;
+        }
     }
 
     public void PlayButton() {

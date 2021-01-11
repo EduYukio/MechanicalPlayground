@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 216811403}
   - component: {fileID: 216811402}
   - component: {fileID: 216811405}
+  - component: {fileID: 216811406}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -270,6 +271,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playDefaultHover: 1
   playDefaultConfirm: 1
+--- !u!225 &216811406
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216811400}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &433493361
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,6 +534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f45ea7e7c9d93ac448ef77cc06713b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preload: {fileID: 0}
 --- !u!114 &491838878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1173,6 +1187,7 @@ GameObject:
   - component: {fileID: 1790210245}
   - component: {fileID: 1790210244}
   - component: {fileID: 1790210247}
+  - component: {fileID: 1790210248}
   m_Layer: 5
   m_Name: CreditsButton
   m_TagString: Untagged
@@ -1307,6 +1322,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playDefaultHover: 1
   playDefaultConfirm: 1
+--- !u!225 &1790210248
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790210242}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &1915451129
 GameObject:
   m_ObjectHideFlags: 0
@@ -1320,6 +1347,7 @@ GameObject:
   - component: {fileID: 1915451132}
   - component: {fileID: 1915451131}
   - component: {fileID: 1915451134}
+  - component: {fileID: 1915451135}
   m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
@@ -1454,3 +1482,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playDefaultHover: 1
   playDefaultConfirm: 1
+--- !u!225 &1915451135
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915451129}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
