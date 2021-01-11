@@ -323,6 +323,15 @@ MonoBehaviour:
     loop: 0
     mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
+  - name: Victory Fanfare
+    clip: {fileID: 8300000, guid: 3bf5c41289c17554391d2ea15be37592, type: 3}
+    volume: 0.75
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
+    source: {fileID: 0}
   - name: UI_Fail
     clip: {fileID: 8300000, guid: ffd20b6f1c8b1664f8219cabf9f7bc88, type: 3}
     volume: 0.5
