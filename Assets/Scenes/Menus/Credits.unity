@@ -183,9 +183,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.14231044, g: 0.7735849, b: 0.23015133, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.14231044, g: 0.7735849, b: 0.23015133, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -204,8 +204,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 488334964}
   m_HandleRect: {fileID: 488334963}
   m_Direction: 2
-  m_Value: 0.99998814
-  m_Size: 0.2477955
+  m_Value: 0.999988
+  m_Size: 0.24779548
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -635,39 +635,39 @@ MonoBehaviour:
 
     Eduardo Yukio
 
-    
 
-    
+
+
 
     GRAPHICS:
 
-    Pixel
-    Adventure 1 pack by Pixel Frog
+    Pixel Adventure
+    1 pack by Pixel Frog
 
     https://pixelfrog-store.itch.io/pixel-adventure-1
 
-    
+
 
     Pixel
     Adventure 2 pack by Pixel Frog
 
     https://pixelfrog-store.itch.io/pixel-adventure-2
 
-    
+
 
     Attack
     Slash effect by MetaShinryu
 
     https://opengameart.org/content/slash-effect-collection
 
-    
+
 
     Shield
     by Bonsaiheldin
 
     https://opengameart.org/content/shield-effect
 
-    
+
 
     Bullets
     by Master484
@@ -676,16 +676,16 @@ MonoBehaviour:
 
     http://m484games.ucoz.com/
 
-    
+
 
     Explosion
     by JROB774
 
     https://opengameart.org/content/pixel-explosion-12-frames
 
-    
 
-    
+
+
 
     MUSIC:
 
@@ -697,7 +697,7 @@ MonoBehaviour:
     License:
     https://filmmusic.io/standard-license
 
-    
+
 
     Rhinoceros by Kevin MacLeod
 
@@ -706,7 +706,7 @@ MonoBehaviour:
 
     License: https://filmmusic.io/standard-license
 
-    
+
 
     Kick
     Shock by Kevin MacLeod
@@ -716,51 +716,51 @@ MonoBehaviour:
     License:
     https://filmmusic.io/standard-license
 
-    
 
-    
+
+
 
     SOUND EFFECTS:
 
-    Attack
-    sfx: qubodup
+    Attack sfx:
+    qubodup
 
     Door open sfx: qubodup
 
     https://opengameart.org/users/qubodup
 
-    
+
 
     Boing
     sfx: MagnusWaker
 
     https://freesound.org/people/magnuswaker/
 
-    
+
 
     Shield
     Charge up: SamsterBirdies
 
     https://freesound.org/people/SamsterBirdies/
 
-    
+
 
     UI
     Hover: DrMinky
 
     https://freesound.org/people/DrMinky/
 
-    
+
 
     UI Confirm:
     SunTemple
 
     https://freesound.org/people/suntemple/
 
-    
 
-    Victory
-    Fanfare: celestialghost8
+
+    Victory Fanfare:
+    celestialghost8
 
     https://opengameart.org/users/celestialghost8'
   m_isRightToLeft: 0
@@ -1194,7 +1194,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 10.600006}
+  m_AnchoredPosition: {x: 0, y: 10.599976}
   m_SizeDelta: {x: -400, y: -273.78748}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1370196303
