@@ -14,6 +14,8 @@ public class Menu : MonoBehaviour {
     public GameObject optionsMenu;
     public GameObject firstOptionsButton;
 
+    public GameObject debugMenu;
+
     public GameObject continueButton;
     public GameObject mechanicsButton;
     public GameObject optionsButton;
@@ -39,6 +41,7 @@ public class Menu : MonoBehaviour {
     void Update() {
         CheckMenuInput();
         CheckSkillControlsInput();
+        CheckDebugMenuInput();
     }
 
     public void ContinueButton() {
@@ -153,5 +156,11 @@ public class Menu : MonoBehaviour {
         Time.timeScale = 1f;
         player.freezePlayerState = false;
         Cursor.visible = false;
+    }
+
+    public void CheckDebugMenuInput() {
+        if (Input.GetKey(KeyCode.AltGr) && Input.GetKeyDown(KeyCode.Period)) {
+            debugMenu.SetActive(!debugMenu.activeSelf);
+        }
     }
 }
