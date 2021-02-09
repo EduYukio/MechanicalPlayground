@@ -159,7 +159,7 @@ public class Menu : MonoBehaviour {
     }
 
     public void CheckDebugMenuInput() {
-        if (Input.GetKey(KeyCode.AltGr) && Input.GetKeyDown(KeyCode.Period)) {
+        if (Input.GetKey(KeyCode.Period) && Input.GetKeyDown(KeyCode.Comma)) {
             debugMenu.SetActive(!debugMenu.activeSelf);
         }
     }
