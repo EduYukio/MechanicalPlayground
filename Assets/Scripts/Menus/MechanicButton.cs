@@ -6,7 +6,6 @@ using TMPro;
 using UnityEngine.UI;
 
 public class MechanicButton : MonoBehaviour {
-    public VideoClip mechanicClip;
     public string mechanicName;
     public List<string> requirements;
     public static MechanicsMenu mechMenu;
@@ -93,11 +92,10 @@ public class MechanicButton : MonoBehaviour {
     }
 
     public void UpdateTutorialInfo() {
-        if (mechanicClip != null) {
-            mechMenu.videoPlayer.clip = mechanicClip;
-            mechMenu.videoPlayer.Play();
-            mechMenu.rawImage.enabled = true;
-        }
+        mechMenu.videoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, gameObject.name + ".mp4");
+        mechMenu.videoPlayer.Play();
+        mechMenu.rawImage.enabled = true;
+
         mechMenu.title.text = mechanicName;
         mechMenu.description.text = descriptions.GetDescription(mechanicName);
     }
