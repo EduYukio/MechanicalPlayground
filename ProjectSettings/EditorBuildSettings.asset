@@ -69,6 +69,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TestLevels/LevelsPrototype.unity
     guid: c9108291e8464274a92547b370561ed1
   - enabled: 1
+    path: Assets/Scenes/TestLevels/TestLayersLevel.unity
+    guid: 7958144281175bb41a04dc8e106cfdd4
+  - enabled: 1
     path: Assets/Scenes/TestLevels/TestScene.unity
     guid: c07b4a6b06e03624bac1a7eff59154c9
   m_configObjects: {}
