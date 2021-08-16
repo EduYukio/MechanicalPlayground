@@ -12,7 +12,8 @@ public class PlayerDashingState : PlayerBaseState {
         DashAction(player);
     }
 
-    public override void Update(PlayerFSM player) {
+
+    public override void FixedUpdate(PlayerFSM player) {
         CheckForAirJumpInputBuffer(player);
 
         if (dashTimer > 0) {
