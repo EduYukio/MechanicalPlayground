@@ -24,8 +24,8 @@ MonoBehaviour:
   startCoyoteDurationTime: 0.1
   doubleJumpForce: 12
   startAirJumpInputBuffer: 0.2
-  dashSpeed: 23
-  startDashDurationTime: 0.12
+  dashSpeed: 17.25
+  startDashDurationTime: 0.172
   startDashCooldownTime: 0.35
   etherealTransparency: 0.4
   wallSlidingSpeed: 1.75
