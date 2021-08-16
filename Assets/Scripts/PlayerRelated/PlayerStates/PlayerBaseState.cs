@@ -2,8 +2,8 @@
 
 public abstract class PlayerBaseState {
     public abstract void EnterState(PlayerFSM player);
-    public abstract void Update(PlayerFSM player);
-
+    public virtual void Update(PlayerFSM player) { }
+    public virtual void FixedUpdate(PlayerFSM player) { }
 
     #region CheckTransitionFunctions
 

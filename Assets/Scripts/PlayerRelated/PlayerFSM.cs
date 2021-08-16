@@ -133,6 +133,12 @@ public class PlayerFSM : MonoBehaviour {
         }
     }
 
+    private void FixedUpdate() {
+        if (freezePlayerState) return;
+
+        currentState.FixedUpdate(this);
+    }
+
     public void TransitionToState(PlayerBaseState state) {
         if (freezePlayerState) return;
 
