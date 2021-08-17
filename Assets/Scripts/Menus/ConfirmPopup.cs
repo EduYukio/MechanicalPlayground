@@ -17,7 +17,7 @@ public class ConfirmPopup : MonoBehaviour {
         mechanicsMenu.BackToPauseMenu();
     }
 
-    void CheckMenuExitInput() {
+    private void CheckMenuExitInput() {
         if (Input.GetButtonDown("Esc") || Input.GetButtonDown("Circle")) {
             DontSaveButton();
         }

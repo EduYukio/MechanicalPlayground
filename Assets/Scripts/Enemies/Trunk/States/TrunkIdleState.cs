@@ -1,8 +1,7 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TrunkIdleState : TrunkBaseState {
-    float idleTimer;
+    private float idleTimer;
 
     public override void EnterState(TrunkFSM trunk) {
         PlayAnimationIfCan(trunk);
@@ -22,11 +21,11 @@ public class TrunkIdleState : TrunkBaseState {
         if (base.CheckTransitionToMoving(trunk)) return;
     }
 
-    void Setup(TrunkFSM trunk) {
+    private void Setup(TrunkFSM trunk) {
         idleTimer = Helper.GetAnimationDuration("Idle", trunk.animator);
     }
 
-    void IdleAction(TrunkFSM trunk) {
+    private void IdleAction(TrunkFSM trunk) {
         trunk.rb.velocity = Vector2.zero;
     }
 

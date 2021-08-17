@@ -6,7 +6,7 @@ public class UIButton : MonoBehaviour, ISelectHandler, ISubmitHandler, IPointerC
     public bool playDefaultHover = true;
     public bool playDefaultConfirm = true;
 
-    Button button;
+    private Button button;
 
     private void Start() {
         button = GetComponent<Button>();
@@ -16,13 +16,13 @@ public class UIButton : MonoBehaviour, ISelectHandler, ISubmitHandler, IPointerC
         Manager.audio.Play("UI_" + soundName);
     }
 
-    void PlayHoverSound() {
+    private void PlayHoverSound() {
         if (playDefaultHover) {
             Manager.audio.Play("UI_Hover");
         }
     }
 
-    void PlayConfirmSound() {
+    private void PlayConfirmSound() {
         if (playDefaultConfirm) {
             Manager.audio.Play("UI_Confirm");
         }

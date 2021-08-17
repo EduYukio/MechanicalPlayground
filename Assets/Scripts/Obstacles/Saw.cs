@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Saw : MonoBehaviour {
@@ -36,14 +35,14 @@ public class Saw : MonoBehaviour {
         KillPlayer(collidedObj);
     }
 
-    bool PlayerIsInvulnerableToSaw(GameObject collidedObj) {
+    private bool PlayerIsInvulnerableToSaw(GameObject collidedObj) {
         PlayerFSM player = collidedObj.GetComponent<PlayerFSM>();
         if (player.mechanics.IsEnabled("Saw Invulnerability")) return true;
 
         return false;
     }
 
-    void KillPlayer(GameObject collidedObj) {
+    private void KillPlayer(GameObject collidedObj) {
         PlayerFSM player = collidedObj.GetComponent<PlayerFSM>();
         player.TransitionToState(player.DyingState);
     }

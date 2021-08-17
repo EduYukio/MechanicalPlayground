@@ -20,12 +20,12 @@ public class PlayerDoubleJumpingState : PlayerBaseState {
         if (base.CheckTransitionToExploding(player)) return;
     }
 
-    void Setup(PlayerFSM player) {
+    private void Setup(PlayerFSM player) {
         player.canDoubleJump = false;
         player.jumpParticles.Play();
     }
 
-    void DoubleJumpAction(PlayerFSM player) {
+    private void DoubleJumpAction(PlayerFSM player) {
         player.rb.velocity = new Vector2(player.rb.velocity.x, player.config.doubleJumpForce);
     }
 }

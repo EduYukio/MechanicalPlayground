@@ -1,12 +1,13 @@
 using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour {
+    private PlayerFSM player;
+
     public Rigidbody2D rb;
     public bool alreadyProcessedHit = false;
     public float initialSpeed;
     public Vector3 initialDirection;
     public float hitsToKill;
-    PlayerFSM player;
 
     public GameObject parryParticles;
     public GameObject destroyBulletParticles;
@@ -25,7 +26,7 @@ public class EnemyBullet : MonoBehaviour {
         ProcessCollision(other.gameObject);
     }
 
-    void ProcessCollision(GameObject collidedObj) {
+    private void ProcessCollision(GameObject collidedObj) {
         if (alreadyProcessedHit) return;
 
         if (HitPlayerWithShield(collidedObj) || HitShield(collidedObj)) {
@@ -52,7 +53,7 @@ public class EnemyBullet : MonoBehaviour {
         if (hitPlayer) KillPlayer(collidedObj);
     }
 
-    bool HitPlayerWithShield(GameObject collidedObj) {
+    private bool HitPlayerWithShield(GameObject collidedObj) {
         if (!collidedObj.CompareTag("Player")) return false;
 
         if (player.shield.gameObject.activeSelf) {
@@ -63,14 +64,14 @@ public class EnemyBullet : MonoBehaviour {
     }
 
 
-    bool HitShield(GameObject collidedObj) {
+    private bool HitShield(GameObject collidedObj) {
         if (!collidedObj.CompareTag("Shield")) return false;
 
         BulletHitShieldAction(player);
         return true;
     }
 
-    void BulletHitShieldAction(PlayerFSM player) {
+    private void BulletHitShieldAction(PlayerFSM player) {
         alreadyProcessedHit = true;
 
         if (player.parryTimer > 0) {
@@ -84,14 +85,14 @@ public class EnemyBullet : MonoBehaviour {
         }
     }
 
-    void DamageEnemy(GameObject collidedObj) {
+    private void DamageEnemy(GameObject collidedObj) {
         Enemy enemy = collidedObj.GetComponent<Enemy>();
         float damage = 0.1f + enemy.maxHealth / hitsToKill;
         enemy.TakeDamage(damage);
         Destroy(gameObject);
     }
 
-    void KillPlayer(GameObject collidedObj) {
+    private void KillPlayer(GameObject collidedObj) {
         player.TransitionToState(player.DyingState);
     }
 }

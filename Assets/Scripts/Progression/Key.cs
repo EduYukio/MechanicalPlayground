@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Key : MonoBehaviour {
@@ -12,7 +11,7 @@ public class Key : MonoBehaviour {
         }
     }
 
-    void AcquireKey(Collider2D other) {
+    private void AcquireKey(Collider2D other) {
         Manager.audio.Play("Key Pick");
         PlayerFSM player = other.gameObject.GetComponent<PlayerFSM>();
         transform.parent.SetParent(player.transform);
@@ -23,7 +22,7 @@ public class Key : MonoBehaviour {
         GetComponent<Collider2D>().enabled = false;
     }
 
-    void PositionKey() {
+    private void PositionKey() {
         if (Key.slots.Count > 0) {
             int randomSlotIndex = Random.Range(0, Key.slots.Count);
             Vector3 newPosition = Key.slots[randomSlotIndex];

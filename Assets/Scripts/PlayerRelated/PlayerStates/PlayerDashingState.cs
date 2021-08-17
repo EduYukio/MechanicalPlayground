@@ -29,13 +29,13 @@ public class PlayerDashingState : PlayerBaseState {
         if (CheckTransitionToFalling(player)) return;
     }
 
-    void Setup(PlayerFSM player) {
+    private void Setup(PlayerFSM player) {
         dashTimer = player.config.startDashDurationTime;
         isEthereal = player.mechanics.IsEnabled("Ethereal Dash");
         player.hasResetDashTrigger = false;
     }
 
-    void DashAction(PlayerFSM player) {
+    private void DashAction(PlayerFSM player) {
         originalGravity = player.rb.gravityScale;
         player.rb.gravityScale = 0f;
         player.rb.velocity = new Vector2(player.lastDirection * player.config.dashSpeed, 0f);
@@ -45,7 +45,7 @@ public class PlayerDashingState : PlayerBaseState {
         }
     }
 
-    void StopDashing(PlayerFSM player) {
+    private void StopDashing(PlayerFSM player) {
         player.rb.gravityScale = originalGravity;
         player.rb.velocity = Vector2.zero;
         player.canDash = false;
@@ -56,7 +56,7 @@ public class PlayerDashingState : PlayerBaseState {
         }
     }
 
-    void CheckForAirJumpInputBuffer(PlayerFSM player) {
+    private void CheckForAirJumpInputBuffer(PlayerFSM player) {
         if (Input.GetButtonDown("Jump")) {
             player.airJumpInputBuffer = player.config.startAirJumpInputBuffer;
         }

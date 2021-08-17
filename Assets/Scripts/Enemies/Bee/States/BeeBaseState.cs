@@ -44,7 +44,7 @@ public abstract class BeeBaseState {
         }
     }
 
-    Vector2 NewTargetPosition(BeeFSM bee) {
+    private Vector2 NewTargetPosition(BeeFSM bee) {
         if (bee.moveVertically) {
             return new Vector2(bee.transform.position.x, bee.initialCoord + bee.distanceToMove);
         }

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class SpikyBeingHitState : SpikyBaseState {
-    float hitTimer;
+    private float hitTimer;
 
     public override void EnterState(SpikyFSM spiky) {
         spiky.animator.Play("BeingHit", -1, 0f);
@@ -21,11 +21,11 @@ public class SpikyBeingHitState : SpikyBaseState {
         if (base.CheckTransitionToIdle(spiky)) return;
     }
 
-    void Setup(SpikyFSM spiky) {
+    private void Setup(SpikyFSM spiky) {
         hitTimer = Helper.GetAnimationDuration("BeingHit", spiky.animator);
     }
 
-    void BeingHitAction(SpikyFSM spiky) {
+    private void BeingHitAction(SpikyFSM spiky) {
         spiky.rb.velocity = Vector2.zero;
     }
 }

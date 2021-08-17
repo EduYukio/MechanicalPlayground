@@ -1,8 +1,8 @@
 using UnityEngine;
 
 public class TrunkMovingState : TrunkBaseState {
-    float distanceToCheckGround = 0.2f;
-    float distanceToCheckObstacle = 0.1f;
+    private float distanceToCheckGround = 0.2f;
+    private float distanceToCheckObstacle = 0.1f;
 
     public override void EnterState(TrunkFSM trunk) {
         trunk.animator.Play("Moving");
@@ -15,7 +15,7 @@ public class TrunkMovingState : TrunkBaseState {
         if (CheckTransitionToIdle(trunk)) return;
     }
 
-    bool ThereIsGroundToWalk(TrunkFSM trunk) {
+    private bool ThereIsGroundToWalk(TrunkFSM trunk) {
         RaycastHit2D[] groundRay = Physics2D.RaycastAll(trunk.groundTransform.position, Vector2.down, distanceToCheckGround);
 
         foreach (var obj in groundRay) {
@@ -26,7 +26,7 @@ public class TrunkMovingState : TrunkBaseState {
         return false;
     }
 
-    bool ReachedObstacle(TrunkFSM trunk) {
+    private bool ReachedObstacle(TrunkFSM trunk) {
         Vector2 direction = CalculateDirection(trunk);
         foreach (var frontTransform in trunk.frontTransforms) {
             RaycastHit2D[] frontRay = Physics2D.RaycastAll(frontTransform.position, direction, distanceToCheckObstacle);

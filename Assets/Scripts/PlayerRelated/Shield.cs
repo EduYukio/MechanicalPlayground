@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour {
     public PlayerFSM player;
-    bool canDefend = true;
+    private bool canDefend = true;
 
     private void Update() {
         gameObject.transform.position = player.transform.position + new Vector3(0, -0.1f, 0);

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class PlayerJumpingState : PlayerBaseState {
-    bool leftGround;
+    private bool leftGround;
     public override void EnterState(PlayerFSM player) {
         Setup(player);
         JumpAction(player);
@@ -23,14 +23,14 @@ public class PlayerJumpingState : PlayerBaseState {
         if (base.CheckTransitionToExploding(player)) return;
     }
 
-    void Setup(PlayerFSM player) {
+    private void Setup(PlayerFSM player) {
         leftGround = false;
         player.coyoteTimer = 0;
         player.bunnyHopTimer = 0;
         player.jumpParticles.Play();
     }
 
-    void JumpAction(PlayerFSM player) {
+    private void JumpAction(PlayerFSM player) {
         player.rb.velocity = new Vector2(player.rb.velocity.x, player.config.jumpForce);
     }
 
@@ -42,7 +42,7 @@ public class PlayerJumpingState : PlayerBaseState {
         player.animator.Play("PlayerJump");
     }
 
-    void CheckIfLeftGround(PlayerFSM player) {
+    private void CheckIfLeftGround(PlayerFSM player) {
         if (leftGround) return;
 
         if (!player.isGrounded) {

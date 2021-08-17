@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InputSwitchChecker : MonoBehaviour {
     public GameObject firstButton;
-    Button[] buttons;
-    Vector3 initialMousePosition;
-    bool gamepadMode = false;
-    bool mouseMode = false;
+    private Button[] buttons;
+    private Vector3 initialMousePosition;
+    private bool gamepadMode = false;
+    private bool mouseMode = false;
 
     private void OnEnable() {
         buttons = GetComponentsInChildren<Button>();
@@ -59,7 +57,7 @@ public class InputSwitchChecker : MonoBehaviour {
         }
     }
 
-    void DeselectAllButtons() {
+    private void DeselectAllButtons() {
         PointerEventData pointer = new PointerEventData(EventSystem.current);
         pointer.position = Input.mousePosition;
 
@@ -69,13 +67,13 @@ public class InputSwitchChecker : MonoBehaviour {
         EventSystem.current.SetSelectedGameObject(null);
     }
 
-    IEnumerator DeselectAfterOneFrame() {
+    private IEnumerator DeselectAfterOneFrame() {
         yield return null;
         DeselectAllButtons();
         EventSystem.current.SetSelectedGameObject(firstButton);
     }
 
-    void CheckGamePadInput() {
+    private void CheckGamePadInput() {
         if (gamepadMode) return;
 
         if (Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0) {
@@ -83,7 +81,7 @@ public class InputSwitchChecker : MonoBehaviour {
         }
     }
 
-    void CheckMouseInput() {
+    private void CheckMouseInput() {
         if (mouseMode) return;
 
         if (initialMousePosition != Input.mousePosition) {

@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour {
     public Slider bgmSlider;
     public Slider sfxSlider;
-    float bgmValue;
-    float sfxValue;
+    private float bgmValue;
+    private float sfxValue;
 
     private void OnEnable() {
         Manager.audio.SetBGMVolumeToNormal();

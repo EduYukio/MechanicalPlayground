@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class BeeBeingHitState : BeeBaseState {
-    float hitTimer;
+    private float hitTimer;
 
     public override void EnterState(BeeFSM bee) {
         bee.animator.Play("BeingHit", -1, 0f);
@@ -21,11 +21,11 @@ public class BeeBeingHitState : BeeBaseState {
         if (base.CheckTransitionToMoving(bee)) return;
     }
 
-    void Setup(BeeFSM bee) {
+    private void Setup(BeeFSM bee) {
         hitTimer = Helper.GetAnimationDuration("BeingHit", bee.animator);
     }
 
-    void BeingHitAction(BeeFSM bee) {
+    private void BeingHitAction(BeeFSM bee) {
         bee.rb.velocity = Vector2.zero;
     }
 }

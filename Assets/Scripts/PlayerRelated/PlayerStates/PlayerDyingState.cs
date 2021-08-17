@@ -17,7 +17,7 @@ public class PlayerDyingState : PlayerBaseState {
         DieAction(player);
     }
 
-    void Setup(PlayerFSM player) {
+    private void Setup(PlayerFSM player) {
         player.dyingParticles.Play();
         player.isDying = true;
         player.spriteRenderer.color = Color.white;
@@ -40,7 +40,7 @@ public class PlayerDyingState : PlayerBaseState {
         player.GetComponent<Collider2D>().enabled = false;
     }
 
-    void DieAction(PlayerFSM player) {
+    private void DieAction(PlayerFSM player) {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

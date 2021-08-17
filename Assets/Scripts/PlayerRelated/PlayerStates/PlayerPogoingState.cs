@@ -21,12 +21,12 @@ public class PlayerPogoingState : PlayerBaseState {
         if (base.CheckTransitionToExploding(player)) return;
     }
 
-    void Setup(PlayerFSM player) {
+    private void Setup(PlayerFSM player) {
         player.canDoubleJump = true;
         player.canDash = true;
     }
 
-    void PogoAction(PlayerFSM player) {
+    private void PogoAction(PlayerFSM player) {
         player.rb.velocity = new Vector2(player.rb.velocity.x, player.config.pogoForce);
     }
 

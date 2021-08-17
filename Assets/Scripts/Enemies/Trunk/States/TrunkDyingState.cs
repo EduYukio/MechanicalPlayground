@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class TrunkDyingState : TrunkBaseState {
+﻿public class TrunkDyingState : TrunkBaseState {
     public override void EnterState(TrunkFSM trunk) {
         Enemy.DieAction(trunk.gameObject);
     }

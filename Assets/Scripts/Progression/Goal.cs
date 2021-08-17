@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -21,7 +20,7 @@ public class Goal : MonoBehaviour {
         }
     }
 
-    IEnumerator ChangeSceneAfterAnimation() {
+    private IEnumerator ChangeSceneAfterAnimation() {
         player.animator.Play("PlayerIdle");
         player.freezePlayerState = true;
         player.spriteRenderer.color = Color.white;

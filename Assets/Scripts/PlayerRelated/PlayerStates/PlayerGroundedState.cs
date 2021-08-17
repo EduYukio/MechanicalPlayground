@@ -19,12 +19,12 @@ public class PlayerGroundedState : PlayerBaseState {
         if (base.CheckTransitionToExploding(player)) return;
     }
 
-    void Setup(PlayerFSM player) {
+    private void Setup(PlayerFSM player) {
         player.canDoubleJump = true;
         player.canDash = true;
     }
 
-    void GroundedAction(PlayerFSM player) {
+    private void GroundedAction(PlayerFSM player) {
         player.rb.velocity = Vector2.zero;
     }
 

@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class BeeFSM : Enemy {
     private BeeBaseState currentState;
@@ -57,7 +54,7 @@ public class BeeFSM : Enemy {
         TransitionToState(BeingHitState);
     }
 
-    void MoveSetup() {
+    private void MoveSetup() {
         if (moveVertically) {
             initialCoord = transform.position.y;
             targetPosition = new Vector2(transform.position.x, initialCoord + distanceToMove);
@@ -79,7 +76,7 @@ public class BeeFSM : Enemy {
         bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
     }
 
-    void PreInstantiateBullets() {
+    private void PreInstantiateBullets() {
         float maxLength = CalculateMaxRayLength();
 
         float delta_t = startAttackCooldownTimer;
@@ -96,7 +93,7 @@ public class BeeFSM : Enemy {
         }
     }
 
-    float CalculateMaxRayLength() {
+    private float CalculateMaxRayLength() {
         float arbitraryMaxLength = 100f;
         int layersToCollide;
         if (gameObject.name.Contains("Red")) {
@@ -126,7 +123,7 @@ public class BeeFSM : Enemy {
         return arbitraryMaxLength;
     }
 
-    Vector3 CalculateDirection() {
+    private Vector3 CalculateDirection() {
         return (bulletDirectionTransform.position - bulletSpawnTransform.position).normalized;
     }
 }

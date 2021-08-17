@@ -28,7 +28,7 @@ public class PlayerWallJumpingState : PlayerBaseState {
         if (base.CheckTransitionToAttacking(player)) return;
     }
 
-    void Setup(PlayerFSM player) {
+    private void Setup(PlayerFSM player) {
         player.jumpParticles.Play();
         player.canDoubleJump = true;
         player.canDash = true;
@@ -36,11 +36,11 @@ public class PlayerWallJumpingState : PlayerBaseState {
         base.SetPlayerSpriteOppositeOfWall(player);
     }
 
-    void JumpAction(PlayerFSM player) {
+    private void JumpAction(PlayerFSM player) {
         player.rb.velocity = new Vector2(player.rb.velocity.x, player.config.jumpForce);
     }
 
-    void ApplyXVelocity(PlayerFSM player) {
+    private void ApplyXVelocity(PlayerFSM player) {
         player.rb.velocity = new Vector2(player.lastDirection * player.moveSpeed, player.rb.velocity.y);
     }
 

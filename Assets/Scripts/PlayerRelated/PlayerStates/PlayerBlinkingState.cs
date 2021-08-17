@@ -1,12 +1,12 @@
 using UnityEngine;
 
 public class PlayerBlinkingState : PlayerBaseState {
-    float beginBlinkTimer;
-    float endBlinkTimer;
-    float originalGravity;
-    bool alreadyBlinked;
-    float xInput;
-    float yInput;
+    private float beginBlinkTimer;
+    private float endBlinkTimer;
+    private float originalGravity;
+    private bool alreadyBlinked;
+    private float xInput;
+    private float yInput;
 
     public override void EnterState(PlayerFSM player) {
         player.animator.SetFloat("disappearSpeedMultiplier", 2.2f);
@@ -39,7 +39,7 @@ public class PlayerBlinkingState : PlayerBaseState {
         if (base.CheckTransitionToFalling(player)) return;
     }
 
-    void Setup(PlayerFSM player) {
+    private void Setup(PlayerFSM player) {
         alreadyBlinked = false;
         beginBlinkTimer = player.config.startPreBlinkTime;
         endBlinkTimer = player.config.startPostBlinkTime;
@@ -49,13 +49,13 @@ public class PlayerBlinkingState : PlayerBaseState {
         InputBuffer();
     }
 
-    void BlinkAction(PlayerFSM player) {
+    private void BlinkAction(PlayerFSM player) {
         Vector3 blinkDirection = base.GetFourDirectionalInput(player, xInput, yInput);
         Vector3 newPos = ValidDestinationPosition(player, blinkDirection);
         player.transform.Translate(newPos);
     }
 
-    Vector3 ValidDestinationPosition(PlayerFSM player, Vector3 blinkDirection) {
+    private Vector3 ValidDestinationPosition(PlayerFSM player, Vector3 blinkDirection) {
         float distance = player.config.blinkDistance;
         Vector3 finalPosition = blinkDirection * distance;
         LayerMask invalidLayers = LayerMask.GetMask("Ground", "Gate");
@@ -72,13 +72,13 @@ public class PlayerBlinkingState : PlayerBaseState {
         return finalPosition;
     }
 
-    void StopBlinking(PlayerFSM player) {
+    private void StopBlinking(PlayerFSM player) {
         player.rb.gravityScale = originalGravity;
         player.rb.velocity = Vector2.zero;
         player.blinkCooldownTimer = player.config.startBlinkCooldownTime;
     }
 
-    void InputBuffer() {
+    private void InputBuffer() {
         xInput = Input.GetAxisRaw("Horizontal");
         yInput = Input.GetAxisRaw("Vertical");
     }

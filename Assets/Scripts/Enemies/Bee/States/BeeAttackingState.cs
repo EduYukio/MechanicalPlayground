@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class BeeAttackingState : BeeBaseState {
-    float attackingTimer;
+    private float attackingTimer;
 
     public override void EnterState(BeeFSM bee) {
         bee.animator.Play("Attacking");
@@ -21,11 +21,11 @@ public class BeeAttackingState : BeeBaseState {
         if (base.CheckTransitionToMoving(bee)) return;
     }
 
-    void Setup(BeeFSM bee) {
+    private void Setup(BeeFSM bee) {
         attackingTimer = bee.bulletSpawnTimerSyncedWithAnimation;
     }
 
-    void AttackAction(BeeFSM bee) {
+    private void AttackAction(BeeFSM bee) {
         if (bee.spriteRenderer.isVisible) Manager.audio.Play("Enemy Shoot");
         bee.SpawnBullet(bee.bulletSpawnTransform.position);
         bee.attackCooldownTimer = bee.startAttackCooldownTimer;

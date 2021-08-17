@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public class TrunkBeingHitState : TrunkBaseState {
-    float hitTimer;
+    private float hitTimer;
 
     public override void EnterState(TrunkFSM trunk) {
         trunk.animator.Play("BeingHit", -1, 0f);
@@ -22,11 +22,11 @@ public class TrunkBeingHitState : TrunkBaseState {
         if (base.CheckTransitionToMoving(trunk)) return;
     }
 
-    void Setup(TrunkFSM trunk) {
+    private void Setup(TrunkFSM trunk) {
         hitTimer = Helper.GetAnimationDuration("BeingHit", trunk.animator);
     }
 
-    void BeingHitAction(TrunkFSM trunk) {
+    private void BeingHitAction(TrunkFSM trunk) {
         trunk.rb.velocity = Vector2.zero;
     }
 }

@@ -11,7 +11,7 @@ public class GunBullet : MonoBehaviour {
         ProcessCollision(other.gameObject);
     }
 
-    void ProcessCollision(GameObject collidedObj) {
+    private void ProcessCollision(GameObject collidedObj) {
         bool hitEnemy = collidedObj.CompareTag("Enemy");
         if (hitEnemy) {
             collidedObj.GetComponent<Enemy>()?.TakeDamage(player.config.gunBootsDamage);

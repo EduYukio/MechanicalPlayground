@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -38,7 +37,7 @@ public class Menu : MonoBehaviour {
         levelIndicator.text = "Level: " + currentLevelText + "/" + finalLevel.ToString();
     }
 
-    void Update() {
+    private void Update() {
         CheckMenuInput();
         CheckSkillControlsInput();
         CheckDebugMenuInput();
@@ -86,7 +85,7 @@ public class Menu : MonoBehaviour {
         EventSystem.current.SetSelectedGameObject(optionsButton);
     }
 
-    void CheckMenuInput() {
+    private void CheckMenuInput() {
         bool hitEsc = Input.GetButtonDown("Esc");
         bool hitStart = Input.GetButtonDown("Start");
         bool hitCircle = Input.GetButtonDown("Circle");
@@ -116,7 +115,7 @@ public class Menu : MonoBehaviour {
         }
     }
 
-    void CheckSkillControlsInput() {
+    private void CheckSkillControlsInput() {
         if (Input.GetButtonDown("Select")) {
             if (pauseMenu.activeSelf) return;
             if (mechanicsMenu && mechanicsMenu.activeSelf) return;
@@ -128,17 +127,17 @@ public class Menu : MonoBehaviour {
         }
     }
 
-    bool IsHidingUI() {
+    private bool IsHidingUI() {
         if (!skillUICompactChildAggregator.activeSelf && !skillUILargeChildAggregator.activeSelf) return true;
 
         return false;
     }
 
-    void ClosePauseMenu() {
+    private void ClosePauseMenu() {
         StartCoroutine(WaitToClosePauseMenu());
     }
 
-    void OpenPauseMenu() {
+    private void OpenPauseMenu() {
         pauseMenu.SetActive(true);
         Manager.audio.SetBGMVolumeToMuffled();
 
@@ -149,7 +148,7 @@ public class Menu : MonoBehaviour {
         EventSystem.current.SetSelectedGameObject(continueButton);
     }
 
-    IEnumerator WaitToClosePauseMenu() {
+    private IEnumerator WaitToClosePauseMenu() {
         pauseMenu.SetActive(false);
         Manager.audio.SetBGMVolumeToNormal();
         yield return new WaitForSecondsRealtime(0.05f);

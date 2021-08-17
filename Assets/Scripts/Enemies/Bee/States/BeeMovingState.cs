@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class BeeMovingState : BeeBaseState {
     public override void EnterState(BeeFSM bee) {
     }

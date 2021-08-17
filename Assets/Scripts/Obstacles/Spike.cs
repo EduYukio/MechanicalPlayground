@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Spike : MonoBehaviour {
@@ -36,14 +35,14 @@ public class Spike : MonoBehaviour {
         KillPlayer(collidedObj);
     }
 
-    bool PlayerIsInvulnerableToSpike(GameObject collidedObj) {
+    private bool PlayerIsInvulnerableToSpike(GameObject collidedObj) {
         PlayerFSM player = collidedObj.GetComponent<PlayerFSM>();
         if (player.mechanics.IsEnabled("Spike Invulnerability")) return true;
 
         return false;
     }
 
-    void KillPlayer(GameObject collidedObj) {
+    private void KillPlayer(GameObject collidedObj) {
         PlayerFSM player = collidedObj.GetComponent<PlayerFSM>();
         player.TransitionToState(player.DyingState);
     }

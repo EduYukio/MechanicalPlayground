@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -47,7 +45,7 @@ public class MechanicsMenu : MonoBehaviour {
         UpdateButtonsState();
     }
 
-    void CleanInfo() {
+    private void CleanInfo() {
         rawImage.enabled = false;
         title.text = "";
         description.text = "";
@@ -112,7 +110,7 @@ public class MechanicsMenu : MonoBehaviour {
         UpdateButtonsState();
     }
 
-    void CheckMenuExitInput() {
+    private void CheckMenuExitInput() {
         bool hitEsc = Input.GetButtonDown("Esc");
         bool hitStart = Input.GetButtonDown("Start");
         bool hitCircle = Input.GetButtonDown("Circle");

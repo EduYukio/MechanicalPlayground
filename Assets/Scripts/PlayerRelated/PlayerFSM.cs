@@ -1,9 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 
 public class PlayerFSM : MonoBehaviour {
     [HideInInspector] public PlayerBaseState currentState;
@@ -193,13 +189,13 @@ public class PlayerFSM : MonoBehaviour {
         if (parryTimer >= 0) parryTimer -= step;
     }
 
-    void CheckIfHasResetDashTrigger() {
+    private void CheckIfHasResetDashTrigger() {
         if (Input.GetAxisRaw("Dash") == 0f) {
             hasResetDashTrigger = true;
         }
     }
 
-    void SetMoveSpeed() {
+    private void SetMoveSpeed() {
         moveSpeed = config.moveSpeed;
         if (mechanics.IsEnabled("Move Speed Boost")) {
             moveSpeed = config.moveSpeedBoosted;

@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PlayerExplodingState : PlayerBaseState {
     public LayerMask hitLayers;
-    float xInput, yInput;
-    Vector3 rightDistance, leftDistance, upDistance, downDistance;
+    private float xInput, yInput;
+    private Vector3 rightDistance, leftDistance, upDistance, downDistance;
 
     public override void EnterState(PlayerFSM player) {
         player.animator.Play("PlayerExploding");
@@ -19,14 +19,14 @@ public class PlayerExplodingState : PlayerBaseState {
         if (base.CheckTransitionToGrounded(player)) return;
     }
 
-    void Setup(PlayerFSM player) {
+    private void Setup(PlayerFSM player) {
         InputBuffer();
         SetExplosionRanges(player);
         hitLayers = LayerMask.GetMask("Enemies", "Obstacles", "Projectiles", "Gate");
         player.explosionCooldownTimer = player.config.startExplosionCooldownTime;
     }
 
-    void ExplosionAction(PlayerFSM player) {
+    private void ExplosionAction(PlayerFSM player) {
         Vector3 explosionDistance = CalculateExplosionDistance(player);
         Vector3 explosionPosition = player.transform.position + explosionDistance;
         GameObject explosion = MonoBehaviour.Instantiate(player.explosionPrefab, explosionPosition, Quaternion.identity);
@@ -39,7 +39,7 @@ public class PlayerExplodingState : PlayerBaseState {
         }
     }
 
-    void CheckDamageEnemy(PlayerFSM player, Collider2D colliderHit) {
+    private void CheckDamageEnemy(PlayerFSM player, Collider2D colliderHit) {
         bool hitEnemy = colliderHit.gameObject.CompareTag("Enemy");
         if (hitEnemy) {
             Enemy enemy = colliderHit.GetComponent<Enemy>();
@@ -48,7 +48,7 @@ public class PlayerExplodingState : PlayerBaseState {
         }
     }
 
-    void CheckDestroyObject(PlayerFSM player, Collider2D colliderHit) {
+    private void CheckDestroyObject(PlayerFSM player, Collider2D colliderHit) {
         bool hitObstacle = colliderHit.gameObject.layer == LayerMask.NameToLayer("Obstacles");
         bool hitGate = colliderHit.gameObject.layer == LayerMask.NameToLayer("Gate");
         bool hitProjectile = colliderHit.gameObject.CompareTag("Projectile");
@@ -57,7 +57,7 @@ public class PlayerExplodingState : PlayerBaseState {
         }
     }
 
-    void InputBuffer() {
+    private void InputBuffer() {
         xInput = Input.GetAxisRaw("Horizontal");
         yInput = Input.GetAxisRaw("Vertical");
     }
@@ -72,7 +72,7 @@ public class PlayerExplodingState : PlayerBaseState {
         return false;
     }
 
-    void SetExplosionRanges(PlayerFSM player) {
+    private void SetExplosionRanges(PlayerFSM player) {
         float xRange = player.config.xRange;
         float yRange = player.config.yRange;
 
@@ -82,7 +82,7 @@ public class PlayerExplodingState : PlayerBaseState {
         downDistance = new Vector3(0, -yRange, 0f);
     }
 
-    Vector3 CalculateExplosionDistance(PlayerFSM player) {
+    private Vector3 CalculateExplosionDistance(PlayerFSM player) {
         Vector3 inputDirection = base.GetFourDirectionalInput(player, xInput, yInput);
 
         if (inputDirection == Vector3.right) return rightDistance;

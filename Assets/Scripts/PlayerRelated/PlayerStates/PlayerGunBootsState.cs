@@ -23,10 +23,10 @@ public class PlayerGunBootsState : PlayerBaseState {
         if (base.CheckTransitionToDoubleJumping(player)) return;
     }
 
-    void Setup(PlayerFSM player) {
+    private void Setup(PlayerFSM player) {
     }
 
-    void GunBootsAction(PlayerFSM player) {
+    private void GunBootsAction(PlayerFSM player) {
         if (player.gunBootsCooldownTimer > 0) return;
 
         Manager.audio.Play("Gun Shoot");

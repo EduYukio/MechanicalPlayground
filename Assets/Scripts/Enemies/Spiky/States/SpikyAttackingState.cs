@@ -1,8 +1,8 @@
 using UnityEngine;
 
 public class SpikyAttackingState : SpikyBaseState {
-    float attackingTimer;
-    Vector2[] bulletDirections = new Vector2[5];
+    private float attackingTimer;
+    private Vector2[] bulletDirections = new Vector2[5];
 
     public override void EnterState(SpikyFSM spiky) {
         spiky.animator.Play("Attacking");
@@ -20,11 +20,11 @@ public class SpikyAttackingState : SpikyBaseState {
         if (base.CheckTransitionToIdle(spiky)) return;
     }
 
-    void Setup(SpikyFSM spiky) {
+    private void Setup(SpikyFSM spiky) {
         attackingTimer = spiky.bulletSpawnTimerSyncedWithAnimation;
     }
 
-    void AttackAction(SpikyFSM spiky) {
+    private void AttackAction(SpikyFSM spiky) {
         if (spiky.spriteRenderer.isVisible) Manager.audio.Play("Enemy Shoot");
         Vector3[] bulletDirections = spiky.CalculateDirections();
 

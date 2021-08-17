@@ -10,7 +10,7 @@ public class SpikyIdleState : SpikyBaseState {
         if (base.CheckTransitionToAttacking(spiky)) return;
     }
 
-    void IdleAction(SpikyFSM spiky) {
+    private void IdleAction(SpikyFSM spiky) {
         spiky.rb.velocity = Vector2.zero;
     }
 }

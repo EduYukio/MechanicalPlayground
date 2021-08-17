@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 public class SpikyFSM : Enemy {
     private SpikyBaseState currentState;
@@ -74,7 +70,7 @@ public class SpikyFSM : Enemy {
         return bulletDirections;
     }
 
-    void PreInstantiateBullets() {
+    private void PreInstantiateBullets() {
         Vector3[] directions = CalculateDirections();
 
         for (int i = 0; i < directions.Length; i++) {
@@ -95,7 +91,7 @@ public class SpikyFSM : Enemy {
         }
     }
 
-    float CalculateMaxRayLength(Vector3 initialPosition, Vector3 direction) {
+    private float CalculateMaxRayLength(Vector3 initialPosition, Vector3 direction) {
         float arbitraryMaxLength = 100f;
         int layersToCollide = LayerMask.GetMask("Ground", "Obstacles", "Gate");
 

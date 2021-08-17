@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class PlayerFallingState : PlayerBaseState {
@@ -23,7 +22,7 @@ public class PlayerFallingState : PlayerBaseState {
         if (base.CheckTransitionToExploding(player)) return;
     }
 
-    void BetterFalling(PlayerFSM player) {
+    private void BetterFalling(PlayerFSM player) {
         if (player.rb.velocity.y < player.config.maxFallSpeed) {
             player.rb.velocity = new Vector2(player.rb.velocity.x, player.config.maxFallSpeed);
             return;
@@ -40,7 +39,7 @@ public class PlayerFallingState : PlayerBaseState {
         }
     }
 
-    void PlayAnimationIfCan(PlayerFSM player) {
+    private void PlayAnimationIfCan(PlayerFSM player) {
         if (Helper.IsPlayingAnimation("PlayerFall", player.animator)) return;
         if (Helper.IsPlayingAnimation("PlayerDoubleJump", player.animator)) return;
         if (Helper.IsPlayingAnimation("PlayerAttacking", player.animator)) return;
@@ -51,7 +50,7 @@ public class PlayerFallingState : PlayerBaseState {
         player.animator.Play("PlayerFall");
     }
 
-    void CheckForBunnyHop(PlayerFSM player) {
+    private void CheckForBunnyHop(PlayerFSM player) {
         if (player.coyoteTimer > 0) return;
 
         if (Input.GetButtonDown("Jump")) {

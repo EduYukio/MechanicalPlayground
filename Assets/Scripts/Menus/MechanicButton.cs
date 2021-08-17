@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Video;
 using TMPro;
 using UnityEngine.UI;
 
@@ -58,7 +56,7 @@ public class MechanicButton : MonoBehaviour {
         mechMenu.UpdateButtonsState();
     }
 
-    bool CheckNoPoints() {
+    private bool CheckNoPoints() {
         if (mechMenu.skillPoints == 0) {
             mechMenu.SkillPointsWarning();
             return true;

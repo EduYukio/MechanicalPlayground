@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,7 +6,7 @@ public class PreloadScript : MonoBehaviour {
     public int currentBGMIndex;
     public int maxBGMIndex = 2;
 
-    void Awake() {
+    private void Awake() {
         DontDestroyOnLoad(gameObject);
         LoadNextScene();
     }
@@ -23,7 +21,7 @@ public class PreloadScript : MonoBehaviour {
         currentBGMIndex = 0;
     }
 
-    void LoadNextScene() {
+    private void LoadNextScene() {
         if (PreloadInitializer.selectedScene > 0) {
             SceneManager.LoadScene(PreloadInitializer.selectedScene);
         }
@@ -32,7 +30,7 @@ public class PreloadScript : MonoBehaviour {
         }
     }
 
-    void CheckIfBGMEnded() {
+    private void CheckIfBGMEnded() {
         if (currentBGM.source == null) return;
 
         if (!currentBGM.source.isPlaying) {

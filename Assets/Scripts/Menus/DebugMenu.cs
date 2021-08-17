@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class DebugMenu : MonoBehaviour {
-    PlayerFSM player;
+    private PlayerFSM player;
 
     private void Start() {
         player = GameObject.Find("PlayerFSM").GetComponent<PlayerFSM>();

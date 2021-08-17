@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class PlayerWalkingState : PlayerBaseState {
-    float walkParticlesStartCooldown = 0.5f;
+    private float walkParticlesStartCooldown = 0.5f;
 
     public override void EnterState(PlayerFSM player) {
         Setup(player);
@@ -23,11 +23,11 @@ public class PlayerWalkingState : PlayerBaseState {
         if (base.CheckTransitionToExploding(player)) return;
     }
 
-    void Setup(PlayerFSM player) {
+    private void Setup(PlayerFSM player) {
         player.walkParticlesCooldownTimer = 0f;
     }
 
-    void ResetCoyoteTimer(PlayerFSM player) {
+    private void ResetCoyoteTimer(PlayerFSM player) {
         player.coyoteTimer = player.config.startCoyoteDurationTime;
     }
 

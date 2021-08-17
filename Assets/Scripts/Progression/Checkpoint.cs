@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Checkpoint : MonoBehaviour {
@@ -30,7 +29,7 @@ public class Checkpoint : MonoBehaviour {
         Checkpoint.activatedName = gameObject.name;
     }
 
-    IEnumerator WaitForPlayParticles(float soundDelay) {
+    private IEnumerator WaitForPlayParticles(float soundDelay) {
         yield return new WaitForSecondsRealtime(soundDelay);
         Vector3 particlePosition = transform.position + new Vector3(-0.25f, 0.45f, 0);
         Instantiate(checkpointParticles, particlePosition, Quaternion.identity);

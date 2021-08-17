@@ -1,14 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using UnityEngine.SceneManagement;
 
 public class SkillsUI : MonoBehaviour {
     public List<GameObject> skills;
     public PlayerFSM player;
 
-    void Awake() {
+    private void Awake() {
         Mechanics.MechanicChanged += EnableAndPositionSkills;
         player = GameObject.FindObjectOfType<PlayerFSM>();
         EnableAndPositionSkills();

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Gate : MonoBehaviour {
     public ParticleSystem gateParticles;
@@ -17,7 +15,7 @@ public class Gate : MonoBehaviour {
         }
     }
 
-    void ConsumeKey(PlayerFSM player) {
+    private void ConsumeKey(PlayerFSM player) {
         GameObject key = player.keys[player.keys.Count - 1];
         player.keys.RemoveAt(player.keys.Count - 1);
         key.GetComponentInChildren<Key>().RestoreOneSlot();

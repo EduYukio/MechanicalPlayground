@@ -1,10 +1,6 @@
-using UnityEngine;
-
 public abstract class SpikyBaseState {
     public abstract void EnterState(SpikyFSM spiky);
     public abstract void Update(SpikyFSM spiky);
-
-    #region Check Methods
 
     public virtual bool CheckTransitionToIdle(SpikyFSM spiky) {
         spiky.TransitionToState(spiky.IdleState);
@@ -27,9 +23,4 @@ public abstract class SpikyBaseState {
 
         return false;
     }
-
-    #endregion
-
-    #region Helper Functions
-    #endregion
 }
