@@ -31,8 +31,7 @@ public abstract class BeeBaseState {
     // Helper Functions
 
     public void MoveAction(BeeFSM bee) {
-        float step = bee.moveSpeed * Time.deltaTime;
-        bee.transform.position = Vector2.MoveTowards(bee.transform.position, bee.targetPosition, step);
+        bee.transform.position = Vector2.MoveTowards(bee.transform.position, bee.targetPosition, bee.moveSpeed * Time.deltaTime);
 
         if (Vector2.Distance(bee.transform.position, bee.targetPosition) < 0.01f) {
             bee.distanceToMove *= -1f;
