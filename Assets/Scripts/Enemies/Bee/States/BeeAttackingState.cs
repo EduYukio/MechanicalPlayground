@@ -8,7 +8,7 @@ public class BeeAttackingState : BeeBaseState {
         Setup(bee);
     }
 
-    public override void Update(BeeFSM bee) {
+    public override void FixedUpdate(BeeFSM bee) {
         base.MoveAction(bee);
 
         if (attackingTimer >= 0) {

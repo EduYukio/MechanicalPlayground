@@ -39,9 +39,12 @@ public class BeeFSM : Enemy {
     }
 
     private void Update() {
-        ProcessTimers();
-
         currentState.Update(this);
+    }
+
+    private void FixedUpdate() {
+        currentState.FixedUpdate(this);
+        ProcessTimers();
     }
 
     public void TransitionToState(BeeBaseState state) {

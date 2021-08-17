@@ -2,9 +2,8 @@ using UnityEngine;
 
 public abstract class BeeBaseState {
     public abstract void EnterState(BeeFSM bee);
-    public abstract void Update(BeeFSM bee);
-
-    #region Check Methods
+    public virtual void Update(BeeFSM bee) { }
+    public virtual void FixedUpdate(BeeFSM bee) { }
 
     public virtual bool CheckTransitionToMoving(BeeFSM bee) {
         bee.TransitionToState(bee.MovingState);
@@ -28,11 +27,8 @@ public abstract class BeeBaseState {
         return false;
     }
 
-    #endregion
 
-
-
-    #region Helper Functions
+    // Helper Functions
 
     public void MoveAction(BeeFSM bee) {
         float step = bee.moveSpeed * Time.deltaTime;
@@ -52,6 +48,4 @@ public abstract class BeeBaseState {
             return new Vector2(bee.initialCoord + bee.distanceToMove, bee.transform.position.y);
         }
     }
-
-    #endregion
 }

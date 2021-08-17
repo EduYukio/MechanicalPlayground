@@ -10,7 +10,7 @@ public class BeeBeingHitState : BeeBaseState {
         BeingHitAction(bee);
     }
 
-    public override void Update(BeeFSM bee) {
+    public override void FixedUpdate(BeeFSM bee) {
         if (base.CheckTransitionToDying(bee)) return;
 
         if (hitTimer >= 0) {
