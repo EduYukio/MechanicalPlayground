@@ -10,7 +10,7 @@ public class PlayerWallJumpingState : PlayerBaseState {
         JumpAction(player);
     }
 
-    public override void Update(PlayerFSM player) {
+    public override void FixedUpdate(PlayerFSM player) {
         if (base.CheckTransitionToDashing(player)) return;
         if (base.CheckTransitionToBlinking(player)) return;
         if (base.CheckTransitionToExploding(player)) return;
