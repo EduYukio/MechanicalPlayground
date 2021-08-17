@@ -5,8 +5,6 @@ public abstract class PlayerBaseState {
     public virtual void Update(PlayerFSM player) { }
     public virtual void FixedUpdate(PlayerFSM player) { }
 
-    #region CheckTransitionFunctions
-
     public virtual bool CheckTransitionToDashing(PlayerFSM player) {
         if (!player.mechanics.IsEnabled("Dash")) return false;
         if (!player.canDash) return false;
@@ -154,11 +152,10 @@ public abstract class PlayerBaseState {
         return false;
     }
 
-    #endregion
 
 
 
-    #region HelperFunctions
+    // Helper Functions
 
     public void ProcessMovementInput(PlayerFSM player) {
         float xInput = Input.GetAxisRaw("Horizontal");
@@ -206,6 +203,4 @@ public abstract class PlayerBaseState {
             player.lastDirection = -1;
         }
     }
-
-    #endregion
 }

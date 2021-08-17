@@ -41,7 +41,6 @@ public class PlayerAttackingState : PlayerBaseState {
         return base.GetFourDirectionalInput(player, xInput, yInput);
     }
 
-
     private void AttackAction(PlayerFSM player) {
         Vector2 hitboxSize;
         Vector2 attackPosition;

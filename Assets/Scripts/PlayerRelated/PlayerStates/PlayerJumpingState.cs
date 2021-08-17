@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerJumpingState : PlayerBaseState {
     private bool leftGround;
+
     public override void EnterState(PlayerFSM player) {
         Setup(player);
         JumpAction(player);
