@@ -15,7 +15,7 @@ public class PlayerBlinkingState : PlayerBaseState {
         Setup(player);
     }
 
-    public override void Update(PlayerFSM player) {
+    public override void FixedUpdate(PlayerFSM player) {
         if (beginBlinkTimer > 0) {
             beginBlinkTimer -= Time.deltaTime;
             return;

@@ -9,7 +9,7 @@ public class PlayerWallSlidingState : PlayerBaseState {
         Setup(player);
     }
 
-    public override void Update(PlayerFSM player) {
+    public override void FixedUpdate(PlayerFSM player) {
         if (base.CheckTransitionToGunBoots(player)) return;
         if (CheckTransitionToGrounded(player)) return;
         if (base.CheckTransitionToWallJumping(player)) return;

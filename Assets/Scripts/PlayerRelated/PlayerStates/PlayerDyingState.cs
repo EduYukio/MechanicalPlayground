@@ -8,7 +8,7 @@ public class PlayerDyingState : PlayerBaseState {
         Setup(player);
     }
 
-    public override void Update(PlayerFSM player) {
+    public override void FixedUpdate(PlayerFSM player) {
         if (dyingTimer > 0) {
             dyingTimer -= Time.deltaTime;
             return;
