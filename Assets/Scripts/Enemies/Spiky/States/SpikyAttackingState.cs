@@ -9,7 +9,7 @@ public class SpikyAttackingState : SpikyBaseState {
         Setup(spiky);
     }
 
-    public override void Update(SpikyFSM spiky) {
+    public override void FixedUpdate(SpikyFSM spiky) {
         if (attackingTimer >= 0) {
             attackingTimer -= Time.deltaTime;
             return;

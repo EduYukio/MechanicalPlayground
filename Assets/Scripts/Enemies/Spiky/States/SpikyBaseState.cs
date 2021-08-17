@@ -1,6 +1,7 @@
 public abstract class SpikyBaseState {
     public abstract void EnterState(SpikyFSM spiky);
-    public abstract void Update(SpikyFSM spiky);
+    public virtual void Update(SpikyFSM spiky) { }
+    public virtual void FixedUpdate(SpikyFSM spiky) { }
 
     public virtual bool CheckTransitionToIdle(SpikyFSM spiky) {
         spiky.TransitionToState(spiky.IdleState);

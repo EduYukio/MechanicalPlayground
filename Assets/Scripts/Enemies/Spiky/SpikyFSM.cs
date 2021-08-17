@@ -32,9 +32,12 @@ public class SpikyFSM : Enemy {
     }
 
     private void Update() {
-        ProcessTimers();
-
         currentState.Update(this);
+    }
+
+    private void FixedUpdate() {
+        ProcessTimers();
+        currentState.FixedUpdate(this);
     }
 
     public void TransitionToState(SpikyBaseState state) {
