@@ -10,7 +10,7 @@ public class TrunkBeingHitState : TrunkBaseState {
         BeingHitAction(trunk);
     }
 
-    public override void Update(TrunkFSM trunk) {
+    public override void FixedUpdate(TrunkFSM trunk) {
         if (base.CheckTransitionToDying(trunk)) return;
 
         if (hitTimer >= 0) {

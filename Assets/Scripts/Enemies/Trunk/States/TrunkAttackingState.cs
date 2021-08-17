@@ -8,7 +8,7 @@ public class TrunkAttackingState : TrunkBaseState {
         Setup(trunk);
     }
 
-    public override void Update(TrunkFSM trunk) {
+    public override void FixedUpdate(TrunkFSM trunk) {
         if (attackingTimer >= 0) {
             attackingTimer -= Time.deltaTime;
             return;

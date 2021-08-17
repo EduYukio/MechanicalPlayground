@@ -2,9 +2,8 @@
 
 public abstract class TrunkBaseState {
     public abstract void EnterState(TrunkFSM trunk);
-    public abstract void Update(TrunkFSM trunk);
-
-    #region Check Methods
+    public virtual void Update(TrunkFSM trunk) { }
+    public virtual void FixedUpdate(TrunkFSM trunk) { }
 
     public virtual bool CheckTransitionToIdle(TrunkFSM trunk) {
         trunk.TransitionToState(trunk.IdleState);
@@ -35,9 +34,8 @@ public abstract class TrunkBaseState {
         return false;
     }
 
-    #endregion
 
-    #region Helper Functions
+    // Helper Functions
 
     public void MoveAction(TrunkFSM trunk) {
         trunk.transform.Translate(Vector2.left * trunk.moveSpeed * Time.deltaTime);
@@ -75,6 +73,4 @@ public abstract class TrunkBaseState {
 
         return false;
     }
-
-    #endregion
 }

@@ -9,7 +9,7 @@ public class TrunkIdleState : TrunkBaseState {
         IdleAction(trunk);
     }
 
-    public override void Update(TrunkFSM trunk) {
+    public override void FixedUpdate(TrunkFSM trunk) {
         PlayAnimationIfCan(trunk);
         if (base.CheckTransitionToAttacking(trunk)) return;
 
