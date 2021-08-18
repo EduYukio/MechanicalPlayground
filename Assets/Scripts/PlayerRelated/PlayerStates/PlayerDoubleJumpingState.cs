@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class PlayerDoubleJumpingState : PlayerBaseState {
     public override void EnterState(PlayerFSM player) {
-        player.animator.Play("PlayerDoubleJump");
         Setup(player);
+        PlayAnimation(player);
+        PlayParticles(player);
         DoubleJumpAction(player);
     }
 
@@ -22,6 +23,13 @@ public class PlayerDoubleJumpingState : PlayerBaseState {
 
     private void Setup(PlayerFSM player) {
         player.canDoubleJump = false;
+    }
+
+    private void PlayAnimation(PlayerFSM player) {
+        player.animator.Play("PlayerDoubleJump");
+    }
+
+    private void PlayParticles(PlayerFSM player) {
         player.jumpParticles.Play();
     }
 
