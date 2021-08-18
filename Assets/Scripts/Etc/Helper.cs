@@ -11,7 +11,7 @@ public static class Helper {
             }
         }
 
-        Debug.Log("ERROR! No clip with this name was found: " + clipName);
+        Debug.LogError("ERROR! No clip with this name was found: " + clipName);
         return 0;
     }
 
