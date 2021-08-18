@@ -154,9 +154,6 @@ public abstract class PlayerBaseState {
 
 
 
-
-    // Helper Functions
-
     public void ProcessMovementInput(PlayerFSM player) {
         float xInput = Input.GetAxisRaw("Horizontal");
         int direction = GetRawDirection(xInput);
@@ -167,6 +164,7 @@ public abstract class PlayerBaseState {
         player.rb.velocity = new Vector2(direction * player.moveSpeed, player.rb.velocity.y);
     }
 
+    // For the GamePad analog sticks
     public int GetRawDirection(float input) {
         int direction = 0;
         if (input > 0) {
@@ -195,7 +193,7 @@ public abstract class PlayerBaseState {
         return direction;
     }
 
-    public void SetPlayerSpriteOppositeOfWall(PlayerFSM player) {
+    public void SetLookingDirectionOppositeOfWall(PlayerFSM player) {
         if (player.isTouchingLeftWall) {
             player.lastDirection = 1;
         }
