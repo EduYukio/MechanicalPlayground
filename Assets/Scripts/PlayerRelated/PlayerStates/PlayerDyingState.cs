@@ -22,7 +22,6 @@ public class PlayerDyingState : PlayerBaseState {
         player.isDying = true;
         player.spriteRenderer.color = Color.white;
 
-        player.animator.SetFloat("disappearSpeedMultiplier", 1f);
         dyingTimer = 0.5f;
         player.animator.Play("PlayerHit");
         Manager.audio.Play("PlayerDying");
