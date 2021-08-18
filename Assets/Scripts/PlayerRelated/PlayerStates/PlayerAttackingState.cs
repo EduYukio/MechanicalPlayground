@@ -9,15 +9,15 @@ public class PlayerAttackingState : PlayerBaseState {
     private bool shouldPogo = false;
 
     public override void EnterState(PlayerFSM player) {
-        Setup(player);
-        if (isBoosted) {
-            player.animator.Play("PlayerAttackingBoosted", -1, 0f);
-        }
-        else {
-            player.animator.Play("PlayerAttacking", -1, 0f);
-        }
         Manager.audio.Play("Slash1");
+        Setup(player);
+        PlayAttackAnimation(player);
         AttackAction(player);
+    }
+
+    private void PlayAttackAnimation(PlayerFSM player) {
+        if (isBoosted) player.animator.Play("PlayerAttackingBoosted", -1, 0f);
+        else player.animator.Play("PlayerAttacking", -1, 0f);
     }
 
     public override void Update(PlayerFSM player) {
