@@ -42,6 +42,7 @@ public class Shield : MonoBehaviour {
 
     public void Parry(GameObject parriedObject) {
         if (!player.mechanics.IsEnabled("Parry")) return;
+
         Manager.audio.Play("Parry");
         StartCoroutine(nameof(ParryCoroutine), parriedObject);
     }

@@ -13,7 +13,6 @@ public class CameraShaker : MonoBehaviour {
             cameraObj.transform.localPosition = new Vector3(x, y, originalPos.z);
 
             elapsed += Time.deltaTime;
-
             yield return null;
         }
 

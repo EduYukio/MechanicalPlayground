@@ -2,7 +2,6 @@
 using UnityEngine.SceneManagement;
 
 public class PreloadInitializer {
-
     public static int selectedScene = -2;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]

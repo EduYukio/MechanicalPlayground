@@ -150,8 +150,6 @@ public class PlayerFSM : MonoBehaviour {
     }
 
 
-
-
     // Helper functions
 
     private void UpdateFacingSprite() {

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SkillsUI : MonoBehaviour {
@@ -14,8 +14,6 @@ public class SkillsUI : MonoBehaviour {
     private void OnDestroy() {
         Mechanics.MechanicChanged -= EnableAndPositionSkills;
     }
-
-
 
     public void EnableAndPositionSkills() {
         Vector3 initialPosition = new Vector3(-126, 198, 0);
