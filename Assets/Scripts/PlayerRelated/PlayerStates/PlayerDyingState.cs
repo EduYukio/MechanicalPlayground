@@ -2,10 +2,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerDyingState : PlayerBaseState {
-    public float dyingTimer;
+    private float dyingTimer;
 
     public override void EnterState(PlayerFSM player) {
         Setup(player);
+        PlayAnimation(player);
+        PlayAudio();
+        PlayParticles(player);
+        DieAction(player);
     }
 
     public override void FixedUpdate(PlayerFSM player) {
@@ -14,24 +18,42 @@ public class PlayerDyingState : PlayerBaseState {
             return;
         }
 
-        DieAction(player);
+        RealodScene();
     }
 
     private void Setup(PlayerFSM player) {
-        player.dyingParticles.Play();
+        dyingTimer = 0.5f;
         player.isDying = true;
         player.spriteRenderer.color = Color.white;
+    }
 
-        dyingTimer = 0.5f;
+    private void PlayAnimation(PlayerFSM player) {
         player.animator.Play("PlayerHit");
+    }
+
+    private void PlayAudio() {
         Manager.audio.Play("PlayerDying");
+    }
 
-        //TODO: refatorar isso aqui
-        Manager.shaker.Shake(player.cameraObj, player.config.dyingShakeDuration, player.config.dyingShakeMagnitude);
+    private void PlayParticles(PlayerFSM player) {
+        player.dyingParticles.Play();
+    }
+
+    private void DieAction(PlayerFSM player) {
+        ShakeCamera(player);
+        DramaticMotion(player);
+    }
+
+    private void ShakeCamera(PlayerFSM player) {
+        float shakeDuration = player.config.dyingShakeDuration;
+        float shakeMagnitude = player.config.dyingShakeMagnitude;
+
+        Manager.shaker.Shake(player.cameraObj, shakeDuration, shakeMagnitude);
         player.cameraHolder.transform.parent = null;
+    }
 
+    private void DramaticMotion(PlayerFSM player) {
         float direction = -player.lastDirection;
-        player.rb.bodyType = RigidbodyType2D.Dynamic;
         player.rb.velocity = new Vector3(direction * 3f, 6f, 0);
         player.rb.constraints = RigidbodyConstraints2D.None;
         player.rb.angularVelocity = direction * -40f;
@@ -39,7 +61,7 @@ public class PlayerDyingState : PlayerBaseState {
         player.GetComponent<Collider2D>().enabled = false;
     }
 
-    private void DieAction(PlayerFSM player) {
+    private void RealodScene() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
