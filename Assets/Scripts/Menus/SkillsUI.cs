@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class SkillsUI : MonoBehaviour {
@@ -28,7 +28,7 @@ public class SkillsUI : MonoBehaviour {
             if (player.mechanics.IsEnabled(mechanic.Name)) {
                 GameObject skill = skills.Find(x => x.name == mechanic.Name);
                 if (skill == null) {
-                    Debug.Log("ERROR: SKILL " + mechanic.Name + "NOT FOUND; DISABLING SKILLS UI");
+                    Debug.LogError("ERROR: SKILL " + mechanic.Name + " NOT FOUND; DISABLING SKILLS UI");
                     gameObject.SetActive(false);
                     return;
                 }
