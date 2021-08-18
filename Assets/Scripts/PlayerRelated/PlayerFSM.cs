@@ -120,7 +120,6 @@ public class PlayerFSM : MonoBehaviour {
 
         UpdateFacingSprite();
         PositionWalkParticles();
-        ProcessTimers();
         if (!isDying) {
             CheckIfHasResetDashTrigger();
             shield.CheckShieldInput();
@@ -132,6 +131,7 @@ public class PlayerFSM : MonoBehaviour {
     private void FixedUpdate() {
         if (freezePlayerState) return;
 
+        ProcessTimers();
         currentState.FixedUpdate(this);
     }
 
