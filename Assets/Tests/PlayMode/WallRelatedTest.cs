@@ -40,7 +40,6 @@ namespace Tests {
 
             PlayerFSM playerScript = player.GetComponent<PlayerFSM>();
             playerScript.ignoreCheckpoints = true;
-            playerScript.ignoreCheckpoints = true;
             playerScript.mechanics.SaveState();
             playerScript.mechanics.ResetMechanics();
             playerScript.mechanics.Activate("Walk");
@@ -59,7 +58,7 @@ namespace Tests {
             yield return new WaitForSeconds(1f);
 
             // Assert
-            Assert.IsTrue(playerScript.rb.velocity.y == -playerScript.config.wallSlidingSpeed);
+            Assert.IsTrue(Mathf.Abs(playerScript.rb.velocity.y) - Mathf.Abs(playerScript.config.wallSlidingSpeed) < 0.1f);
             Assert.IsTrue(playerScript.isTouchingWall);
             playerScript.mechanics.RestoreState();
         }
@@ -95,7 +94,7 @@ namespace Tests {
             yield return new WaitForSeconds(1f);
 
             // Assert
-            Assert.IsTrue(playerScript.rb.velocity.y == -playerScript.config.wallSlidingSpeed);
+            Assert.IsTrue(Mathf.Abs(playerScript.rb.velocity.y) - Mathf.Abs(playerScript.config.wallSlidingSpeed) < 0.1f);
             Assert.IsTrue(playerScript.isTouchingWall);
 
             IS.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.LEFT);
