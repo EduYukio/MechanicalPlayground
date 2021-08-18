@@ -19,8 +19,8 @@ public static class Helper {
         return animator.GetCurrentAnimatorStateInfo(0).IsName(stateName);
     }
 
-    public static void CheckIfNeedToBlinkRed(ref bool blinkRed, Image image) {
-        if (blinkRed) {
+    public static void CheckIfNeedToBlinkRed(ref bool mustBlinkRed, Image image) {
+        if (mustBlinkRed) {
             float step = 0.02f;
 
             Color currentColor = image.color;
@@ -28,13 +28,13 @@ public static class Helper {
             image.color = newColor;
 
             if (newColor.g >= 1f && newColor.b >= 1f) {
-                blinkRed = false;
+                mustBlinkRed = false;
             }
         }
     }
 
-    public static void CheckIfNeedToBlinkRed(ref bool blinkRed, TMP_Text text) {
-        if (blinkRed) {
+    public static void CheckIfNeedToBlinkRed(ref bool mustBlinkRed, TMP_Text text) {
+        if (mustBlinkRed) {
             text.enabled = false;
             text.enabled = true;
             float step = 0.02f;
@@ -44,7 +44,7 @@ public static class Helper {
             text.color = newColor;
 
             if (newColor.r <= 0f) {
-                blinkRed = false;
+                mustBlinkRed = false;
             }
         }
     }
