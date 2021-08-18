@@ -20,7 +20,7 @@ public class PlayerExplodingState : PlayerBaseState {
     }
 
     private void Setup(PlayerFSM player) {
-        InputBuffer();
+        Helper.InputBuffer(out xInput, out yInput);
         SetExplosionRanges(player);
         hitLayers = LayerMask.GetMask("Enemies", "Obstacles", "Projectiles", "Gate");
         player.explosionCooldownTimer = player.config.startExplosionCooldownTime;

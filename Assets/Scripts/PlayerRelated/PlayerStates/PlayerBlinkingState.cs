@@ -46,7 +46,7 @@ public class PlayerBlinkingState : PlayerBaseState {
         player.rb.velocity = Vector2.zero;
         originalGravity = player.rb.gravityScale;
         player.rb.gravityScale = 0f;
-        InputBuffer();
+        Helper.InputBuffer(out xInput, out yInput);
     }
 
     private void BlinkAction(PlayerFSM player) {
@@ -76,10 +76,5 @@ public class PlayerBlinkingState : PlayerBaseState {
         player.rb.gravityScale = originalGravity;
         player.rb.velocity = Vector2.zero;
         player.blinkCooldownTimer = player.config.startBlinkCooldownTime;
-    }
-
-    private void InputBuffer() {
-        xInput = Input.GetAxisRaw("Horizontal");
-        yInput = Input.GetAxisRaw("Vertical");
     }
 }

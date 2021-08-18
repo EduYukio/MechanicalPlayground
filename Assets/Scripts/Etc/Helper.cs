@@ -48,4 +48,9 @@ public static class Helper {
             }
         }
     }
+
+    public static void InputBuffer(out float xInput, out float yInput) {
+        xInput = Input.GetAxisRaw("Horizontal");
+        yInput = Input.GetAxisRaw("Vertical");
+    }
 }
