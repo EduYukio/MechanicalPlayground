@@ -74,7 +74,7 @@ public class PlayerFSM : MonoBehaviour {
     public float coyoteTimer;
     public float bunnyHopTimer;
     public float parryTimer;
-    public float airJumpInputBuffer;
+    public float airJumpInputBufferTimer;
 
     [HideInInspector] public float moveSpeed;
     [HideInInspector] public int lastDirection = 1;
@@ -150,7 +150,6 @@ public class PlayerFSM : MonoBehaviour {
     }
 
 
-    // Helper functions
 
     private void UpdateFacingSprite() {
         if (lastDirection == 1) {
@@ -175,12 +174,12 @@ public class PlayerFSM : MonoBehaviour {
     private void ProcessTimers() {
         float step = Time.deltaTime;
         if (walkParticlesCooldownTimer >= 0) walkParticlesCooldownTimer -= step;
-        if (gunBootsCooldownTimer >= 0) gunBootsCooldownTimer -= step;
+        if (airJumpInputBufferTimer >= 0) airJumpInputBufferTimer -= step;
         if (explosionCooldownTimer >= 0) explosionCooldownTimer -= step;
+        if (gunBootsCooldownTimer >= 0) gunBootsCooldownTimer -= step;
         if (attackCooldownTimer >= 0) attackCooldownTimer -= step;
         if (shieldCooldownTimer >= 0) shieldCooldownTimer -= step;
         if (blinkCooldownTimer >= 0) blinkCooldownTimer -= step;
-        if (airJumpInputBuffer >= 0) airJumpInputBuffer -= step;
         if (dashCooldownTimer >= 0) dashCooldownTimer -= step;
         if (bunnyHopTimer >= 0) bunnyHopTimer -= step;
         if (coyoteTimer >= 0) coyoteTimer -= step;

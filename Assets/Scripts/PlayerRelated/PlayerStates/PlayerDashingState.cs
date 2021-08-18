@@ -58,7 +58,7 @@ public class PlayerDashingState : PlayerBaseState {
 
     private void CheckForAirJumpInputBuffer(PlayerFSM player) {
         if (Input.GetButtonDown("Jump")) {
-            player.airJumpInputBuffer = player.config.startAirJumpInputBuffer;
+            player.airJumpInputBufferTimer = player.config.startAirJumpInputBufferTime;
         }
     }
 

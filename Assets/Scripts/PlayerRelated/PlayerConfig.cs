@@ -24,7 +24,7 @@ public class PlayerConfig : ScriptableObject {
 
     [Header("Double Jump")]
     public float doubleJumpForce = 12f;
-    public float startAirJumpInputBuffer = 0.2f;
+    public float startAirJumpInputBufferTime = 0.2f;
 
     [Header("Dash")]
     public float dashSpeed = 23;
@@ -70,7 +70,7 @@ public class PlayerConfig : ScriptableObject {
     public float explosionShakeMagnitude = 0.4f;
 
     [Header("Gun Boots")]
-    public float startGunBootsCooldownTimer = 0.2f;
+    public float startGunBootsCooldownTime = 0.2f;
     public float bootsBulletSpeed = 6f;
     public float gunBootsForce = 3f;
     public float gunBootsMaxSpeed = 50f;

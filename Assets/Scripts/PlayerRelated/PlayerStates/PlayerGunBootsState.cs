@@ -37,7 +37,7 @@ public class PlayerGunBootsState : PlayerBaseState {
 
         bullet.GetComponent<Rigidbody2D>().velocity = direction * player.config.bootsBulletSpeed;
 
-        player.gunBootsCooldownTimer = player.config.startGunBootsCooldownTimer;
+        player.gunBootsCooldownTimer = player.config.startGunBootsCooldownTime;
 
         float ySpeed = Mathf.Clamp(player.rb.velocity.y + player.config.gunBootsForce, 0f, player.config.gunBootsMaxSpeed);
         player.rb.velocity = new Vector2(player.rb.velocity.x, ySpeed);

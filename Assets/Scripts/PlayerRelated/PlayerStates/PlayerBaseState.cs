@@ -58,7 +58,7 @@ public abstract class PlayerBaseState {
         if (!player.mechanics.IsEnabled("Double Jump")) return false;
         if (!player.canDoubleJump) return false;
 
-        if (Input.GetButtonDown("Jump") || player.airJumpInputBuffer > 0) {
+        if (Input.GetButtonDown("Jump") || player.airJumpInputBufferTimer > 0) {
             player.TransitionToState(player.DoubleJumpingState);
             return true;
         }
