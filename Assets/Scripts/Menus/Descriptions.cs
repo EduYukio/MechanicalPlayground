@@ -3,8 +3,6 @@ using UnityEngine;
 
 [CreateAssetMenu()]
 public class Descriptions : ScriptableObject {
-    public Dictionary<string, string> dict;
-
     [Header("Movement")]
     public string doubleJump = "Jump again while in the air.";
     public string wallSlide = "Slide on walls.";
@@ -30,7 +28,9 @@ public class Descriptions : ScriptableObject {
     public string createPlatform = "Create platforms underneath you. You can jump from them and they also block enemy projectiles.";
 
 
-    public Dictionary<string, string> GetDictionary() {
+    public Dictionary<string, string> dict;
+
+    public void PopulateDictionary() {
         dict = new Dictionary<string, string>() {
             {"Double Jump", doubleJump},
             {"Wall Slide", wallSlide},
@@ -51,12 +51,10 @@ public class Descriptions : ScriptableObject {
             {"Spike Invulnerability", spikeInvul},
             {"Create Platform", createPlatform}
         };
-
-        return dict;
     }
 
     public string GetDescription(string mechanicName) {
-        dict = GetDictionary();
+        if (dict == null) PopulateDictionary();
         if (!dict.ContainsKey(mechanicName)) return "";
 
         return dict[mechanicName];
