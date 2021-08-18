@@ -4,15 +4,14 @@ public class PlayerBlinkingState : PlayerBaseState {
     private float beginBlinkTimer;
     private float endBlinkTimer;
     private float originalGravity;
-    private bool alreadyBlinked;
     private float xInput;
     private float yInput;
+    private bool alreadyBlinked;
 
     public override void EnterState(PlayerFSM player) {
-        player.animator.SetFloat("disappearSpeedMultiplier", 2.2f);
-        player.animator.Play("PlayerDisappear");
-        Manager.audio.Play("Blink");
         Setup(player);
+        PlayAnimation(player);
+        PlayAudio();
     }
 
     public override void FixedUpdate(PlayerFSM player) {
@@ -40,19 +39,27 @@ public class PlayerBlinkingState : PlayerBaseState {
     }
 
     private void Setup(PlayerFSM player) {
-        alreadyBlinked = false;
         beginBlinkTimer = player.config.startPreBlinkTime;
         endBlinkTimer = player.config.startPostBlinkTime;
-        player.rb.velocity = Vector2.zero;
         originalGravity = player.rb.gravityScale;
+        alreadyBlinked = false;
+        player.rb.velocity = Vector2.zero;
         player.rb.gravityScale = 0f;
         Helper.InputBuffer(out xInput, out yInput);
     }
 
+    private void PlayAnimation(PlayerFSM player) {
+        player.animator.Play("PlayerDisappear");
+    }
+
+    private void PlayAudio() {
+        Manager.audio.Play("Blink");
+    }
+
     private void BlinkAction(PlayerFSM player) {
         Vector3 blinkDirection = base.GetFourDirectionalInput(player, xInput, yInput);
-        Vector3 newPos = ValidDestinationPosition(player, blinkDirection);
-        player.transform.Translate(newPos);
+        Vector3 destinationPosition = ValidDestinationPosition(player, blinkDirection);
+        player.transform.Translate(destinationPosition);
     }
 
     private Vector3 ValidDestinationPosition(PlayerFSM player, Vector3 blinkDirection) {
@@ -62,11 +69,11 @@ public class PlayerBlinkingState : PlayerBaseState {
         float radius = player.config.blinkGroundCheckRadius;
         float step = 0.1f;
 
-        Collider2D[] destinationColliders = Physics2D.OverlapCircleAll(player.transform.localPosition + finalPosition, radius, invalidLayers);
-        while (destinationColliders.Length > 0) {
+        Collider2D[] invalidColliders = Physics2D.OverlapCircleAll(player.transform.localPosition + finalPosition, radius, invalidLayers);
+        while (invalidColliders.Length > 0) {
             distance = distance - step;
             finalPosition = blinkDirection * distance;
-            destinationColliders = Physics2D.OverlapCircleAll(player.transform.localPosition + finalPosition, radius, invalidLayers);
+            invalidColliders = Physics2D.OverlapCircleAll(player.transform.localPosition + finalPosition, radius, invalidLayers);
         }
 
         return finalPosition;
