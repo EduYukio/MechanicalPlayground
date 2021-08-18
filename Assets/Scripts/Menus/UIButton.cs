@@ -17,15 +17,11 @@ public class UIButton : MonoBehaviour, ISelectHandler, ISubmitHandler, IPointerC
     }
 
     private void PlayHoverSound() {
-        if (playDefaultHover) {
-            Manager.audio.Play("UI_Hover");
-        }
+        if (playDefaultHover) Manager.audio.Play("UI_Hover");
     }
 
     private void PlayConfirmSound() {
-        if (playDefaultConfirm) {
-            Manager.audio.Play("UI_Confirm");
-        }
+        if (playDefaultConfirm) Manager.audio.Play("UI_Confirm");
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
