@@ -30,7 +30,7 @@ public class PlayerWallSlidingState : PlayerBaseState {
         player.canDoubleJump = true;
         player.canDash = true;
         stickyTimer = player.config.startStickyTime;
-        base.SetPlayerSpriteOppositeOfWall(player);
+        base.SetLookingDirectionOppositeOfWall(player);
     }
 
     private void WallSlideAction(PlayerFSM player) {

@@ -33,7 +33,7 @@ public class PlayerWallJumpingState : PlayerBaseState {
         player.canDoubleJump = true;
         player.canDash = true;
         xVelocityTimer = player.config.startWallJumpDurationTime;
-        base.SetPlayerSpriteOppositeOfWall(player);
+        base.SetLookingDirectionOppositeOfWall(player);
     }
 
     private void JumpAction(PlayerFSM player) {
