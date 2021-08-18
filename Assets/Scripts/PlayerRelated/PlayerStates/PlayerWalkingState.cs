@@ -47,6 +47,7 @@ public class PlayerWalkingState : PlayerBaseState {
         if (Helper.IsPlayingAnimation("PlayerAttacking", player.animator)) return;
         if (Helper.IsPlayingAnimation("PlayerAttackingBoosted", player.animator)) return;
         if (Helper.IsPlayingAnimation("PlayerExploding", player.animator)) return;
+        if (Helper.IsPlayingAnimation("PlayerAppear", player.animator)) return;
 
         player.animator.Play("PlayerWalk");
     }

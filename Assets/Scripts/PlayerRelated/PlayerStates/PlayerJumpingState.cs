@@ -39,6 +39,7 @@ public class PlayerJumpingState : PlayerBaseState {
         if (Helper.IsPlayingAnimation("PlayerJump", player.animator)) return;
         if (Helper.IsPlayingAnimation("PlayerAttacking", player.animator)) return;
         if (Helper.IsPlayingAnimation("PlayerAttackingBoosted", player.animator)) return;
+        if (Helper.IsPlayingAnimation("PlayerAppear", player.animator)) return;
 
         player.animator.Play("PlayerJump");
     }
