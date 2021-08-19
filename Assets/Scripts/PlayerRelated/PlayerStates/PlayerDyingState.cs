@@ -9,6 +9,7 @@ public class PlayerDyingState : PlayerBaseState {
         PlayAnimation(player);
         PlayAudio();
         PlayParticles(player);
+        ShakeCamera(player);
         DieAction(player);
     }
 
@@ -39,11 +40,6 @@ public class PlayerDyingState : PlayerBaseState {
         player.dyingParticles.Play();
     }
 
-    private void DieAction(PlayerFSM player) {
-        ShakeCamera(player);
-        DramaticMotion(player);
-    }
-
     private void ShakeCamera(PlayerFSM player) {
         float shakeDuration = player.config.dyingShakeDuration;
         float shakeMagnitude = player.config.dyingShakeMagnitude;
@@ -52,7 +48,7 @@ public class PlayerDyingState : PlayerBaseState {
         player.cameraHolder.transform.parent = null;
     }
 
-    private void DramaticMotion(PlayerFSM player) {
+    private void DieAction(PlayerFSM player) {
         float direction = -player.lastDirection;
         player.rb.velocity = new Vector3(direction * 3f, 6f, 0);
         player.rb.constraints = RigidbodyConstraints2D.None;
