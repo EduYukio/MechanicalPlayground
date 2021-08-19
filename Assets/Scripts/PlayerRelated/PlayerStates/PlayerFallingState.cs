@@ -8,7 +8,7 @@ public class PlayerFallingState : PlayerBaseState {
         PlayAnimationIfCan(player);
         BetterFalling(player);
         CheckForBunnyHop(player);
-        base.ProcessMovementInput(player);
+        base.ProcessHorizontalMoveInput(player);
 
         if (CheckTransitionToJumping(player)) return;
         if (base.CheckTransitionToGunBoots(player)) return;

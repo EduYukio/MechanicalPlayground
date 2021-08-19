@@ -8,7 +8,7 @@ public class PlayerPogoingState : PlayerBaseState {
 
     public override void Update(PlayerFSM player) {
         PlayAnimationIfCan(player);
-        base.ProcessMovementInput(player);
+        base.ProcessHorizontalMoveInput(player);
 
         if (base.CheckTransitionToGrounded(player)) return;
         if (base.CheckTransitionToGunBoots(player)) return;

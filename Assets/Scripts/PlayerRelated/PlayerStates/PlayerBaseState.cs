@@ -154,7 +154,7 @@ public abstract class PlayerBaseState {
 
 
 
-    public void ProcessMovementInput(PlayerFSM player) {
+    public void ProcessHorizontalMoveInput(PlayerFSM player) {
         float xInput = Input.GetAxisRaw("Horizontal");
         int direction = GetRawDirection(xInput);
         if (direction != 0) {

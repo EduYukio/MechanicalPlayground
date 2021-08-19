@@ -11,7 +11,7 @@ public class PlayerWalkingState : PlayerBaseState {
         PlayAnimationIfCan(player);
         PlayParticleIfCan(player);
         ResetCoyoteTimer(player);
-        base.ProcessMovementInput(player);
+        base.ProcessHorizontalMoveInput(player);
 
         if (base.CheckTransitionToGunBoots(player)) return;
         if (CheckTransitionToGrounded(player)) return;

@@ -9,7 +9,7 @@ public class PlayerDoubleJumpingState : PlayerBaseState {
     }
 
     public override void Update(PlayerFSM player) {
-        base.ProcessMovementInput(player);
+        base.ProcessHorizontalMoveInput(player);
 
         if (base.CheckTransitionToGunBoots(player)) return;
         if (base.CheckTransitionToGrounded(player)) return;

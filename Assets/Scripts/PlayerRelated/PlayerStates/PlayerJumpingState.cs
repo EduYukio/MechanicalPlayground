@@ -10,7 +10,7 @@ public class PlayerJumpingState : PlayerBaseState {
 
     public override void Update(PlayerFSM player) {
         PlayAnimationIfCan(player);
-        base.ProcessMovementInput(player);
+        base.ProcessHorizontalMoveInput(player);
         CheckIfLeftGround(player);
 
         if (CheckTransitionToGrounded(player)) return;
