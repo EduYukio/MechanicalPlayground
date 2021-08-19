@@ -64,8 +64,8 @@ public class PlayerConfig : ScriptableObject {
     public float startExplosionCooldownTime = 0.5f;
     public float explosionRadius = 0.4f;
     public float explosionDamageRate = 0.5f;
-    public float xRange = 1.2f;
-    public float yRange = 1.3f;
+    public float explosionXRange = 1.2f;
+    public float explosionYRange = 1.3f;
     public float explosionShakeDuration = 0.15f;
     public float explosionShakeMagnitude = 0.4f;
 

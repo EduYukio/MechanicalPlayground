@@ -1,15 +1,14 @@
 using UnityEngine;
 
 public class PlayerExplodingState : PlayerBaseState {
-    public LayerMask hitLayers;
-    private float xInput, yInput;
     private Vector3 rightDistance, leftDistance, upDistance, downDistance;
+    private float xInput, yInput;
 
     public override void EnterState(PlayerFSM player) {
-        player.animator.Play("PlayerExploding");
-        Manager.audio.Play("Explosion");
-        Manager.shaker.Shake(player.cameraObj, player.config.explosionShakeDuration, player.config.explosionShakeMagnitude);
         Setup(player);
+        PlayAnimation(player);
+        PlayAudio();
+        ShakeCamera(player);
         ExplosionAction(player);
     }
 
@@ -21,60 +20,63 @@ public class PlayerExplodingState : PlayerBaseState {
 
     private void Setup(PlayerFSM player) {
         Helper.InputBuffer(out xInput, out yInput);
-        SetExplosionRanges(player);
-        hitLayers = LayerMask.GetMask("Enemies", "Obstacles", "Projectiles", "Gate");
         player.explosionCooldownTimer = player.config.startExplosionCooldownTime;
+        SetExplosionDistances(player);
+    }
+
+    private void PlayAnimation(PlayerFSM player) {
+        player.animator.Play("PlayerExploding");
+    }
+
+    private void PlayAudio() {
+        Manager.audio.Play("Explosion");
+    }
+
+    private void ShakeCamera(PlayerFSM player) {
+        float shakeDuration = player.config.explosionShakeDuration;
+        float shakeMagnitude = player.config.explosionShakeMagnitude;
+
+        Manager.shaker.Shake(player.cameraObj, shakeDuration, shakeMagnitude);
     }
 
     private void ExplosionAction(PlayerFSM player) {
-        Vector3 explosionDistance = CalculateExplosionDistance(player);
-        Vector3 explosionPosition = player.transform.position + explosionDistance;
-        GameObject explosion = MonoBehaviour.Instantiate(player.explosionPrefab, explosionPosition, Quaternion.identity);
+        Vector3 distance = CalculateExplosionDistance(player);
+        Vector3 position = player.transform.position + distance;
+
+        GameObject explosion = MonoBehaviour.Instantiate(player.explosionPrefab, position, Quaternion.identity);
         explosion.GetComponent<Animator>().Play("Explosion");
 
-        Collider2D[] hitTargets = Physics2D.OverlapCircleAll(explosionPosition, player.config.explosionRadius, hitLayers);
-        foreach (Collider2D colliderHit in hitTargets) {
-            CheckDamageEnemy(player, colliderHit);
-            CheckDestroyObject(player, colliderHit);
+        LayerMask hitLayers = LayerMask.GetMask("Enemies", "Obstacles", "Projectiles", "Gate");
+        Collider2D[] hitTargets = Physics2D.OverlapCircleAll(position, player.config.explosionRadius, hitLayers);
+        foreach (Collider2D targetHit in hitTargets) {
+            CheckDamageEnemy(player, targetHit);
+            CheckDestroyObject(player, targetHit);
         }
     }
 
-    private void CheckDamageEnemy(PlayerFSM player, Collider2D colliderHit) {
-        bool hitEnemy = colliderHit.gameObject.CompareTag("Enemy");
+    private void CheckDamageEnemy(PlayerFSM player, Collider2D targetHit) {
+        bool hitEnemy = targetHit.gameObject.CompareTag("Enemy");
+
         if (hitEnemy) {
-            Enemy enemy = colliderHit.GetComponent<Enemy>();
+            Enemy enemy = targetHit.GetComponent<Enemy>();
             float damage = enemy.maxHealth * player.config.explosionDamageRate;
             enemy.TakeDamage(damage);
         }
     }
 
-    private void CheckDestroyObject(PlayerFSM player, Collider2D colliderHit) {
-        bool hitObstacle = colliderHit.gameObject.layer == LayerMask.NameToLayer("Obstacles");
-        bool hitGate = colliderHit.gameObject.layer == LayerMask.NameToLayer("Gate");
-        bool hitProjectile = colliderHit.gameObject.CompareTag("Projectile");
+    private void CheckDestroyObject(PlayerFSM player, Collider2D targetHit) {
+        bool hitObstacle = targetHit.gameObject.layer == LayerMask.NameToLayer("Obstacles");
+        bool hitGate = targetHit.gameObject.layer == LayerMask.NameToLayer("Gate");
+        bool hitProjectile = targetHit.gameObject.CompareTag("Projectile");
+
         if (hitObstacle || hitProjectile || hitGate) {
-            MonoBehaviour.Destroy(colliderHit.gameObject);
+            MonoBehaviour.Destroy(targetHit.gameObject);
         }
     }
 
-    private void InputBuffer() {
-        xInput = Input.GetAxisRaw("Horizontal");
-        yInput = Input.GetAxisRaw("Vertical");
-    }
-
-    public override bool CheckTransitionToWallSliding(PlayerFSM player) {
-        if (!player.mechanics.IsEnabled("Wall Slide")) return false;
-
-        if (player.isTouchingWall && !player.isGrounded) {
-            player.TransitionToState(player.WallSlidingState);
-            return true;
-        }
-        return false;
-    }
-
-    private void SetExplosionRanges(PlayerFSM player) {
-        float xRange = player.config.xRange;
-        float yRange = player.config.yRange;
+    private void SetExplosionDistances(PlayerFSM player) {
+        float xRange = player.config.explosionXRange;
+        float yRange = player.config.explosionYRange;
 
         rightDistance = new Vector3(xRange, -0.12f, 0f);
         leftDistance = new Vector3(-xRange, -0.12f, 0f);
@@ -91,5 +93,15 @@ public class PlayerExplodingState : PlayerBaseState {
         if (inputDirection == Vector3.down) return downDistance;
 
         return Vector3.zero;
+    }
+
+    public override bool CheckTransitionToWallSliding(PlayerFSM player) {
+        if (!player.mechanics.IsEnabled("Wall Slide")) return false;
+
+        if (player.isTouchingWall && !player.isGrounded) {
+            player.TransitionToState(player.WallSlidingState);
+            return true;
+        }
+        return false;
     }
 }
