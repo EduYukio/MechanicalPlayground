@@ -17,15 +17,13 @@ public class SpikyFSM : Enemy {
     [HideInInspector] public float bulletSpawnTimerSyncedWithAnimation;
     [HideInInspector] public SpriteRenderer spriteRenderer;
 
-    private void Awake() {
+    private void Start() {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         bulletSpawnTimerSyncedWithAnimation = Helper.GetAnimationDuration("Attacking", animator);
         PreInstantiateBullets();
-    }
 
-    private void Start() {
         currentHealth = maxHealth;
         attackCooldownTimer = 0f;
         TransitionToState(IdleState);
@@ -80,40 +78,40 @@ public class SpikyFSM : Enemy {
             Vector3 initialPosition = bulletStartTransforms[i].position;
             float maxLength = CalculateMaxRayLength(initialPosition, directions[i]);
 
-            float delta_t = startAttackCooldownTimer;
-            float distance = bulletSpeed * delta_t;
+            float deltaT = startAttackCooldownTimer;
+            float distance = bulletSpeed * deltaT;
 
             float timeStep = bulletSpawnTimerSyncedWithAnimation + startAttackCooldownTimer;
             while (distance < maxLength) {
                 Vector3 spawnPosition = initialPosition + directions[i] * distance;
                 Vector3 spawnAngle = bulletStartTransforms[i].eulerAngles;
                 SpawnBullet(spawnPosition, spawnAngle, directions[i]);
-                delta_t += timeStep;
-                distance = bulletSpeed * delta_t;
+                deltaT += timeStep;
+                distance = bulletSpeed * deltaT;
             }
         }
     }
 
     private float CalculateMaxRayLength(Vector3 initialPosition, Vector3 direction) {
         float arbitraryMaxLength = 100f;
-        int layersToCollide = LayerMask.GetMask("Ground", "Obstacles", "Gate");
 
-        RaycastHit2D frontRay = Physics2D.Raycast(initialPosition, direction, arbitraryMaxLength, layersToCollide);
+        RaycastHit2D ray = ThrowRayCast(arbitraryMaxLength, initialPosition, direction);
+        if (ray.collider == null) return arbitraryMaxLength;
 
-        if (frontRay.collider == null) {
-            return arbitraryMaxLength;
-        }
-
-        bool isGround = frontRay.collider.CompareTag("Ground");
-        bool isObstacle = frontRay.collider.CompareTag("Obstacle");
-        bool isGate = frontRay.collider.CompareTag("Gate");
+        bool isGround = ray.collider.CompareTag("Ground");
+        bool isObstacle = ray.collider.CompareTag("Obstacle");
+        bool isGate = ray.collider.CompareTag("Gate");
 
         bool hitBlockable = isGround || isObstacle || isGate;
-
-        if (hitBlockable) {
-            return frontRay.distance;
-        }
+        if (hitBlockable) return ray.distance;
 
         return arbitraryMaxLength;
+    }
+
+    private RaycastHit2D ThrowRayCast(float maxLenght, Vector3 position, Vector3 direction) {
+        int layersToCollide = LayerMask.GetMask("Ground", "Obstacles", "Gate");
+        RaycastHit2D ray = Physics2D.Raycast(position, direction, maxLenght, layersToCollide);
+
+        return ray;
     }
 }
