@@ -1,11 +1,9 @@
 using UnityEngine;
 
 public class PlayerBlinkingState : PlayerBaseState {
-    private float beginBlinkTimer;
-    private float endBlinkTimer;
+    private float beginBlinkTimer, endBlinkTimer;
+    private float xInput, yInput;
     private float originalGravity;
-    private float xInput;
-    private float yInput;
     private bool alreadyBlinked;
 
     public override void EnterState(PlayerFSM player) {
