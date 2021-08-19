@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 public class Shield : MonoBehaviour {
-    public PlayerFSM player;
+    [SerializeField] private PlayerFSM player = null;
     private bool canDefend = true;
 
     public void CheckShieldInput() {

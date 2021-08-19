@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerFSM : MonoBehaviour {
-    [HideInInspector] public PlayerBaseState currentState;
+    [SerializeField] private PlayerBaseState currentState;
 
     public readonly PlayerGroundedState GroundedState = new PlayerGroundedState();
     public readonly PlayerJumpingState JumpingState = new PlayerJumpingState();
@@ -19,15 +19,12 @@ public class PlayerFSM : MonoBehaviour {
     public readonly PlayerExplodingState ExplodingState = new PlayerExplodingState();
     public readonly PlayerGunBootsState GunBootsState = new PlayerGunBootsState();
 
-    //DEBUG
     [Header("Debug")]
-    public bool ignoreConfirmationPopup = false;
+    [SerializeField] private bool canActivateSlowMotion = false;
+    [SerializeField] private bool activateSlowMotion = false;
+    [SerializeField] private bool printDebugStates = false;
+    [SerializeField] private string debugState = "";
     public bool ignoreCheckpoints = false;
-    public bool canActivateSlowMotion = false;
-    public bool activateSlowMotion = false;
-    public bool printDebugStates = false;
-    public string debugState;
-    //DEBUG
 
     [Header("Config")]
     public PlayerConfig config;
@@ -40,16 +37,14 @@ public class PlayerFSM : MonoBehaviour {
     public GameObject explosionPrefab;
     public GameObject cameraHolder;
     public GameObject cameraObj;
-    [HideInInspector] public Rigidbody2D rb;
-    [HideInInspector] public Animator animator;
-    [HideInInspector] public SpriteRenderer spriteRenderer;
+    [SerializeField] private Vector3 originalPosition = new Vector3(0, 0, 0);
 
     [Header("Particles")]
     public ParticleSystem walkParticles;
     public ParticleSystem leftSideParticles;
     public ParticleSystem rightSideParticles;
-    public ParticleSystem jumpParticles;
     public ParticleSystem dyingParticles;
+    public ParticleSystem jumpParticles;
 
     [Header("Parameters")]
     public bool isGrounded;
@@ -76,33 +71,31 @@ public class PlayerFSM : MonoBehaviour {
     public float parryTimer;
     public float airJumpInputBufferTimer;
 
-    [HideInInspector] public float moveSpeed;
-    [HideInInspector] public int lookingDirection = 1;
-    public Transform centerTransform;
     public static Vector3 respawnPosition;
-    public Vector3 originalPosition = new Vector3(0, 0, 0);
-    public bool freezePlayerState = false;
-    public List<GameObject> keys;
+
+    public Rigidbody2D rb { get; set; }
+    public Animator animator { get; set; }
+    public SpriteRenderer spriteRenderer { get; set; }
+
+    public bool freezePlayerState { get; set; }
+    public float moveSpeed { get; set; }
+    public int lookingDirection { get; set; }
+    public List<GameObject> keys { get; set; }
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        lookingDirection = 1;
         freezePlayerState = false;
         hasResetDashTrigger = true;
+
         keys = new List<GameObject>();
         Key.ResetAllSlots();
         SetMoveSpeed();
 
-        //DEBUG
-        if (!ignoreCheckpoints) {
-            if (respawnPosition == Vector3.zero) {
-                respawnPosition = originalPosition;
-            }
-            transform.position = respawnPosition;
-        }
-        //DEBUG
-
+        IfDebugSetRespawnPosition();
         TransitionToState(GroundedState);
     }
 
@@ -111,13 +104,7 @@ public class PlayerFSM : MonoBehaviour {
 
         currentState.Update(this);
 
-        //DEBUG
-        if (canActivateSlowMotion) {
-            if (activateSlowMotion) Time.timeScale = 0.2f;
-            else Time.timeScale = 1f;
-        }
-        //DEBUG
-
+        IfDebugActivateSlowMotion();
         UpdateFacingSprite();
         PositionWalkParticles();
         if (!isDying) {
@@ -141,15 +128,8 @@ public class PlayerFSM : MonoBehaviour {
         currentState = state;
         currentState.EnterState(this);
 
-        //DEBUG
-        if (printDebugStates) {
-            debugState = currentState.GetType().Name;
-            Debug.Log(debugState);
-        }
-        //DEBUG
+        IfDebugPrintStates();
     }
-
-
 
     private void UpdateFacingSprite() {
         if (lookingDirection == 1) {
@@ -186,6 +166,7 @@ public class PlayerFSM : MonoBehaviour {
         if (parryTimer >= 0) parryTimer -= step;
     }
 
+    // To avoid dashing infinitely when holding trigger on the ground
     private void CheckIfHasResetDashTrigger() {
         if (Input.GetAxisRaw("Dash") == 0f) {
             hasResetDashTrigger = true;
@@ -196,6 +177,29 @@ public class PlayerFSM : MonoBehaviour {
         moveSpeed = config.moveSpeed;
         if (mechanics.IsEnabled("Move Speed Boost")) {
             moveSpeed = config.moveSpeedBoosted;
+        }
+    }
+
+    private void IfDebugSetRespawnPosition() {
+        if (!ignoreCheckpoints) {
+            if (respawnPosition == Vector3.zero) {
+                respawnPosition = originalPosition;
+            }
+            transform.position = respawnPosition;
+        }
+    }
+
+    private void IfDebugActivateSlowMotion() {
+        if (canActivateSlowMotion) {
+            if (activateSlowMotion) Time.timeScale = 0.2f;
+            else Time.timeScale = 1f;
+        }
+    }
+
+    private void IfDebugPrintStates() {
+        if (printDebugStates) {
+            debugState = currentState.GetType().Name;
+            Debug.Log(debugState);
         }
     }
 }
