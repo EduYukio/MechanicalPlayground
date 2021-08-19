@@ -1,10 +1,11 @@
 using UnityEngine;
 
 public class GunBullet : MonoBehaviour {
-    static PlayerFSM player;
+    private static PlayerFSM player;
+    private static string[] obstacleTags = { "Ground", "Obstacle", "Gate" };
 
     private void Start() {
-        GunBullet.player = GameObject.Find("PlayerFSM").GetComponent<PlayerFSM>();
+        if (player == null) player = GameObject.FindObjectOfType<PlayerFSM>();
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -12,16 +13,15 @@ public class GunBullet : MonoBehaviour {
     }
 
     private void ProcessCollision(GameObject collidedObj) {
-        bool hitEnemy = collidedObj.CompareTag("Enemy");
-        if (hitEnemy) {
+        if (collidedObj.CompareTag("Enemy")) {
             collidedObj.GetComponent<Enemy>()?.TakeDamage(player.config.gunBootsDamage);
+            Destroy(gameObject);
+            return;
         }
 
-        bool hitGround = collidedObj.CompareTag("Ground");
-        bool hitObstacle = collidedObj.CompareTag("Obstacle");
-        bool hitGate = collidedObj.CompareTag("Gate");
-        bool shouldAutoDestroy = hitEnemy || hitGround || hitObstacle || hitGate;
-
-        if (shouldAutoDestroy) Destroy(gameObject);
+        foreach (var tag in obstacleTags) {
+            if (collidedObj.CompareTag(tag)) Destroy(gameObject);
+            return;
+        }
     }
 }
