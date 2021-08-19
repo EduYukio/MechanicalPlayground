@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class InputSwitchChecker : MonoBehaviour {
-    public GameObject firstButton;
+    [SerializeField] private GameObject firstButton = null;
     private Button[] buttons;
     private Vector3 initialMousePosition;
     private bool gamepadMode = false;

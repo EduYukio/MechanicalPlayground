@@ -69,7 +69,6 @@ public class MechanicButton : MonoBehaviour {
         ActivateButtonImage();
         mechanics.Activate(name);
         mechMenu.skillPoints--;
-
     }
 
     private void DeactivateMechanic(string name) {
