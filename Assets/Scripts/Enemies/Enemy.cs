@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour {
     public static void DieAction(GameObject enemy) {
         int direction = 1;
         PlayerFSM player = GameObject.FindObjectOfType<PlayerFSM>();
-        if (player != null) direction = player.lastDirection;
+        if (player != null) direction = player.lookingDirection;
 
         //TODO: refatorar isso aqui
         Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();

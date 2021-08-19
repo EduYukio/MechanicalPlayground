@@ -43,7 +43,7 @@ public class PlayerWallJumpingState : PlayerBaseState {
     }
 
     private void WallJumpAction(PlayerFSM player) {
-        player.rb.velocity = new Vector2(player.lastDirection * player.moveSpeed, player.config.jumpForce);
+        player.rb.velocity = new Vector2(player.lookingDirection * player.moveSpeed, player.config.jumpForce);
     }
 
     public override bool CheckTransitionToFalling(PlayerFSM player) {

@@ -96,7 +96,7 @@ namespace Tests {
 
             yield return new WaitForSeconds(dashDuration / 2);
 
-            Assert.IsTrue(playerScript.lastDirection == 1);
+            Assert.IsTrue(playerScript.lookingDirection == 1);
             Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.x > 0);
 
             yield return new WaitForSeconds(dashDuration * 1.5f);
@@ -115,7 +115,7 @@ namespace Tests {
 
             yield return new WaitForSeconds(dashDuration / 2);
 
-            Assert.IsTrue(playerScript.lastDirection == -1);
+            Assert.IsTrue(playerScript.lookingDirection == -1);
             Assert.IsTrue(player.GetComponent<Rigidbody2D>().velocity.x < 0);
 
             yield return new WaitForSeconds(dashDuration);

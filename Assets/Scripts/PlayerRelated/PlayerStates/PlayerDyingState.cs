@@ -49,7 +49,7 @@ public class PlayerDyingState : PlayerBaseState {
     }
 
     private void DieAction(PlayerFSM player) {
-        float direction = -player.lastDirection;
+        float direction = -player.lookingDirection;
         player.rb.velocity = new Vector3(direction * 3f, 6f, 0);
         player.rb.constraints = RigidbodyConstraints2D.None;
         player.rb.angularVelocity = direction * -40f;

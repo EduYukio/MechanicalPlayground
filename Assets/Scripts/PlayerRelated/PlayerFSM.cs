@@ -77,7 +77,7 @@ public class PlayerFSM : MonoBehaviour {
     public float airJumpInputBufferTimer;
 
     [HideInInspector] public float moveSpeed;
-    [HideInInspector] public int lastDirection = 1;
+    [HideInInspector] public int lookingDirection = 1;
     public Transform centerTransform;
     public static Vector3 respawnPosition;
     public Vector3 originalPosition = new Vector3(0, 0, 0);
@@ -152,20 +152,20 @@ public class PlayerFSM : MonoBehaviour {
 
 
     private void UpdateFacingSprite() {
-        if (lastDirection == 1) {
+        if (lookingDirection == 1) {
             spriteRenderer.flipX = false;
         }
-        else if (lastDirection == -1) {
+        else if (lookingDirection == -1) {
             spriteRenderer.flipX = true;
         }
     }
 
     private void PositionWalkParticles() {
-        if (lastDirection == 1) {
+        if (lookingDirection == 1) {
             walkParticles.transform.localPosition = new Vector3(-0.3f, -0.45f, 0);
             walkParticles.transform.localScale = new Vector3(1, 1, 1);
         }
-        else if (lastDirection == -1) {
+        else if (lookingDirection == -1) {
             walkParticles.transform.localPosition = new Vector3(0.3f, -0.45f, 0);
             walkParticles.transform.localScale = new Vector3(-1, 1, 1);
         }

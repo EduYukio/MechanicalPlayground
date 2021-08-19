@@ -45,7 +45,7 @@ public class PlayerDashingState : PlayerBaseState {
     }
 
     private void DashAction(PlayerFSM player) {
-        player.rb.velocity = new Vector2(player.lastDirection * player.config.dashSpeed, 0f);
+        player.rb.velocity = new Vector2(player.lookingDirection * player.config.dashSpeed, 0f);
 
         if (isEthereal) {
             player.spriteRenderer.color = new Color(1, 1, 1, player.config.etherealTransparency);
