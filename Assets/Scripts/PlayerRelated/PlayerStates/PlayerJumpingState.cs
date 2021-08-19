@@ -5,6 +5,7 @@ public class PlayerJumpingState : PlayerBaseState {
 
     public override void EnterState(PlayerFSM player) {
         Setup(player);
+        PlayParticles(player);
         JumpAction(player);
     }
 
@@ -28,6 +29,9 @@ public class PlayerJumpingState : PlayerBaseState {
         leftGround = false;
         player.coyoteTimer = 0;
         player.bunnyHopTimer = 0;
+    }
+
+    private void PlayParticles(PlayerFSM player) {
         player.jumpParticles.Play();
     }
 
