@@ -100,12 +100,10 @@ public class BeeFSM : Enemy {
         RaycastHit2D ray = ThrowRayCast(arbitraryMaxLength);
         if (ray.collider == null) return arbitraryMaxLength;
 
-        bool isGround = ray.collider.CompareTag("Ground");
-        bool isObstacle = ray.collider.CompareTag("Obstacle");
-        bool isGate = ray.collider.CompareTag("Gate");
-
-        bool hitBlockable = isGround || isObstacle || isGate;
-        if (hitBlockable) return ray.distance;
+        string[] obstacleTags = { "Ground", "Obstacle", "Gate" };
+        foreach (var tag in obstacleTags) {
+            if (ray.collider.CompareTag(tag)) return ray.distance;
+        }
 
         return arbitraryMaxLength;
     }
