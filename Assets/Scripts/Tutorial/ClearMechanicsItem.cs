@@ -8,8 +8,8 @@ public class ClearMechanicsItem : MonoBehaviour {
         }
     }
 
-    public void ClearMechanics(GameObject otherObj) {
-        PlayerFSM player = otherObj.GetComponent<PlayerFSM>();
+    public void ClearMechanics(GameObject playerObj) {
+        PlayerFSM player = playerObj.GetComponent<PlayerFSM>();
         player.mechanics.ResetMechanics();
         player.mechanics.EnableBasicMechanics();
     }
