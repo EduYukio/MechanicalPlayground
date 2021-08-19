@@ -1,7 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Spike : MonoBehaviour {
+public class LethalObstacle : MonoBehaviour {
+    private string obstacleType;
+
     private void Start() {
+        DetermineObstacleType();
         CheckInvulnerability();
     }
 
@@ -13,9 +16,14 @@ public class Spike : MonoBehaviour {
         Mechanics.MechanicChanged -= CheckInvulnerability;
     }
 
+    private void DetermineObstacleType() {
+        if (gameObject.name.Contains("Spike")) obstacleType = "Spike";
+        else if (gameObject.name.Contains("Saw")) obstacleType = "Saw";
+    }
+
     private void CheckInvulnerability() {
         GameObject playerObj = GameObject.Find("PlayerFSM");
-        if (PlayerIsInvulnerableToSpike(playerObj)) {
+        if (PlayerIsInvulnerableToObstacle(playerObj)) {
             gameObject.tag = "Ground";
         }
     }
@@ -30,14 +38,15 @@ public class Spike : MonoBehaviour {
 
     private void ProcessCollision(GameObject collidedObj) {
         if (!collidedObj.CompareTag("Player")) return;
-        if (PlayerIsInvulnerableToSpike(collidedObj)) return;
+        if (PlayerIsInvulnerableToObstacle(collidedObj)) return;
 
         KillPlayer(collidedObj);
     }
 
-    private bool PlayerIsInvulnerableToSpike(GameObject collidedObj) {
+    private bool PlayerIsInvulnerableToObstacle(GameObject collidedObj) {
         PlayerFSM player = collidedObj.GetComponent<PlayerFSM>();
-        if (player.mechanics.IsEnabled("Spike Invulnerability")) return true;
+        string mechanicName = obstacleType + " Invulnerability";
+        if (player.mechanics.IsEnabled(mechanicName)) return true;
 
         return false;
     }
