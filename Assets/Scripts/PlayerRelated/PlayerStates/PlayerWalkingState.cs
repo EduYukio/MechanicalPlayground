@@ -3,13 +3,14 @@ using UnityEngine;
 public class PlayerWalkingState : PlayerBaseState {
     private float startWalkParticlesCooldownTime;
     private float startCoyoteDurationTime;
+    private string[] waitAnimations;
 
     public override void EnterState(PlayerFSM player) {
         Setup(player);
     }
 
     public override void Update(PlayerFSM player) {
-        PlayAnimationIfCan(player);
+        Helper.PlayAnimationIfPossible("PlayerWalk", player.animator, waitAnimations);
         PlayParticleIfCan(player);
         ResetCoyoteTimer(player);
         base.ProcessHorizontalMoveInput(player);
@@ -28,20 +29,11 @@ public class PlayerWalkingState : PlayerBaseState {
         startWalkParticlesCooldownTime = player.config.startWalkParticlesCooldownTime;
         startCoyoteDurationTime = player.config.startCoyoteDurationTime;
         player.walkParticlesCooldownTimer = 0f;
+        waitAnimations = new string[] { "PlayerWalk", "PlayerAttacking", "PlayerAttackingBoosted", "PlayerExploding", "PlayerAppear" };
     }
 
     private void ResetCoyoteTimer(PlayerFSM player) {
         player.coyoteTimer = startCoyoteDurationTime;
-    }
-
-    private void PlayAnimationIfCan(PlayerFSM player) {
-        if (Helper.IsPlayingAnimation("PlayerWalk", player.animator)) return;
-        if (Helper.IsPlayingAnimation("PlayerAttacking", player.animator)) return;
-        if (Helper.IsPlayingAnimation("PlayerAttackingBoosted", player.animator)) return;
-        if (Helper.IsPlayingAnimation("PlayerExploding", player.animator)) return;
-        if (Helper.IsPlayingAnimation("PlayerAppear", player.animator)) return;
-
-        player.animator.Play("PlayerWalk");
     }
 
     private void PlayParticleIfCan(PlayerFSM player) {

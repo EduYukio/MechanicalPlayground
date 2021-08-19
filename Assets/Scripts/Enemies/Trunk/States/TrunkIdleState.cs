@@ -2,15 +2,15 @@
 
 public class TrunkIdleState : TrunkBaseState {
     private float idleTimer;
+    private string[] waitAnimations;
 
     public override void EnterState(TrunkFSM trunk) {
-        PlayAnimationIfCan(trunk);
         Setup(trunk);
         IdleAction(trunk);
     }
 
     public override void FixedUpdate(TrunkFSM trunk) {
-        PlayAnimationIfCan(trunk);
+        Helper.PlayAnimationIfPossible("Idle", trunk.animator, waitAnimations);
         if (base.CheckTransitionToAttacking(trunk)) return;
 
         if (idleTimer >= 0) {
@@ -23,16 +23,10 @@ public class TrunkIdleState : TrunkBaseState {
 
     private void Setup(TrunkFSM trunk) {
         idleTimer = Helper.GetAnimationDuration("Idle", trunk.animator);
+        waitAnimations = new string[] { "Attacking", "Idle" };
     }
 
     private void IdleAction(TrunkFSM trunk) {
         trunk.rb.velocity = Vector2.zero;
-    }
-
-    private void PlayAnimationIfCan(TrunkFSM trunk) {
-        if (Helper.IsPlayingAnimation("Attacking", trunk.animator)) return;
-        if (Helper.IsPlayingAnimation("Idle", trunk.animator)) return;
-
-        trunk.animator.Play("Idle");
     }
 }

@@ -1,13 +1,15 @@
 using UnityEngine;
 
 public class PlayerGroundedState : PlayerBaseState {
+    private string[] waitAnimations;
+
     public override void EnterState(PlayerFSM player) {
         Setup(player);
         GroundedAction(player);
     }
 
     public override void Update(PlayerFSM player) {
-        PlayAnimationIfCan(player);
+        Helper.PlayAnimationIfPossible("PlayerIdle", player.animator, waitAnimations);
 
         if (base.CheckTransitionToGunBoots(player)) return;
         if (base.CheckTransitionToFalling(player)) return;
@@ -22,20 +24,10 @@ public class PlayerGroundedState : PlayerBaseState {
     private void Setup(PlayerFSM player) {
         player.canDoubleJump = true;
         player.canDash = true;
+        waitAnimations = new string[] { "PlayerIdle", "PlayerAttacking", "PlayerAttackingBoosted", "PlayerAppear", "PlayerDisappear", "PlayerExploding" };
     }
 
     private void GroundedAction(PlayerFSM player) {
         player.rb.velocity = Vector2.zero;
-    }
-
-    private void PlayAnimationIfCan(PlayerFSM player) {
-        if (Helper.IsPlayingAnimation("PlayerIdle", player.animator)) return;
-        if (Helper.IsPlayingAnimation("PlayerAttacking", player.animator)) return;
-        if (Helper.IsPlayingAnimation("PlayerAttackingBoosted", player.animator)) return;
-        if (Helper.IsPlayingAnimation("PlayerAppear", player.animator)) return;
-        if (Helper.IsPlayingAnimation("PlayerDisappear", player.animator)) return;
-        if (Helper.IsPlayingAnimation("PlayerExploding", player.animator)) return;
-
-        player.animator.Play("PlayerIdle");
     }
 }

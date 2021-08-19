@@ -1,18 +1,18 @@
 public class BeeMovingState : BeeBaseState {
+    private string[] waitAnimations;
+
     public override void EnterState(BeeFSM bee) {
+        Setup();
     }
 
     public override void Update(BeeFSM bee) {
-        PlayAnimationIfCan(bee);
+        Helper.PlayAnimationIfPossible("Moving", bee.animator, waitAnimations);
         base.MoveAction(bee);
 
         if (base.CheckTransitionToAttacking(bee)) return;
     }
 
-    private void PlayAnimationIfCan(BeeFSM bee) {
-        if (Helper.IsPlayingAnimation("Attacking", bee.animator)) return;
-        if (Helper.IsPlayingAnimation("Moving", bee.animator)) return;
-
-        bee.animator.Play("Moving");
+    private void Setup() {
+        waitAnimations = new string[] { "Attacking", "Moving" };
     }
 }

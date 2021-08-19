@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerJumpingState : PlayerBaseState {
     private bool leftGround;
+    private string[] waitAnimations;
 
     public override void EnterState(PlayerFSM player) {
         Setup(player);
@@ -10,7 +11,7 @@ public class PlayerJumpingState : PlayerBaseState {
     }
 
     public override void Update(PlayerFSM player) {
-        PlayAnimationIfCan(player);
+        Helper.PlayAnimationIfPossible("PlayerJump", player.animator, waitAnimations);
         base.ProcessHorizontalMoveInput(player);
         CheckIfLeftGround(player);
 
@@ -29,6 +30,7 @@ public class PlayerJumpingState : PlayerBaseState {
         leftGround = false;
         player.coyoteTimer = 0;
         player.bunnyHopTimer = 0;
+        waitAnimations = new string[] { "PlayerJump", "PlayerAttacking", "PlayerAttackingBoosted", "PlayerAppear" };
     }
 
     private void PlayParticles(PlayerFSM player) {
@@ -37,15 +39,6 @@ public class PlayerJumpingState : PlayerBaseState {
 
     private void JumpAction(PlayerFSM player) {
         player.rb.velocity = new Vector2(player.rb.velocity.x, player.config.jumpForce);
-    }
-
-    private void PlayAnimationIfCan(PlayerFSM player) {
-        if (Helper.IsPlayingAnimation("PlayerJump", player.animator)) return;
-        if (Helper.IsPlayingAnimation("PlayerAttacking", player.animator)) return;
-        if (Helper.IsPlayingAnimation("PlayerAttackingBoosted", player.animator)) return;
-        if (Helper.IsPlayingAnimation("PlayerAppear", player.animator)) return;
-
-        player.animator.Play("PlayerJump");
     }
 
     private void CheckIfLeftGround(PlayerFSM player) {

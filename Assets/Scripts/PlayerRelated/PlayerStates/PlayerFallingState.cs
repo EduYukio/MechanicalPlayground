@@ -1,11 +1,14 @@
 using UnityEngine;
 
 public class PlayerFallingState : PlayerBaseState {
+    private string[] waitAnimations;
+
     public override void EnterState(PlayerFSM player) {
+        Setup();
     }
 
     public override void Update(PlayerFSM player) {
-        PlayAnimationIfCan(player);
+        Helper.PlayAnimationIfPossible("PlayerFall", player.animator, waitAnimations);
         BetterFalling(player);
         CheckForBunnyHop(player);
         base.ProcessHorizontalMoveInput(player);
@@ -20,6 +23,10 @@ public class PlayerFallingState : PlayerBaseState {
         if (base.CheckTransitionToAttacking(player)) return;
         if (base.CheckTransitionToBlinking(player)) return;
         if (base.CheckTransitionToExploding(player)) return;
+    }
+
+    private void Setup() {
+        waitAnimations = new string[] { "PlayerFall", "PlayerDoubleJump", "PlayerAttacking", "PlayerAttackingBoosted", "PlayerAppear", "PlayerExploding" };
     }
 
     private void BetterFalling(PlayerFSM player) {
@@ -39,17 +46,6 @@ public class PlayerFallingState : PlayerBaseState {
             float lowJumpMultiplier = player.config.lowJumpMultiplier - 1;
             player.rb.velocity += Vector2.up * Physics2D.gravity.y * lowJumpMultiplier * Time.deltaTime;
         }
-    }
-
-    private void PlayAnimationIfCan(PlayerFSM player) {
-        if (Helper.IsPlayingAnimation("PlayerFall", player.animator)) return;
-        if (Helper.IsPlayingAnimation("PlayerDoubleJump", player.animator)) return;
-        if (Helper.IsPlayingAnimation("PlayerAttacking", player.animator)) return;
-        if (Helper.IsPlayingAnimation("PlayerAttackingBoosted", player.animator)) return;
-        if (Helper.IsPlayingAnimation("PlayerAppear", player.animator)) return;
-        if (Helper.IsPlayingAnimation("PlayerExploding", player.animator)) return;
-
-        player.animator.Play("PlayerFall");
     }
 
     private void CheckForBunnyHop(PlayerFSM player) {

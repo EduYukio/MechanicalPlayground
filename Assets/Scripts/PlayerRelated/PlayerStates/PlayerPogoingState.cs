@@ -1,13 +1,15 @@
 using UnityEngine;
 
 public class PlayerPogoingState : PlayerBaseState {
+    private string[] waitAnimations;
+
     public override void EnterState(PlayerFSM player) {
         Setup(player);
         PogoAction(player);
     }
 
     public override void Update(PlayerFSM player) {
-        PlayAnimationIfCan(player);
+        Helper.PlayAnimationIfPossible("PlayerJump", player.animator, waitAnimations);
         base.ProcessHorizontalMoveInput(player);
 
         if (base.CheckTransitionToGrounded(player)) return;
@@ -24,18 +26,11 @@ public class PlayerPogoingState : PlayerBaseState {
     private void Setup(PlayerFSM player) {
         player.canDoubleJump = true;
         player.canDash = true;
+        waitAnimations = new string[] { "PlayerJump", "PlayerAttacking", "PlayerAttackingBoosted" };
     }
 
     private void PogoAction(PlayerFSM player) {
         player.rb.velocity = new Vector2(player.rb.velocity.x, player.config.pogoForce);
-    }
-
-    private void PlayAnimationIfCan(PlayerFSM player) {
-        if (Helper.IsPlayingAnimation("PlayerJump", player.animator)) return;
-        if (Helper.IsPlayingAnimation("PlayerAttacking", player.animator)) return;
-        if (Helper.IsPlayingAnimation("PlayerAttackingBoosted", player.animator)) return;
-
-        player.animator.Play("PlayerJump");
     }
 
     public override bool CheckTransitionToFalling(PlayerFSM player) {

@@ -15,6 +15,14 @@ public static class Helper {
         return 0;
     }
 
+    public static void PlayAnimationIfPossible(string animationToPlay, Animator animator, string[] waitAnimations) {
+        foreach (var animation in waitAnimations) {
+            if (IsPlayingAnimation(animation, animator)) return;
+        }
+
+        animator.Play(animationToPlay);
+    }
+
     public static bool IsPlayingAnimation(string stateName, Animator animator) {
         return animator.GetCurrentAnimatorStateInfo(0).IsName(stateName);
     }
@@ -35,8 +43,10 @@ public static class Helper {
 
     public static void CheckIfNeedToBlinkRed(ref bool mustBlinkRed, TMP_Text text) {
         if (mustBlinkRed) {
+            // Black magic that fix a text disappearing bug
             text.enabled = false;
             text.enabled = true;
+
             float step = 0.02f;
 
             Color currentColor = text.color;
