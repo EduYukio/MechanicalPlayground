@@ -22,7 +22,7 @@ public class BeeFSM : Enemy {
     [HideInInspector] public Vector2 targetPosition;
     [HideInInspector] public SpriteRenderer spriteRenderer;
 
-    private void Awake() {
+    private void Start() {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
