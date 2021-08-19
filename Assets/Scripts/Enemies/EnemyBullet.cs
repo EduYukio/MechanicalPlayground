@@ -29,28 +29,23 @@ public class EnemyBullet : MonoBehaviour {
     private void ProcessCollision(GameObject collidedObj) {
         if (alreadyProcessedHit) return;
 
-        if (HitPlayerWithShield(collidedObj) || HitShield(collidedObj)) {
-            return;
-        }
+        if (HitPlayerWithShield(collidedObj)) return;
+        if (HitShield(collidedObj)) return;
 
-        bool hitEnemy = collidedObj.CompareTag("Enemy");
-        if (hitEnemy) {
+        if (collidedObj.CompareTag("Enemy")) {
             DamageEnemy(collidedObj);
             return;
         }
 
-        bool hitPlayer = collidedObj.CompareTag("Player");
-        bool hitGround = collidedObj.CompareTag("Ground");
-        bool hitObstacle = collidedObj.CompareTag("Obstacle");
-        bool hitGate = collidedObj.CompareTag("Gate");
-        bool shouldAutoDestroy = hitPlayer || hitGround || hitObstacle || hitGate;
-
-        if (shouldAutoDestroy) {
-            Instantiate(destroyBulletParticles, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+        string[] obstacleTags = { "Player", "Ground", "Obstacle", "Gate" };
+        foreach (var tag in obstacleTags) {
+            if (collidedObj.CompareTag(tag)) {
+                Instantiate(destroyBulletParticles, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+                if (tag == "Player") KillPlayer();
+                return;
+            }
         }
-
-        if (hitPlayer) KillPlayer(collidedObj);
     }
 
     private bool HitPlayerWithShield(GameObject collidedObj) {
@@ -60,9 +55,9 @@ public class EnemyBullet : MonoBehaviour {
             BulletHitShieldAction(player);
             return true;
         }
+
         return false;
     }
-
 
     private bool HitShield(GameObject collidedObj) {
         if (!collidedObj.CompareTag("Shield")) return false;
@@ -92,7 +87,7 @@ public class EnemyBullet : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    private void KillPlayer(GameObject collidedObj) {
+    private void KillPlayer() {
         player.TransitionToState(player.DyingState);
     }
 }
