@@ -17,7 +17,7 @@ public class BeeFSM : Enemy {
     public bool moveVertically = true;
     public float startAttackCooldownTimer = 1.5f;
     public float attackCooldownTimer = 0;
-    [HideInInspector] public float bulletSpawnTimerSyncedWithAnimation;
+    [HideInInspector] public float bulletTimerSyncedWithAnimation;
     [HideInInspector] public float initialCoord;
     [HideInInspector] public Vector2 targetPosition;
     [HideInInspector] public SpriteRenderer spriteRenderer;
@@ -26,15 +26,13 @@ public class BeeFSM : Enemy {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        bulletSpawnTimerSyncedWithAnimation = Helper.GetAnimationDuration("Attacking", animator) * 0.625f;
-        PreInstantiateBullets();
-    }
 
-    private void Start() {
+        bulletTimerSyncedWithAnimation = Helper.GetAnimationDuration("Attacking", animator) * 0.625f;
         currentHealth = maxHealth;
-
-        MoveSetup();
         attackCooldownTimer = 0f;
+
+        PreInstantiateBullets();
+        MoveSetup();
         TransitionToState(MovingState);
     }
 
@@ -50,6 +48,11 @@ public class BeeFSM : Enemy {
     public void TransitionToState(BeeBaseState state) {
         currentState = state;
         currentState.EnterState(this);
+    }
+
+    private void ProcessTimers() {
+        float step = Time.deltaTime;
+        if (attackCooldownTimer >= 0) attackCooldownTimer -= step;
     }
 
     public override void TakeDamage(float damage) {
@@ -68,9 +71,21 @@ public class BeeFSM : Enemy {
         }
     }
 
-    private void ProcessTimers() {
-        float step = Time.deltaTime;
-        if (attackCooldownTimer >= 0) attackCooldownTimer -= step;
+    private void PreInstantiateBullets() {
+        float maxLength = CalculateMaxRayLength();
+
+        float deltaT = startAttackCooldownTimer;
+        float distance = bulletSpeed * deltaT;
+
+        Vector3 direction = CalculateDirection();
+        float timeStep = bulletTimerSyncedWithAnimation + startAttackCooldownTimer;
+        Vector3 initialPosition = bulletSpawnTransform.position;
+        while (distance < maxLength) {
+            Vector3 spawnPosition = initialPosition + direction * distance;
+            SpawnBullet(spawnPosition);
+            deltaT += timeStep;
+            distance = bulletSpeed * deltaT;
+        }
     }
 
     public void SpawnBullet(Vector3 spawnPosition) {
@@ -79,51 +94,32 @@ public class BeeFSM : Enemy {
         bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
     }
 
-    private void PreInstantiateBullets() {
-        float maxLength = CalculateMaxRayLength();
-
-        float delta_t = startAttackCooldownTimer;
-        float distance = bulletSpeed * delta_t;
-
-        Vector3 direction = CalculateDirection();
-        float timeStep = bulletSpawnTimerSyncedWithAnimation + startAttackCooldownTimer;
-        Vector3 initialPosition = bulletSpawnTransform.position;
-        while (distance < maxLength) {
-            Vector3 spawnPosition = initialPosition + direction * distance;
-            SpawnBullet(spawnPosition);
-            delta_t += timeStep;
-            distance = bulletSpeed * delta_t;
-        }
-    }
-
     private float CalculateMaxRayLength() {
         float arbitraryMaxLength = 100f;
-        int layersToCollide;
+
+        RaycastHit2D ray = ThrowRayCast(arbitraryMaxLength);
+        if (ray.collider == null) return arbitraryMaxLength;
+
+        bool isGround = ray.collider.CompareTag("Ground");
+        bool isObstacle = ray.collider.CompareTag("Obstacle");
+        bool isGate = ray.collider.CompareTag("Gate");
+
+        bool hitBlockable = isGround || isObstacle || isGate;
+        if (hitBlockable) return ray.distance;
+
+        return arbitraryMaxLength;
+    }
+
+    private RaycastHit2D ThrowRayCast(float maxLenght) {
+        Vector3 direction = CalculateDirection();
+        int layersToCollide = LayerMask.GetMask("Ground", "Obstacles", "Gate");
         if (gameObject.name.Contains("Red")) {
             layersToCollide = LayerMask.GetMask("Gate");
         }
-        else {
-            layersToCollide = LayerMask.GetMask("Ground", "Obstacles", "Gate");
-        }
 
-        Vector3 direction = CalculateDirection();
-        RaycastHit2D frontRay = Physics2D.Raycast(bulletSpawnTransform.position, direction, arbitraryMaxLength, layersToCollide);
+        RaycastHit2D ray = Physics2D.Raycast(bulletSpawnTransform.position, direction, maxLenght, layersToCollide);
 
-        if (frontRay.collider == null) {
-            return arbitraryMaxLength;
-        }
-
-        bool isGround = frontRay.collider.CompareTag("Ground");
-        bool isObstacle = frontRay.collider.CompareTag("Obstacle");
-        bool isGate = frontRay.collider.CompareTag("Gate");
-
-        bool hitBlockable = isGround || isObstacle || isGate;
-
-        if (hitBlockable) {
-            return frontRay.distance;
-        }
-
-        return arbitraryMaxLength;
+        return ray;
     }
 
     private Vector3 CalculateDirection() {

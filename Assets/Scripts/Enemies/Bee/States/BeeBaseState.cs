@@ -15,6 +15,7 @@ public abstract class BeeBaseState {
             bee.TransitionToState(bee.AttackingState);
             return true;
         }
+
         return false;
     }
 
@@ -28,7 +29,6 @@ public abstract class BeeBaseState {
     }
 
 
-    // Helper Functions
 
     public void MoveAction(BeeFSM bee) {
         bee.transform.position = Vector2.MoveTowards(bee.transform.position, bee.targetPosition, bee.moveSpeed * Time.deltaTime);
