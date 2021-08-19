@@ -1,13 +1,13 @@
 using UnityEngine;
 
 public class PlayerWallJumpingState : PlayerBaseState {
-    private float xVelocityTimer = 10f;
+    private float wallJumpTimer;
 
     public override void EnterState(PlayerFSM player) {
-        player.animator.Play("PlayerJump");
         Setup(player);
-        ApplyXVelocity(player);
-        JumpAction(player);
+        PlayAnimation(player);
+        PlayParticles(player);
+        WallJumpAction(player);
     }
 
     public override void FixedUpdate(PlayerFSM player) {
@@ -16,9 +16,8 @@ public class PlayerWallJumpingState : PlayerBaseState {
         if (base.CheckTransitionToExploding(player)) return;
         if (base.CheckTransitionToGunBoots(player)) return;
 
-        // Obligatory x movement
-        if (xVelocityTimer > 0) {
-            xVelocityTimer -= Time.deltaTime;
+        if (wallJumpTimer > 0) {
+            wallJumpTimer -= Time.deltaTime;
             return;
         }
 
@@ -29,27 +28,32 @@ public class PlayerWallJumpingState : PlayerBaseState {
     }
 
     private void Setup(PlayerFSM player) {
-        player.jumpParticles.Play();
         player.canDoubleJump = true;
         player.canDash = true;
-        xVelocityTimer = player.config.startWallJumpDurationTime;
+        wallJumpTimer = player.config.startWallJumpDurationTime;
         base.SetLookingDirectionOppositeOfWall(player);
     }
 
-    private void JumpAction(PlayerFSM player) {
-        player.rb.velocity = new Vector2(player.rb.velocity.x, player.config.jumpForce);
+    private void PlayAnimation(PlayerFSM player) {
+        player.animator.Play("PlayerJump");
     }
 
-    private void ApplyXVelocity(PlayerFSM player) {
-        player.rb.velocity = new Vector2(player.lastDirection * player.moveSpeed, player.rb.velocity.y);
+    private void PlayParticles(PlayerFSM player) {
+        player.jumpParticles.Play();
+    }
+
+    private void WallJumpAction(PlayerFSM player) {
+        player.rb.velocity = new Vector2(player.lastDirection * player.moveSpeed, player.config.jumpForce);
     }
 
     public override bool CheckTransitionToFalling(PlayerFSM player) {
         float xInput = Input.GetAxisRaw("Horizontal");
+
         if (!Input.GetButton("Jump") || xInput != 0) {
             player.TransitionToState(player.FallingState);
             return true;
         }
+
         return false;
     }
 
