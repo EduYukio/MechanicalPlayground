@@ -5,7 +5,7 @@ public class DebugMenu : MonoBehaviour {
     private PlayerFSM player;
 
     private void Start() {
-        player = GameObject.Find("PlayerFSM").GetComponent<PlayerFSM>();
+        player = GameObject.FindObjectOfType<PlayerFSM>();
     }
 
     public void RestartLevel() {

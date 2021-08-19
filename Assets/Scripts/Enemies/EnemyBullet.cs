@@ -18,7 +18,7 @@ public class EnemyBullet : MonoBehaviour {
             rb.velocity = initialDirection * initialSpeed;
         }
 
-        player = GameObject.Find("PlayerFSM").GetComponent<PlayerFSM>();
+        player = GameObject.FindObjectOfType<PlayerFSM>();
         hitsToKill = player.config.reflectedBulletsNeededToKill;
     }
 

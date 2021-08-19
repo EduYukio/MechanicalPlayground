@@ -16,7 +16,7 @@ public class MechanicItem : MonoBehaviour {
     }
 
     public void DisableMechanic(string name) {
-        PlayerFSM player = GameObject.Find("PlayerFSM").GetComponent<PlayerFSM>();
+        PlayerFSM player = GameObject.FindObjectOfType<PlayerFSM>();
         player.mechanics.Deactivate(name);
     }
 }
