@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-static class Manager {
-    public static AudioManager audio;
-    public static CameraShaker shaker;
+public static class Manager {
+    public static AudioManager audio { get; private set; }
+    public static CameraShaker shaker { get; private set; }
 
     static Manager() {
         GameObject preloadObj = GameObject.Find("PreloadObject");

@@ -6,10 +6,13 @@ public class AudioManager : MonoBehaviour {
     public AudioMixer mixer;
     public Sound[] sounds;
 
-    [HideInInspector] public float normalBGMVolume = 0f;
-    [HideInInspector] public float muffleEffect = 12.5f;
+    public float normalBGMVolume { get; set; }
+    public float muffleEffect { get; set; }
 
     void Awake() {
+        normalBGMVolume = 0f;
+        muffleEffect = 12.5f;
+
         foreach (Sound sound in sounds) {
             sound.source = gameObject.AddComponent<AudioSource>();
             sound.source.clip = sound.clip;
@@ -37,7 +40,7 @@ public class AudioManager : MonoBehaviour {
         sound.source.PlayDelayed(delay);
     }
 
-    void SetSourceSettings(Sound sound) {
+    private void SetSourceSettings(Sound sound) {
         sound.source.volume = sound.volume * (1f + UnityEngine.Random.Range(-sound.volumeVariance / 2f, sound.volumeVariance / 2f));
         sound.source.pitch = sound.pitch * (1f + UnityEngine.Random.Range(-sound.pitchVariance / 2f, sound.pitchVariance / 2f));
     }

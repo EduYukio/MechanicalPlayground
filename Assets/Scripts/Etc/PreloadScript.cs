@@ -3,8 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class PreloadScript : MonoBehaviour {
     public Sound currentBGM;
-    public int currentBGMIndex;
-    public int maxBGMIndex = 2;
+    private int currentBGMIndex = 0;
+    private int maxBGMIndex = 2;
 
     private void Awake() {
         DontDestroyOnLoad(gameObject);
