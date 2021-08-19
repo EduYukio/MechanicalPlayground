@@ -8,14 +8,16 @@ public class SpikyFSM : Enemy {
     public readonly SpikyBeingHitState BeingHitState = new SpikyBeingHitState();
     public readonly SpikyDyingState DyingState = new SpikyDyingState();
 
-    public GameObject bulletPrefab;
+    [SerializeField] private GameObject bulletPrefab = null;
+    [SerializeField] private Transform[] bulletEndTransforms = null;
+    [SerializeField] private float bulletSpeed = 2f;
+
     public Transform[] bulletStartTransforms;
-    public Transform[] bulletEndTransforms;
-    public float bulletSpeed = 2f;
     public float startAttackCooldownTimer = 1.5f;
     public float attackCooldownTimer = 0;
-    [HideInInspector] public float bulletSpawnTimerSyncedWithAnimation;
-    [HideInInspector] public SpriteRenderer spriteRenderer;
+
+    public float bulletSpawnTimerSyncedWithAnimation { get; set; }
+    public SpriteRenderer spriteRenderer { get; set; }
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();

@@ -1,14 +1,16 @@
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
-    [HideInInspector] public Animator animator;
-    [HideInInspector] public Rigidbody2D rb;
+    private static PlayerFSM player;
+
+    [SerializeField] private Color particleColor = Color.white;
+    [SerializeField] private GameObject beingHitParticlesObj = null;
 
     public float maxHealth = 25f;
     public float currentHealth;
-    public Color particleColor;
-    public GameObject beingHitParticlesObj;
-    private static PlayerFSM player;
+
+    public Animator animator { get; set; }
+    public Rigidbody2D rb { get; set; }
 
     public virtual void TakeDamage(float damage) {
         currentHealth -= damage;

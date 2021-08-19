@@ -8,19 +8,21 @@ public class BeeFSM : Enemy {
     public readonly BeeBeingHitState BeingHitState = new BeeBeingHitState();
     public readonly BeeDyingState DyingState = new BeeDyingState();
 
-    public GameObject bulletPrefab;
-    public Transform bulletSpawnTransform;
-    public Transform bulletDirectionTransform;
-    public float bulletSpeed = 2f;
+    [SerializeField] private GameObject bulletPrefab = null;
+    [SerializeField] private Transform bulletDirectionTransform = null;
+    [SerializeField] private float bulletSpeed = 2f;
+
     public float moveSpeed = 3f;
     public float distanceToMove = 3f;
     public bool moveVertically = true;
+    public Transform bulletSpawnTransform;
     public float startAttackCooldownTimer = 1.5f;
     public float attackCooldownTimer = 0;
-    [HideInInspector] public float bulletTimerSyncedWithAnimation;
-    [HideInInspector] public float initialCoord;
-    [HideInInspector] public Vector2 targetPosition;
-    [HideInInspector] public SpriteRenderer spriteRenderer;
+
+    public SpriteRenderer spriteRenderer { get; set; }
+    public float bulletTimerSyncedWithAnimation { get; set; }
+    public float initialCoord { get; set; }
+    public Vector2 targetPosition { get; set; }
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();

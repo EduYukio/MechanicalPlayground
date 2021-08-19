@@ -9,19 +9,21 @@ public class TrunkFSM : Enemy {
     public readonly TrunkDyingState DyingState = new TrunkDyingState();
     public readonly TrunkMovingState MovingState = new TrunkMovingState();
 
-    public float moveSpeed = 3f;
-    public GameObject bulletPrefab;
+    [SerializeField] private GameObject bulletPrefab = null;
+    [SerializeField] private float bulletSpeed = 2f;
+
     public Transform bulletSpawnTransform;
     public Transform bulletDirectionTransform;
-    public float bulletSpeed = 2f;
-    public float startAttackCooldownTimer = 1.5f;
-    public float attackCooldownTimer = 0;
-    public float playerRayDistance = 5f;
     public Transform groundTransform;
     public Transform[] frontTransforms;
+    public float playerRayDistance = 5f;
+    public float moveSpeed = 3f;
+    public float attackCooldownTimer = 0;
+    public float startAttackCooldownTimer = 1.5f;
     public bool needToTurn = false;
-    [HideInInspector] public float bulletSpawnTimerSyncedWithAnimation;
-    [HideInInspector] public SpriteRenderer spriteRenderer;
+
+    public float bulletSpawnTimerSyncedWithAnimation { get; set; }
+    public SpriteRenderer spriteRenderer { get; set; }
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();

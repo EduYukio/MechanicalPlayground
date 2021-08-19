@@ -1,16 +1,15 @@
 using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour {
-    private PlayerFSM player;
-
-    public Rigidbody2D rb;
-    public bool alreadyProcessedHit = false;
-    public float initialSpeed;
-    public Vector3 initialDirection;
-    public float hitsToKill;
-
-    public GameObject parryParticles;
+    [SerializeField] private GameObject parryParticles = null;
     public GameObject destroyBulletParticles;
+
+    private PlayerFSM player;
+    private Rigidbody2D rb;
+    private bool alreadyProcessedHit = false;
+    private float initialSpeed = 0f;
+    private Vector3 initialDirection = Vector3.zero;
+    private float hitsToKill;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
