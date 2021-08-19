@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour {
     public float currentHealth;
     public Color particleColor;
     public GameObject beingHitParticlesObj;
+    private static PlayerFSM player;
 
     public virtual void TakeDamage(float damage) {
         currentHealth -= damage;
@@ -15,12 +16,10 @@ public class Enemy : MonoBehaviour {
     }
 
     public static void DieAction(GameObject enemy) {
-        int direction = 1;
-        PlayerFSM player = GameObject.FindObjectOfType<PlayerFSM>();
-        if (player != null) direction = player.lookingDirection;
-
-        //TODO: refatorar isso aqui
+        if (player == null) player = GameObject.FindObjectOfType<PlayerFSM>();
+        int direction = player.lookingDirection;
         Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
+
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.velocity = new Vector3(direction * 3f, 6f, 0);
         rb.constraints = RigidbodyConstraints2D.None;
@@ -40,9 +39,10 @@ public class Enemy : MonoBehaviour {
     }
 
     public void ThrowCustomParticles() {
-        GameObject partObj = Instantiate(beingHitParticlesObj, transform.position, Quaternion.identity);
-        ParticleSystem partSystem = partObj.GetComponent<ParticleSystem>();
-        ParticleSystem.MainModule partMain = partSystem.main;
-        partMain.startColor = new ParticleSystem.MinMaxGradient(particleColor);
+        GameObject particlesObj = Instantiate(beingHitParticlesObj, transform.position, Quaternion.identity);
+        ParticleSystem particlesSystem = particlesObj.GetComponent<ParticleSystem>();
+        ParticleSystem.MainModule particlesMainModule = particlesSystem.main;
+
+        particlesMainModule.startColor = new ParticleSystem.MinMaxGradient(particleColor);
     }
 }
