@@ -11,6 +11,7 @@ public class PlayerConfig : ScriptableObject {
 
     [Header("Walk")]
     public float moveSpeed = 6f;
+    public float startWalkParticlesCooldownTime = 0.5f;
 
     [Header("Better Falling")]
     public float fallMultiplier = 3f;

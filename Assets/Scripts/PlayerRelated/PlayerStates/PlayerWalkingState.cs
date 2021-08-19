@@ -1,7 +1,8 @@
 using UnityEngine;
 
 public class PlayerWalkingState : PlayerBaseState {
-    private float walkParticlesStartCooldown = 0.5f;
+    private float startWalkParticlesCooldownTime;
+    private float startCoyoteDurationTime;
 
     public override void EnterState(PlayerFSM player) {
         Setup(player);
@@ -24,22 +25,13 @@ public class PlayerWalkingState : PlayerBaseState {
     }
 
     private void Setup(PlayerFSM player) {
+        startWalkParticlesCooldownTime = player.config.startWalkParticlesCooldownTime;
+        startCoyoteDurationTime = player.config.startCoyoteDurationTime;
         player.walkParticlesCooldownTimer = 0f;
     }
 
     private void ResetCoyoteTimer(PlayerFSM player) {
-        player.coyoteTimer = player.config.startCoyoteDurationTime;
-    }
-
-    public override bool CheckTransitionToGrounded(PlayerFSM player) {
-        if (!player.isGrounded) return false;
-
-        float xInput = Input.GetAxisRaw("Horizontal");
-        if (xInput == 0) {
-            player.TransitionToState(player.GroundedState);
-            return true;
-        }
-        return false;
+        player.coyoteTimer = startCoyoteDurationTime;
     }
 
     private void PlayAnimationIfCan(PlayerFSM player) {
@@ -56,6 +48,17 @@ public class PlayerWalkingState : PlayerBaseState {
         if (player.walkParticlesCooldownTimer > 0) return;
 
         player.walkParticles.Play();
-        player.walkParticlesCooldownTimer = walkParticlesStartCooldown;
+        player.walkParticlesCooldownTimer = startWalkParticlesCooldownTime;
+    }
+
+    public override bool CheckTransitionToGrounded(PlayerFSM player) {
+        if (!player.isGrounded) return false;
+
+        float xInput = Input.GetAxisRaw("Horizontal");
+        if (xInput == 0) {
+            player.TransitionToState(player.GroundedState);
+            return true;
+        }
+        return false;
     }
 }
