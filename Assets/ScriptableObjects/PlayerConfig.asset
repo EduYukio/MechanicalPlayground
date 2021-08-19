@@ -23,7 +23,7 @@ MonoBehaviour:
   startBunnyHopDurationTime: 0.1
   startCoyoteDurationTime: 0.1
   doubleJumpForce: 12
-  startAirJumpInputBuffer: 0.2
+  startAirJumpInputBufferTime: 0.2
   dashSpeed: 17.25
   startDashDurationTime: 0.172
   startDashCooldownTime: 0.35
@@ -47,12 +47,12 @@ MonoBehaviour:
   startExplosionCooldownTime: 0.5
   explosionRadius: 0.5
   explosionDamageRate: 1
-  xRange: 1.2
-  yRange: 1.3
+  explosionXRange: 1.2
+  explosionYRange: 1.3
   explosionShakeDuration: 0.2
   explosionShakeMagnitude: 0.025
-  startGunBootsCooldownTimer: 0.1
+  startGunBootsCooldownTime: 0.115
   bootsBulletSpeed: 9
-  gunBootsForce: 5
-  gunBootsMaxSpeed: 10
+  gunBootsUpwardsBoost: 5
+  gunBootsMaxPlayerVelocity: 10
   gunBootsDamage: 2
