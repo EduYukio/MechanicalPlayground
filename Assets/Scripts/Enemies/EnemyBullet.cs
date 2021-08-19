@@ -90,4 +90,17 @@ public class EnemyBullet : MonoBehaviour {
     private void KillPlayer() {
         player.TransitionToState(player.DyingState);
     }
+
+    public void ReflectBullet() {
+        alreadyProcessedHit = false;
+        rb.velocity = -4 * rb.velocity;
+        Vector3 angle = transform.eulerAngles;
+        transform.eulerAngles = new Vector3(angle.x, angle.y, angle.z + 180);
+        if (name.Contains("Ethereal")) {
+            gameObject.layer = LayerMask.NameToLayer("EtherealParriedBullet");
+        }
+        else {
+            gameObject.layer = LayerMask.NameToLayer("ParriedBullet");
+        }
+    }
 }

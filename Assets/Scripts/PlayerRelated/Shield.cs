@@ -5,22 +5,11 @@ public class Shield : MonoBehaviour {
     public PlayerFSM player;
     private bool canDefend = true;
 
-    private void Update() {
-        gameObject.transform.position = player.transform.position + new Vector3(0, -0.1f, 0);
-    }
-
-    private void OnEnable() {
-        gameObject.transform.position = player.transform.position + new Vector3(0, -0.1f, 0);
-    }
-
     public void CheckShieldInput() {
         if (!player.mechanics.IsEnabled("Shield")) return;
+        if (JustDeactivatedShield()) return;
 
         CheckForParryInput();
-
-        if (Input.GetButtonUp("Shield")) {
-            canDefend = true;
-        }
 
         if (!player.isParrying) {
             if (Input.GetButton("Shield") && canDefend && player.shieldCooldownTimer <= 0) {
@@ -40,17 +29,28 @@ public class Shield : MonoBehaviour {
         }
     }
 
+    private bool JustDeactivatedShield() {
+        if (Input.GetButtonUp("Shield")) {
+            canDefend = true;
+            return true;
+        }
+
+        return false;
+    }
+
     public void Parry(GameObject parriedObject) {
         if (!player.mechanics.IsEnabled("Parry")) return;
 
         Manager.audio.Play("Parry");
-        StartCoroutine(nameof(ParryCoroutine), parriedObject);
+        StartCoroutine(nameof(ParryEffectCoroutine), parriedObject);
     }
 
-    public IEnumerator ParryCoroutine(GameObject parriedObject) {
+    public IEnumerator ParryEffectCoroutine(GameObject parriedObject) {
         player.isParrying = true;
         Time.timeScale = 0f;
+
         yield return new WaitForSecondsRealtime(player.config.parryPauseDuration);
+
         Time.timeScale = 1f;
         player.isParrying = false;
         gameObject.SetActive(false);
@@ -63,7 +63,8 @@ public class Shield : MonoBehaviour {
         }
 
         if (player.mechanics.IsEnabled("Reflect Projectile")) {
-            ReflectBullet(parriedObject);
+            EnemyBullet bulletScript = parriedObject.GetComponent<EnemyBullet>();
+            bulletScript.ReflectBullet();
         }
         else {
             Destroy(parriedObject);
@@ -76,21 +77,5 @@ public class Shield : MonoBehaviour {
         canDefend = false;
         player.shieldCooldownTimer = player.config.startShieldCooldownTime;
         Manager.audio.FindSound("Shield Returning").source.PlayDelayed(player.shieldCooldownTimer * 0.85f);
-    }
-
-    public void ReflectBullet(GameObject parriedObject) {
-        EnemyBullet bullet = parriedObject.GetComponent<EnemyBullet>();
-        if (bullet == null) return;
-
-        bullet.alreadyProcessedHit = false;
-        bullet.rb.velocity = -4 * bullet.rb.velocity;
-        Vector3 angle = bullet.transform.eulerAngles;
-        bullet.transform.eulerAngles = new Vector3(angle.x, angle.y, angle.z + 180);
-        if (bullet.name.Contains("Ethereal")) {
-            bullet.gameObject.layer = LayerMask.NameToLayer("EtherealParriedBullet");
-        }
-        else {
-            bullet.gameObject.layer = LayerMask.NameToLayer("ParriedBullet");
-        }
     }
 }
