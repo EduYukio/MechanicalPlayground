@@ -158,7 +158,7 @@ public abstract class PlayerBaseState {
         float xInput = Input.GetAxisRaw("Horizontal");
         int direction = GetRawDirection(xInput);
         if (direction != 0) {
-            player.lastDirection = direction;
+            player.lookingDirection = direction;
         }
 
         player.rb.velocity = new Vector2(direction * player.moveSpeed, player.rb.velocity.y);
@@ -180,7 +180,7 @@ public abstract class PlayerBaseState {
     public Vector3 GetFourDirectionalInput(PlayerFSM player, float xInput, float yInput) {
         Vector3 direction;
         if (xInput == 0 && yInput == 0) {
-            direction = new Vector3(player.lastDirection, 0f, 0f);
+            direction = new Vector3(player.lookingDirection, 0f, 0f);
         }
         else if (Mathf.Abs(xInput) > Mathf.Abs(yInput)) {
             int xDirection = GetRawDirection(xInput);
@@ -195,10 +195,10 @@ public abstract class PlayerBaseState {
 
     public void SetLookingDirectionOppositeOfWall(PlayerFSM player) {
         if (player.isTouchingLeftWall) {
-            player.lastDirection = 1;
+            player.lookingDirection = 1;
         }
         else if (player.isTouchingRightWall) {
-            player.lastDirection = -1;
+            player.lookingDirection = -1;
         }
     }
 }
