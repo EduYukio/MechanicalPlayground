@@ -32,10 +32,12 @@ public class PlayerFallingState : PlayerBaseState {
         bool playerStoppedJumping = player.rb.velocity.y > 0 && !Input.GetButton("Jump");
 
         if (playerIsFalling) {
-            player.rb.velocity += Vector2.up * Physics2D.gravity.y * (player.config.fallMultiplier - 1) * Time.deltaTime;
+            float fallMultiplier = player.config.fallMultiplier - 1;
+            player.rb.velocity += Vector2.up * Physics2D.gravity.y * fallMultiplier * Time.deltaTime;
         }
         else if (playerStoppedJumping) {
-            player.rb.velocity += Vector2.up * Physics2D.gravity.y * (player.config.lowJumpMultiplier - 1) * Time.deltaTime;
+            float lowJumpMultiplier = player.config.lowJumpMultiplier - 1;
+            player.rb.velocity += Vector2.up * Physics2D.gravity.y * lowJumpMultiplier * Time.deltaTime;
         }
     }
 
@@ -59,8 +61,6 @@ public class PlayerFallingState : PlayerBaseState {
     }
 
     public override bool CheckTransitionToJumping(PlayerFSM player) {
-        if (!player.mechanics.IsEnabled("Jump")) return false;
-
         if (player.coyoteTimer > 0) {
             return base.CheckTransitionToJumping(player);
         }
@@ -73,6 +73,7 @@ public class PlayerFallingState : PlayerBaseState {
             Manager.audio.Play("Landing");
             player.leftSideParticles.Play();
             player.rightSideParticles.Play();
+
             player.TransitionToState(player.GroundedState);
             return true;
         }
