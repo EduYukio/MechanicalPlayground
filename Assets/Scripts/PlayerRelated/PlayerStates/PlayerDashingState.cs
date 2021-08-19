@@ -62,7 +62,7 @@ public class PlayerDashingState : PlayerBaseState {
 
         if (isEthereal) {
             player.spriteRenderer.color = new Color(1, 1, 1, 1);
-            player.gameObject.layer = LayerMask.NameToLayer("Player"); ;
+            player.gameObject.layer = LayerMask.NameToLayer("Player");
         }
     }
 
