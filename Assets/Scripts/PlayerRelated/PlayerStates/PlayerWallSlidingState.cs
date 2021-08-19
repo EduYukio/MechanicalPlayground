@@ -1,12 +1,13 @@
 using UnityEngine;
 
 public class PlayerWallSlidingState : PlayerBaseState {
-    private float stickyTimer;
+    private float stickyTimer, startStickyTime;
+    private float slideSpeed, maxSpeed;
 
     public override void EnterState(PlayerFSM player) {
-        player.animator.Play("PlayerWallSlide", -1, 0f);
-        Manager.audio.Play("Wall Slide Begin");
         Setup(player);
+        PlayAnimation(player);
+        PlayAudio();
     }
 
     public override void FixedUpdate(PlayerFSM player) {
@@ -29,12 +30,23 @@ public class PlayerWallSlidingState : PlayerBaseState {
     private void Setup(PlayerFSM player) {
         player.canDoubleJump = true;
         player.canDash = true;
-        stickyTimer = player.config.startStickyTime;
+        startStickyTime = player.config.startStickyTime;
+        stickyTimer = startStickyTime;
+        maxSpeed = float.MaxValue;
+        slideSpeed = -player.config.wallSlidingSpeed;
         base.SetLookingDirectionOppositeOfWall(player);
     }
 
+    private void PlayAnimation(PlayerFSM player) {
+        player.animator.Play("PlayerWallSlide", -1, 0f);
+    }
+
+    private void PlayAudio() {
+        Manager.audio.Play("Wall Slide Begin");
+    }
+
     private void WallSlideAction(PlayerFSM player) {
-        float yVelocity = Mathf.Clamp(player.rb.velocity.y, -player.config.wallSlidingSpeed, float.MaxValue);
+        float yVelocity = Mathf.Clamp(player.rb.velocity.y, slideSpeed, maxSpeed);
         player.rb.velocity = new Vector2(player.rb.velocity.x, yVelocity);
     }
 
@@ -43,7 +55,7 @@ public class PlayerWallSlidingState : PlayerBaseState {
             stickyTimer -= Time.deltaTime;
         }
         else {
-            stickyTimer = player.config.startStickyTime;
+            stickyTimer = startStickyTime;
         }
     }
 
@@ -54,6 +66,16 @@ public class PlayerWallSlidingState : PlayerBaseState {
         if (xInput > 0 && player.isTouchingRightWall) return false;
 
         return true;
+    }
+
+    public bool CheckDettachmentFromWall(PlayerFSM player) {
+        if (!player.mechanics.IsEnabled("Wall Jump")) {
+            if (Input.GetButtonDown("Jump")) {
+                player.TransitionToState(player.FallingState);
+                return true;
+            }
+        }
+        return false;
     }
 
     public override bool CheckTransitionToFalling(PlayerFSM player) {
@@ -67,15 +89,5 @@ public class PlayerWallSlidingState : PlayerBaseState {
     public override bool CheckTransitionToGrounded(PlayerFSM player) {
         if (player.rb.velocity.y > 0) return false;
         return base.CheckTransitionToGrounded(player);
-    }
-
-    public bool CheckDettachmentFromWall(PlayerFSM player) {
-        if (!player.mechanics.IsEnabled("Wall Jump")) {
-            if (Input.GetButtonDown("Jump")) {
-                player.TransitionToState(player.FallingState);
-                return true;
-            }
-        }
-        return false;
     }
 }
