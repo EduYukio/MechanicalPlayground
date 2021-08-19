@@ -4,8 +4,8 @@ public class TrunkAttackingState : TrunkBaseState {
     private float attackingTimer;
 
     public override void EnterState(TrunkFSM trunk) {
-        trunk.animator.Play("Attacking");
         Setup(trunk);
+        PlayAnimation(trunk);
     }
 
     public override void FixedUpdate(TrunkFSM trunk) {
@@ -15,13 +15,16 @@ public class TrunkAttackingState : TrunkBaseState {
         }
 
         AttackAction(trunk);
-
         if (base.CheckTransitionToIdle(trunk)) return;
     }
 
     private void Setup(TrunkFSM trunk) {
         attackingTimer = trunk.bulletSpawnTimerSyncedWithAnimation;
         trunk.rb.velocity = Vector2.zero;
+    }
+
+    private void PlayAnimation(TrunkFSM trunk) {
+        trunk.animator.Play("Attacking");
     }
 
     private void AttackAction(TrunkFSM trunk) {

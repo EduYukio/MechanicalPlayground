@@ -1,11 +1,11 @@
 using UnityEngine;
 
 public class TrunkMovingState : TrunkBaseState {
-    private float distanceToCheckGround = 0.2f;
-    private float distanceToCheckObstacle = 0.1f;
+    private float distanceToCheckGround, distanceToCheckObstacle;
 
     public override void EnterState(TrunkFSM trunk) {
-        trunk.animator.Play("Moving");
+        Setup();
+        PlayAnimation(trunk);
     }
 
     public override void Update(TrunkFSM trunk) {
@@ -13,6 +13,15 @@ public class TrunkMovingState : TrunkBaseState {
 
         base.MoveAction(trunk);
         if (CheckTransitionToIdle(trunk)) return;
+    }
+
+    private void Setup() {
+        distanceToCheckGround = 0.2f;
+        distanceToCheckObstacle = 0.1f;
+    }
+
+    private void PlayAnimation(TrunkFSM trunk) {
+        trunk.animator.Play("Moving");
     }
 
     private bool ThereIsGroundToWalk(TrunkFSM trunk) {
@@ -27,22 +36,16 @@ public class TrunkMovingState : TrunkBaseState {
     }
 
     private bool ReachedObstacle(TrunkFSM trunk) {
-        Vector2 direction = CalculateDirection(trunk);
+        Vector2 direction = base.CalculateDirection(trunk);
+
         foreach (var frontTransform in trunk.frontTransforms) {
-            RaycastHit2D[] frontRay = Physics2D.RaycastAll(frontTransform.position, direction, distanceToCheckObstacle);
+            int layersToCollide = LayerMask.GetMask("Ground", "Obstacles", "Gate", "Enemies");
+            RaycastHit2D ray = Physics2D.Raycast(frontTransform.position, direction, distanceToCheckObstacle, layersToCollide);
+            if (ray.collider == null) continue;
 
-            foreach (var obj in frontRay) {
-                if (obj.collider != null) {
-                    bool isWall = obj.collider.CompareTag("Ground");
-                    bool isEnemy = obj.collider.CompareTag("Enemy");
-                    bool isObstacle = obj.collider.CompareTag("Obstacle");
-                    bool isGate = obj.collider.CompareTag("Gate");
-
-                    bool hasHitObstacle = isObstacle || isWall || isEnemy || isGate;
-                    if (hasHitObstacle) {
-                        return true;
-                    }
-                }
+            string[] obstacleTags = { "Ground", "Obstacle", "Gate", "Enemy" };
+            foreach (var tag in obstacleTags) {
+                if (ray.collider.CompareTag(tag)) return true;
             }
         }
 

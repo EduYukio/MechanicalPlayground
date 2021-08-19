@@ -35,7 +35,6 @@ public abstract class TrunkBaseState {
     }
 
 
-    // Helper Functions
 
     public void MoveAction(TrunkFSM trunk) {
         trunk.transform.Translate(Vector2.left * trunk.moveSpeed * Time.deltaTime);
@@ -50,27 +49,25 @@ public abstract class TrunkBaseState {
                 trunk.transform.eulerAngles = new Vector3(0f, 0f, 0f);
             }
         }
-        trunk.needToTurn = false;
-    }
 
-    public Vector2 CalculateDirection(TrunkFSM trunk) {
-        return (trunk.bulletDirectionTransform.position - trunk.bulletSpawnTransform.position).normalized;
+        trunk.needToTurn = false;
     }
 
     public bool PlayerIsOnSight(TrunkFSM trunk) {
         Vector2 direction = CalculateDirection(trunk);
-        foreach (var frontTransform in trunk.frontTransforms) {
-            RaycastHit2D[] frontRay = Physics2D.RaycastAll(frontTransform.position, direction, trunk.playerRayDistance);
 
-            foreach (var obj in frontRay) {
-                if (obj.collider != null && obj.collider.CompareTag("Ground")) return false;
-                if (obj.collider != null && obj.collider.CompareTag("Obstacle")) return false;
-                if (obj.collider != null && obj.collider.CompareTag("Gate")) return false;
-                if (obj.collider != null && obj.collider.CompareTag("Enemy")) return false;
-                if (obj.collider != null && obj.collider.CompareTag("Player")) return true;
-            }
+        foreach (var frontTransform in trunk.frontTransforms) {
+            int layersToCollide = LayerMask.GetMask("Player", "Ground", "Obstacles", "Gate", "Enemies");
+            RaycastHit2D ray = Physics2D.Raycast(frontTransform.position, direction, trunk.playerRayDistance, layersToCollide);
+
+            if (ray.collider == null) continue;
+            if (ray.collider.CompareTag("Player")) return true;
         }
 
         return false;
+    }
+
+    public Vector2 CalculateDirection(TrunkFSM trunk) {
+        return (trunk.bulletDirectionTransform.position - trunk.bulletSpawnTransform.position).normalized;
     }
 }

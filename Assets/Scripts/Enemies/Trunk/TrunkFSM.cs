@@ -23,14 +23,12 @@ public class TrunkFSM : Enemy {
     [HideInInspector] public float bulletSpawnTimerSyncedWithAnimation;
     [HideInInspector] public SpriteRenderer spriteRenderer;
 
-    private void Awake() {
+    private void Start() {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         bulletSpawnTimerSyncedWithAnimation = Helper.GetAnimationDuration("Attacking", animator) * 0.7f;
-    }
 
-    private void Start() {
         currentHealth = maxHealth;
         attackCooldownTimer = 0f;
         TransitionToState(IdleState);
