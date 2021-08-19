@@ -41,9 +41,7 @@ public class PlayerPogoingState : PlayerBaseState {
     public override bool CheckTransitionToFalling(PlayerFSM player) {
         if (player.isGrounded) return false;
 
-        bool playerIsFalling = player.rb.velocity.y <= 0;
-
-        if (playerIsFalling) {
+        if (player.rb.velocity.y <= 0) {
             player.TransitionToState(player.FallingState);
             return true;
         }
