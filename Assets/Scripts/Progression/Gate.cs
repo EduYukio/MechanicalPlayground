@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public class Gate : MonoBehaviour {
-    public ParticleSystem gateParticles;
+    [SerializeField] private ParticleSystem gateParticles = null;
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("Player")) {

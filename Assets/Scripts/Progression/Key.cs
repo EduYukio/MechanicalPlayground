@@ -2,8 +2,8 @@
 using UnityEngine;
 
 public class Key : MonoBehaviour {
+    [SerializeField] private Vector3 slotPosition;
     public static List<Vector3> slots;
-    public Vector3 slotPosition;
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("Player")) {

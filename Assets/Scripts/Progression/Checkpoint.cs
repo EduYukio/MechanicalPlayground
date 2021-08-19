@@ -2,9 +2,9 @@
 using UnityEngine;
 
 public class Checkpoint : MonoBehaviour {
-    private Animator animator;
+    [SerializeField] private GameObject checkpointParticles = null;
     public static string activatedName = "";
-    public GameObject checkpointParticles;
+    private Animator animator;
 
     private void Awake() {
         animator = GetComponent<Animator>();
