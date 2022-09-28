@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1671344374316473886}
   - component: {fileID: 1671344374316473885}
   - component: {fileID: 6027273342978180283}
+  - component: {fileID: 121360013}
   m_Layer: 0
   m_Name: PreloadObject
   m_TagString: Untagged
@@ -55,8 +56,6 @@ MonoBehaviour:
     loop: 0
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
-  currentBGMIndex: 0
-  maxBGMIndex: 2
 --- !u!114 &1671344374316473885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,7 +324,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Victory Fanfare
     clip: {fileID: 8300000, guid: 3bf5c41289c17554391d2ea15be37592, type: 3}
-    volume: 0.75
+    volume: 1
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -386,8 +385,6 @@ MonoBehaviour:
     loop: 0
     mixerGroup: {fileID: -1990543525491340882, guid: 05427f4427a60f1408ddfbef02a76005, type: 2}
     source: {fileID: 0}
-  normalBGMVolume: 0
-  muffleEffect: 12.5
 --- !u!114 &6027273342978180283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,3 +397,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 222b150562e0cab428802725e2f335c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &121360013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671344374316473883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02119f2d57167234e8eeecd219dec670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canActivateSlowMotion: 0
+  activateSlowMotion: 0
+  printDebugStates: 0
+  debugState: 
+  originalPosition: {x: 0, y: 0, z: 0}

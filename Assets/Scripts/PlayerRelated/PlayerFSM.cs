@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerFSM : MonoBehaviour {
-    [SerializeField] private PlayerBaseState currentState;
+    public PlayerBaseState CurrentState { get; set; }
 
     public readonly PlayerGroundedState GroundedState = new PlayerGroundedState();
     public readonly PlayerJumpingState JumpingState = new PlayerJumpingState();
@@ -19,13 +19,6 @@ public class PlayerFSM : MonoBehaviour {
     public readonly PlayerExplodingState ExplodingState = new PlayerExplodingState();
     public readonly PlayerGunBootsState GunBootsState = new PlayerGunBootsState();
 
-    [Header("Debug")]
-    [SerializeField] private bool canActivateSlowMotion = false;
-    [SerializeField] private bool activateSlowMotion = false;
-    [SerializeField] private bool printDebugStates = false;
-    [SerializeField] private string debugState = "";
-    public bool ignoreCheckpoints = false;
-
     [Header("Config")]
     public PlayerConfig config;
     public Mechanics mechanics;
@@ -37,7 +30,6 @@ public class PlayerFSM : MonoBehaviour {
     public GameObject explosionPrefab;
     public GameObject cameraHolder;
     public GameObject cameraObj;
-    [SerializeField] private Vector3 originalPosition = new Vector3(0, 0, 0);
 
     [Header("Particles")]
     public ParticleSystem walkParticles;
@@ -71,6 +63,7 @@ public class PlayerFSM : MonoBehaviour {
     public float parryTimer;
     public float airJumpInputBufferTimer;
 
+    public bool IgnoreCheckpoints { get; set; } = false;
     public static Vector3 respawnPosition;
 
     public Rigidbody2D rb { get; set; }
@@ -95,16 +88,16 @@ public class PlayerFSM : MonoBehaviour {
         Key.ResetAllSlots();
         SetMoveSpeed();
 
-        IfDebugSetRespawnPosition();
+        Manager.debug.IfDebugSetRespawnPosition(this);
         TransitionToState(GroundedState);
     }
 
     private void Update() {
         if (freezePlayerState) return;
 
-        currentState.Update(this);
+        CurrentState.Update(this);
 
-        IfDebugActivateSlowMotion();
+        Manager.debug.IfDebugActivateSlowMotion();
         UpdateFacingSprite();
         PositionWalkParticles();
         if (!isDying) {
@@ -119,16 +112,16 @@ public class PlayerFSM : MonoBehaviour {
         if (freezePlayerState) return;
 
         ProcessTimers();
-        currentState.FixedUpdate(this);
+        CurrentState.FixedUpdate(this);
     }
 
     public void TransitionToState(PlayerBaseState state) {
         if (freezePlayerState) return;
 
-        currentState = state;
-        currentState.EnterState(this);
+        CurrentState = state;
+        CurrentState.EnterState(this);
 
-        IfDebugPrintStates();
+        Manager.debug.IfDebugPrintStates(this);
     }
 
     private void UpdateFacingSprite() {
@@ -177,29 +170,6 @@ public class PlayerFSM : MonoBehaviour {
         moveSpeed = config.moveSpeed;
         if (mechanics.IsEnabled("Move Speed Boost")) {
             moveSpeed = config.moveSpeedBoosted;
-        }
-    }
-
-    private void IfDebugSetRespawnPosition() {
-        if (!ignoreCheckpoints) {
-            if (respawnPosition == Vector3.zero) {
-                respawnPosition = originalPosition;
-            }
-            transform.position = respawnPosition;
-        }
-    }
-
-    private void IfDebugActivateSlowMotion() {
-        if (canActivateSlowMotion) {
-            if (activateSlowMotion) Time.timeScale = 0.2f;
-            else Time.timeScale = 1f;
-        }
-    }
-
-    private void IfDebugPrintStates() {
-        if (printDebugStates) {
-            debugState = currentState.GetType().Name;
-            Debug.Log(debugState);
         }
     }
 }
