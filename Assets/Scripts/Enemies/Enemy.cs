@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
+public class Enemy : MonoBehaviour
+{
     private static PlayerFSM player;
 
     [SerializeField] private Color particleColor = Color.white;
@@ -12,12 +13,14 @@ public class Enemy : MonoBehaviour {
     public Animator animator { get; set; }
     public Rigidbody2D rb { get; set; }
 
-    public virtual void TakeDamage(float damage) {
+    public virtual void TakeDamage(float damage)
+    {
         currentHealth -= damage;
         ThrowCustomParticles();
     }
 
-    public static void DieAction(GameObject enemy) {
+    public static void DieAction(GameObject enemy)
+    {
         if (player == null) player = GameObject.FindObjectOfType<PlayerFSM>();
         int direction = player.lookingDirection;
         Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
@@ -33,14 +36,17 @@ public class Enemy : MonoBehaviour {
         Manager.audio.PlayDelayed("EnemyDying", 0.75f);
     }
 
-    private void OnCollisionStay2D(Collision2D other) {
-        if (other.gameObject.CompareTag("Player")) {
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
             PlayerFSM player = other.gameObject.GetComponent<PlayerFSM>();
             player.TransitionToState(player.DyingState);
         }
     }
 
-    public void ThrowCustomParticles() {
+    public void ThrowCustomParticles()
+    {
         GameObject particlesObj = Instantiate(beingHitParticlesObj, transform.position, Quaternion.identity);
         ParticleSystem particlesSystem = particlesObj.GetComponent<ParticleSystem>();
         ParticleSystem.MainModule particlesMainModule = particlesSystem.main;

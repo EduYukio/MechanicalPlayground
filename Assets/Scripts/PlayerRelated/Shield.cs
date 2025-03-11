@@ -1,36 +1,45 @@
 using System.Collections;
 using UnityEngine;
 
-public class Shield : MonoBehaviour {
+public class Shield : MonoBehaviour
+{
     [SerializeField] private PlayerFSM player = null;
     private bool canDefend = true;
 
-    public void CheckShieldInput() {
+    public void CheckShieldInput()
+    {
         if (!player.mechanics.IsEnabled("Shield")) return;
         if (JustDeactivatedShield()) return;
 
         CheckForParryInput();
 
-        if (!player.isParrying) {
-            if (Input.GetButton("Shield") && canDefend && player.shieldCooldownTimer <= 0) {
+        if (!player.isParrying)
+        {
+            if (Input.GetButton("Shield") && canDefend && player.shieldCooldownTimer <= 0)
+            {
                 gameObject.SetActive(true);
             }
-            else {
+            else
+            {
                 gameObject.SetActive(false);
             }
         }
     }
 
-    public void CheckForParryInput() {
+    public void CheckForParryInput()
+    {
         if (!player.mechanics.IsEnabled("Parry")) return;
 
-        if (Input.GetButtonDown("Shield")) {
+        if (Input.GetButtonDown("Shield"))
+        {
             player.parryTimer = player.config.startParryTime;
         }
     }
 
-    private bool JustDeactivatedShield() {
-        if (Input.GetButtonUp("Shield")) {
+    private bool JustDeactivatedShield()
+    {
+        if (Input.GetButtonUp("Shield"))
+        {
             canDefend = true;
             return true;
         }
@@ -38,14 +47,16 @@ public class Shield : MonoBehaviour {
         return false;
     }
 
-    public void Parry(GameObject parriedObject) {
+    public void Parry(GameObject parriedObject)
+    {
         if (!player.mechanics.IsEnabled("Parry")) return;
 
         Manager.audio.Play("Parry");
         StartCoroutine(nameof(ParryEffectCoroutine), parriedObject);
     }
 
-    public IEnumerator ParryEffectCoroutine(GameObject parriedObject) {
+    public IEnumerator ParryEffectCoroutine(GameObject parriedObject)
+    {
         player.isParrying = true;
         Time.timeScale = 0f;
 
@@ -55,23 +66,28 @@ public class Shield : MonoBehaviour {
         player.isParrying = false;
         gameObject.SetActive(false);
 
-        if (!Input.GetButton("Shield")) {
+        if (!Input.GetButton("Shield"))
+        {
             canDefend = true;
         }
-        else {
+        else
+        {
             canDefend = false;
         }
 
-        if (player.mechanics.IsEnabled("Reflect Projectile")) {
+        if (player.mechanics.IsEnabled("Reflect Projectile"))
+        {
             EnemyBullet bulletScript = parriedObject.GetComponent<EnemyBullet>();
             bulletScript.ReflectBullet();
         }
-        else {
+        else
+        {
             Destroy(parriedObject);
         }
     }
 
-    public void ConsumeShield() {
+    public void ConsumeShield()
+    {
         Manager.audio.Play("Shield Consumed");
         gameObject.SetActive(false);
         canDefend = false;

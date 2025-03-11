@@ -1,19 +1,23 @@
 using UnityEngine;
 
-public class BeeBeingHitState : BeeBaseState {
+public class BeeBeingHitState : BeeBaseState
+{
     private float hitTimer;
 
-    public override void EnterState(BeeFSM bee) {
+    public override void EnterState(BeeFSM bee)
+    {
         Setup(bee);
         PlayAnimation(bee);
         PlayAudio();
         BeingHitAction(bee);
     }
 
-    public override void FixedUpdate(BeeFSM bee) {
+    public override void FixedUpdate(BeeFSM bee)
+    {
         if (base.CheckTransitionToDying(bee)) return;
 
-        if (hitTimer >= 0) {
+        if (hitTimer >= 0)
+        {
             hitTimer -= Time.deltaTime;
             return;
         }
@@ -21,19 +25,23 @@ public class BeeBeingHitState : BeeBaseState {
         if (base.CheckTransitionToMoving(bee)) return;
     }
 
-    private void Setup(BeeFSM bee) {
+    private void Setup(BeeFSM bee)
+    {
         hitTimer = Helper.GetAnimationDuration("BeingHit", bee.animator);
     }
 
-    private void PlayAnimation(BeeFSM bee) {
+    private void PlayAnimation(BeeFSM bee)
+    {
         bee.animator.Play("BeingHit", -1, 0f);
     }
 
-    private void PlayAudio() {
+    private void PlayAudio()
+    {
         Manager.audio.Play("EnemyHit");
     }
 
-    private void BeingHitAction(BeeFSM bee) {
+    private void BeingHitAction(BeeFSM bee)
+    {
         bee.rb.velocity = Vector2.zero;
     }
 }

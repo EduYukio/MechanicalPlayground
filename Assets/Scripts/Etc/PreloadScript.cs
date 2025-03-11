@@ -1,43 +1,54 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PreloadScript : MonoBehaviour {
+public class PreloadScript : MonoBehaviour
+{
     public Sound currentBGM;
     private int currentBGMIndex = 0;
     private int maxBGMIndex = 2;
 
-    private void Awake() {
+    private void Awake()
+    {
         DontDestroyOnLoad(gameObject);
         LoadNextScene();
     }
 
-    private void Update() {
+    private void Update()
+    {
         CheckIfBGMEnded();
     }
 
-    public void InitializeFirstBGM() {
+    public void InitializeFirstBGM()
+    {
         Manager.audio.Play("BGM0");
         currentBGM = Manager.audio.FindSound("BGM0");
         currentBGMIndex = 0;
     }
 
-    private void LoadNextScene() {
-        if (PreloadInitializer.selectedScene > 0) {
+    private void LoadNextScene()
+    {
+        if (PreloadInitializer.selectedScene > 0)
+        {
             SceneManager.LoadScene(PreloadInitializer.selectedScene);
         }
-        else {
+        else
+        {
             SceneManager.LoadScene(1);
         }
     }
 
-    private void CheckIfBGMEnded() {
+    private void CheckIfBGMEnded()
+    {
         if (currentBGM.source == null) return;
 
-        if (!currentBGM.source.isPlaying) {
-            if (currentBGMIndex == maxBGMIndex) {
+        if (!currentBGM.source.isPlaying)
+        {
+            if (currentBGMIndex == maxBGMIndex)
+            {
                 currentBGMIndex = 0;
             }
-            else {
+            else
+            {
                 currentBGMIndex++;
             }
 

@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class BeeFSM : Enemy {
+public class BeeFSM : Enemy
+{
     private BeeBaseState currentState;
 
     public readonly BeeMovingState MovingState = new BeeMovingState();
@@ -24,7 +25,8 @@ public class BeeFSM : Enemy {
     public float initialCoord { get; set; }
     public Vector2 targetPosition { get; set; }
 
-    private void Start() {
+    private void Start()
+    {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -38,42 +40,51 @@ public class BeeFSM : Enemy {
         TransitionToState(MovingState);
     }
 
-    private void Update() {
+    private void Update()
+    {
         currentState.Update(this);
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         ProcessTimers();
         currentState.FixedUpdate(this);
     }
 
-    public void TransitionToState(BeeBaseState state) {
+    public void TransitionToState(BeeBaseState state)
+    {
         currentState = state;
         currentState.EnterState(this);
     }
 
-    private void ProcessTimers() {
+    private void ProcessTimers()
+    {
         float step = Time.deltaTime;
         if (attackCooldownTimer >= 0) attackCooldownTimer -= step;
     }
 
-    public override void TakeDamage(float damage) {
+    public override void TakeDamage(float damage)
+    {
         base.TakeDamage(damage);
         TransitionToState(BeingHitState);
     }
 
-    private void MoveSetup() {
-        if (moveVertically) {
+    private void MoveSetup()
+    {
+        if (moveVertically)
+        {
             initialCoord = transform.position.y;
             targetPosition = new Vector2(transform.position.x, initialCoord + distanceToMove);
         }
-        else {
+        else
+        {
             initialCoord = transform.position.x;
             targetPosition = new Vector2(initialCoord + distanceToMove, transform.position.y);
         }
     }
 
-    private void PreInstantiateBullets() {
+    private void PreInstantiateBullets()
+    {
         float maxLength = CalculateMaxRayLength();
 
         float deltaT = startAttackCooldownTimer;
@@ -82,7 +93,8 @@ public class BeeFSM : Enemy {
         Vector3 direction = CalculateDirection();
         float timeStep = bulletTimerSyncedWithAnimation + startAttackCooldownTimer;
         Vector3 initialPosition = bulletSpawnTransform.position;
-        while (distance < maxLength) {
+        while (distance < maxLength)
+        {
             Vector3 spawnPosition = initialPosition + direction * distance;
             SpawnBullet(spawnPosition);
             deltaT += timeStep;
@@ -90,30 +102,35 @@ public class BeeFSM : Enemy {
         }
     }
 
-    public void SpawnBullet(Vector3 spawnPosition) {
+    public void SpawnBullet(Vector3 spawnPosition)
+    {
         GameObject bullet = MonoBehaviour.Instantiate(bulletPrefab, spawnPosition, transform.rotation);
         Vector3 direction = CalculateDirection();
         bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
     }
 
-    private float CalculateMaxRayLength() {
+    private float CalculateMaxRayLength()
+    {
         float arbitraryMaxLength = 100f;
 
         RaycastHit2D ray = ThrowRayCast(arbitraryMaxLength);
         if (ray.collider == null) return arbitraryMaxLength;
 
         string[] obstacleTags = { "Ground", "Obstacle", "Gate" };
-        foreach (var tag in obstacleTags) {
+        foreach (var tag in obstacleTags)
+        {
             if (ray.collider.CompareTag(tag)) return ray.distance;
         }
 
         return arbitraryMaxLength;
     }
 
-    private RaycastHit2D ThrowRayCast(float maxLenght) {
+    private RaycastHit2D ThrowRayCast(float maxLenght)
+    {
         Vector3 direction = CalculateDirection();
         int layersToCollide = LayerMask.GetMask("Ground", "Obstacles", "Gate");
-        if (gameObject.name.Contains("Red")) {
+        if (gameObject.name.Contains("Red"))
+        {
             layersToCollide = LayerMask.GetMask("Gate");
         }
 
@@ -122,7 +139,8 @@ public class BeeFSM : Enemy {
         return ray;
     }
 
-    private Vector3 CalculateDirection() {
+    private Vector3 CalculateDirection()
+    {
         return (bulletDirectionTransform.position - bulletSpawnTransform.position).normalized;
     }
 }

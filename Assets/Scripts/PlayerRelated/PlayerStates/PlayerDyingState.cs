@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerDyingState : PlayerBaseState {
+public class PlayerDyingState : PlayerBaseState
+{
     private float dyingTimer;
 
-    public override void EnterState(PlayerFSM player) {
+    public override void EnterState(PlayerFSM player)
+    {
         Setup(player);
         PlayAnimation(player);
         PlayAudio();
@@ -13,8 +15,10 @@ public class PlayerDyingState : PlayerBaseState {
         DieAction(player);
     }
 
-    public override void FixedUpdate(PlayerFSM player) {
-        if (dyingTimer > 0) {
+    public override void FixedUpdate(PlayerFSM player)
+    {
+        if (dyingTimer > 0)
+        {
             dyingTimer -= Time.deltaTime;
             return;
         }
@@ -22,25 +26,30 @@ public class PlayerDyingState : PlayerBaseState {
         RealodScene();
     }
 
-    private void Setup(PlayerFSM player) {
+    private void Setup(PlayerFSM player)
+    {
         dyingTimer = 0.5f;
         player.isDying = true;
         player.spriteRenderer.color = Color.white;
     }
 
-    private void PlayAnimation(PlayerFSM player) {
+    private void PlayAnimation(PlayerFSM player)
+    {
         player.animator.Play("PlayerHit");
     }
 
-    private void PlayAudio() {
+    private void PlayAudio()
+    {
         Manager.audio.Play("PlayerDying");
     }
 
-    private void PlayParticles(PlayerFSM player) {
+    private void PlayParticles(PlayerFSM player)
+    {
         player.dyingParticles.Play();
     }
 
-    private void ShakeCamera(PlayerFSM player) {
+    private void ShakeCamera(PlayerFSM player)
+    {
         float shakeDuration = player.config.dyingShakeDuration;
         float shakeMagnitude = player.config.dyingShakeMagnitude;
 
@@ -48,7 +57,8 @@ public class PlayerDyingState : PlayerBaseState {
         player.cameraHolder.transform.parent = null;
     }
 
-    private void DieAction(PlayerFSM player) {
+    private void DieAction(PlayerFSM player)
+    {
         float direction = -player.lookingDirection;
         player.rb.velocity = new Vector3(direction * 3f, 6f, 0);
         player.rb.constraints = RigidbodyConstraints2D.None;
@@ -57,7 +67,8 @@ public class PlayerDyingState : PlayerBaseState {
         player.GetComponent<Collider2D>().enabled = false;
     }
 
-    private void RealodScene() {
+    private void RealodScene()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

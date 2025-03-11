@@ -1,14 +1,17 @@
 using UnityEngine;
 
-public class PlayerDoubleJumpingState : PlayerBaseState {
-    public override void EnterState(PlayerFSM player) {
+public class PlayerDoubleJumpingState : PlayerBaseState
+{
+    public override void EnterState(PlayerFSM player)
+    {
         Setup(player);
         PlayAnimation(player);
         PlayParticles(player);
         DoubleJumpAction(player);
     }
 
-    public override void Update(PlayerFSM player) {
+    public override void Update(PlayerFSM player)
+    {
         base.ProcessHorizontalMoveInput(player);
 
         if (base.CheckTransitionToGunBoots(player)) return;
@@ -21,19 +24,23 @@ public class PlayerDoubleJumpingState : PlayerBaseState {
         if (base.CheckTransitionToExploding(player)) return;
     }
 
-    private void Setup(PlayerFSM player) {
+    private void Setup(PlayerFSM player)
+    {
         player.canDoubleJump = false;
     }
 
-    private void PlayAnimation(PlayerFSM player) {
+    private void PlayAnimation(PlayerFSM player)
+    {
         player.animator.Play("PlayerDoubleJump");
     }
 
-    private void PlayParticles(PlayerFSM player) {
+    private void PlayParticles(PlayerFSM player)
+    {
         player.jumpParticles.Play();
     }
 
-    private void DoubleJumpAction(PlayerFSM player) {
+    private void DoubleJumpAction(PlayerFSM player)
+    {
         player.rb.velocity = new Vector2(player.rb.velocity.x, player.config.doubleJumpForce);
     }
 }

@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerFSM : MonoBehaviour {
+public class PlayerFSM : MonoBehaviour
+{
     public PlayerBaseState CurrentState { get; set; }
 
     public readonly PlayerGroundedState GroundedState = new PlayerGroundedState();
@@ -75,7 +76,8 @@ public class PlayerFSM : MonoBehaviour {
     public int lookingDirection { get; set; }
     public List<GameObject> keys { get; set; }
 
-    private void Start() {
+    private void Start()
+    {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -92,7 +94,8 @@ public class PlayerFSM : MonoBehaviour {
         TransitionToState(GroundedState);
     }
 
-    private void Update() {
+    private void Update()
+    {
         if (freezePlayerState) return;
 
         CurrentState.Update(this);
@@ -100,7 +103,8 @@ public class PlayerFSM : MonoBehaviour {
         Manager.debug.IfDebugActivateSlowMotion();
         UpdateFacingSprite();
         PositionWalkParticles();
-        if (!isDying) {
+        if (!isDying)
+        {
             CheckIfHasResetDashTrigger();
             shield.CheckShieldInput();
             CreatePlatform.CheckCreateInput(this);
@@ -108,14 +112,16 @@ public class PlayerFSM : MonoBehaviour {
         }
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         if (freezePlayerState) return;
 
         ProcessTimers();
         CurrentState.FixedUpdate(this);
     }
 
-    public void TransitionToState(PlayerBaseState state) {
+    public void TransitionToState(PlayerBaseState state)
+    {
         if (freezePlayerState) return;
 
         CurrentState = state;
@@ -124,27 +130,34 @@ public class PlayerFSM : MonoBehaviour {
         Manager.debug.IfDebugPrintStates(this);
     }
 
-    private void UpdateFacingSprite() {
-        if (lookingDirection == 1) {
+    private void UpdateFacingSprite()
+    {
+        if (lookingDirection == 1)
+        {
             spriteRenderer.flipX = false;
         }
-        else if (lookingDirection == -1) {
+        else if (lookingDirection == -1)
+        {
             spriteRenderer.flipX = true;
         }
     }
 
-    private void PositionWalkParticles() {
-        if (lookingDirection == 1) {
+    private void PositionWalkParticles()
+    {
+        if (lookingDirection == 1)
+        {
             walkParticles.transform.localPosition = new Vector3(-0.3f, -0.45f, 0);
             walkParticles.transform.localScale = new Vector3(1, 1, 1);
         }
-        else if (lookingDirection == -1) {
+        else if (lookingDirection == -1)
+        {
             walkParticles.transform.localPosition = new Vector3(0.3f, -0.45f, 0);
             walkParticles.transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 
-    private void ProcessTimers() {
+    private void ProcessTimers()
+    {
         float step = Time.deltaTime;
         if (walkParticlesCooldownTimer >= 0) walkParticlesCooldownTimer -= step;
         if (airJumpInputBufferTimer >= 0) airJumpInputBufferTimer -= step;
@@ -160,15 +173,19 @@ public class PlayerFSM : MonoBehaviour {
     }
 
     // To avoid dashing infinitely when holding trigger on the ground
-    private void CheckIfHasResetDashTrigger() {
-        if (Input.GetAxisRaw("Dash") == 0f) {
+    private void CheckIfHasResetDashTrigger()
+    {
+        if (Input.GetAxisRaw("Dash") == 0f)
+        {
             hasResetDashTrigger = true;
         }
     }
 
-    private void SetMoveSpeed() {
+    private void SetMoveSpeed()
+    {
         moveSpeed = config.moveSpeed;
-        if (mechanics.IsEnabled("Move Speed Boost")) {
+        if (mechanics.IsEnabled("Move Speed Boost"))
+        {
             moveSpeed = config.moveSpeedBoosted;
         }
     }

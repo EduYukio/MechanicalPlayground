@@ -3,24 +3,29 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-public class Goal : MonoBehaviour {
+public class Goal : MonoBehaviour
+{
     private Animator animator;
     private PlayerFSM player;
     public UnityEvent WhenPicked;
 
-    private void Start() {
+    private void Start()
+    {
         animator = GetComponent<Animator>();
         player = GameObject.FindObjectOfType<PlayerFSM>();
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.CompareTag("Player")) {
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
             animator.Play("GoalReached");
             StartCoroutine(ChangeSceneAfterAnimation());
         }
     }
 
-    private IEnumerator ChangeSceneAfterAnimation() {
+    private IEnumerator ChangeSceneAfterAnimation()
+    {
         player.animator.Play("PlayerIdle");
         player.freezePlayerState = true;
         player.spriteRenderer.color = Color.white;
@@ -39,7 +44,8 @@ public class Goal : MonoBehaviour {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    public void DisableMechanic(string name) {
+    public void DisableMechanic(string name)
+    {
         player.mechanics.Deactivate(name);
     }
 }

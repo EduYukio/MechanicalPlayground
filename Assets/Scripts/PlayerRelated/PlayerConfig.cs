@@ -1,7 +1,8 @@
 using UnityEngine;
 
 [CreateAssetMenu()]
-public class PlayerConfig : ScriptableObject {
+public class PlayerConfig : ScriptableObject
+{
     [Header("Mechanics Menu")]
     public int maxSkillPoints = 6;
 

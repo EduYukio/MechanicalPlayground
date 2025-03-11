@@ -1,26 +1,30 @@
 using UnityEngine;
 
-public class PlayerAttackingState : PlayerBaseState {
+public class PlayerAttackingState : PlayerBaseState
+{
     private bool shouldPogo;
     private bool isRangeBoosted;
     private Vector3 attackDirection;
     private GameObject slashEffect;
     private float playerDamage;
 
-    public override void EnterState(PlayerFSM player) {
+    public override void EnterState(PlayerFSM player)
+    {
         Setup(player);
         PlayAnimation(player);
         PlayAudio();
         AttackAction(player);
     }
 
-    public override void Update(PlayerFSM player) {
+    public override void Update(PlayerFSM player)
+    {
         if (CheckTransitionToPogoing(player)) return;
         if (base.CheckTransitionToFalling(player)) return;
         if (base.CheckTransitionToGrounded(player)) return;
     }
 
-    private void Setup(PlayerFSM player) {
+    private void Setup(PlayerFSM player)
+    {
         shouldPogo = false;
         player.attackCooldownTimer = player.config.startAttackCooldownTime;
         isRangeBoosted = player.mechanics.IsEnabled("Range Boost");
@@ -30,69 +34,82 @@ public class PlayerAttackingState : PlayerBaseState {
         PositionSlashEffect(player, isRangeBoosted);
     }
 
-    private void PlayAnimation(PlayerFSM player) {
+    private void PlayAnimation(PlayerFSM player)
+    {
         if (isRangeBoosted) player.animator.Play("PlayerAttackingBoosted", -1, 0f);
         else player.animator.Play("PlayerAttacking", -1, 0f);
     }
 
-    private void PlayAudio() {
+    private void PlayAudio()
+    {
         Manager.audio.Play("Slash1");
     }
 
-    private void AttackAction(PlayerFSM player) {
+    private void AttackAction(PlayerFSM player)
+    {
         Vector2 hitboxSize = CalculateHitBoxSize();
         Vector3 attackPosition = CalculateAttackPosition(player);
         LayerMask hitLayers = LayerMask.GetMask("Enemies", "Obstacles", "Projectiles", "BulletEthereal");
 
         float attackRotationAngle = GetSlashAngleVector().z;
         Collider2D[] hitTargets = Physics2D.OverlapCapsuleAll(attackPosition, hitboxSize, CapsuleDirection2D.Horizontal, attackRotationAngle, hitLayers);
-        foreach (Collider2D targetHit in hitTargets) {
+        foreach (Collider2D targetHit in hitTargets)
+        {
             CheckDamageEnemy(player, targetHit);
             CheckPogo(player, targetHit);
             CheckDestroyProjectile(player, targetHit);
         }
     }
 
-    private Vector3 CalculateDirection(PlayerFSM player) {
+    private Vector3 CalculateDirection(PlayerFSM player)
+    {
         float xInput = Input.GetAxisRaw("Horizontal");
         float yInput = Input.GetAxisRaw("Vertical");
         return base.GetFourDirectionalInput(player, xInput, yInput);
     }
 
-    private void PositionSlashEffect(PlayerFSM player, bool isBoosted) {
-        if (isBoosted) {
+    private void PositionSlashEffect(PlayerFSM player, bool isBoosted)
+    {
+        if (isBoosted)
+        {
             slashEffect.transform.localPosition = GetBoostedSlashPosition();
         }
-        else {
+        else
+        {
             slashEffect.transform.localPosition = GetNormalSlashPosition();
         }
         slashEffect.transform.eulerAngles = GetSlashAngleVector();
     }
 
-    private Vector2 CalculateHitBoxSize() {
+    private Vector2 CalculateHitBoxSize()
+    {
         Vector2 baseHitboxSize = new Vector2(3.65f, 3.65f);
 
         if (isRangeBoosted) return baseHitboxSize * GetBoostedSlashScale();
         return baseHitboxSize * GetNormalSlashScale();
     }
 
-    private Vector2 CalculateAttackPosition(PlayerFSM player) {
+    private Vector2 CalculateAttackPosition(PlayerFSM player)
+    {
         Vector3 baseAttackPosition = player.transform.position;
 
         if (isRangeBoosted) return baseAttackPosition + GetBoostedSlashPosition();
         return baseAttackPosition + GetNormalSlashPosition();
     }
 
-    private void CheckDamageEnemy(PlayerFSM player, Collider2D targetHit) {
+    private void CheckDamageEnemy(PlayerFSM player, Collider2D targetHit)
+    {
         bool hitEnemy = targetHit.gameObject.CompareTag("Enemy");
 
-        if (hitEnemy) {
+        if (hitEnemy)
+        {
             GameObject enemyObj = targetHit.gameObject;
             enemyObj.GetComponent<Enemy>()?.TakeDamage(playerDamage);
         }
     }
 
-    private void CheckPogo(PlayerFSM player, Collider2D targetHit) {
+    private void CheckPogo(PlayerFSM player, Collider2D targetHit)
+    {
         if (!player.mechanics.IsEnabled("Pogo Jump")) return;
 
         bool hitEnemy = targetHit.gameObject.layer == LayerMask.NameToLayer("Enemies");
@@ -103,11 +120,13 @@ public class PlayerAttackingState : PlayerBaseState {
         shouldPogo = !player.isGrounded && downwardSlash && (hitEnemy || hitProjectile || hitObstacle);
     }
 
-    private void CheckDestroyProjectile(PlayerFSM player, Collider2D targetHit) {
+    private void CheckDestroyProjectile(PlayerFSM player, Collider2D targetHit)
+    {
         if (!player.mechanics.IsEnabled("Destroy Projectile")) return;
 
         bool hitProjectile = targetHit.gameObject.CompareTag("Projectile");
-        if (hitProjectile) {
+        if (hitProjectile)
+        {
             Manager.audio.Play("Destroy Projectile");
             GameObject bulletObj = targetHit.gameObject;
             EnemyBullet bullet = bulletObj.GetComponent<EnemyBullet>();
@@ -116,7 +135,8 @@ public class PlayerAttackingState : PlayerBaseState {
         }
     }
 
-    private Vector3 GetBoostedSlashPosition() {
+    private Vector3 GetBoostedSlashPosition()
+    {
         if (attackDirection == Vector3.right) return new Vector3(1, -0.16f, 0f);
         if (attackDirection == Vector3.up) return new Vector3(0, 0.95f, 0f);
         if (attackDirection == Vector3.left) return new Vector3(-1, -0.16f, 0f);
@@ -125,7 +145,8 @@ public class PlayerAttackingState : PlayerBaseState {
         return Vector3.zero;
     }
 
-    private Vector3 GetNormalSlashPosition() {
+    private Vector3 GetNormalSlashPosition()
+    {
         if (attackDirection == Vector3.right) return new Vector3(0.7f, -0.15f, 0f);
         if (attackDirection == Vector3.up) return new Vector3(0, 0.59f, 0);
         if (attackDirection == Vector3.left) return new Vector3(-0.7f, -0.15f, 0f);
@@ -134,7 +155,8 @@ public class PlayerAttackingState : PlayerBaseState {
         return Vector3.zero;
     }
 
-    private Vector3 GetSlashAngleVector() {
+    private Vector3 GetSlashAngleVector()
+    {
         if (attackDirection == Vector3.right) return new Vector3(0, 0f, 0f);
         if (attackDirection == Vector3.up) return new Vector3(0, 0f, 90f);
         if (attackDirection == Vector3.left) return new Vector3(0, 0f, 180f);
@@ -143,18 +165,22 @@ public class PlayerAttackingState : PlayerBaseState {
         return Vector3.zero;
     }
 
-    private Vector2 GetBoostedSlashScale() {
+    private Vector2 GetBoostedSlashScale()
+    {
         return new Vector2(0.64f, 0.5f);
     }
 
-    private Vector2 GetNormalSlashScale() {
+    private Vector2 GetNormalSlashScale()
+    {
         return new Vector2(0.32f, 0.25f);
     }
 
-    public bool CheckTransitionToPogoing(PlayerFSM player) {
+    public bool CheckTransitionToPogoing(PlayerFSM player)
+    {
         if (!player.mechanics.IsEnabled("Pogo Jump")) return false;
 
-        if (shouldPogo) {
+        if (shouldPogo)
+        {
             shouldPogo = false;
             player.TransitionToState(player.PogoingState);
             return true;

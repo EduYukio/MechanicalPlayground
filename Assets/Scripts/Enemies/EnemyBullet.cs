@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class EnemyBullet : MonoBehaviour {
+public class EnemyBullet : MonoBehaviour
+{
     [SerializeField] private GameObject parryParticles = null;
     public GameObject destroyBulletParticles;
 
@@ -11,9 +12,11 @@ public class EnemyBullet : MonoBehaviour {
     private Vector3 initialDirection = Vector3.zero;
     private float hitsToKill;
 
-    private void Start() {
+    private void Start()
+    {
         rb = GetComponent<Rigidbody2D>();
-        if (initialSpeed != 0f) {
+        if (initialSpeed != 0f)
+        {
             rb.velocity = initialDirection * initialSpeed;
         }
 
@@ -21,24 +24,29 @@ public class EnemyBullet : MonoBehaviour {
         hitsToKill = player.config.reflectedBulletsNeededToKill;
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
         ProcessCollision(other.gameObject);
     }
 
-    private void ProcessCollision(GameObject collidedObj) {
+    private void ProcessCollision(GameObject collidedObj)
+    {
         if (alreadyProcessedHit) return;
 
         if (HitPlayerWithShield(collidedObj)) return;
         if (HitShield(collidedObj)) return;
 
-        if (collidedObj.CompareTag("Enemy")) {
+        if (collidedObj.CompareTag("Enemy"))
+        {
             DamageEnemy(collidedObj);
             return;
         }
 
         string[] obstacleTags = { "Player", "Ground", "Obstacle", "Gate" };
-        foreach (var tag in obstacleTags) {
-            if (collidedObj.CompareTag(tag)) {
+        foreach (var tag in obstacleTags)
+        {
+            if (collidedObj.CompareTag(tag))
+            {
                 Instantiate(destroyBulletParticles, transform.position, Quaternion.identity);
                 Destroy(gameObject);
                 if (tag == "Player") KillPlayer();
@@ -47,10 +55,12 @@ public class EnemyBullet : MonoBehaviour {
         }
     }
 
-    private bool HitPlayerWithShield(GameObject collidedObj) {
+    private bool HitPlayerWithShield(GameObject collidedObj)
+    {
         if (!collidedObj.CompareTag("Player")) return false;
 
-        if (player.shield.gameObject.activeSelf) {
+        if (player.shield.gameObject.activeSelf)
+        {
             BulletHitShieldAction(player);
             return true;
         }
@@ -58,47 +68,56 @@ public class EnemyBullet : MonoBehaviour {
         return false;
     }
 
-    private bool HitShield(GameObject collidedObj) {
+    private bool HitShield(GameObject collidedObj)
+    {
         if (!collidedObj.CompareTag("Shield")) return false;
 
         BulletHitShieldAction(player);
         return true;
     }
 
-    private void BulletHitShieldAction(PlayerFSM player) {
+    private void BulletHitShieldAction(PlayerFSM player)
+    {
         alreadyProcessedHit = true;
 
-        if (player.parryTimer > 0) {
+        if (player.parryTimer > 0)
+        {
             Instantiate(parryParticles, transform.position, Quaternion.identity);
             player.shield.Parry(gameObject);
         }
-        else {
+        else
+        {
             Instantiate(destroyBulletParticles, transform.position, Quaternion.identity);
             Destroy(gameObject);
             player.shield.ConsumeShield();
         }
     }
 
-    private void DamageEnemy(GameObject collidedObj) {
+    private void DamageEnemy(GameObject collidedObj)
+    {
         Enemy enemy = collidedObj.GetComponent<Enemy>();
         float damage = 0.1f + enemy.maxHealth / hitsToKill;
         enemy.TakeDamage(damage);
         Destroy(gameObject);
     }
 
-    private void KillPlayer() {
+    private void KillPlayer()
+    {
         player.TransitionToState(player.DyingState);
     }
 
-    public void ReflectBullet() {
+    public void ReflectBullet()
+    {
         alreadyProcessedHit = false;
         rb.velocity = -4 * rb.velocity;
         Vector3 angle = transform.eulerAngles;
         transform.eulerAngles = new Vector3(angle.x, angle.y, angle.z + 180);
-        if (name.Contains("Ethereal")) {
+        if (name.Contains("Ethereal"))
+        {
             gameObject.layer = LayerMask.NameToLayer("EtherealParriedBullet");
         }
-        else {
+        else
+        {
             gameObject.layer = LayerMask.NameToLayer("ParriedBullet");
         }
     }

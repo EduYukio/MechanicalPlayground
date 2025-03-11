@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu()]
-public class Descriptions : ScriptableObject {
+public class Descriptions : ScriptableObject
+{
     [Header("Movement")]
     public string doubleJump = "Jump again while in the air.";
     public string wallSlide = "Slide on walls.";
@@ -30,7 +31,8 @@ public class Descriptions : ScriptableObject {
 
     public Dictionary<string, string> dict;
 
-    public void PopulateDictionary() {
+    public void PopulateDictionary()
+    {
         dict = new Dictionary<string, string>() {
             {"Double Jump", doubleJump},
             {"Wall Slide", wallSlide},
@@ -53,7 +55,8 @@ public class Descriptions : ScriptableObject {
         };
     }
 
-    public string GetDescription(string mechanicName) {
+    public string GetDescription(string mechanicName)
+    {
         if (dict == null) PopulateDictionary();
         if (!dict.ContainsKey(mechanicName)) return "";
 

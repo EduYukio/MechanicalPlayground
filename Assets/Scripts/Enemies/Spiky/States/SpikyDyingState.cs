@@ -1,5 +1,7 @@
-public class SpikyDyingState : SpikyBaseState {
-    public override void EnterState(SpikyFSM spiky) {
+public class SpikyDyingState : SpikyBaseState
+{
+    public override void EnterState(SpikyFSM spiky)
+    {
         Enemy.DieAction(spiky.gameObject);
     }
 }

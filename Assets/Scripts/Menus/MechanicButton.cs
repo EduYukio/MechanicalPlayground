@@ -3,7 +3,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class MechanicButton : MonoBehaviour {
+public class MechanicButton : MonoBehaviour
+{
     public string mechanicName;
     public List<string> requirements;
     public static MechanicsMenu mechMenu;
@@ -24,19 +25,23 @@ public class MechanicButton : MonoBehaviour {
     private bool blinkRedImage;
     private bool blinkRedText;
 
-    private void Awake() {
+    private void Awake()
+    {
         if (mechMenu == null) mechMenu = GameObject.FindObjectOfType<MechanicsMenu>();
         buttonImage = GetComponent<Image>();
         GetComponent<Button>().onClick.AddListener(ClickedOnMechanic);
     }
 
-    private void Update() {
+    private void Update()
+    {
         Helper.CheckIfNeedToBlinkRed(ref blinkRedImage, requirementImage);
         Helper.CheckIfNeedToBlinkRed(ref blinkRedText, requirementText);
     }
 
-    public void ClickedOnMechanic() {
-        if (isBlocked) {
+    public void ClickedOnMechanic()
+    {
+        if (isBlocked)
+        {
             if (CheckNoPoints()) return;
 
             RequirementWarning(requirementImage, requirementText);
@@ -44,11 +49,13 @@ public class MechanicButton : MonoBehaviour {
             return;
         }
 
-        if (isActive) {
+        if (isActive)
+        {
             DeactivateMechanic(mechanicName);
             DeactivateThoseWhoRequireThis();
         }
-        else {
+        else
+        {
             if (CheckNoPoints()) return;
             ActivateMechanic(mechanicName);
         }
@@ -56,39 +63,48 @@ public class MechanicButton : MonoBehaviour {
         mechMenu.UpdateButtonsState();
     }
 
-    private bool CheckNoPoints() {
-        if (mechMenu.skillPoints == 0) {
+    private bool CheckNoPoints()
+    {
+        if (mechMenu.skillPoints == 0)
+        {
             mechMenu.SkillPointsWarning();
             return true;
         }
         return false;
     }
 
-    private void ActivateMechanic(string name) {
+    private void ActivateMechanic(string name)
+    {
         Manager.audio.Play("UI_On");
         ActivateButtonImage();
         mechanics.Activate(name);
         mechMenu.skillPoints--;
     }
 
-    private void DeactivateMechanic(string name) {
+    private void DeactivateMechanic(string name)
+    {
         Manager.audio.Play("UI_Off");
         DeactivateButtonImage();
         mechanics.Deactivate(name);
         mechMenu.skillPoints++;
     }
 
-    private void DeactivateThoseWhoRequireThis() {
-        foreach (var button in mechMenu.buttons) {
-            if (button.requirements.Contains(this.mechanicName)) {
-                if (mechanics.IsEnabled(button.mechanicName)) {
+    private void DeactivateThoseWhoRequireThis()
+    {
+        foreach (var button in mechMenu.buttons)
+        {
+            if (button.requirements.Contains(this.mechanicName))
+            {
+                if (mechanics.IsEnabled(button.mechanicName))
+                {
                     DeactivateMechanic(button.mechanicName);
                 }
             }
         }
     }
 
-    public void UpdateTutorialInfo() {
+    public void UpdateTutorialInfo()
+    {
         mechMenu.videoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, gameObject.name + ".mp4");
         mechMenu.videoPlayer.Play();
         mechMenu.rawImage.enabled = true;
@@ -97,62 +113,75 @@ public class MechanicButton : MonoBehaviour {
         mechMenu.description.text = descriptions.GetDescription(mechanicName);
     }
 
-    public void ClearTutorialInfo() {
+    public void ClearTutorialInfo()
+    {
         mechMenu.videoPlayer.Stop();
         mechMenu.rawImage.enabled = false;
         mechMenu.title.text = "";
         mechMenu.description.text = "";
     }
 
-    public void ActivateButtonImage() {
+    public void ActivateButtonImage()
+    {
         if (isBlocked) return;
         isActive = true;
         buttonImage.color = activeColor;
     }
 
-    public void DeactivateButtonImage() {
+    public void DeactivateButtonImage()
+    {
         if (isBlocked) return;
         isActive = false;
         buttonImage.color = inactiveColor;
     }
 
-    public void DecideIfIsBlocked() {
+    public void DecideIfIsBlocked()
+    {
         isBlocked = false;
         if (requirements.Count == 0) return;
 
-        foreach (string requirement in requirements) {
-            if (!mechanics.IsEnabled(requirement)) {
+        foreach (string requirement in requirements)
+        {
+            if (!mechanics.IsEnabled(requirement))
+            {
                 isBlocked = true;
                 return;
             }
         }
     }
 
-    public void SetButtonAppearance() {
+    public void SetButtonAppearance()
+    {
         buttonImage = GetComponent<Image>();
-        if (isBlocked) {
+        if (isBlocked)
+        {
             buttonImage.color = blockedColor;
             GetComponentInChildren<TextMeshProUGUI>().color = blockedTextColor;
         }
-        else if (mechanics.IsEnabled(mechanicName)) {
+        else if (mechanics.IsEnabled(mechanicName))
+        {
             isActive = true;
             buttonImage.color = activeColor;
             GetComponentInChildren<TextMeshProUGUI>().color = normalTextColor;
         }
-        else {
+        else
+        {
             isActive = false;
             buttonImage.color = inactiveColor;
             GetComponentInChildren<TextMeshProUGUI>().color = normalTextColor;
         }
     }
 
-    public void RequirementWarning(Image image, TMP_Text text) {
-        if (image != null) {
+    public void RequirementWarning(Image image, TMP_Text text)
+    {
+        if (image != null)
+        {
             image.color = Color.red;
             blinkRedImage = true;
         }
 
-        if (text != null) {
+        if (text != null)
+        {
             text.color = Color.red;
             blinkRedText = true;
         }

@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class Menu : MonoBehaviour {
+public class Menu : MonoBehaviour
+{
     private PlayerFSM player;
 
     public GameObject pauseMenu;
@@ -27,48 +28,56 @@ public class Menu : MonoBehaviour {
     public TMP_Text levelIndicator;
     private const int finalLevel = 15;
 
-    private void Awake() {
+    private void Awake()
+    {
         player = GameObject.FindObjectOfType<PlayerFSM>();
         Cursor.visible = false;
     }
 
-    private void Start() {
+    private void Start()
+    {
         string currentLevelText = (SceneManager.GetActiveScene().buildIndex - 1).ToString();
         levelIndicator.text = "Level: " + currentLevelText + "/" + finalLevel.ToString();
     }
 
-    private void Update() {
+    private void Update()
+    {
         CheckMenuInput();
         CheckSkillControlsInput();
         CheckDebugMenuInput();
     }
 
-    public void ContinueButton() {
+    public void ContinueButton()
+    {
         ClosePauseMenu();
     }
 
-    public void MechanicsButton() {
+    public void MechanicsButton()
+    {
         pauseMenu.SetActive(false);
         mechanicsMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(firstMechanicButton);
     }
 
-    public void OptionsButton() {
+    public void OptionsButton()
+    {
         pauseMenu.SetActive(false);
         optionsMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(firstOptionsButton);
     }
 
-    public void RestartButton() {
+    public void RestartButton()
+    {
         Manager.audio.SetBGMVolumeToNormal();
         Time.timeScale = 1f;
         player.freezePlayerState = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void QuitToMenuButton() {
+    public void QuitToMenuButton()
+    {
         Manager.audio.SetBGMVolumeToNormal();
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
@@ -77,7 +86,8 @@ public class Menu : MonoBehaviour {
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void BackToPauseMenu() {
+    public void BackToPauseMenu()
+    {
         Manager.audio.SetBGMVolumeToMuffled();
         optionsMenu.SetActive(false);
         pauseMenu.SetActive(true);
@@ -85,38 +95,48 @@ public class Menu : MonoBehaviour {
         EventSystem.current.SetSelectedGameObject(optionsButton);
     }
 
-    private void CheckMenuInput() {
+    private void CheckMenuInput()
+    {
         bool hitEsc = Input.GetButtonDown("Esc");
         bool hitStart = Input.GetButtonDown("Start");
         bool hitCircle = Input.GetButtonDown("Circle");
-        if (hitEsc || hitStart) {
-            if (pauseMenu.activeSelf) {
+        if (hitEsc || hitStart)
+        {
+            if (pauseMenu.activeSelf)
+            {
                 Manager.audio.Play("UI_Confirm");
                 ClosePauseMenu();
             }
-            else if (optionsMenu.activeSelf) {
+            else if (optionsMenu.activeSelf)
+            {
                 Manager.audio.Play("UI_Confirm");
                 BackToPauseMenu();
             }
-            else if (mechanicsMenu == null || !mechanicsMenu.activeSelf) {
+            else if (mechanicsMenu == null || !mechanicsMenu.activeSelf)
+            {
                 OpenPauseMenu();
             }
         }
 
-        if (hitCircle) {
-            if (pauseMenu.activeSelf) {
+        if (hitCircle)
+        {
+            if (pauseMenu.activeSelf)
+            {
                 Manager.audio.Play("UI_Confirm");
                 ClosePauseMenu();
             }
-            else if (optionsMenu.activeSelf) {
+            else if (optionsMenu.activeSelf)
+            {
                 Manager.audio.Play("UI_Confirm");
                 BackToPauseMenu();
             }
         }
     }
 
-    private void CheckSkillControlsInput() {
-        if (Input.GetButtonDown("Select")) {
+    private void CheckSkillControlsInput()
+    {
+        if (Input.GetButtonDown("Select"))
+        {
             if (pauseMenu.activeSelf) return;
             if (mechanicsMenu && mechanicsMenu.activeSelf) return;
             if (IsHidingUI()) return;
@@ -127,17 +147,20 @@ public class Menu : MonoBehaviour {
         }
     }
 
-    private bool IsHidingUI() {
+    private bool IsHidingUI()
+    {
         if (!skillUICompactChildAggregator.activeSelf && !skillUILargeChildAggregator.activeSelf) return true;
 
         return false;
     }
 
-    private void ClosePauseMenu() {
+    private void ClosePauseMenu()
+    {
         StartCoroutine(WaitToClosePauseMenu());
     }
 
-    private void OpenPauseMenu() {
+    private void OpenPauseMenu()
+    {
         pauseMenu.SetActive(true);
         Manager.audio.SetBGMVolumeToMuffled();
 
@@ -148,7 +171,8 @@ public class Menu : MonoBehaviour {
         EventSystem.current.SetSelectedGameObject(continueButton);
     }
 
-    private IEnumerator WaitToClosePauseMenu() {
+    private IEnumerator WaitToClosePauseMenu()
+    {
         pauseMenu.SetActive(false);
         Manager.audio.SetBGMVolumeToNormal();
         yield return new WaitForSecondsRealtime(0.05f);
@@ -157,8 +181,10 @@ public class Menu : MonoBehaviour {
         Cursor.visible = false;
     }
 
-    public void CheckDebugMenuInput() {
-        if (Input.GetKey(KeyCode.Period) && Input.GetKeyDown(KeyCode.Comma)) {
+    public void CheckDebugMenuInput()
+    {
+        if (Input.GetKey(KeyCode.Period) && Input.GetKeyDown(KeyCode.Comma))
+        {
             debugMenu.SetActive(!debugMenu.activeSelf);
         }
     }

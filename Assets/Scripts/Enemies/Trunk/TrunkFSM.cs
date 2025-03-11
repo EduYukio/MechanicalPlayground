@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class TrunkFSM : Enemy {
+public class TrunkFSM : Enemy
+{
     private TrunkBaseState currentState;
 
     public readonly TrunkIdleState IdleState = new TrunkIdleState();
@@ -25,7 +26,8 @@ public class TrunkFSM : Enemy {
     public float bulletSpawnTimerSyncedWithAnimation { get; set; }
     public SpriteRenderer spriteRenderer { get; set; }
 
-    private void Start() {
+    private void Start()
+    {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -36,31 +38,37 @@ public class TrunkFSM : Enemy {
         TransitionToState(IdleState);
     }
 
-    private void Update() {
+    private void Update()
+    {
         currentState.Update(this);
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         ProcessTimers();
         currentState.FixedUpdate(this);
     }
 
-    public void TransitionToState(TrunkBaseState state) {
+    public void TransitionToState(TrunkBaseState state)
+    {
         currentState = state;
         currentState.EnterState(this);
     }
 
-    public override void TakeDamage(float damage) {
+    public override void TakeDamage(float damage)
+    {
         base.TakeDamage(damage);
         TransitionToState(BeingHitState);
     }
 
-    private void ProcessTimers() {
+    private void ProcessTimers()
+    {
         float step = Time.deltaTime;
         if (attackCooldownTimer >= 0) attackCooldownTimer -= step;
     }
 
-    public void SpawnBullet(Vector3 spawnPosition) {
+    public void SpawnBullet(Vector3 spawnPosition)
+    {
         GameObject bullet = MonoBehaviour.Instantiate(bulletPrefab, spawnPosition, transform.rotation);
         Vector2 direction = (bulletDirectionTransform.position - bulletSpawnTransform.position).normalized;
         bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;

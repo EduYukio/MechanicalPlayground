@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class SpikyFSM : Enemy {
+public class SpikyFSM : Enemy
+{
     private SpikyBaseState currentState;
 
     public readonly SpikyIdleState IdleState = new SpikyIdleState();
@@ -19,7 +20,8 @@ public class SpikyFSM : Enemy {
     public float bulletSpawnTimerSyncedWithAnimation { get; set; }
     public SpriteRenderer spriteRenderer { get; set; }
 
-    private void Start() {
+    private void Start()
+    {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -31,52 +33,62 @@ public class SpikyFSM : Enemy {
         TransitionToState(IdleState);
     }
 
-    private void Update() {
+    private void Update()
+    {
         currentState.Update(this);
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         ProcessTimers();
         currentState.FixedUpdate(this);
     }
 
-    public void TransitionToState(SpikyBaseState state) {
+    public void TransitionToState(SpikyBaseState state)
+    {
         currentState = state;
         currentState.EnterState(this);
     }
 
-    public override void TakeDamage(float damage) {
+    public override void TakeDamage(float damage)
+    {
         base.TakeDamage(damage);
         TransitionToState(BeingHitState);
     }
 
-    private void ProcessTimers() {
+    private void ProcessTimers()
+    {
         float step = Time.deltaTime;
         if (attackCooldownTimer >= 0) attackCooldownTimer -= step;
     }
 
-    public void SpawnBullet(Vector3 spawnPosition, Vector3 spawnAngle, Vector3 direction) {
+    public void SpawnBullet(Vector3 spawnPosition, Vector3 spawnAngle, Vector3 direction)
+    {
         GameObject bullet = MonoBehaviour.Instantiate(bulletPrefab, spawnPosition, Quaternion.identity);
         bullet.transform.eulerAngles = spawnAngle;
         bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
     }
 
-    public Vector3[] CalculateDirections() {
+    public Vector3[] CalculateDirections()
+    {
         Vector3[] bulletDirections = new Vector3[5];
         Transform[] end = bulletEndTransforms;
         Transform[] start = bulletStartTransforms;
 
-        for (int i = 0; i < bulletDirections.Length; i++) {
+        for (int i = 0; i < bulletDirections.Length; i++)
+        {
             bulletDirections[i] = (end[i].position - start[i].position).normalized;
         }
 
         return bulletDirections;
     }
 
-    private void PreInstantiateBullets() {
+    private void PreInstantiateBullets()
+    {
         Vector3[] directions = CalculateDirections();
 
-        for (int i = 0; i < directions.Length; i++) {
+        for (int i = 0; i < directions.Length; i++)
+        {
             Vector3 initialPosition = bulletStartTransforms[i].position;
             float maxLength = CalculateMaxRayLength(initialPosition, directions[i]);
 
@@ -84,7 +96,8 @@ public class SpikyFSM : Enemy {
             float distance = bulletSpeed * deltaT;
 
             float timeStep = bulletSpawnTimerSyncedWithAnimation + startAttackCooldownTimer;
-            while (distance < maxLength) {
+            while (distance < maxLength)
+            {
                 Vector3 spawnPosition = initialPosition + directions[i] * distance;
                 Vector3 spawnAngle = bulletStartTransforms[i].eulerAngles;
                 SpawnBullet(spawnPosition, spawnAngle, directions[i]);
@@ -94,21 +107,24 @@ public class SpikyFSM : Enemy {
         }
     }
 
-    private float CalculateMaxRayLength(Vector3 initialPosition, Vector3 direction) {
+    private float CalculateMaxRayLength(Vector3 initialPosition, Vector3 direction)
+    {
         float arbitraryMaxLength = 100f;
 
         RaycastHit2D ray = ThrowRayCast(arbitraryMaxLength, initialPosition, direction);
         if (ray.collider == null) return arbitraryMaxLength;
 
         string[] obstacleTags = { "Ground", "Obstacle", "Gate" };
-        foreach (var tag in obstacleTags) {
+        foreach (var tag in obstacleTags)
+        {
             if (ray.collider.CompareTag(tag)) return ray.distance;
         }
 
         return arbitraryMaxLength;
     }
 
-    private RaycastHit2D ThrowRayCast(float maxLenght, Vector3 position, Vector3 direction) {
+    private RaycastHit2D ThrowRayCast(float maxLenght, Vector3 position, Vector3 direction)
+    {
         int layersToCollide = LayerMask.GetMask("Ground", "Obstacles", "Gate");
         RaycastHit2D ray = Physics2D.Raycast(position, direction, maxLenght, layersToCollide);
 
